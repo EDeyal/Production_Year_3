@@ -13,18 +13,17 @@ public class RBController : MonoBehaviour
     List<Vector3> externalForces = new List<Vector3>();
     Rigidbody rb;
 
+    //non mono -> 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         InputManager.Instance.OnJumpDown.AddListener(Jump);
     }
 
-
-    private void Update()
+    private void LateUpdate()
     {
         SetVelocity();
     }
-
     public void AddExternalForce(Vector3 givenForce) //send direction multiplied by force
     {
         externalForces.Add(givenForce);
