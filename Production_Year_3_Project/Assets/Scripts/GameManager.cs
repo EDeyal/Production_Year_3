@@ -5,5 +5,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] public SceneManager SceneManager;
+    [SerializeField] public PlayerManager PlayerManager;
+
 
 }
