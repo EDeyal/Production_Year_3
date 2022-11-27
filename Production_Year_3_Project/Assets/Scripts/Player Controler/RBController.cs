@@ -8,6 +8,8 @@ public class RBController : MonoBehaviour
     [SerializeField] float movementSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] Vector3 velocity;
+    [SerializeField]GroundCheck groundCheck;
+
     List<Vector3> externalForces = new List<Vector3>();
     Rigidbody rb;
 
@@ -42,6 +44,9 @@ public class RBController : MonoBehaviour
 
     private void Jump()
     {
+        if (!groundCheck.IsGrounded())
+            return;
+
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
