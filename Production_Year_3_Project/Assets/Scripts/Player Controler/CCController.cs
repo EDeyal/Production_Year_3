@@ -27,8 +27,12 @@ public class CCController : MonoBehaviour
     [SerializeField] float gravityScale;
     private float startingGravityScale;
 
+    bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
+    Vector3 oldPos;
+
     List<Vector3> externalForces = new List<Vector3>();
     public UnityEvent <Vector3>OnRecieveForce;
+
 
     private void Start()
     {
@@ -142,7 +146,7 @@ public class CCController : MonoBehaviour
 
     IEnumerator JumpApexWait()
     {
-        yield return new WaitUntil(() => controller.velocity.y < 0);
+        yield return new WaitUntil(() => isFalling);
         gravityScale = apexGravityScale;
         yield return new WaitForSecondsRealtime(apexWaitTime);
         gravityScale = startingGravityScale;
@@ -154,9 +158,16 @@ public class CCController : MonoBehaviour
         OnRecieveForce?.Invoke(force);
     }
 
-    [ContextMenu("force")]
-    public void TestForce()
+    private Vector3 DistanceFromPreviousPos()
     {
-        AddForce(Vector2.one * 5);
+        if (ReferenceEquals(oldPos, null))
+        {
+            oldPos = transform.position;
+            return Vector3.zero;
+        }
+        Vector3 olderpos = oldPos;
+        oldPos = transform.position;
+        return transform.position- olderpos;
     }
+
 }

@@ -161,12 +161,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 30781684}
   movementSpeed: 10
-  jumpHeight: 20
+  jumpHeight: 50
   velocity: {x: 0, y: 0, z: 0}
   gravity: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 881261943}
   ceilingDetector: {fileID: 175699345}
-  gravityScale: 6
+  coyoteThreshold: 1.2
+  apexWaitTime: 1
+  apexGravityScale: 6
+  gravityScale: 12
+  OnRecieveForce:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &30781689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
