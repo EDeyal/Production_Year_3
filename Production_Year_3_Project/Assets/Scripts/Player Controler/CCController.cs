@@ -64,7 +64,7 @@ public class CCController : MonoBehaviour
             jumped = true;
             groundCheck.OnGrounded.AddListener(ResetJumped);
             jumpPressed = false;
-            StartCoroutine(JumpApexWait());
+            //StartCoroutine(JumpApexWait());
         }
     }
 
