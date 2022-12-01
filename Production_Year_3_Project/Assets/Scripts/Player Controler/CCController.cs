@@ -20,7 +20,6 @@ public class CCController : MonoBehaviour
     bool coyoteAvailable;
     [SerializeField] float coyoteThreshold;
 
-    [SerializeField] float apexWaitTime;
     [SerializeField] float apexGravityScale;
 
     private float gravityForce = 9.81f;
@@ -64,7 +63,7 @@ public class CCController : MonoBehaviour
             jumped = true;
             groundCheck.OnGrounded.AddListener(ResetJumped);
             jumpPressed = false;
-            //StartCoroutine(JumpApexWait());
+            StartCoroutine(JumpApexWait());
         }
     }
 
@@ -147,12 +146,12 @@ public class CCController : MonoBehaviour
     IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling);
-        gravityScale = apexGravityScale;
-        yield return new WaitForSecondsRealtime(apexWaitTime);
+        gravityScale = 0;
+        yield return new WaitForEndOfFrame();
         gravityScale = startingGravityScale;
     }
 
-    public void AddForce(Vector3 force)
+    public void AddForce(Vector3 force) //direction * force
     {
         externalForces.Add(force);
         OnRecieveForce?.Invoke(force);
