@@ -51,6 +51,12 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6427850386134744666
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +289,7 @@ MonoBehaviour:
   jumpForce: 5.9
   velocity: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 6427850385640673735}
+  gravityScale: 0
   rb: {fileID: 6427850386398440211}
 --- !u!114 &6427850386398440213
 MonoBehaviour:
