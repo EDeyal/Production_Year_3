@@ -373,6 +373,9 @@ MonoBehaviour:
   OnJump:
     m_PersistentCalls:
       m_Calls: []
+  OnJumpUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &454012844
 Transform:
   m_ObjectHideFlags: 0
@@ -395,6 +398,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: jumpTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
       propertyPath: jumpHeight
       value: 40
@@ -425,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 49.39
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
