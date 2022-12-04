@@ -47,7 +47,7 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 0, y: 1}
     Offset: {x: 0, y: 0}
-    Range: 0.2
+    Range: 0.3
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -104,13 +104,13 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 0, y: -1}
     Offset: {x: 0, y: 0}
-    Range: 0.2
+    Range: 0.3
   - Direcion: {x: 0, y: -1}
-    Offset: {x: -0.3, y: 0.1}
-    Range: 0.2
+    Offset: {x: -0.42, y: 0.1}
+    Range: 0.4
   - Direcion: {x: 0, y: -1}
-    Offset: {x: 0.3, y: 0.1}
-    Range: 0.2
+    Offset: {x: 0.4, y: 0.1}
+    Range: 0.4
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -352,15 +352,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 30781684}
   movementSpeed: 10
-  jumpHeight: 36
+  jumpHeight: 24
   velocity: {x: 0, y: 0, z: 0}
   gravity: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 6427850385640673735}
   ceilingDetector: {fileID: 175699345}
-  coyoteThreshold: 1.2
-  apexWaitTime: 1
+  jumpHeldTime: 0.15
+  numberOfJumps: 2
+  coyoteThreshold: 0.4
+  extraJumpsHeightModifier: 0.5
   apexGravityScale: 6
-  gravityScale: 12
+  gravityScale: 18
+  maxGravity: 75
   OnRecieveForce:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJump:
     m_PersistentCalls:
       m_Calls: []
