@@ -24,7 +24,9 @@ public class CCController : MonoBehaviour
     bool coyoteAvailable;
     float jumpHeldTimer;
     [SerializeField] float jumpHeldTime;
+    [SerializeField] int numberOfJumps;
     [SerializeField] float coyoteThreshold;
+    int jumpsLeft;
 
     [SerializeField] float apexGravityScale;
 
@@ -51,7 +53,7 @@ public class CCController : MonoBehaviour
         //
         groundCheck.OnGrounded.AddListener(ResetVelocity);
         groundCheck.OnGrounded.AddListener(ResetCanJump);
-        groundCheck.OnGrounded.AddListener(ResetCoyoteTime);
+        groundCheck.OnGrounded.AddListener(ResetJumpsLeft);
         //groundCheck.OnGrounded.AddListener(ResetCanHoldJump);
         OnJump.AddListener(ResetJumpHeldTimer);
         OnJump.AddListener(ResetCanHoldJump);
@@ -126,10 +128,17 @@ public class CCController : MonoBehaviour
 
     private void Jump()
     {
-        if (canJump && (groundCheck.IsGrounded() || coyoteAvailable))
+        if (canJump && (groundCheck.IsGrounded() || coyoteAvailable || jumpsLeft > 0))
         {
-            jumpPressed = true;
-            canJump = false;
+            jumpsLeft--;
+            if (jumpsLeft > 0)
+            {
+                jumpPressed = true;
+            }
+            else
+            {
+                canJump = false;
+            }
         }
     }
 
@@ -149,7 +158,16 @@ public class CCController : MonoBehaviour
         {
             jumpIsHeld = false;
         }
-        canHoldJump = false;
+
+        if (jumpsLeft > 0)
+        {
+            canHoldJump = true;
+            ResetJumpHeldTimer();
+        }
+        else
+        {
+            canHoldJump = false;
+        }
     }
 
     private void ResetJumpHeldTimer()
@@ -160,11 +178,6 @@ public class CCController : MonoBehaviour
     public void ResetGravity()
     {
         gravity = Vector3.zero;
-    }
-
-    private void ResetCoyoteTime()
-    {
-        coyoteAvailable = true;
     }
     public void ResetVelocity()
     {
@@ -184,6 +197,10 @@ public class CCController : MonoBehaviour
         velocity = givenVelocity;
     }
 
+    private void ResetJumpsLeft()
+    {
+        jumpsLeft = numberOfJumps;
+    }
 
     private void ResetCanJump()
     {
