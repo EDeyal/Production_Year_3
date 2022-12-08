@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
-   
+    //controller  
+    [SerializeField] CCController playerController;
+
+    public CCController PlayerController { get => playerController;}
 }

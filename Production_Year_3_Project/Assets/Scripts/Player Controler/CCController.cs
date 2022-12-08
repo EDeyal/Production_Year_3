@@ -52,9 +52,9 @@ public class CCController : MonoBehaviour
     private void Start()
     {
         //inputs
-        InputManager.Instance.OnJumpDown.AddListener(Jump);
-        InputManager.Instance.OnJump.AddListener(HoldJump);
-        InputManager.Instance.OnJumpUp.AddListener(ReleaseJumpHeld);
+        GameManager.Instance.InputManager.OnJumpDown.AddListener(Jump);
+        GameManager.Instance.InputManager.OnJump.AddListener(HoldJump);
+        GameManager.Instance.InputManager.OnJumpUp.AddListener(ReleaseJumpHeld);
         //
         groundCheck.OnGrounded.AddListener(ResetVelocity);
         groundCheck.OnGrounded.AddListener(ResetCanJump);
@@ -84,7 +84,7 @@ public class CCController : MonoBehaviour
     }
     private void SetInputVelocity()
     {
-        velocity.x = InputManager.Instance.GetMoveVector().x * movementSpeed;
+        velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
 
         if (jumpPressed)
         {

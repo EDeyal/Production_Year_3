@@ -6,13 +6,8 @@ using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
+    ///public static InputManager Instance;
 
-    private void Awake()
-    {
-        Instance = this;
-        //for testing purposes
-    }
 
     private PlayerInputs input;
 
