@@ -496,62 +496,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: jumpTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: jumpHeight
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: maxGravity
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: jumpHandler
-      value: 
-      objectReference: {fileID: 593445727}
-    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: gravityScale
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 30781685, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
-      propertyPath: jumpHeldTime
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[0].Range
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[1].Range
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[2].Range
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[1].Offset.x
-      value: -0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[1].Offset.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[2].Offset.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6427850385640673735, guid: 8500d0d9592a7694f898365f435d4557,
-        type: 3}
-      propertyPath: sensors.Array.data[2].Offset.y
+      propertyPath: coyoteThreshold
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440204, guid: 8500d0d9592a7694f898365f435d4557,
@@ -567,12 +512,12 @@ PrefabInstance:
     - target: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.9
+      value: -11.58
       objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 7.36
       objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440215, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
@@ -616,26 +561,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
---- !u!1 &593445720 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6427850386398440204, guid: 8500d0d9592a7694f898365f435d4557,
-    type: 3}
-  m_PrefabInstance: {fileID: 591745881}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &593445727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593445720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecad34cee33bd1f44810b10b3e3f49a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJumps: 3
-  jumpTime: 1
 --- !u!1 &695175085
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707879768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.49, y: 3.98, z: 0}
+  m_LocalPosition: {x: -7.45, y: 4.38, z: 0}
   m_LocalScale: {x: 3.279, y: 0.6461, z: 4.6}
   m_ConstrainProportionsScale: 0
   m_Children: []

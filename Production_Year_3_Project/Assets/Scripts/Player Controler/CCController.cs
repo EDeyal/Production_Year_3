@@ -15,22 +15,30 @@ public class CCController : MonoBehaviour
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] GroundCheck ceilingDetector;
 
+    bool canMove;
+    bool useGravity;
+
     bool jumpPressed;
     bool jumpIsHeld;
 
     bool canHoldJump;
     bool canJump;
 
+    bool jumped;
+
     bool coyoteAvailable;
     float jumpHeldTimer;
     [SerializeField] float jumpHeldTime;
+    [SerializeField] int numberOfJumps;
     [SerializeField] float coyoteThreshold;
+    [SerializeField, Range(0, 1)] float extraJumpsHeightModifier;
+    int jumpsLeft;
 
     [SerializeField] float apexGravityScale;
 
     private float gravityForce = 9.81f;
-    [SerializeField] float gravityScale;
     private float startingGravityScale;
+    [SerializeField] float gravityScale;
     [SerializeField] float maxGravity;
 
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
@@ -47,20 +55,21 @@ public class CCController : MonoBehaviour
         InputManager.Instance.OnJumpDown.AddListener(Jump);
         InputManager.Instance.OnJump.AddListener(HoldJump);
         InputManager.Instance.OnJumpUp.AddListener(ReleaseJumpHeld);
-
         //
         groundCheck.OnGrounded.AddListener(ResetVelocity);
         groundCheck.OnGrounded.AddListener(ResetCanJump);
-        groundCheck.OnGrounded.AddListener(ResetCoyoteTime);
+        groundCheck.OnGrounded.AddListener(ResetJumpsLeft);
+        groundCheck.OnGrounded.AddListener(ResetJumped);
         //groundCheck.OnGrounded.AddListener(ResetCanHoldJump);
         OnJump.AddListener(ResetJumpHeldTimer);
         OnJump.AddListener(ResetCanHoldJump);
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
 
-        ceilingDetector.OnGrounded.AddListener(ResetVelocityY);
+        ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
         OnRecieveForce.AddListener(ApplyExtrenalForces);
         startingGravityScale = gravityScale;
+        useGravity = true;
     }
 
     private void Update()
@@ -80,14 +89,19 @@ public class CCController : MonoBehaviour
         if (jumpPressed)
         {
             Debug.Log("jumped");
+            if (!IsFirstJump())
+            {
+                DisableGravity();
+            }
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravityForce);
             jumpPressed = false;
+            jumped = true;
             OnJump?.Invoke();
-            //StartCoroutine(JumpApexWait());
         }
         else if (jumpIsHeld && jumpHeldTimer > 0)
         {
-            Debug.Log("jump is held");
+            Debug.Log("jump was held");
+
             jumpHeldTimer -= Time.deltaTime;
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravityForce);
             ResetGravity();
@@ -97,6 +111,10 @@ public class CCController : MonoBehaviour
 
     private void ApplyGravity()
     {
+        if (!useGravity)
+        {
+            return;
+        }
         if (groundCheck.IsGrounded())
         {
             gravity = Vector3.zero;
@@ -126,18 +144,25 @@ public class CCController : MonoBehaviour
 
     private void Jump()
     {
-        if (canJump && (groundCheck.IsGrounded() || coyoteAvailable))
+        if (canJump && (groundCheck.IsGrounded() || coyoteAvailable || (jumpsLeft > 0 && jumped)))
         {
-            jumpPressed = true;
-            canJump = false;
+            jumpsLeft--;
+            if (jumpsLeft >= 0)
+            {
+                jumpPressed = true;
+            }
+            else
+            {
+                canJump = false;
+            }
         }
     }
 
     private void HoldJump()
     {
-        if (!groundCheck.IsGrounded() && canHoldJump)
+        if (!groundCheck.IsGrounded() && canHoldJump && !ceilingDetector.IsGrounded() && jumped)
         {
-            Debug.Log("jump was held");
+            ResetGravity();
             canHoldJump = false;
             jumpIsHeld = true;
         }
@@ -149,7 +174,19 @@ public class CCController : MonoBehaviour
         {
             jumpIsHeld = false;
         }
-        canHoldJump = false;
+
+        if (jumpsLeft > 0)
+        {
+            //cheking if can jump again
+            canHoldJump = true;
+            canJump = true;
+            ResetJumpHeldTimer();
+            jumpHeldTimer *= extraJumpsHeightModifier;
+        }
+        else
+        {
+            canHoldJump = false;
+        }
     }
 
     private void ResetJumpHeldTimer()
@@ -160,11 +197,6 @@ public class CCController : MonoBehaviour
     public void ResetGravity()
     {
         gravity = Vector3.zero;
-    }
-
-    private void ResetCoyoteTime()
-    {
-        coyoteAvailable = true;
     }
     public void ResetVelocity()
     {
@@ -185,9 +217,31 @@ public class CCController : MonoBehaviour
     }
 
 
+    private void CeilingReset()
+    {
+        ResetVelocityY();
+        ReleaseJumpHeld();
+    }
+    private void ResetJumpsLeft()
+    {
+        jumpsLeft = numberOfJumps;
+    }
+
     private void ResetCanJump()
     {
         canJump = true;
+    }
+
+    public void DisableGravity()
+    {
+        StartCoroutine(JumpGravityDisable());
+    }
+    IEnumerator JumpGravityDisable()
+    {
+        useGravity = false;
+        yield return new WaitForEndOfFrame();
+        useGravity = true;
+        ResetGravity();
     }
 
     private void ResetCanHoldJump()
@@ -195,9 +249,24 @@ public class CCController : MonoBehaviour
         //canHoldJump = true;
         StartCoroutine(WaitUntilJumpIsntHeld());
     }
+
+    private void ResetJumped()
+    {
+        jumped = false;
+    }
+
+    private bool IsFirstJump()
+    {
+        if (jumpsLeft < numberOfJumps - 1)
+        {
+            return false;
+        }
+        return true;
+    }
+
     private void StartCoyoteTime()
     {
-        if (canJump) //if the character isnt jumping
+        if (!jumped) //if the character isnt jumping
         {
             StartCoroutine(CoyoteCounter());
         }
