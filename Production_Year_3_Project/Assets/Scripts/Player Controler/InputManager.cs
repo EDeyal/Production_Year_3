@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnJump;
     public UnityEvent OnJumpUp;
 
+    public UnityEvent OnDashDown;
+
     private void Start()
     {
         input = new PlayerInputs();
@@ -23,8 +25,14 @@ public class InputManager : MonoBehaviour
         input.BasicActions.Jump.started += InvokeOnJumpDown;
         input.BasicActions.Jump.performed += InvokeOnJump;
         input.BasicActions.Jump.canceled += InvokeOnJumpUp;
+        input.BasicActions.Dash.started += InvokeOnDashDown;
     }
 
+
+    public void InvokeOnDashDown(InputAction.CallbackContext obj)
+    {
+        OnDashDown?.Invoke();
+    }
 
     public void InvokeOnJumpDown(InputAction.CallbackContext obj)
     {
