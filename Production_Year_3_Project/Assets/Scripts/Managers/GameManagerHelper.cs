@@ -4,6 +4,13 @@ public class GameManagerHelper : MonoBehaviour
 {
     [SerializeField] GameManager _gameManagerPrefab;
     [SerializeField] PlayerManager _playerManager;
+    private void OnValidate()
+    {
+        if (_playerManager == null)
+        {
+            _playerManager = FindObjectOfType<PlayerManager>();
+        }
+    }
     public PlayerManager GetPlayerManager => _playerManager;
     public void Awake()
     {
