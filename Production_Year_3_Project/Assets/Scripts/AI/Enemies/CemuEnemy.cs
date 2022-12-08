@@ -10,10 +10,13 @@ public class CemuEnemy : GroundEnemy
         if (IsInRange(Distance))
         {
             //Fight
+            Debug.Log("Cemu Fight");
         }
         else
         {
+            Debug.Log("Cemu Idle");
             //Idle
         }
+
     }
 }
