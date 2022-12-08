@@ -62,6 +62,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""14572b06-0b28-4703-8301-7ed08c33fb03"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7ad19c2-b9d0-43ee-b872-e94af42ea9ff"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_Move = m_BasicActions.FindAction("Move", throwIfNotFound: true);
         m_BasicActions_BasicAttack = m_BasicActions.FindAction("BasicAttack", throwIfNotFound: true);
         m_BasicActions_SpellAttack = m_BasicActions.FindAction("SpellAttack", throwIfNotFound: true);
+        m_BasicActions_Dash = m_BasicActions.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_Move;
     private readonly InputAction m_BasicActions_BasicAttack;
     private readonly InputAction m_BasicActions_SpellAttack;
+    private readonly InputAction m_BasicActions_Dash;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -235,6 +257,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_BasicActions_Move;
         public InputAction @BasicAttack => m_Wrapper.m_BasicActions_BasicAttack;
         public InputAction @SpellAttack => m_Wrapper.m_BasicActions_SpellAttack;
+        public InputAction @Dash => m_Wrapper.m_BasicActions_Dash;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +279,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @SpellAttack.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSpellAttack;
                 @SpellAttack.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSpellAttack;
                 @SpellAttack.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSpellAttack;
+                @Dash.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +298,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @SpellAttack.started += instance.OnSpellAttack;
                 @SpellAttack.performed += instance.OnSpellAttack;
                 @SpellAttack.canceled += instance.OnSpellAttack;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -282,5 +311,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnBasicAttack(InputAction.CallbackContext context);
         void OnSpellAttack(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

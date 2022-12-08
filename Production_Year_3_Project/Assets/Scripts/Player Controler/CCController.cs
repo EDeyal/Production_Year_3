@@ -42,6 +42,9 @@ public class CCController : MonoBehaviour
     [SerializeField] float maxGravity;
 
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
+
+    public Vector3 Velocity { get => velocity;}
+
     Vector3 oldPos;
 
     List<Vector3> externalForces = new List<Vector3>();
@@ -70,10 +73,15 @@ public class CCController : MonoBehaviour
         OnRecieveForce.AddListener(ApplyExtrenalForces);
         startingGravityScale = gravityScale;
         useGravity = true;
+        canMove = true;
     }
 
     private void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         SetInputVelocity();
         ApplyGravity();
 
@@ -107,8 +115,6 @@ public class CCController : MonoBehaviour
             ResetGravity();
         }
     }
-
-
     private void ApplyGravity()
     {
         if (!useGravity)
@@ -198,6 +204,20 @@ public class CCController : MonoBehaviour
     {
         gravity = Vector3.zero;
     }
+
+    public void StartDashReset()
+    {
+        canMove = false;
+        ResetGravity();
+        ResetVelocity();
+    }
+
+    public void EndDashReset()
+    {
+        canMove = true;
+        ResetVelocity();
+    }
+
     public void ResetVelocity()
     {
         velocity = Vector3.zero;
