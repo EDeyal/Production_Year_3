@@ -2,6 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseAttackSO : BaseAIActionSO
+public class ThamulEnemy : GroundEnemy
 {
 }

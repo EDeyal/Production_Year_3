@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5362763116364010868}
   - component: {fileID: 5362763116364010858}
   - component: {fileID: 5362763116364010869}
+  - component: {fileID: 2994988240799571270}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   _settingsManager: {fileID: 5362763116364010858}
   _saveManager: {fileID: 5362763116364010868}
   _gameManagerHelper: {fileID: 0}
+  _inputManager: {fileID: 2994988240799571270}
 --- !u!114 &5362763116364010868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,3 +90,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2f334f7bf22194d9932a8aa5ba64a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2994988240799571270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362763116364010862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583b17e7521e844a851512db6cb5330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnJumpDown:
+    m_PersistentCalls:
+      m_Calls: []

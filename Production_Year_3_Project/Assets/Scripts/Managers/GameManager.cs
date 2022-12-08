@@ -9,12 +9,14 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] SettingsManager _settingsManager;
     [SerializeField] SaveManager _saveManager;
     [SerializeField] GameManagerHelper _gameManagerHelper;
+    [SerializeField] InputManager _inputManager;
     #endregion
     #region Properties
     public SceneLoaderManager SceneManager => _sceneManager;
     public PlayerManager PlayerManager => _playerManager;
     public SettingsManager SettingsManager => _settingsManager;
     public SaveManager SaveManager => _saveManager;
+    public InputManager InputManager => _inputManager;
     #endregion
 
     public override void Awake()
