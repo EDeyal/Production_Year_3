@@ -1,32 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GroundEnemy : BaseEnemy
 {
-    protected GameObject _nextPatrollPoint;
-    public float DistanceOffset;//plaster should come from Character Data
-    public override bool IsInRange(int distance)
+    [SerializeField] int _nextWaypoint;
+    [SerializeField] float _waypointOffsetDistance;
+    List<Transform> _waypoints;
+
+    public virtual void Patrol()
     {
-        var currentDistance = Vector3.Distance(transform.position, _player.transform.position);
-        //Debug.Log("Current Distance From Targer is: " + currentDistance);
-        if (currentDistance < distance)
-            return true;
-        return false;
+        //distance is near the next point, need to move to the next point
+        if (Vector3.Distance(transform.position, _waypoints[_nextWaypoint].position) < _waypointOffsetDistance)
+            MoveToNextPoint();
+
+        //if (IsNearBound(BoundOffset))//and walking closer to bounds //need implementaion
+        //  MoveToNextPoint();
+        //check if hit a wall, if so move to next point;
+
+        //Walk(_waypoints[_nextWaypoint].position.x) //walk towards next point
     }
 
-    public virtual void Patroll(GameObject a, GameObject b)
+    private void MoveToNextPoint()
     {
-        if (_nextPatrollPoint == null) //randomly choose 1 point to go to
-        {
-        //ground enemy moves between 2 points
-            if (Random.Range(0, 2) == 0)
-                _nextPatrollPoint = a;
-            else
-                _nextPatrollPoint = b;
-        }
-
-        if (Vector3.Distance(transform.position,_nextPatrollPoint.transform.position)<DistanceOffset)
-            _nextPatrollPoint = _nextPatrollPoint == a ? b : a;
-        //Change Next PatrollPoint if Reached to a point
-
+            _nextWaypoint = _nextWaypoint < _waypoints.Count ? _nextWaypoint++ : _nextWaypoint = 0;
     }
+public virtual void Walk(int xDirection, float speed)
+{
+    var velocity = new Vector3(xDirection * _speed, RB.velocity.y, 0);
+    RB.velocity = velocity;
+}
 }

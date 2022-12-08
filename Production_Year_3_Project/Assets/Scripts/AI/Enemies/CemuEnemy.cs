@@ -1,22 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CemuEnemy : GroundEnemy
 {
-    public int Distance; //plaster
+    CemuStateHandler _cemuStateHandler;
+    public void Awake()
+    {
+        _cemuStateHandler.CheckValidation();
+        _cemuStateHandler.CurrentState.OnStateEnter?.Invoke();
+    }
+    //visual -> controller
     private void Update()
     {
-        if (IsInRange(Distance))
+        BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
+
+        if (_cemuStateHandler.CurrentState != nextState)
         {
-            //Fight
-            Debug.Log("Cemu Fight");
+            _cemuStateHandler.CurrentState.OnStateExit?.Invoke();
+            _cemuStateHandler.CurrentState = nextState;
+            _cemuStateHandler.CurrentState.OnStateEnter?.Invoke();
         }
-        else
-        {
-            Debug.Log("Cemu Idle");
-            //Idle
-        }
+
+        
 
     }
 }
