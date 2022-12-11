@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CemuEnemy : GroundEnemy
 {
-    CemuStateHandler _cemuStateHandler;
+    [SerializeField] CemuStateHandler _cemuStateHandler;
     public void Awake()
     {
         _cemuStateHandler.CheckValidation();
@@ -19,8 +19,5 @@ public class CemuEnemy : GroundEnemy
             _cemuStateHandler.CurrentState = nextState;
             _cemuStateHandler.CurrentState.OnStateEnter?.Invoke();
         }
-
-        
-
     }
 }

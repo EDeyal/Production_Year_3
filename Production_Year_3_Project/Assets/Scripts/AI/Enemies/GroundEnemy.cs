@@ -5,28 +5,40 @@ public abstract class GroundEnemy : BaseEnemy
 {
     [SerializeField] int _nextWaypoint;
     [SerializeField] float _waypointOffsetDistance;
-    List<Transform> _waypoints;
+    [SerializeField] List<Transform> _waypoints;
+    [SerializeField] BaseAction<WalkData> _walkAction;
 
     public virtual void Patrol()
     {
+        var isWalking = true;
         //distance is near the next point, need to move to the next point
-        if (Vector3.Distance(transform.position, _waypoints[_nextWaypoint].position) < _waypointOffsetDistance)
-            MoveToNextPoint();
+        var distance = Mathf.Abs(transform.position.x - _waypoints[_nextWaypoint].position.x);
+        if (distance < _waypointOffsetDistance)
+        {
+            isWalking = IsMovingToNextPoint();
+        }
 
         //if (IsNearBound(BoundOffset))//and walking closer to bounds //need implementaion
         //  MoveToNextPoint();
         //check if hit a wall, if so move to next point;
 
-        //Walk(_waypoints[_nextWaypoint].position.x) //walk towards next point
+        var direction = 0;
+        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? 1 : -1;
+
+        if (isWalking)
+        {
+            _walkAction.InitAction(new WalkData(RB,new Vector3(direction,0,0)));
+        }
     }
 
-    private void MoveToNextPoint()
+    private bool IsMovingToNextPoint()
     {
-            _nextWaypoint = _nextWaypoint < _waypoints.Count ? _nextWaypoint++ : _nextWaypoint = 0;
+        _nextWaypoint++;
+        if (_nextWaypoint >= _waypoints.Count)
+        {
+            _nextWaypoint = 0;
+            return false;
+        }
+        return true;
     }
-public virtual void Walk(int xDirection, float speed)
-{
-    var velocity = new Vector3(xDirection * _speed, RB.velocity.y, 0);
-    RB.velocity = velocity;
-}
 }

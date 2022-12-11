@@ -6,6 +6,7 @@ public class CemuPatrolState : BaseCemuState
 {
     public override BaseState RunCurrentState()
     {
+        Debug.Log("Cemu Patrol State");
         if (GeneralFunctions.IsInRange(transform.position, _cemuHandler.PlayerManager.transform.position, _cemuHandler.NoticePlayerDistance))
         {
             return _cemuHandler.CombatState;

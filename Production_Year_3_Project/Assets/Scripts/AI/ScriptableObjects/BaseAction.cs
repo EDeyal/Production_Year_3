@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public abstract class BaseAction : ScriptableObject
+public abstract class BaseAction<T> : ScriptableObject, ICheckValidation
 {
-    public abstract bool InitAction();
+    public virtual void CheckValidation() { }
+
+    public abstract bool InitAction(T data);
 }

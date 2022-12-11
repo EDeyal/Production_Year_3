@@ -5,11 +5,11 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] Bounds _bound;
     [SerializeField] protected float _boundOffset;
     [SerializeField] Rigidbody _rb;
-    [SerializeField] protected float _speed;
+    //[SerializeField] protected float _speed;
     public Bounds Bound => _bound;
     public float BoundOffset => _boundOffset;
     public Rigidbody RB => _rb;
-    public float speed => _speed;
+    //public float speed => _speed;
 
     private void OnDrawGizmos()
     {

@@ -6,8 +6,8 @@ public abstract class BaseStateHandler : MonoBehaviour,ICheckValidation
     [SerializeField] private BaseState _idleState;
     [SerializeField] private BaseState _combatState;
     [SerializeField] private int _noticePlayerDistance;
+    [SerializeField] BaseEnemy _refEnemy;
     protected PlayerManager _player;
-    protected BaseEnemy _refEnemy;
 
     public BaseState CurrentState { get => _currentState; set => _currentState = value; }
     public BaseState IdleState { get => _idleState; }
@@ -15,7 +15,8 @@ public abstract class BaseStateHandler : MonoBehaviour,ICheckValidation
     public int NoticePlayerDistance => _noticePlayerDistance;
     public PlayerManager PlayerManager => _player;
     public BaseEnemy RefEnemy => _refEnemy;
-    public virtual void Awake()
+
+    public virtual void Start()
     {
         if (GameManager.Instance.PlayerManager == null)
             throw new System.Exception("Player Reference is missing from Game Manager");
@@ -36,5 +37,10 @@ public abstract class BaseStateHandler : MonoBehaviour,ICheckValidation
             throw new System.Exception("Idle state is Null");
         if (_combatState == null)
             throw new System.Exception("Combat state is Null");
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, NoticePlayerDistance);
     }
 }

@@ -10,6 +10,6 @@ public class CemuStateHandler : BaseStateHandler
         if (_patrolState == null)
             throw new System.Exception("Patrol state is Null");
     }
-    private BaseState _patrolState;
+    [SerializeField] BaseState _patrolState;
     public BaseState PatrolState => _patrolState;
 }
