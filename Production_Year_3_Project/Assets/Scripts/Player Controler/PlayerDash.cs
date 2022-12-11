@@ -31,6 +31,7 @@ public class PlayerDash : MonoBehaviour
         if (Time.time - lastDashed >= dashCoolDown)
         {
             StartCoroutine(Dash());
+            lastDashed = Time.time;
         }
     }
 
