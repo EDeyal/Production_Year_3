@@ -4,7 +4,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "CheckXDistanceAction", menuName = "ScriptableObjects/Actions/CheckXDistance")]
 
-public class CheckXDistanceAction<T> : BaseAction<DistanceData>
+public class CheckXDistanceAction : BaseAction<DistanceData>
 {
     public float Distance;
     public override bool InitAction(DistanceData distanceData)

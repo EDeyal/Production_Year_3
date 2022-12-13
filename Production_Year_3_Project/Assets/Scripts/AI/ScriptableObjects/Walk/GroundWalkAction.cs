@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GroundWalkAction",menuName = "ScriptableObjects/Actions/GroundWalk")]
-public class GroundWalkAction<T> : BaseAction<WalkData>
+public class GroundWalkAction : BaseAction<WalkData>
 {
     public float Speed;
 
