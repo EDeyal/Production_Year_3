@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
-using System;
 using UnityEngine.Events;
 
 
@@ -38,7 +35,7 @@ public class PlayerDash : MonoBehaviour
     IEnumerator Dash()
     {
         OnDash?.Invoke();
-        controller.ResetVelocity(new Vector3(transform.localScale.x * dashSpeed, 0, 0));
+        controller.ResetVelocity(new Vector3(Mathf.Clamp(transform.rotation.y, -1, 1) * dashSpeed, 0, 0));
         yield return new WaitForSecondsRealtime(dashDuration);
         OnDashEnd?.Invoke();
     }

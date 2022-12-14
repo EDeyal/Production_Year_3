@@ -18,14 +18,14 @@ public class CCFlip : MonoBehaviour
     IEnumerator WaitForMovingLeft()
     {
         yield return new WaitUntil(() => controller.Velocity.x < 0);
-        transform.localScale = leftVector;
+        transform.rotation = Quaternion.Euler(leftVector);
         StartCoroutine(WaitForMovingRight());
     }
 
     IEnumerator WaitForMovingRight()
     {
         yield return new WaitUntil(() => controller.Velocity.x > 0);
-        transform.localScale = rightVector;
+        transform.rotation = Quaternion.Euler(rightVector);
         StartCoroutine(WaitForMovingLeft());
     }
 
