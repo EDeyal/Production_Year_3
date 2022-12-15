@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu(fileName = "CheckXDistanceAction", menuName = "ScriptableObjects/Actions/CheckXDistance")]
 
@@ -9,9 +7,9 @@ public class CheckXDistanceAction : BaseAction<DistanceData>
     public float Distance;
     public override bool InitAction(DistanceData distanceData)
     {
-        var totalDistance = Mathf.Abs(distanceData.X1 - distanceData.X2);
+        var totalXDistance = distanceData.GetXDistance();
 
-        if (totalDistance < distanceData.Offset)
+        if (totalXDistance < distanceData.Offset)
         {
             return true;
         }
