@@ -23,6 +23,8 @@ public class RaycastSensor
         bool isHitPartialy = false;
         foreach (var item in _sensors)
         {
+            float rawLayerValue = _sensorTarget.LayerMask.value;
+            rawLayerValue = Mathf.Log(rawLayerValue, 2);
             Vector3 relativePos = new Vector3(transform.position.x + item.Offset.x, transform.position.y + item.Offset.y);
             bool isHit = Physics.Raycast(relativePos, item.Direcion, item.Range, _sensorTarget.LayerMask);
 

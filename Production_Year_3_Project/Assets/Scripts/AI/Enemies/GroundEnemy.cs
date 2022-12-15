@@ -9,14 +9,23 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
+    [SerializeField] WallSensorInfo _rightWallSensorInfo;
+    [SerializeField] WallSensorInfo _leftWallSensorInfo;
+    [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
     WalkData _walkData;
     private void OnEnable()
     {
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
+        _rightWallSensorInfo.SubscribeToEvents(SensorHandler);
+        _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
+        _ledgeSensorInfo.SubscribeToEvents(SensorHandler);
     }
     private void OnDisable()
     {
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
+        _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
+        _leftWallSensorInfo.UnsubscribeToEvents(SensorHandler);
+        _ledgeSensorInfo.UnsubscribeToEvents(SensorHandler);
     }
     private void Start()
     {
@@ -46,17 +55,21 @@ public abstract class GroundEnemy : BaseEnemy
             moveToNextPoint = true;
         }
 
-        if (_groundSensorInfo.SensorInfoType == SensorInfoType.PartialHit)
+        //change direction if near a ledge
+        if (_ledgeSensorInfo.SensorInfoType == SensorInfoType.PartialHit)
+        {
+            if (_groundSensorInfo.SensorInfoType == SensorInfoType.PartialHit)
+            {
+                moveToNextPoint = true;
+            }
+        }
+        //wall Check
+        if (_rightWallSensorInfo.IsNearWall||_leftWallSensorInfo.IsNearWall)
         {
             moveToNextPoint = true;
         }
 
-        //checked Ledge
-
-        //check if hit a wall, if so move to next point;
-        //check front with raycast
-        //if raycast hit object that is tagged ground move to next point = true
-        //
+        //if needed to turn for some reason, turn to next waypoint
         if (moveToNextPoint)
         {
             IsMovingToNextPoint();
