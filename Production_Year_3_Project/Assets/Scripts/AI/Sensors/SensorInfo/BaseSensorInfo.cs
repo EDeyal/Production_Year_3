@@ -9,20 +9,20 @@ public enum SensorInfoType
 [System.Serializable]
 public abstract class BaseSensorInfo
 {
-    [SerializeField] SensorTarget _groundCheckSensor;
+    [SerializeField] SensorTarget _sensorTarget;
     [ReadOnly] [SerializeField] SensorInfoType _sensorInfoType;
     [ReadOnly] public bool IsActive;
     public SensorInfoType SensorInfoType => _sensorInfoType;
     public void SubscribeToEvents(SensorHandler sensorHandler)
     {
-        var raycastSensor = sensorHandler.GetSensor(_groundCheckSensor);
+        var raycastSensor = sensorHandler.GetSensor(_sensorTarget);
         raycastSensor.OnSensorHit += Hit;
         raycastSensor.OnSensorPartialHit += PartialHit;
         raycastSensor.OnSensorMiss += Miss;
     }
     public void UnsubscribeToEvents(SensorHandler sensorHandler)
     {
-        var raycastSensor = sensorHandler.GetSensor(_groundCheckSensor);
+        var raycastSensor = sensorHandler.GetSensor(_sensorTarget);
         raycastSensor.OnSensorHit -= Hit;
         raycastSensor.OnSensorPartialHit -= PartialHit;
         raycastSensor.OnSensorMiss -= Miss;

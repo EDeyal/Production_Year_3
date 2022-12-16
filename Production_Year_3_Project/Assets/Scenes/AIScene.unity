@@ -448,26 +448,22 @@ MonoBehaviour:
   _waypointXDistanceAction: {fileID: 11400000, guid: f5b31f330093d8240b2f70eb91927860,
     type: 2}
   _groundSensorInfo:
-    _groundCheckSensor: {fileID: 11400000, guid: 89e1f7c7d0d70004dbe8e8c05d30f653,
-      type: 2}
+    _sensorTarget: {fileID: 11400000, guid: 89e1f7c7d0d70004dbe8e8c05d30f653, type: 2}
     _sensorInfoType: 0
     IsActive: 0
     IsGrounded: 0
   _rightWallSensorInfo:
-    _groundCheckSensor: {fileID: 11400000, guid: ea63297718e1df5499e79b329b5d0898,
-      type: 2}
+    _sensorTarget: {fileID: 11400000, guid: ea63297718e1df5499e79b329b5d0898, type: 2}
     _sensorInfoType: 0
     IsActive: 0
     IsNearWall: 0
   _leftWallSensorInfo:
-    _groundCheckSensor: {fileID: 11400000, guid: b35b0fad25870fb48a8e1f08ddac6d6b,
-      type: 2}
+    _sensorTarget: {fileID: 0}
     _sensorInfoType: 0
     IsActive: 0
     IsNearWall: 0
   _ledgeSensorInfo:
-    _groundCheckSensor: {fileID: 11400000, guid: d3f5293b8d6d1af41b0e39d068546889,
-      type: 2}
+    _sensorTarget: {fileID: 0}
     _sensorInfoType: 0
     IsActive: 0
   _cemuStateHandler: {fileID: 288940673}
@@ -756,6 +752,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 175699345, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: OnGrounded.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175699345, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: OnGrounded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 175699345, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: OnGrounded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440204, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_Name
