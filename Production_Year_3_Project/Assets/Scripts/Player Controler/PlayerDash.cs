@@ -9,6 +9,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] float dashCoolDown;
     [SerializeField] float dashDuration;
     [SerializeField] float dashSpeed;
+    [SerializeField] Animator anim;
 
     float lastDashed;
 
@@ -20,6 +21,7 @@ public class PlayerDash : MonoBehaviour
         lastDashed = dashCoolDown * -1;
         GameManager.Instance.InputManager.OnDashDown.AddListener(StartDash);
         OnDash.AddListener(controller.StartDashReset);
+        OnDash.AddListener(RollAnim);
         OnDashEnd.AddListener(controller.EndDashReset);
     }
 
@@ -30,6 +32,11 @@ public class PlayerDash : MonoBehaviour
             StartCoroutine(Dash());
             lastDashed = Time.time;
         }
+    }
+
+    private void RollAnim()
+    {
+        anim.SetTrigger("Roll");
     }
 
     IEnumerator Dash()

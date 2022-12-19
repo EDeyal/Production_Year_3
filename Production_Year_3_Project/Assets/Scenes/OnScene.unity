@@ -503,6 +503,7 @@ MonoBehaviour:
   dashCoolDown: 1
   dashDuration: 0.2
   dashSpeed: 40
+  anim: {fileID: 1732950502}
   OnDash:
     m_PersistentCalls:
       m_Calls: []
@@ -865,6 +866,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Bot
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5c05d2bd550df014db416dbfa1a861b3, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
+        clip 'mixamo.com'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e2a423d673ca6945adc010e6e62b84c, type: 3}
 --- !u!1 &973680292
@@ -1158,6 +1172,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1732950502 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
+    type: 3}
+  m_PrefabInstance: {fileID: 796940024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1745012355
 GameObject:
   m_ObjectHideFlags: 0

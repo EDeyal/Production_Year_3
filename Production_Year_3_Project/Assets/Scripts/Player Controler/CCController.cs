@@ -11,9 +11,10 @@ public class CCController : MonoBehaviour
 
     [SerializeField] Vector3 velocity;
     [SerializeField] Vector3 gravity;
-
+    
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] GroundCheck ceilingDetector;
+
 
     bool canMove;
     bool useGravity;
