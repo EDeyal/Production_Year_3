@@ -10,7 +10,7 @@ public class CCController : MonoBehaviour
     [SerializeField] float jumpHeight;
 
     [SerializeField] Vector3 velocity;
-    [SerializeField] Vector3 gravity;
+    //[SerializeField] Vector3 gravity;
     
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] GroundCheck ceilingDetector;
@@ -42,6 +42,7 @@ public class CCController : MonoBehaviour
     [SerializeField] float gravityScale;
     [SerializeField] float maxGravity;
 
+    [SerializeField] Animator anim;
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
 
     public Vector3 Velocity { get => velocity;}
@@ -64,8 +65,9 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetCanJump);
         groundCheck.OnGrounded.AddListener(ResetJumpsLeft);
         groundCheck.OnGrounded.AddListener(ResetJumped);
+        groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         //groundCheck.OnGrounded.AddListener(ResetCanHoldJump);
-        OnJump.AddListener(ResetJumpHeldTimer);
+        //OnJump.AddListener(ResetJumpHeldTimer);
         OnJump.AddListener(ResetCanHoldJump);
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
 
@@ -94,7 +96,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-
+        anim.SetFloat("Movement Speed", Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");
@@ -124,14 +126,16 @@ public class CCController : MonoBehaviour
         }
         if (groundCheck.IsGrounded())
         {
-            gravity = Vector3.zero;
+            //gravity = Vector3.zero;
         }
         else
         {
-            gravity.y -= gravityForce * gravityScale * Time.deltaTime;
+            //gravity.y -= gravityForce * gravityScale * Time.deltaTime;
+            velocity.y -= gravityForce * gravityScale * Time.deltaTime;
         }
-        gravity.y = Mathf.Clamp(gravity.y, maxGravity * -1, 0);
-        controller.Move(gravity * Time.deltaTime);
+        velocity.y = Mathf.Clamp(velocity.y, maxGravity * -1, 100);
+        //gravity.y = Mathf.Clamp(gravity.y, maxGravity * -1, 0);
+        //controller.Move(gravity * Time.deltaTime);
     }
     private void MoveController()
     {
@@ -203,7 +207,7 @@ public class CCController : MonoBehaviour
 
     public void ResetGravity()
     {
-        gravity = Vector3.zero;
+        velocity.y = Mathf.Clamp(velocity.y, 0, 100);
     }
 
     public void StartDashReset()
