@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(StatSheet))]
 public class Damageable : MonoBehaviour
 {
     [SerializeField] private float currentHp;
@@ -22,7 +23,7 @@ public class Damageable : MonoBehaviour
     /// <summary>
     /// Invoked when this object is done adding damage mods
     /// </summary>
-    public UnityEvent<DamageHandler> OnDoneDamageCalc;
+    public UnityEvent<DamageHandler> OnTotalDamageCalcRecieve;
     /// <summary>
     /// Invoked when this object is healed
     /// </summary>
@@ -60,7 +61,7 @@ public class Damageable : MonoBehaviour
     public virtual void TakeDamage(DamageHandler givenDamage)
     {
         OnTakeDamage?.Invoke(givenDamage);
-        OnDoneDamageCalc?.Invoke(givenDamage);
+        OnTotalDamageCalcRecieve?.Invoke(givenDamage);
         currentHp -= givenDamage.GetFinalMult();
         if (currentHp <= 0)
         {
@@ -73,8 +74,8 @@ public class Damageable : MonoBehaviour
     {
         OnTakeDamage?.Invoke(givenDamage);
         givenDamageDealer.OnDealDamage?.Invoke(givenDamage);
-        OnDoneDamageCalc?.Invoke(givenDamage);
-        givenDamageDealer.OnDoneDamageCalc?.Invoke(givenDamage);
+        OnTotalDamageCalcRecieve?.Invoke(givenDamage);
+        givenDamageDealer.OnTotalDamageCalcDeal?.Invoke(givenDamage);
 
         currentHp -= givenDamage.GetFinalMult();
         if (currentHp <= 0)

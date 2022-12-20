@@ -7,9 +7,9 @@ public class AnimationHandler : MonoBehaviour
 {
     [SerializeField] private Animator anim;
 
-    private float lastSpeed;
+    private int lastSpeed;
     
-    public void SetSpeed(float givenSpeed)
+    public void SetSpeed(int givenSpeed)
     {
         if (lastSpeed == givenSpeed)
         {

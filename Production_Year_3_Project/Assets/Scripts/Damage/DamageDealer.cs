@@ -16,7 +16,7 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     /// Invoked when this object is done adding damage mods
     /// </summary>
-    public UnityEvent<DamageHandler> OnDoneDamageCalc;
+    public UnityEvent<DamageHandler> OnTotalDamageCalcDeal;
     
     
 

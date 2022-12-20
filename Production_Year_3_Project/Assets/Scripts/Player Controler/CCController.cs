@@ -96,7 +96,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        anim.SetSpeed(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+        anim.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");
@@ -130,12 +130,10 @@ public class CCController : MonoBehaviour
         }
         else
         {
-            //gravity.y -= gravityForce * gravityScale * Time.deltaTime;
             velocity.y -= gravityForce * gravityScale * Time.deltaTime;
         }
         velocity.y = Mathf.Clamp(velocity.y, maxGravity * -1, 100);
-        //gravity.y = Mathf.Clamp(gravity.y, maxGravity * -1, 0);
-        //controller.Move(gravity * Time.deltaTime);
+
     }
     private void MoveController()
     {
