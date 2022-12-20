@@ -42,7 +42,7 @@ public class CCController : MonoBehaviour
     [SerializeField] float gravityScale;
     [SerializeField] float maxGravity;
 
-    [SerializeField] Animator anim;
+    [SerializeField] AnimationHandler anim;
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
 
     public Vector3 Velocity { get => velocity;}
@@ -96,7 +96,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        anim.SetFloat("Movement Speed", Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+        anim.SetSpeed(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");
