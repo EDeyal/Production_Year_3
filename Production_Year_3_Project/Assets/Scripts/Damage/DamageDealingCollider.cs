@@ -25,14 +25,4 @@ public class DamageDealingCollider : MonoBehaviour
             }
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log("trigger stay");
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collision");
-    }
 }
