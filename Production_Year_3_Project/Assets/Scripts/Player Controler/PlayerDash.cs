@@ -20,6 +20,7 @@ public class PlayerDash : MonoBehaviour
 
     bool dashDurationUp;
 
+    int dashDir;
     private void Start()
     {
         lastDashed = dashCoolDown * -1;
@@ -48,7 +49,15 @@ public class PlayerDash : MonoBehaviour
     {
         OnDash?.Invoke();
         StartCoroutine(DashCounter());
-        controller.ResetVelocity(new Vector3(Mathf.Clamp(transform.rotation.y, -1, 1) * dashSpeed, 0, 0));
+        if (!controller.facingRight)
+        {
+            dashDir = -1;
+        }
+        else
+        {
+            dashDir = 1;
+        }
+        controller.ResetVelocity(new Vector3(dashSpeed * dashDir, 0, 0));
         yield return new WaitUntil(() => dashDurationUp || rightCheck.IsGrounded() || leftCheck.IsGrounded());
         lastDashed = Time.time;
         controller.ResetGravity();
@@ -75,6 +84,6 @@ public class PlayerDash : MonoBehaviour
         leftCheck.gameObject.SetActive(false);
     }
 
-    
+
 
 }

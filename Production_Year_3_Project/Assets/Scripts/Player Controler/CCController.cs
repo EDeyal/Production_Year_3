@@ -53,14 +53,13 @@ public class CCController : MonoBehaviour
     public UnityEvent<Vector3> OnRecieveForce;
     public UnityEvent OnJump;
 
-
+    public bool facingRight;
     private void Start()
     {
         //inputs
         GameManager.Instance.InputManager.OnJumpDown.AddListener(Jump);
         GameManager.Instance.InputManager.OnJump.AddListener(HoldJump);
         GameManager.Instance.InputManager.OnJumpUp.AddListener(ReleaseJumpHeld);
-        //
         groundCheck.OnGrounded.AddListener(ResetVelocity);
         groundCheck.OnGrounded.AddListener(ResetCanJump);
         groundCheck.OnGrounded.AddListener(ResetJumpsLeft);
@@ -74,6 +73,7 @@ public class CCController : MonoBehaviour
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
         OnRecieveForce.AddListener(ApplyExtrenalForces);
+
         startingGravityScale = gravityScale;
         useGravity = true;
         canMove = true;
@@ -336,5 +336,4 @@ public class CCController : MonoBehaviour
         oldPos = transform.position;
         return transform.position - olderpos;
     }
-
 }
