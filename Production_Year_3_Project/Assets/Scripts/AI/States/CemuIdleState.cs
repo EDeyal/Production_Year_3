@@ -4,10 +4,10 @@ public class CemuIdleState : BaseCemuState
     public override BaseState RunCurrentState()
     {
         Debug.Log("Cemu Idle State");
-        if (GeneralFunctions.IsInRange(transform.position, _cemuHandler.PlayerManager.transform.position, _cemuHandler.NoticePlayerDistance))
+        if (GeneralFunctions.IsInRange(_cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position, _cemuStateHandler.NoticePlayerDistance))
         {
-            return _cemuHandler.CombatState;
+            return _cemuStateHandler.CombatState;
         }
-        return _cemuHandler.PatrolState;
+        return _cemuStateHandler.PatrolState;
     }
 }

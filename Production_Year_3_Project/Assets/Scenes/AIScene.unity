@@ -331,10 +331,13 @@ GameObject:
   - component: {fileID: 288940667}
   - component: {fileID: 288940672}
   - component: {fileID: 288940671}
-  - component: {fileID: 288940673}
-  - component: {fileID: 288940675}
-  - component: {fileID: 288940674}
   - component: {fileID: 288940676}
+  - component: {fileID: 288940679}
+  - component: {fileID: 288940678}
+  - component: {fileID: 288940677}
+  - component: {fileID: 288940682}
+  - component: {fileID: 288940681}
+  - component: {fileID: 288940680}
   m_Layer: 0
   m_Name: Cemu Enemy
   m_TagString: Untagged
@@ -466,7 +469,7 @@ MonoBehaviour:
     _sensorTarget: {fileID: 11400000, guid: d3f5293b8d6d1af41b0e39d068546889, type: 2}
     _sensorInfoType: 0
     IsActive: 0
-  _cemuStateHandler: {fileID: 288940673}
+  _cemuStateHandler: {fileID: 288940679}
 --- !u!54 &288940672
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -483,60 +486,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &288940673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288940665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17be0f4248748cc4ba080834018d286f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentState: {fileID: 288940675}
-  _idleState: {fileID: 288940675}
-  _combatState: {fileID: 288940675}
-  _noticePlayerDistance: 5
-  _refEnemy: {fileID: 288940671}
-  _patrolState: {fileID: 288940674}
---- !u!114 &288940674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288940665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e614e0065c37264dbcd414e38401787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStateEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStateExit:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &288940675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288940665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7f8575eb22292448a6e82fe39441cef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStateEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStateExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &288940676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +535,91 @@ MonoBehaviour:
       Range: 1
     _sensorTarget: {fileID: 11400000, guid: b35b0fad25870fb48a8e1f08ddac6d6b, type: 2}
     IsActive: 1
+--- !u!114 &288940677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e614e0065c37264dbcd414e38401787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 288940679}
+--- !u!114 &288940678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f8575eb22292448a6e82fe39441cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 288940679}
+--- !u!114 &288940679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17be0f4248748cc4ba080834018d286f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _noticePlayerDistance: 5
+  _refEnemy: {fileID: 288940671}
+  _currentState: {fileID: 288940678}
+  _idleState: {fileID: 288940678}
+  _combatState: {fileID: 288940682}
+  _patrolState: {fileID: 288940677}
+  _chaseState: {fileID: 288940681}
+  _boostState: {fileID: 288940680}
+--- !u!114 &288940680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77303e2c56df1c4ebd1cb0d04f448a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 288940679}
+--- !u!114 &288940681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cabd6e9267e5084e898c162be624e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 288940679}
+--- !u!114 &288940682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288940665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3a9093b15f8b74282dc26b92923c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 288940679}
 --- !u!1 &402658614
 GameObject:
   m_ObjectHideFlags: 0

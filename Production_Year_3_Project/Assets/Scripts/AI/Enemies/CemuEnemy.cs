@@ -1,12 +1,13 @@
 using UnityEngine;
-
 public class CemuEnemy : GroundEnemy
 {
     [SerializeField] CemuStateHandler _cemuStateHandler;
+    bool _isBoostActive;
+    public bool IsBoostActive => _isBoostActive;
     public void Awake()
     {
         _cemuStateHandler.CheckValidation();
-        _cemuStateHandler.CurrentState.OnStateEnter?.Invoke();
+        _cemuStateHandler.CurrentState.EnterState();
     }
     //visual -> controller
     private void Update()
@@ -15,9 +16,9 @@ public class CemuEnemy : GroundEnemy
 
         if (_cemuStateHandler.CurrentState != nextState)
         {
-            _cemuStateHandler.CurrentState.OnStateExit?.Invoke();
+            _cemuStateHandler.CurrentState.ExitState();
             _cemuStateHandler.CurrentState = nextState;
-            _cemuStateHandler.CurrentState.OnStateEnter?.Invoke();
+            _cemuStateHandler.CurrentState.EnterState();
         }
     }
 }
