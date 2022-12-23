@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -328,6 +328,19 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1708975603}
+    - target: {fileID: 591745887, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: dashSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 591745887, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: dashDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3318132566623315614, guid: 8500d0d9592a7694f898365f435d4557,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440204, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_Name
