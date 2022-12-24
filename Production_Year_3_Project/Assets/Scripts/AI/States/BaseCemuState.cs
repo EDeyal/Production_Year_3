@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public abstract class BaseCemuState : BaseState
 {
-    protected CemuStateHandler _cemuHandler;
-    private void Start()
+    private void OnValidate()
     {
-        if(!_cemuHandler)
-            _cemuHandler = GetComponent<CemuStateHandler>();
+        if (!_cemuStateHandler)
+            _cemuStateHandler = GetComponent<CemuStateHandler>();
     }
+    [SerializeField] protected CemuStateHandler _cemuStateHandler;
 }
