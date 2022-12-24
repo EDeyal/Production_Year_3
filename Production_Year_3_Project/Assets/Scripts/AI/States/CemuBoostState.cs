@@ -10,6 +10,6 @@ public class CemuBoostState : BaseCemuState
         {
             return _cemuStateHandler.ChaseState;
         }
-        return _cemuStateHandler.CombatState;
+        return this;
     }
 }

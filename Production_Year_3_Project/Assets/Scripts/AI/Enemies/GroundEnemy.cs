@@ -7,6 +7,7 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<WalkData> _walkAction;
     [SerializeField] BaseAction<WalkData> _stopAction;
+    [SerializeField] BaseAction<WalkData> _chaseAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
@@ -81,11 +82,17 @@ public abstract class GroundEnemy : BaseEnemy
         _walkData.Direction = new Vector3(direction, 0, 0);
         _walkAction.InitAction(_walkData);
     }
-    public void StopMovement()
+    public virtual void StopMovement()
     {
         _stopAction.InitAction(_walkData);
     }
-
+    public virtual void Chase()
+    {
+        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.Data.transform.position);
+        _walkData.Direction = new Vector3(direction, 0, 0);
+        _chaseAction.InitAction(_walkData);
+        //find player and determin his direction
+    }
     private bool IsMovingToNextPoint()
     {
         _nextWaypoint++;
