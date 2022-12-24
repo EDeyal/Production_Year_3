@@ -6,6 +6,7 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<WalkData> _walkAction;
+    [SerializeField] BaseAction<WalkData> _stopAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
@@ -44,13 +45,13 @@ public abstract class GroundEnemy : BaseEnemy
             return;
 
         bool moveToNextPoint = false;//check if need to move to next point
-        if (_waypointXDistanceAction.InitAction(new DistanceData(transform.position, _waypoints[_nextWaypoint].position, _waypointXDistanceAction.Distance)))
+        if (_waypointXDistanceAction.InitAction(new DistanceData(transform.position, _waypoints[_nextWaypoint].position)))
         {
             moveToNextPoint = true;
         }
 
-        if (_boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.max, _boundsXDistanceAction.Distance))
-            || _boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.min, _boundsXDistanceAction.Distance)))
+        if (_boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.max))
+            || _boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.min)))
         {
             moveToNextPoint = true;
         }
@@ -79,6 +80,10 @@ public abstract class GroundEnemy : BaseEnemy
 
         _walkData.Direction = new Vector3(direction, 0, 0);
         _walkAction.InitAction(_walkData);
+    }
+    public void StopMovement()
+    {
+        _stopAction.InitAction(_walkData);
     }
 
     private bool IsMovingToNextPoint()

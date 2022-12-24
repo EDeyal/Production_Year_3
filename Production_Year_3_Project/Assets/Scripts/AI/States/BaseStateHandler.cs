@@ -1,7 +1,6 @@
 using UnityEngine;
 public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
 {
-    [SerializeField] private int _noticePlayerDistance;
     [SerializeField] private BaseEnemy _refEnemy;
     [SerializeField] private BaseState _currentState;
     [SerializeField] private BaseState _idleState;
@@ -11,7 +10,6 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     public BaseState CurrentState { get => _currentState; set => _currentState = value; }
     public BaseState IdleState { get => _idleState; }
     public BaseState CombatState { get => _combatState; }
-    public int NoticePlayerDistance => _noticePlayerDistance;
     public PlayerManager PlayerManager => _player;
     public BaseEnemy RefEnemy => _refEnemy;
     public virtual void Start()
@@ -34,10 +32,5 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
             throw new System.Exception("Idle state is Null");
         if (_combatState == null)
             throw new System.Exception("Combat state is Null");
-    }
-    public virtual void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(RefEnemy.transform.position, NoticePlayerDistance);
     }
 }

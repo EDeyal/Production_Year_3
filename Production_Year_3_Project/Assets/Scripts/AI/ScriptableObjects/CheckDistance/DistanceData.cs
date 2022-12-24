@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class DistanceData
 {
-    public DistanceData(Vector3 a, Vector3 b,float offset)
+    public DistanceData(Vector3 a, Vector3 b)
     {
         _a = a;
         _b = b;
-        Offset = offset;
     }
     Vector3 _a;
     Vector3 _b;
-    public float Offset;
 
     public float GetXDistance()
     {

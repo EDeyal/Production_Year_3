@@ -440,12 +440,17 @@ MonoBehaviour:
     m_Extent: {x: 15, y: 2, z: 0}
   _rb: {fileID: 288940672}
   _sensorHandler: {fileID: 288940676}
+  _noticePlayerDistance: {fileID: 11400000, guid: fa1f13643f1c5ad43b3b81cd3552e8d8,
+    type: 2}
+  _chasePlayerDistance: {fileID: 11400000, guid: 4fcdde5de6c35b54892ed597fe112dd4,
+    type: 2}
   _nextWaypoint: 0
   _waypoints:
   - {fileID: 459333857}
   - {fileID: 661974126}
   - {fileID: 402658615}
   _walkAction: {fileID: 11400000, guid: 6bb168e8445fa804c90623361608e7ba, type: 2}
+  _stopAction: {fileID: 11400000, guid: e14292671f394f546bd0ef64d7f4268c, type: 2}
   _boundsXDistanceAction: {fileID: 11400000, guid: 35cf3054c9b260a49a3b3dfe3cd44109,
     type: 2}
   _waypointXDistanceAction: {fileID: 11400000, guid: f5b31f330093d8240b2f70eb91927860,
@@ -470,6 +475,8 @@ MonoBehaviour:
     _sensorInfoType: 0
     IsActive: 0
   _cemuStateHandler: {fileID: 288940679}
+  _boostCooldownAction: {fileID: 11400000, guid: e92e8432615575d46bccabe0392ae96e,
+    type: 2}
 --- !u!54 &288940672
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -479,7 +486,7 @@ Rigidbody:
   m_GameObject: {fileID: 288940665}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -573,7 +580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17be0f4248748cc4ba080834018d286f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _noticePlayerDistance: 5
   _refEnemy: {fileID: 288940671}
   _currentState: {fileID: 288940678}
   _idleState: {fileID: 288940678}

@@ -5,11 +5,10 @@ using UnityEngine;
 public class CheckXDistanceAction : BaseAction<DistanceData>
 {
     public float Distance;
+    public float Offset;
     public override bool InitAction(DistanceData distanceData)
     {
-        var totalXDistance = distanceData.GetXDistance();
-
-        if (totalXDistance < distanceData.Offset)
+        if (distanceData.GetXDistance() < Distance + Offset)
         {
             return true;
         }
