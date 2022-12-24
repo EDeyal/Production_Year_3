@@ -9,6 +9,7 @@ public class CCFlip : MonoBehaviour
     [SerializeField] Vector3 rightVector;
     [SerializeField] Vector3 leftVector;
     [SerializeField] CCController controller;
+    [SerializeField] Transform objectToFlip;
 
     private void Start()
     {
@@ -18,14 +19,16 @@ public class CCFlip : MonoBehaviour
     IEnumerator WaitForMovingLeft()
     {
         yield return new WaitUntil(() => controller.Velocity.x < 0);
-        transform.localScale = leftVector;
+        objectToFlip.rotation = Quaternion.Euler(leftVector);
+        controller.facingRight = false;
         StartCoroutine(WaitForMovingRight());
     }
 
     IEnumerator WaitForMovingRight()
     {
         yield return new WaitUntil(() => controller.Velocity.x > 0);
-        transform.localScale = rightVector;
+        objectToFlip.rotation = Quaternion.Euler(rightVector);
+        controller.facingRight = true;
         StartCoroutine(WaitForMovingLeft());
     }
 
