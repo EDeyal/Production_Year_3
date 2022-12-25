@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 public abstract class BaseState :MonoBehaviour
 {
+    protected const float ONE = 1;
+    protected const float ZERO = 0;
+
     public event Action OnStateEnter;
     public event Action OnStateExit;
     public abstract BaseState RunCurrentState();

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CemuPatrolState : BaseCemuState
 {
+
     public override BaseState RunCurrentState()
     {
         Debug.Log("Cemu Patrol State");
@@ -12,5 +13,17 @@ public class CemuPatrolState : BaseCemuState
         }
         ((GroundEnemy)_cemuStateHandler.RefEnemy).Patrol();
         return this;
+    }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed),ONE);
+        //add logic for animat
+    }
+    public override void ExitState()
+    {
+        base.ExitState();
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
+
     }
 }

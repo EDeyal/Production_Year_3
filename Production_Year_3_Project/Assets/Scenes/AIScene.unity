@@ -190,16 +190,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Bot
       objectReference: {fileID: 0}
+    - target: {fileID: 3853268898807207900, guid: 0e2a423d673ca6945adc010e6e62b84c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 93ea975420e5e324c84dab8de5bbd44a, type: 2}
     - target: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5c05d2bd550df014db416dbfa1a861b3, type: 2}
+      objectReference: {fileID: 9100000, guid: c03b0fcb248c8364fb0e34379a4c1421, type: 2}
     - target: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
         type: 3}
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6148737315974723067, guid: 0e2a423d673ca6945adc010e6e62b84c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 896171ac00fa4b64984aecf054d83b57, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e2a423d673ca6945adc010e6e62b84c, type: 3}
 --- !u!4 &204716681 stripped
@@ -411,6 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 281532517}
+  - component: {fileID: 281532518}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -434,6 +445,24 @@ Transform:
   m_Father: {fileID: 288940670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281532518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281532516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8942f6c4d8c80441b4c9893d700b341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 288940672}
+  _controller: {fileID: 0}
+  _rightVector: {x: 1, y: 90, z: 1}
+  _leftVector: {x: -1, y: -90, z: 1}
+  _objectToFlip: {fileID: 281532517}
+  _isUsingRigidbody: 1
 --- !u!1 &288940665
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +526,8 @@ MonoBehaviour:
     type: 2}
   _chasePlayerDistance: {fileID: 11400000, guid: 4fcdde5de6c35b54892ed597fe112dd4,
     type: 2}
+  _animatorHandler:
+    _animator: {fileID: 2090567654}
   _nextWaypoint: 0
   _waypoints:
   - {fileID: 459333857}
@@ -539,7 +570,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288940665}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -1250,3 +1281,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2090567654 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0e2a423d673ca6945adc010e6e62b84c,
+    type: 3}
+  m_PrefabInstance: {fileID: 204716680}
+  m_PrefabAsset: {fileID: 0}
