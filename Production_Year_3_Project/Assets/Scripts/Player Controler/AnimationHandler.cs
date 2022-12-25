@@ -47,4 +47,14 @@ public class AnimationHandler : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public void SetBool(string name, bool state)
+    {
+        anim.SetBool(name, state);
+    }
+
+    public void SetTrigger(string name)
+    {
+        anim.SetTrigger(name);
+    }
 }
