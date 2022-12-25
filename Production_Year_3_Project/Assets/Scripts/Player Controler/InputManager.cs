@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnDashDown;
 
     public UnityEvent OnBasicAttackDown;
+    public UnityEvent OnBasicAttackUp;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
         input.BasicActions.Jump.canceled += InvokeOnJumpUp;
         input.BasicActions.Dash.started += InvokeOnDashDown;
         input.BasicActions.BasicAttack.started += InvokeOnBasicAttackDown;
+        input.BasicActions.BasicAttack.canceled += InvokeOnBasicAttackUp;
     }
 
     public void InvokeOnBasicAttackDown(InputAction.CallbackContext obj)
@@ -36,7 +38,10 @@ public class InputManager : MonoBehaviour
         OnBasicAttackDown?.Invoke();
     }
 
-
+    public void InvokeOnBasicAttackUp(InputAction.CallbackContext obj)
+    {
+        OnBasicAttackUp?.Invoke();
+    }
     public void InvokeOnDashDown(InputAction.CallbackContext obj)
     {
         OnDashDown?.Invoke();

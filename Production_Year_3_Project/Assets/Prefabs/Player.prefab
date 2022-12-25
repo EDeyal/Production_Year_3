@@ -297,6 +297,8 @@ GameObject:
   - component: {fileID: 591745895}
   - component: {fileID: 591745900}
   - component: {fileID: 591745901}
+  - component: {fileID: 2372582475109938729}
+  - component: {fileID: 1708975603}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -381,7 +383,7 @@ MonoBehaviour:
   apexGravityScale: 6
   gravityScale: 8
   maxGravity: 25
-  anim: {fileID: 5866666021829851184}
+  anim: {fileID: 1708975603}
   OnRecieveForce:
     m_PersistentCalls:
       m_Calls: []
@@ -487,7 +489,7 @@ MonoBehaviour:
   OnHitAttack:
     m_PersistentCalls:
       m_Calls: []
-  OnDoneDamageCalc:
+  OnTotalDamageCalcDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &591745901
@@ -511,7 +513,7 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  OnDoneDamageCalc:
+  OnTotalDamageCalcRecieve:
     m_PersistentCalls:
       m_Calls: []
   OnGetHealed:
@@ -520,6 +522,33 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2372582475109938729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427850386398440204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13ee59c1dfce984f88e7d6f3f7f4868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  maxHp: 0
+--- !u!114 &1708975603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427850386398440204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5182779aa52b8f140ae0eb8da7e154a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 5866666021829851184}
 --- !u!1001 &214238625
 PrefabInstance:
   m_ObjectHideFlags: 0

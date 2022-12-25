@@ -8,12 +8,15 @@ public class DamageHandler
     private List<float> modifiers = new List<float>();
 
     [SerializeField] private DamageType damageType;
-
+    
     public float BaseAmount { get => baseAmount; }
     public List<float> Modifiers { get => modifiers; }
     public DamageType DamageType { get => damageType; }
 
-
+    public void OverrideBaseAmount(float amount)
+    {
+        baseAmount = amount;
+    }
     public void AddModifier(float givenMod)
     {
         modifiers.Add(givenMod);
