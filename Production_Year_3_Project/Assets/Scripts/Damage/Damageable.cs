@@ -6,8 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(StatSheet))]
 public class Damageable : MonoBehaviour
 {
-    [SerializeField] private float currentHp;
-    [SerializeField] private float maxHp;
+     private float currentHp;
+     private float maxHp;
 
 
     [SerializeField] private TargetType targetType;
@@ -39,11 +39,11 @@ public class Damageable : MonoBehaviour
     public float CurrentHp { get => currentHp;}
     public float MaxHp { get => maxHp; }
 
-    private void Start()
+    public void SetStats(StatSheet stats)
     {
+        maxHp = stats.MaxHp;
         currentHp = maxHp;
     }
-
 
     public virtual void GetHit(Attack givenAttack)
     {

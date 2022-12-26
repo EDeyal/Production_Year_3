@@ -324,6 +324,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 591745885, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: playerMeleeAttackCollider
+      value: 
+      objectReference: {fileID: 2128970427}
+    - target: {fileID: 591745885, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: playerMeleeAttackAnimationHandler
+      value: 
+      objectReference: {fileID: 2128970429}
+    - target: {fileID: 591745902, guid: 8500d0d9592a7694f898365f435d4557, type: 3}
+      propertyPath: meleeBaseDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851436537349780074, guid: 8500d0d9592a7694f898365f435d4557,
+        type: 3}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851436537349780074, guid: 8500d0d9592a7694f898365f435d4557,
+        type: 3}
+      propertyPath: damageDealer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6427850386398440204, guid: 8500d0d9592a7694f898365f435d4557,
         type: 3}
       propertyPath: m_Name
@@ -1334,6 +1356,30 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!114 &2128970427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3851436537349780074, guid: 8500d0d9592a7694f898365f435d4557,
+    type: 3}
+  m_PrefabInstance: {fileID: 591745881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2128970429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5252180134498417000, guid: 8500d0d9592a7694f898365f435d4557,
+    type: 3}
+  m_PrefabInstance: {fileID: 591745881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f35257bdcc5b146b8fbda7960d5cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2144201641
 GameObject:
   m_ObjectHideFlags: 0
