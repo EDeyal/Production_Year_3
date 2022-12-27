@@ -1,22 +1,31 @@
-using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
-
-public abstract class BaseEnemy : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
 {
-    public virtual void Awake()
+    #region Fields
+    [SerializeField] Bounds _bound;
+    [SerializeField] Rigidbody _rb;
+    [SerializeField] SensorHandler _sensorHandler;
+    [SerializeField] BaseAction<DistanceData> _noticePlayerDistance;
+    [SerializeField] BaseAction<DistanceData> _chasePlayerDistance;
+    [SerializeField] AnimatorHandler _animatorHandler;
+    #endregion
+    #region Properties
+    public Bounds Bound => _bound;
+    public Rigidbody RB => _rb;
+    public SensorHandler SensorHandler => _sensorHandler;
+    public BaseAction<DistanceData> NoticePlayerDistance => _noticePlayerDistance;
+    public BaseAction<DistanceData> chasePlayerDistance => _chasePlayerDistance;
+    public AnimatorHandler AnimatorHandler => _animatorHandler;
+    #endregion
+    public virtual void CheckValidation()
     {
-        if (GameManager.Instance.PlayerManager == null)
-            throw new System.Exception("Player Reference is missing from Game Manager");
-        else
-            _player = GameManager.Instance.PlayerManager;
+        if (!_sensorHandler)
+            throw new System.Exception("BaseEnemy has no SensorHandler");
     }
-    protected PlayerManager _player;
-    public PlayerManager PlayerManager { get => _player; set => _player = value; }
-    //BaseEnemy is where all of the logic that all enemies hold stands
-    public abstract bool IsInRange(int distance);
-    private void OnDestroy()
+    private void OnDrawGizmos()
     {
-        PlayerManager = null;
+        Gizmos.DrawWireCube(_bound.center, _bound.size);
     }
-
 }
