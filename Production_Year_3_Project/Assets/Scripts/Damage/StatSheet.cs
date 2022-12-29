@@ -1,8 +1,11 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 public class StatSheet : MonoBehaviour
 {
-    [SerializeField] private float currentHp;
-    [SerializeField] private float maxHp;
+    [SerializeField, FoldoutGroup("Combat")] private float maxHp;
+    [SerializeField, FoldoutGroup("Combat")] private float invulnerabilityDuration;
+
+    [SerializeField,FoldoutGroup("Locomotion")] private float speed;
 
     private void Start()
     {
@@ -14,6 +17,7 @@ public class StatSheet : MonoBehaviour
         GetComponent<Damageable>().SetStats(this);
     }
 
-    public float CurrentHp { get => currentHp; }
     public float MaxHp { get => maxHp; }
+    public float InvulnerabilityDuration { get => invulnerabilityDuration; }
+    public float Speed { get => speed; }
 }

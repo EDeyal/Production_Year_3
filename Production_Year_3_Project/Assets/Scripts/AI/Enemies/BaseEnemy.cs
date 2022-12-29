@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
@@ -11,6 +10,7 @@ public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
     [SerializeField] BaseAction<DistanceData> _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
     #endregion
+
     #region Properties
     public Bounds Bound => _bound;
     public Rigidbody RB => _rb;

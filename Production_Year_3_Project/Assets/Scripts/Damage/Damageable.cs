@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(StatSheet))]
 public class Damageable : MonoBehaviour
 {
-     private float currentHp;
-     private float maxHp;
-
+    [SerializeField, ReadOnly] private float currentHp;
+    [SerializeField, ReadOnly] private float maxHp;
+    [SerializeField, ReadOnly] private float invulnerabilityDuration;
+    protected bool _canReciveDamage = true;
 
     [SerializeField] private TargetType targetType;
 
@@ -35,24 +37,29 @@ public class Damageable : MonoBehaviour
 
 
 
-    public TargetType TargetType { get => targetType;}
-    public float CurrentHp { get => currentHp;}
+    public TargetType TargetType { get => targetType; }
+    public float CurrentHp { get => currentHp; }
     public float MaxHp { get => maxHp; }
 
     public void SetStats(StatSheet stats)
     {
         maxHp = stats.MaxHp;
         currentHp = maxHp;
+        invulnerabilityDuration = stats.InvulnerabilityDuration;
     }
 
     public virtual void GetHit(Attack givenAttack)
     {
+        if (!_canReciveDamage)
+            return;
         OnGetHit?.Invoke(givenAttack);
         TakeDamage(givenAttack.DamageHandler);
     }
 
     public virtual void GetHit(Attack givenAttack, DamageDealer givenDealer)
     {
+        if (!_canReciveDamage)
+            return;
         OnGetHit?.Invoke(givenAttack);
         givenDealer.OnHitAttack?.Invoke(givenAttack);
         TakeDamage(givenAttack.DamageHandler, givenDealer);
@@ -68,6 +75,8 @@ public class Damageable : MonoBehaviour
             OnDeath?.Invoke();
         }
         ClampHp();
+        if (_canReciveDamage)
+            StartCoroutine(InvulnerabilityPhase());
     }
 
     public virtual void TakeDamage(DamageHandler givenDamage, DamageDealer givenDamageDealer)
@@ -83,6 +92,8 @@ public class Damageable : MonoBehaviour
             OnDeath?.Invoke();
         }
         ClampHp();
+        if (_canReciveDamage)
+            StartCoroutine(InvulnerabilityPhase());
     }
 
 
@@ -95,11 +106,18 @@ public class Damageable : MonoBehaviour
     {
         currentHp = Mathf.Clamp(currentHp, 0, maxHp);
     }
+
+    IEnumerator InvulnerabilityPhase()
+    {
+        _canReciveDamage = false;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        _canReciveDamage = true;
+    }
 }
 
 public enum TargetType
 {
     Player,
-    Enemy, 
+    Enemy,
     Terrain
 }
