@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVisuals : MonoBehaviour
 {
-    //controller  
-    [SerializeField] CCController playerController;
-
-    public CCController PlayerController { get => playerController;}
+    [SerializeField] private CCController playerController;
+    [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
+    [SerializeField] private DamageDealingCollider playerMeleeAttackCollider;
+    public CCController PlayerController { get => playerController; }
+    public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
+    public DamageDealingCollider PlayerMeleeAttackCollider { get => playerMeleeAttackCollider;}
 }

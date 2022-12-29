@@ -13,6 +13,7 @@ public class CCFlip : MonoBehaviour
 
     private void Start()
     {
+        controller.facingRight = true;
         StartCoroutine(WaitForMovingLeft());
     }
 

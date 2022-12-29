@@ -7,4 +7,10 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerVisuals Visuals { get => visuals;}
     public PlayerData Data { get => data;}
+
+
+    private void Start()
+    {
+        visuals.PlayerMeleeAttackCollider.CacheReferences(data.PlayerStats.MeleeAttack, data.PlayerDamageDealer);
+    }
 }
