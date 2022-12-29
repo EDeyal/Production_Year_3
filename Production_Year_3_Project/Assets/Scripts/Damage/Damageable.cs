@@ -90,6 +90,7 @@ public class Damageable : MonoBehaviour
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
+            givenDamageDealer.OnKill?.Invoke(this, givenDamage);
         }
         ClampHp();
         if (_canReciveDamage)
