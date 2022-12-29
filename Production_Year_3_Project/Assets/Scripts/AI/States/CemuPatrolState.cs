@@ -17,13 +17,17 @@ public class CemuPatrolState : BaseCemuState
     public override void EnterState()
     {
         base.EnterState();
-        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed),ONE);
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+            _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
         //add logic for animat
     }
     public override void ExitState()
     {
         base.ExitState();
-        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
+    AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+    _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
 
     }
 }

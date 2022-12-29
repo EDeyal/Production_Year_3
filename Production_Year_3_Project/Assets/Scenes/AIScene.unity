@@ -874,6 +874,7 @@ GameObject:
   - component: {fileID: 288940683}
   - component: {fileID: 288940672}
   - component: {fileID: 288940671}
+  - component: {fileID: 288940686}
   - component: {fileID: 288940676}
   - component: {fileID: 288940679}
   - component: {fileID: 288940678}
@@ -881,7 +882,6 @@ GameObject:
   - component: {fileID: 288940682}
   - component: {fileID: 288940681}
   - component: {fileID: 288940680}
-  - component: {fileID: 288940686}
   - component: {fileID: 288940685}
   - component: {fileID: 288940684}
   m_Layer: 9
@@ -930,14 +930,13 @@ MonoBehaviour:
     type: 2}
   _animatorHandler:
     _animator: {fileID: 2090567654}
+  _enemyStatSheet: {fileID: 288940686}
   _nextWaypoint: 0
   _waypoints:
   - {fileID: 459333857}
   - {fileID: 661974126}
   - {fileID: 402658615}
-  _walkAction: {fileID: 11400000, guid: 6bb168e8445fa804c90623361608e7ba, type: 2}
-  _stopAction: {fileID: 11400000, guid: e14292671f394f546bd0ef64d7f4268c, type: 2}
-  _chaseAction: {fileID: 11400000, guid: b1b0f467e52bf9f4b8026b5526c78b39, type: 2}
+  _moveAction: {fileID: 11400000, guid: 6bb168e8445fa804c90623361608e7ba, type: 2}
   _boundsXDistanceAction: {fileID: 11400000, guid: 35cf3054c9b260a49a3b3dfe3cd44109,
     type: 2}
   _waypointXDistanceAction: {fileID: 11400000, guid: f5b31f330093d8240b2f70eb91927860,

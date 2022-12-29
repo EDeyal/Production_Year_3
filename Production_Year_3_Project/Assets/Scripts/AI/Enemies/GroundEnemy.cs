@@ -5,16 +5,14 @@ public abstract class GroundEnemy : BaseEnemy
 {
     [SerializeField] int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
-    [SerializeField] BaseAction<WalkData> _walkAction;
-    [SerializeField] BaseAction<WalkData> _stopAction;
-    [SerializeField] BaseAction<WalkData> _chaseAction;
+    [SerializeField] BaseAction<MoveData> _moveAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
     [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
-    WalkData _walkData;
+    MoveData _moveData;
     private void OnEnable()
     {
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
@@ -31,7 +29,7 @@ public abstract class GroundEnemy : BaseEnemy
     }
     private void Start()
     {
-        _walkData = new WalkData(RB, Vector3.zero);
+        _moveData = new MoveData(RB, Vector3.zero,EnemyStatSheet.Speed);
     }
 
     public override void CheckValidation()
@@ -79,19 +77,20 @@ public abstract class GroundEnemy : BaseEnemy
         var direction = 0;
         direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? 1 : -1;
 
-        _walkData.Direction = new Vector3(direction, 0, 0);
-        _walkAction.InitAction(_walkData);
+        _moveData.UpdateData(new Vector3(direction, 0, 0), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
     }
     public virtual void StopMovement()
     {
-        _stopAction.InitAction(_walkData);
+        _moveData.UpdateData(ZERO);
+        _moveAction.InitAction(_moveData);
     }
     public virtual void Chase()
     {
-        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.Data.transform.position);
-        _walkData.Direction = new Vector3(direction, 0, 0);
-        _chaseAction.InitAction(_walkData);
         //find player and determin his direction
+        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.Data.transform.position);
+        _moveData.UpdateData(new Vector3(direction, 0, 0), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
     }
     private bool IsMovingToNextPoint()
     {

@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 public class StatSheet : MonoBehaviour
 {
+
     [SerializeField, FoldoutGroup("Combat")] private float maxHp;
     [SerializeField, FoldoutGroup("Combat")] private float invulnerabilityDuration;
 

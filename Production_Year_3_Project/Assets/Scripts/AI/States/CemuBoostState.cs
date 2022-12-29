@@ -12,4 +12,18 @@ public class CemuBoostState : BaseCemuState
         }
         return this;
     }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+            ZERO);
+    }
+    public override void ExitState()
+    {
+        base.ExitState();
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
+    AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+    _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
+    }
 }

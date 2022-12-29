@@ -39,6 +39,8 @@ public class CemuEnemy : GroundEnemy
         if (_boostCooldownAction.InitAction(new ActionCooldownData(ref _beforeBoostCooldown)))
         {
             _isBoostActive = true;
+            //add status effect for speed
+            //add status effect for decaying health
             return true;
         }
         _isBoostActive = false;

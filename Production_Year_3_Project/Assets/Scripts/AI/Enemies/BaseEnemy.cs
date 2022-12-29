@@ -2,6 +2,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
 {
+    protected const float ZERO = 0;
+    protected const float ONE = 1;
     #region Fields
     [SerializeField] Bounds _bound;
     [SerializeField] Rigidbody _rb;
@@ -9,6 +11,7 @@ public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
     [SerializeField] BaseAction<DistanceData> _noticePlayerDistance;
     [SerializeField] BaseAction<DistanceData> _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
+    [SerializeField] EnemyStatSheet _enemyStatSheet;
     #endregion
 
     #region Properties
@@ -18,6 +21,7 @@ public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
     public BaseAction<DistanceData> NoticePlayerDistance => _noticePlayerDistance;
     public BaseAction<DistanceData> chasePlayerDistance => _chasePlayerDistance;
     public AnimatorHandler AnimatorHandler => _animatorHandler;
+    public EnemyStatSheet EnemyStatSheet => _enemyStatSheet;
     #endregion
     public virtual void CheckValidation()
     {
