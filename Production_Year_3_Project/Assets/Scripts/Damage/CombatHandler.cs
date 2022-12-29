@@ -4,29 +4,14 @@ using UnityEngine;
 [System.Serializable]
 public class CombatHandler
 {
-    [SerializeField] DamageDealingCollider _damageDealingCollider;
+    [SerializeField] List<AttackWrapper> _attacksWrapper;
     [SerializeField] DamageDealer _damageDealer;
     [SerializeField] Damageable _damagable;
-    List<Attack> _attacks;
-
-    public void AddAttacks(List<Attack> attacks)
-    {
-        _attacks = attacks;
-    }
     public void Init()
     {
-        foreach (var item in _attacks)
+        foreach (var wrapper in _attacksWrapper)
         {
-            _damageDealingCollider.CacheReferences(item, _damageDealer);
+            wrapper.Init(_damageDealer);
         }
-    }
-    public Attack GetAttackType(Attack attack)
-    {
-        foreach (var item in _attacks)
-        {
-            if (item == attack)
-                return item;
-        }
-        return null;
     }
 }

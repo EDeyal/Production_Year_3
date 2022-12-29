@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684794235154033133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.47, y: 0.54319304, z: 0}
+  m_LocalPosition: {x: -4.16, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684794235833240074}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.84, y: 7.88, z: 0}
+  m_LocalPosition: {x: 4.78, y: -0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -262,10 +262,11 @@ MonoBehaviour:
   _boostCooldownAction: {fileID: 11400000, guid: e92e8432615575d46bccabe0392ae96e,
     type: 2}
   _combatHandler:
-    _damageDealingCollider: {fileID: 684794236416992096}
+    _attacksWrapper:
+    - _damageDealingCollider: {fileID: 684794236416992096}
+      _attack: {fileID: 11400000, guid: 30e21aa0d59627e46849828f65ce8c47, type: 2}
     _damageDealer: {fileID: 684794236260423736}
     _damagable: {fileID: 684794236260423737}
-  _collisionAttack: {fileID: 11400000, guid: 30e21aa0d59627e46849828f65ce8c47, type: 2}
 --- !u!114 &684794236260423738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +381,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnTotalDamageCalcDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &684794236260423731

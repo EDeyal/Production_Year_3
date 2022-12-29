@@ -7,7 +7,6 @@ public class CemuEnemy : GroundEnemy
     ActionCooldown _beforeBoostCooldown;
     [SerializeField] BaseAction<ActionCooldownData> _boostCooldownAction;
     [SerializeField] CombatHandler _combatHandler;
-    [SerializeField] Attack _collisionAttack;
 
     public bool IsBoostActive => _isBoostActive;
     public void Awake()
@@ -15,7 +14,6 @@ public class CemuEnemy : GroundEnemy
         _cemuStateHandler.CheckValidation();
         _cemuStateHandler.CurrentState.EnterState();
         _beforeBoostCooldown = new ActionCooldown();
-        _combatHandler.AddAttacks(new System.Collections.Generic.List<Attack>{ _collisionAttack });//Show On
         _combatHandler.Init();
     }
     private void Update()
