@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +10,7 @@ public class Damageable : MonoBehaviour
     [SerializeField, ReadOnly] private float maxHp;
     [SerializeField, ReadOnly] private float invulnerabilityDuration;
     protected bool _canReciveDamage = true;
+    private BaseCharacter owner;
 
     [SerializeField] private TargetType targetType;
 
@@ -40,6 +40,12 @@ public class Damageable : MonoBehaviour
     public TargetType TargetType { get => targetType; }
     public float CurrentHp { get => currentHp; }
     public float MaxHp { get => maxHp; }
+    public BaseCharacter Owner { get => owner; }
+
+    public void CacheOwner(BaseCharacter givenCharacter)
+    {
+        owner = givenCharacter;
+    }
 
     public void SetStats(StatSheet stats)
     {

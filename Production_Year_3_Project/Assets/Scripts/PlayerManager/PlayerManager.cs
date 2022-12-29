@@ -12,5 +12,7 @@ public class PlayerManager : BaseCharacter
     private void Start()
     {
         visuals.PlayerMeleeAttackCollider.CacheReferences(data.PlayerStats.MeleeAttack, data.PlayerDamageDealer);
+        data.PlayerStatusEffectable.CacheOwner(this);
+        data.PlayerDamageable.CacheOwner(this);
     }
 }
