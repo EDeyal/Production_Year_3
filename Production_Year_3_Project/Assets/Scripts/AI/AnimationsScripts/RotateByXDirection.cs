@@ -69,7 +69,7 @@ public class RotateByXDirection : MonoBehaviour
     {
         if (_isUsingRigidbody)
         {
-            yield return new WaitUntil(() => _rb.velocity.x < 0);
+            yield return new WaitUntil(() => _rb.velocity.x > 0);
         }
         else
         {
