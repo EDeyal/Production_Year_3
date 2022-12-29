@@ -1,6 +1,6 @@
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
-public abstract class BaseEnemy : MonoBehaviour, ICheckValidation
+public abstract class BaseEnemy : BaseCharacter, ICheckValidation
 {
     protected const float ZERO = 0;
     protected const float ONE = 1;

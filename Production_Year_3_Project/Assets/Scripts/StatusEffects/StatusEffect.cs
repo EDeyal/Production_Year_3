@@ -1,10 +1,6 @@
 public abstract class StatusEffect
 {
-    protected StatusEffector effector;
-    public StatusEffect(StatusEffector givenEffector = null)
-    {
-        effector = givenEffector;
-    }
+    protected BaseCharacter host;
 
     public virtual void StartEffect()
     {

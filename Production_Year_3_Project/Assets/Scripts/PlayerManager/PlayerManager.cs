@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : BaseCharacter
 {
     [SerializeField] private PlayerVisuals visuals;
     [SerializeField] private PlayerData data;
