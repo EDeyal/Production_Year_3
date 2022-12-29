@@ -7,7 +7,7 @@ public class CemuChaseState : BaseCemuState
     public override BaseState RunCurrentState()
     {
         //if boost is not active
-        Debug.Log("CemuChaseState");
+        //Debug.Log("CemuChaseState");
         ((GroundEnemy)_cemuStateHandler.RefEnemy).Chase();
         return _cemuStateHandler.CombatState;
     }

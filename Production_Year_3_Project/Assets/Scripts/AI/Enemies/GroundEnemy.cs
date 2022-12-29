@@ -49,8 +49,8 @@ public abstract class GroundEnemy : BaseEnemy
             moveToNextPoint = true;
         }
 
-        if (_boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.max))
-            || _boundsXDistanceAction.InitAction(new DistanceData(transform.position, Bound.min)))
+        if (_boundsXDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.max))
+            || _boundsXDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.min)))
         {
             moveToNextPoint = true;
         }

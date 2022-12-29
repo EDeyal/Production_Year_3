@@ -4,7 +4,7 @@ public class CemuBoostState : BaseCemuState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("CemuBoostState");
+        //Debug.Log("CemuBoostState");
         var enemy = (CemuEnemy)_cemuStateHandler.RefEnemy;
         if (enemy.CheckBoostActivation())
         {

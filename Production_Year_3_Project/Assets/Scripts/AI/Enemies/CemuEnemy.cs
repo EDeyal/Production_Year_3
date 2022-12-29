@@ -6,12 +6,8 @@ public class CemuEnemy : GroundEnemy
     [ReadOnly] bool _isBoostActive;
     ActionCooldown _beforeBoostCooldown;
     [SerializeField] BaseAction<ActionCooldownData> _boostCooldownAction;
-
-    //create script that will hold all damage functions "Combat Handler"
-    [SerializeField] DamageDealingCollider _damageDealingCollider;
-    [SerializeField] DamageDealer _damageDealer;
-    [SerializeField] Damageable _damagable;
-    [SerializeField] Attack _attack;
+    [SerializeField] CombatHandler _combatHandler;
+    [SerializeField] Attack _collisionAttack;
 
     public bool IsBoostActive => _isBoostActive;
     public void Awake()
@@ -19,9 +15,9 @@ public class CemuEnemy : GroundEnemy
         _cemuStateHandler.CheckValidation();
         _cemuStateHandler.CurrentState.EnterState();
         _beforeBoostCooldown = new ActionCooldown();
-        _damageDealingCollider.CacheReferences(_attack,_damageDealer);//add to combat handler
+        _combatHandler.AddAttacks(new System.Collections.Generic.List<Attack>{ _collisionAttack });//Show On
+        _combatHandler.Init();
     }
-    //visual -> controller
     private void Update()
     {
         BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
