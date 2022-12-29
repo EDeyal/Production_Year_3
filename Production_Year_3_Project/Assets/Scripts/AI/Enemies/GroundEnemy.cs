@@ -13,6 +13,8 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
     [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
     MoveData _moveData;
+
+    public CheckXDistanceAction BoundsXDistanceAction => _boundsXDistanceAction;
     private void OnEnable()
     {
         _groundSensorInfo.SubscribeToEvents(SensorHandler);

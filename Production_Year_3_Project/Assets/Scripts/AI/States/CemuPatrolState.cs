@@ -1,17 +1,19 @@
-using UnityEngine;
-
 public class CemuPatrolState : BaseCemuState
 {
 
     public override BaseState RunCurrentState()
     {
+        var enemyRef = _cemuStateHandler.RefEnemy;
         //Debug.Log("Cemu Patrol State");
-        if (_cemuStateHandler.RefEnemy.NoticePlayerDistance.InitAction(new DistanceData(_cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position)))
+        if (enemyRef.NoticePlayerDistance.InitAction(new DistanceData(_cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position)))
         {
-            ((GroundEnemy)_cemuStateHandler.RefEnemy).StopMovement();
-            return _cemuStateHandler.CombatState;
+            if (enemyRef.HasDirectLineToPlayer(enemyRef.NoticePlayerDistance.Distance))
+            {
+                ((GroundEnemy)enemyRef).StopMovement();
+                return _cemuStateHandler.CombatState;
+            }
         }
-        ((GroundEnemy)_cemuStateHandler.RefEnemy).Patrol();
+        ((GroundEnemy)enemyRef).Patrol();
         return this;
     }
     public override void EnterState()

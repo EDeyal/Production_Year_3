@@ -8,17 +8,19 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] BoundHandler _boundHandler;
     [SerializeField] Rigidbody _rb;
     [SerializeField] SensorHandler _sensorHandler;
-    [SerializeField] BaseAction<DistanceData> _noticePlayerDistance;
-    [SerializeField] BaseAction<DistanceData> _chasePlayerDistance;
+    [SerializeField] CheckDistanceAction _noticePlayerDistance;
+    [SerializeField] CheckDistanceAction _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
     [SerializeField] EnemyStatSheet _enemyStatSheet;
+
+    [SerializeField] private RaycastSensor _playerSensor;
     #endregion
 
     #region Properties
     public Rigidbody RB => _rb;
     public SensorHandler SensorHandler => _sensorHandler;
-    public BaseAction<DistanceData> NoticePlayerDistance => _noticePlayerDistance;
-    public BaseAction<DistanceData> chasePlayerDistance => _chasePlayerDistance;
+    public CheckDistanceAction NoticePlayerDistance => _noticePlayerDistance;
+    public CheckDistanceAction ChasePlayerDistance => _chasePlayerDistance;
     public AnimatorHandler AnimatorHandler => _animatorHandler;
     public EnemyStatSheet EnemyStatSheet => _enemyStatSheet;
     public BoundHandler BoundHandler => _boundHandler;
@@ -31,9 +33,18 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     {
         if (!_sensorHandler)
             throw new System.Exception("BaseEnemy has no SensorHandler");
+        if (!_playerSensor.SensorTarget)
+        {
+            throw new System.Exception("BaseEnemy has no SensorTarget on player sensor");
+        }
     }
     private void OnDrawGizmos()
     {
         BoundHandler.DrawBounds();
+        _playerSensor.DrawLineToTarget(transform, _noticePlayerDistance.Distance);
+    }
+    public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
+    {
+        return _playerSensor.SendRayToTarget(transform,maxDistanceToPlayer);
     }
 }

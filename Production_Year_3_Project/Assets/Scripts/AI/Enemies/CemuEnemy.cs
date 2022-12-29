@@ -11,6 +11,7 @@ public class CemuEnemy : GroundEnemy
     public bool IsBoostActive => _isBoostActive;
     public void Awake()
     {
+        CheckValidation();
         _cemuStateHandler.CheckValidation();
         _cemuStateHandler.CurrentState.EnterState();
         _beforeBoostCooldown = new ActionCooldown();
@@ -40,5 +41,9 @@ public class CemuEnemy : GroundEnemy
         _isBoostActive = false;
         return false;
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        ChasePlayerDistance.DrawGizmos(transform.position);
+        NoticePlayerDistance.DrawGizmos(transform.position);
+    }
 }

@@ -230,6 +230,13 @@ MonoBehaviour:
   _animatorHandler:
     _animator: {fileID: 6407062145061780909}
   _enemyStatSheet: {fileID: 684794236260423738}
+  _playerSensor:
+    _sensors:
+    - Direcion: {x: 0, y: 0}
+      Offset: {x: 0, y: 0.5}
+      Range: 0
+    _sensorTarget: {fileID: 11400000, guid: b6e8a161e89ce4e4cb6c3b0f73c2c383, type: 2}
+    IsActive: 1
   _nextWaypoint: 0
   _waypoints:
   - {fileID: 684794235154033134}

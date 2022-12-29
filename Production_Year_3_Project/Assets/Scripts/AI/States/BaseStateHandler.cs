@@ -5,6 +5,9 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     [SerializeField] private BaseState _currentState;
     [SerializeField] private BaseState _idleState;
     [SerializeField] private BaseState _combatState;
+
+
+
     protected PlayerManager _player;
 
     public BaseState CurrentState { get => _currentState; set => _currentState = value; }
@@ -12,6 +15,7 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     public BaseState CombatState { get => _combatState; }
     public PlayerManager PlayerManager => _player;
     public BaseEnemy RefEnemy => _refEnemy;
+
     public virtual void Start()
     {
         if (GameManager.Instance.PlayerManager == null)
