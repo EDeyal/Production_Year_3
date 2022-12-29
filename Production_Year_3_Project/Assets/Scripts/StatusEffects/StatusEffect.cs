@@ -17,6 +17,4 @@ public abstract class StatusEffect
     protected abstract void Subscribe();
     protected abstract void UnSubscribe();
 
-
-
 }
