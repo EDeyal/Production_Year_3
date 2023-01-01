@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(BaseCharacter))]
 public class StatusEffectable : MonoBehaviour
 {
     private List<StatusEffect> statusEffects = new List<StatusEffect>();
+    private BaseCharacter owner;
 
     /// <summary>
     /// invoked when recieving a status effect
@@ -16,9 +18,13 @@ public class StatusEffectable : MonoBehaviour
     /// </summary>
     public UnityEvent<StatusEffect> OnStatusEffectRemoved;
 
-
     public List<StatusEffect> StatusEffects { get => statusEffects; }
+    public BaseCharacter Owner { get => owner; }
 
+    public void CacheOwner(BaseCharacter givenCharacter)
+    {
+        owner = givenCharacter;
+    }
 
     public void ApplyStatusEffect(StatusEffect effect)
     {
@@ -32,6 +38,8 @@ public class StatusEffectable : MonoBehaviour
             }
         }
         statusEffects.Add(effect);
+        effect.CacheHost(Owner);
+        effect.onRemoved.AddListener(RemoveStatusEffect);
         effect.StartEffect();
     }
 
@@ -48,6 +56,8 @@ public class StatusEffectable : MonoBehaviour
             }
         }
         statusEffects.Add(effect);
+        effect.CacheHost(Owner);
+        effect.onRemoved.AddListener(RemoveStatusEffect);
         effect.StartEffect();
     }
 

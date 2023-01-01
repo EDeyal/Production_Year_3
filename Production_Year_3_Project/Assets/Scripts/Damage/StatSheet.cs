@@ -3,10 +3,12 @@ using UnityEngine;
 public class StatSheet : MonoBehaviour
 {
 
-    [SerializeField, FoldoutGroup("Combat")] private float maxHp;
+    [SerializeField, FoldoutGroup("Combat")] private float baseMaxHp;
     [SerializeField, FoldoutGroup("Combat")] private float invulnerabilityDuration;
 
-    [SerializeField,FoldoutGroup("Locomotion")] private float speed;
+    [SerializeField, FoldoutGroup("Locomotion")] private float baseSpeed;
+
+    private float currentSpeed;
 
     private void Start()
     {
@@ -16,9 +18,21 @@ public class StatSheet : MonoBehaviour
     protected virtual void InitializeStats()
     {
         GetComponent<Damageable>().SetStats(this);
+        currentSpeed = baseSpeed;
     }
 
-    public float MaxHp { get => maxHp; }
+    public float MaxHp { get => baseMaxHp; }
     public float InvulnerabilityDuration { get => invulnerabilityDuration; }
-    public float Speed { get => speed; }
+    public float Speed { get => currentSpeed; }
+
+
+    public void OverrideSpeed(float givenSpeed)
+    {
+        currentSpeed = givenSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        currentSpeed = baseSpeed;
+    }
 }
