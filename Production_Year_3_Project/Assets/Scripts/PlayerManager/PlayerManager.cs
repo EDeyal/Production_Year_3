@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class PlayerManager : BaseCharacter
 {
-    [SerializeField] private PlayerVisuals visuals;
-    [SerializeField] private PlayerData data;
+    [SerializeField] private CCController playerController;
+    [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
+    [SerializeField] private DamageDealingCollider playerMeleeAttackCollider;
 
-    public PlayerVisuals Visuals { get => visuals;}
-    public PlayerData Data { get => data;}
-
+    public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
+    public CCController PlayerController { get => playerController; }
+    public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
+    public DamageDealingCollider PlayerMeleeAttackCollider { get => playerMeleeAttackCollider; }
 
     private void Start()
     {
-        visuals.PlayerMeleeAttackCollider.CacheReferences(data.PlayerStats.MeleeAttack, data.PlayerDamageDealer);
-        data.PlayerStatusEffectable.CacheOwner(this);
-        data.PlayerDamageable.CacheOwner(this);
+        PlayerMeleeAttackCollider.CacheReferences(PlayerStatSheet.MeleeAttack, DamageDealer);
+        Effectable.CacheOwner(this);
+        Damageable.CacheOwner(this);
     }
 }

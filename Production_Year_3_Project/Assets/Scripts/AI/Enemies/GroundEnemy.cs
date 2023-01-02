@@ -90,7 +90,7 @@ public abstract class GroundEnemy : BaseEnemy
     public virtual void Chase()
     {
         //find player and determin his direction
-        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.Data.transform.position);
+        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.transform.position);
         _moveData.UpdateData(new Vector3(direction, 0, 0), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
