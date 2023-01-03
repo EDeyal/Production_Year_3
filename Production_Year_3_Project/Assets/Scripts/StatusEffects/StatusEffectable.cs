@@ -39,7 +39,6 @@ public class StatusEffectable : MonoBehaviour
         }
         statusEffects.Add(effect);
         effect.CacheHost(Owner);
-        effect.onRemoved.AddListener(RemoveStatusEffect);
         effect.StartEffect();
     }
 
@@ -55,9 +54,9 @@ public class StatusEffectable : MonoBehaviour
                 return;
             }
         }
+
         statusEffects.Add(effect);
         effect.CacheHost(Owner);
-        effect.onRemoved.AddListener(RemoveStatusEffect);
         effect.StartEffect();
     }
 
@@ -69,7 +68,6 @@ public class StatusEffectable : MonoBehaviour
             if (item.GetType() == effect.GetType())
             {
                 statusEffects.Remove(item);
-                item.Remove();
                 return;
             }
         }

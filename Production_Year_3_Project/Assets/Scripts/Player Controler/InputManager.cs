@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -20,6 +18,9 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnBasicAttackDown;
     public UnityEvent OnBasicAttackUp;
 
+    public UnityEvent OnSpellCast;
+
+
     private void Start()
     {
         input = new PlayerInputs();
@@ -31,6 +32,12 @@ public class InputManager : MonoBehaviour
         input.BasicActions.Dash.started += InvokeOnDashDown;
         input.BasicActions.BasicAttack.started += InvokeOnBasicAttackDown;
         input.BasicActions.BasicAttack.canceled += InvokeOnBasicAttackUp;
+        input.BasicActions.SpellAttack.started += InvokeOnSpellCast;
+    }
+    public void InvokeOnSpellCast(InputAction.CallbackContext obj)
+    {
+        Debug.Log("casting spell");
+        OnSpellCast?.Invoke();
     }
 
     public void InvokeOnBasicAttackDown(InputAction.CallbackContext obj)

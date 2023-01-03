@@ -131,6 +131,7 @@ public class Damageable : MonoBehaviour
         yield return new WaitForSeconds(invulnerabilityDuration);
         _canReciveDamage = true;
     }
+
 }
 
 public enum TargetType

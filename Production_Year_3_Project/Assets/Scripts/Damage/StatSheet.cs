@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 public class StatSheet : MonoBehaviour
 {
 
@@ -8,14 +9,12 @@ public class StatSheet : MonoBehaviour
     [SerializeField, FoldoutGroup("Combat")] private DecayingHealth decayingHealth = new DecayingHealth();
     [SerializeField, FoldoutGroup("Locomotion")] private float baseSpeed;
 
+    public UnityEvent<float> OnOverrideSpeed;
+    public UnityEvent<float> OnResetSpeed;
+
     private float currentSpeed;
 
-    private void Start()
-    {
-        InitializeStats();
-    }
-
-    protected virtual void InitializeStats()
+    public virtual void InitializeStats()
     {
         GetComponent<Damageable>().SetStats(this);
         currentSpeed = baseSpeed;
@@ -28,11 +27,11 @@ public class StatSheet : MonoBehaviour
 
     public void OverrideSpeed(float givenSpeed)
     {
-        currentSpeed = givenSpeed;
+        OnOverrideSpeed?.Invoke(givenSpeed);
     }
 
     public void ResetSpeed()
     {
-        currentSpeed = baseSpeed;
+        OnOverrideSpeed?.Invoke(baseSpeed);
     }
 }

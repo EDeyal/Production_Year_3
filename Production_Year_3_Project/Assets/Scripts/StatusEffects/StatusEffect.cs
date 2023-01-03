@@ -3,7 +3,6 @@ using UnityEngine.Events;
 public abstract class StatusEffect
 {
     protected BaseCharacter host;
-    public UnityEvent<StatusEffect> onRemoved;
 
     public virtual void StartEffect()
     {
@@ -18,8 +17,8 @@ public abstract class StatusEffect
 
     public virtual void Remove()
     {
-        onRemoved?.Invoke(this);
         UnSubscribe();
+        host.Effectable.RemoveStatusEffect(this);
     }
 
     public abstract void Reset();

@@ -8,7 +8,7 @@ public class PlayerStatSheet : StatSheet
     public Attack MeleeAttack { get => meleeAttack; }
     public float AirAttackGravityStopDuration { get => airAttackGravityStopDuration; }
 
-    protected override void InitializeStats()
+    public override void InitializeStats()
     {
         base.InitializeStats();
         meleeAttack.DamageHandler.OverrideBaseAmount(meleeBaseDamage);

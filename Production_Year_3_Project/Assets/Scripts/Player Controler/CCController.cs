@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,15 @@ using UnityEngine.Events;
 public class CCController : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
-    [SerializeField] float movementSpeed;
+    [SerializeField, ReadOnly] private float movementSpeed;
+    private float startingMovementSpeed;
+
+
     [SerializeField] float jumpHeight;
 
     [SerializeField] Vector3 velocity;
     //[SerializeField] Vector3 gravity;
-    
+
     [SerializeField] GroundCheck groundCheck;
     [SerializeField] GroundCheck ceilingDetector;
 
@@ -41,13 +45,14 @@ public class CCController : MonoBehaviour
     private float startingGravityScale;
     [SerializeField] float gravityScale;
     [SerializeField] float maxGravity;
-    [SerializeField, Range(0,1)] float midAirAttackStopDuration;
+    [SerializeField, Range(0, 1)] float midAirAttackStopDuration;
     private bool midAirAttackUsed;
 
     [SerializeField] AnimationHandler animBlender;
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
 
-    public Vector3 Velocity { get => velocity;}
+    public Vector3 Velocity { get => velocity; }
+    public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
 
     Vector3 oldPos;
 
@@ -62,6 +67,8 @@ public class CCController : MonoBehaviour
         GameManager.Instance.InputManager.OnJumpDown.AddListener(Jump);
         GameManager.Instance.InputManager.OnJump.AddListener(HoldJump);
         GameManager.Instance.InputManager.OnJumpUp.AddListener(ReleaseJumpHeld);
+
+        startingMovementSpeed = movementSpeed;
 
 
         groundCheck.OnGrounded.AddListener(ResetVelocity);
@@ -366,6 +373,11 @@ public class CCController : MonoBehaviour
             return;
         }
         StartCoroutine(MidAirAttackGravity());
+    }
+
+    public void SetSpeed(float givenSpeed)
+    {
+        movementSpeed = givenSpeed;
     }
 
     private IEnumerator MidAirAttackGravity()
