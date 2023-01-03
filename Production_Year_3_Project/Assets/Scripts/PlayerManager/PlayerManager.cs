@@ -5,7 +5,6 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private CCController playerController;
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
     [SerializeField] private DamageDealingCollider playerMeleeAttackCollider;
-
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -16,5 +15,6 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttackCollider.CacheReferences(PlayerStatSheet.MeleeAttack, DamageDealer);
         Effectable.CacheOwner(this);
         Damageable.CacheOwner(this);
+        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
     }
 }

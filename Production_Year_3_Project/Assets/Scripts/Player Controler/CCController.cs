@@ -41,6 +41,8 @@ public class CCController : MonoBehaviour
     private float startingGravityScale;
     [SerializeField] float gravityScale;
     [SerializeField] float maxGravity;
+    [SerializeField, Range(0,1)] float midAirAttackStopDuration;
+    private bool midAirAttackUsed;
 
     [SerializeField] AnimationHandler animBlender;
     bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
@@ -68,6 +70,7 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetJumped);
         groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         groundCheck.OnGrounded.AddListener(LandAnim);
+        groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
 
         OnJump.AddListener(ResetCanHoldJump);
         OnJump.AddListener(JumpAnim);
@@ -210,6 +213,7 @@ public class CCController : MonoBehaviour
     public void ResetGravity()
     {
         velocity.y = Mathf.Clamp(velocity.y, 0, 100);
+        gravityScale = startingGravityScale;
     }
 
     public void StartDashReset()
@@ -349,5 +353,30 @@ public class CCController : MonoBehaviour
     private void LandAnim()
     {
         animBlender.SetTrigger("Landed");
+    }
+    private void ResetMidAirAttackUsed()
+    {
+        midAirAttackUsed = false;
+    }
+
+    public void MidAirGraivtyAttackStop()
+    {
+        if (groundCheck.IsGrounded() || midAirAttackUsed)
+        {
+            return;
+        }
+        StartCoroutine(MidAirAttackGravity());
+    }
+
+    private IEnumerator MidAirAttackGravity()
+    {
+        midAirAttackUsed = true;
+        useGravity = false;
+        canMove = false;
+        ResetVelocity();
+        yield return new WaitForSecondsRealtime(midAirAttackStopDuration);
+        useGravity = true;
+        canMove = true;
+        ResetGravity();
     }
 }

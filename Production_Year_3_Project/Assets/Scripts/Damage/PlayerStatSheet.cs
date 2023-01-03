@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatSheet : StatSheet
 {
     [SerializeField] private Attack meleeAttack;
     [SerializeField] private float meleeBaseDamage;
-    public Attack MeleeAttack { get => meleeAttack;}
+    [SerializeField] private float airAttackGravityStopDuration;
+    public Attack MeleeAttack { get => meleeAttack; }
+    public float AirAttackGravityStopDuration { get => airAttackGravityStopDuration; }
 
     protected override void InitializeStats()
     {
