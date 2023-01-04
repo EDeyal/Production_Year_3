@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerAbilityHandler : MonoBehaviour
 {
     private Ability currentAbility;
-    public Ability CurrentAbility { get => currentAbility;}
+    public Ability CurrentAbility { get => currentAbility; }
 
     private float lastCastSpell;
 
@@ -24,19 +22,20 @@ public class PlayerAbilityHandler : MonoBehaviour
     }
     public virtual void CastAbility()
     {
-        /*if (Time.time - lastCastSpell < currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
+        if (lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
         {
             return;
-        }*/
+        }
+        Debug.Log("casting " + currentAbility.name);
         currentAbility.Cast();
         lastCastSpell = Time.time;
-      //  anim.SetTrigger(currentAbility.AnimationTrigger);
+        //  anim.SetTrigger(currentAbility.AnimationTrigger);
 
     }
 
     private void ResetLastCastSpell()
     {
-        lastCastSpell = 0;
+        lastCastSpell = currentAbility.CoolDown * -1;
     }
 
     public void EquipSpell(Ability givenAbility)

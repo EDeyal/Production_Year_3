@@ -36,7 +36,6 @@ public class InputManager : MonoBehaviour
     }
     public void InvokeOnSpellCast(InputAction.CallbackContext obj)
     {
-        Debug.Log("casting spell");
         OnSpellCast?.Invoke();
     }
 
