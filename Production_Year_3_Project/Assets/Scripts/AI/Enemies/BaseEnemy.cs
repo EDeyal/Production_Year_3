@@ -53,4 +53,5 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     {
         return _playerSensor.SendRayToTarget(transform, maxDistanceToPlayer);
     }
+    public abstract void OnDeath();
 }

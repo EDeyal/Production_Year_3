@@ -22,7 +22,6 @@ public class CemuPatrolState : BaseCemuState
         _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
             AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
             _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
-        //add logic for animat
     }
     public override void ExitState()
     {
@@ -31,5 +30,12 @@ public class CemuPatrolState : BaseCemuState
     AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
     _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
 
+    }
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
+AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+_cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
     }
 }

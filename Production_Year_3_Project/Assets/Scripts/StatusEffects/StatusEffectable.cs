@@ -67,10 +67,10 @@ public class StatusEffectable : MonoBehaviour
         {
             if (item.GetType() == effect.GetType())
             {
+                OnStatusEffectRemoved.Invoke(item);
                 statusEffects.Remove(item);
                 return;
             }
         }
     }
-
 }

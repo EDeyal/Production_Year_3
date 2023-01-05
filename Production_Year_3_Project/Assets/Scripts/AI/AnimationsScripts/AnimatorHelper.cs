@@ -5,6 +5,7 @@ using UnityEngine;
 public enum AnimatorParameterType
 {
     Speed,
+    IsDead,
 }
 public static class AnimatorHelper
 {
@@ -14,6 +15,8 @@ public static class AnimatorHelper
         {
             case AnimatorParameterType.Speed:
                 return "Speed";
+                case AnimatorParameterType.IsDead:
+                return "IsDead";
             default:
                 throw new System.Exception("Animator Helper Recived Wrong AnimatorParameterType");
         }

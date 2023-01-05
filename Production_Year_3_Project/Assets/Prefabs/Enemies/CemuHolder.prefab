@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 684794236260423742}
   - component: {fileID: 684794236260423741}
   - component: {fileID: 684794236260423740}
+  - component: {fileID: 2044695640459412864}
   - component: {fileID: 2523725584667933375}
   - component: {fileID: 4614162803186384033}
   m_Layer: 9
@@ -257,6 +258,7 @@ MonoBehaviour:
     type: 2}
   _waypointXDistanceAction: {fileID: 11400000, guid: f5b31f330093d8240b2f70eb91927860,
     type: 2}
+  _deathAction: {fileID: 11400000, guid: e06e4fca30327ae4c9bb888fbe89962a, type: 2}
   _groundSensorInfo:
     _sensorTarget: {fileID: 11400000, guid: 89e1f7c7d0d70004dbe8e8c05d30f653, type: 2}
     _sensorInfoType: 0
@@ -297,9 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2830323c6146ab14d8af2afb972e4bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHp: 0
+  baseMaxHp: 16
   invulnerabilityDuration: 0.3
-  baseSpeed: 0
+  baseSpeed: 1
   OnOverrideSpeed:
     m_PersistentCalls:
       m_Calls: []
@@ -426,6 +428,7 @@ MonoBehaviour:
   _currentState: {fileID: 684794236260423730}
   _idleState: {fileID: 684794236260423730}
   _combatState: {fileID: 684794236260423742}
+  _deathState: {fileID: 2044695640459412864}
   _patrolState: {fileID: 684794236260423729}
   _chaseState: {fileID: 684794236260423741}
   _boostState: {fileID: 684794236260423740}
@@ -491,6 +494,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a77303e2c56df1c4ebd1cb0d04f448a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 684794236260423731}
+--- !u!114 &2044695640459412864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684794236260423885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea98d045410a4f342b398684aa165fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cemuStateHandler: {fileID: 684794236260423731}

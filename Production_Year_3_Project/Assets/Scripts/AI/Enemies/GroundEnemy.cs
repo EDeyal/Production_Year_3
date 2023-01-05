@@ -8,6 +8,8 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] BaseAction<MoveData> _moveAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
+    [SerializeField] BaseAction<ActionCooldownData> _deathAction;
+    ActionCooldown _deathCooldown;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
@@ -18,6 +20,7 @@ public abstract class GroundEnemy : BaseEnemy
     public override void Awake()
     {
         base.Awake();
+        _deathCooldown = new ActionCooldown();
     }
     private void OnEnable()
     {
@@ -106,5 +109,15 @@ public abstract class GroundEnemy : BaseEnemy
             _nextWaypoint = 0;
         }
         return true;
+    }
+    public override void OnDeath()
+    {
+        //can add logic until destroyed cooldown is completed
+        if (_deathAction.InitAction(new ActionCooldownData(ref _deathCooldown)))
+        {
+            //can add logic to frame of death
+            transform.gameObject.SetActive(false);
+            //Destroy(this);
+        }
     }
 }

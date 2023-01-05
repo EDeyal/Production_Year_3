@@ -5,6 +5,7 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     [SerializeField] private BaseState _currentState;
     [SerializeField] private BaseState _idleState;
     [SerializeField] private BaseState _combatState;
+    [SerializeField] private BaseState _deathState;
 
 
 
@@ -13,6 +14,7 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     public BaseState CurrentState { get => _currentState; set => _currentState = value; }
     public BaseState IdleState { get => _idleState; }
     public BaseState CombatState { get => _combatState; }
+    public BaseState DeathState { get => _deathState; }
     public PlayerManager PlayerManager => _player;
     public BaseEnemy RefEnemy => _refEnemy;
 

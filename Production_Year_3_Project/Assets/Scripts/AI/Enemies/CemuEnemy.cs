@@ -21,20 +21,26 @@ public class CemuEnemy : GroundEnemy
     }
     private void Update()
     {
-        BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
 
+        BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
+        if (Damageable.CurrentHp <= 0)
+        {
+            nextState = _cemuStateHandler.DeathState;
+        }
         if (_cemuStateHandler.CurrentState != nextState)
         {
             _cemuStateHandler.CurrentState.ExitState();
             _cemuStateHandler.CurrentState = nextState;
             _cemuStateHandler.CurrentState.EnterState();
         }
+ 
     }
     private void RemoveBuffActivation(StatusEffect boost)
     {
         if (boost is CemuSpeedBoost)
         {
             _isBoostActive = false;
+            _cemuStateHandler.CurrentState.UpdateState();
         }
     }
     public bool CheckBoostActivation()

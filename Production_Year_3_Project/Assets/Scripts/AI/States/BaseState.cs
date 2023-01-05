@@ -18,6 +18,9 @@ public abstract class BaseState :MonoBehaviour
     {
         OnStateExit?.Invoke();
     }
+    public virtual void UpdateState()
+    {
 
+    }
 
 }
