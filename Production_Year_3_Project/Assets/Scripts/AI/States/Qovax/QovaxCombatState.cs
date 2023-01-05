@@ -10,6 +10,7 @@ public class QovaxCombatState : BaseQovaxState
             _qovaxStateHandler.RefEnemy.transform.position, _qovaxStateHandler.PlayerManager.transform.position)))
         {
             Debug.Log("Player in qovax chase range");
+            return _qovaxStateHandler.CombatState;
         }
         return _qovaxStateHandler.IdleState;
     }

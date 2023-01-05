@@ -21,7 +21,6 @@ public class CemuEnemy : GroundEnemy
     }
     private void Update()
     {
-
         BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
         if (Damageable.CurrentHp <= 0)
         {
@@ -33,7 +32,6 @@ public class CemuEnemy : GroundEnemy
             _cemuStateHandler.CurrentState = nextState;
             _cemuStateHandler.CurrentState.EnterState();
         }
- 
     }
     private void RemoveBuffActivation(StatusEffect boost)
     {

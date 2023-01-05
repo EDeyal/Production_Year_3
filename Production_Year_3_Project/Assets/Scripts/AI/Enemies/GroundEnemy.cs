@@ -83,10 +83,10 @@ public abstract class GroundEnemy : BaseEnemy
         {
             IsMovingToNextPoint();
         }
-        var direction = 0;
-        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? 1 : -1;
+        var direction = ZERO;
+        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE :MINUS_ONE;
 
-        _moveData.UpdateData(new Vector3(direction, 0, 0), EnemyStatSheet.Speed);
+        _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
     public virtual void StopMovement()
@@ -98,7 +98,7 @@ public abstract class GroundEnemy : BaseEnemy
     {
         //find player and determin his direction
         var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.transform.position);
-        _moveData.UpdateData(new Vector3(direction, 0, 0), EnemyStatSheet.Speed);
+        _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
     private bool IsMovingToNextPoint()

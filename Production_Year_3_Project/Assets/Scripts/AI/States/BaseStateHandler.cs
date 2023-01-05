@@ -38,5 +38,7 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
             throw new System.Exception("Idle state is Null");
         if (_combatState == null)
             throw new System.Exception("Combat state is Null");
+        if (_deathState == null)
+            throw new System.Exception("Death state is Null");
     }
 }

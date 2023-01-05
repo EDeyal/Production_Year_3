@@ -5,6 +5,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
 {
     protected const float ZERO = 0;
     protected const float ONE = 1;
+    protected const float MINUS_ONE = -1;
     #region Fields
     [SerializeField] BoundHandler _boundHandler;
     [SerializeField] Rigidbody _rb;

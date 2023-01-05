@@ -34,5 +34,29 @@ public static class GeneralFunctions
         }
         return ZERO;
     }
+    public static int GetYDirectionToTarget(Vector3 a, Vector3 target)
+    {
+        if (a.y > target.y)
+        {
+            return MINUS_ONE;
+        }
+        else if (a.y < target.y)
+        {
+            return ONE;
+        }
+        return ZERO;
+    }
+    public static int GetZDirectionToTarget(Vector3 a, Vector3 target)
+    {
+        if (a.z > target.z)
+        {
+            return MINUS_ONE;
+        }
+        else if (a.z < target.z)
+        {
+            return ONE;
+        }
+        return ZERO;
+    }
 
 }

@@ -1,6 +1,9 @@
+using System;
+using UnityEngine;
+
 public class QovaxStateHandler : BaseStateHandler
 {
-    BaseState _patrolState;
+    [SerializeField] BaseState _patrolState;
     public BaseState PatrolState => _patrolState;
     public override void CheckValidation()
     {

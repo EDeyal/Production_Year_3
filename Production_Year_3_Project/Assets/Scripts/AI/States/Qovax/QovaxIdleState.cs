@@ -1,8 +1,9 @@
+using UnityEngine;
 public class QovaxIdleState : BaseQovaxState
 {
-
     public override BaseState RunCurrentState()
     {
+        Debug.Log("Qovax Idle State");
         var enemyRef = _qovaxStateHandler.RefEnemy;
         //if in notice range
         if (enemyRef.NoticePlayerDistance.InitAction(new DistanceData(

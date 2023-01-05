@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class FlyingEnemy : BaseEnemy
 {
-    int _nextWaypoint;
+    [SerializeField] int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
@@ -12,10 +12,10 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] BaseAction<ActionCooldownData> _idleMovementAction;
     ActionCooldown _idleCooldown;
 
-    [SerializeField] GroundSensorInfo _groundSensorInfo;
+    [SerializeField] WallSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
-    [SerializeField] CeilingSensorInfo _ceilingSensorInfo;
+    [SerializeField] WallSensorInfo _ceilingSensorInfo;
 
     private void OnEnable()
     {
@@ -61,5 +61,48 @@ public abstract class FlyingEnemy : BaseEnemy
         {
             moveToNextPoint = true;
         }
+
+        //check walls around you
+        if (_groundSensorInfo.IsNearWall || _ceilingSensorInfo.IsNearWall||
+            _rightWallSensorInfo.IsNearWall||_leftWallSensorInfo.IsNearWall)
+        {
+            moveToNextPoint = true;
+        }
+        //if needed to turn for some reason, turn to next waypoint
+        if (moveToNextPoint)
+        {
+            IsMovingToNextPoint();
+        }
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
+        var direction =  target - position;
+        direction.Normalize();
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
+    }
+    public virtual void StopMovement()
+    {
+        _moveData.UpdateData(ZERO);
+        _moveAction.InitAction(_moveData);
+    }
+    public virtual void Chase()
+    {
+        //find player and determin his direction
+        var playerPos = GameManager.Instance.PlayerManager.transform.position;
+
+        Vector2 direction = new Vector2(GeneralFunctions.GetXDirectionToTarget(transform.position, playerPos),
+            GeneralFunctions.GetYDirectionToTarget(transform.position, playerPos));
+
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
+    }
+    private bool IsMovingToNextPoint()
+    {
+        _nextWaypoint++;
+        if (_nextWaypoint >= _waypoints.Count)
+        {
+            _nextWaypoint = 0;
+        }
+        return true;
     }
 }
