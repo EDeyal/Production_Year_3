@@ -27,6 +27,17 @@ public class BaseCharacter : MonoBehaviour
         }
         return null;
     }
+
+    private void Awake()
+    {
+        SetUp();
+    }
+
+    protected virtual void SetUp()
+    {
+        Effectable.CacheOwner(this);
+        Damageable.CacheOwner(this);
+    }
 }
 
 
