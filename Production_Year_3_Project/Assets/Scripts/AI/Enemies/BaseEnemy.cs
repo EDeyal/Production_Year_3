@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : BaseCharacter, ICheckValidation
@@ -29,6 +30,11 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     {
         _boundHandler.ValidateBounds();
     }
+    public override void Awake()
+    {
+        base.Awake();
+        StatSheet.InitializeStats();
+    }
     public virtual void CheckValidation()
     {
         if (!_sensorHandler)
@@ -45,6 +51,6 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     }
     public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
     {
-        return _playerSensor.SendRayToTarget(transform,maxDistanceToPlayer);
+        return _playerSensor.SendRayToTarget(transform, maxDistanceToPlayer);
     }
 }

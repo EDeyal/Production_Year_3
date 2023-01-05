@@ -28,10 +28,12 @@ public class StatSheet : MonoBehaviour
     public void OverrideSpeed(float givenSpeed)
     {
         OnOverrideSpeed?.Invoke(givenSpeed);
+        currentSpeed = givenSpeed;
     }
 
     public void ResetSpeed()
     {
         OnOverrideSpeed?.Invoke(baseSpeed);
+        currentSpeed=baseSpeed;
     }
 }

@@ -28,7 +28,7 @@ public class BaseCharacter : MonoBehaviour
         return null;
     }
 
-    private void Awake()
+    public virtual void Awake()
     {
         SetUp();
     }

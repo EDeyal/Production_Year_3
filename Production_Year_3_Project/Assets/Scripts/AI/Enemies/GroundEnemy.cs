@@ -15,6 +15,10 @@ public abstract class GroundEnemy : BaseEnemy
     MoveData _moveData;
 
     public CheckXDistanceAction BoundsXDistanceAction => _boundsXDistanceAction;
+    public override void Awake()
+    {
+        base.Awake();
+    }
     private void OnEnable()
     {
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
