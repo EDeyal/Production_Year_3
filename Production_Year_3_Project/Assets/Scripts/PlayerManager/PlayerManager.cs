@@ -12,13 +12,11 @@ public class PlayerManager : BaseCharacter
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
     public DamageDealingCollider PlayerMeleeAttackCollider { get => playerMeleeAttackCollider; }
     public PlayerAbilityHandler PlayerAbilityHandler { get => playerAbilityHandler; }
-
-    private void Awake()
+    protected override void SetUp()
     {
+        base.SetUp();
         PlayerStatSheet.InitializeStats();
         PlayerMeleeAttackCollider.CacheReferences(PlayerStatSheet.MeleeAttack, DamageDealer);
-        Effectable.CacheOwner(this);
-        Damageable.CacheOwner(this);
         playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
