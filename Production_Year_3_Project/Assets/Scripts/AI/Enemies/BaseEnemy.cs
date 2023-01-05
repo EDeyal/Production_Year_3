@@ -14,6 +14,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] AnimatorHandler _animatorHandler;
     [SerializeField] EnemyStatSheet _enemyStatSheet;
 
+    [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
     #endregion
 
@@ -52,6 +53,14 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
     {
         return _playerSensor.SendRayToTarget(transform, maxDistanceToPlayer);
+    }
+    protected bool WaitAction(BaseAction<ActionCooldownData> action, ref ActionCooldown cooldown)
+    {
+        if (action.InitAction(new ActionCooldownData(ref cooldown)))
+        {
+            return true;
+        }
+        return false;
     }
     public abstract void OnDeath();
 }

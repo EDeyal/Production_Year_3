@@ -6,6 +6,7 @@ public class BoundHandler
     [SerializeField] Bounds _bound;
     [SerializeField] GameObject _holder;
     [SerializeField] Vector3 _boundCenterOffset;
+    [SerializeField] Color _boundColor;
     public Bounds Bound => _bound;
 #if UNITY_EDITOR
     public void ValidateBounds()
@@ -19,6 +20,7 @@ public class BoundHandler
     {
         if (!_holder)
             return;
+        Gizmos.color = _boundColor;
         Gizmos.DrawWireCube(GetBoundOffset(), _bound.size);
     }
 #endif

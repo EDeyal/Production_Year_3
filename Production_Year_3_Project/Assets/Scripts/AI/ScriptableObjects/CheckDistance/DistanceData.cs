@@ -28,6 +28,12 @@ public class DistanceData
         zDistance = Mathf.Abs(zDistance);
         return zDistance;
     }
+    public float GetXYDistance()
+    {
+        var xyDistance = Vector2.Distance(_a, _b);
+        xyDistance = Mathf.Abs(xyDistance);
+        return xyDistance;
+    }
     public float GetTotalDistance()
     {
         var totalDistance = Vector3.Distance(_a, _b);

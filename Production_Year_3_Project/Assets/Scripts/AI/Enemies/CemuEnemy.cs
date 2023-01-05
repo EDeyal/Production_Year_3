@@ -45,7 +45,7 @@ public class CemuEnemy : GroundEnemy
     }
     public bool CheckBoostActivation()
     {
-        if (_boostCooldownAction.InitAction(new ActionCooldownData(ref _beforeBoostCooldown)))
+        if (WaitAction(_boostCooldownAction, ref _beforeBoostCooldown))
         {
             if (!_isBoostActive)
             {
