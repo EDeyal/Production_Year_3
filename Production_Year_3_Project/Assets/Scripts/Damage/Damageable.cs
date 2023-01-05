@@ -75,7 +75,9 @@ public class Damageable : MonoBehaviour
     {
         OnTakeDamage?.Invoke(givenDamage);
         OnTotalDamageCalcRecieve?.Invoke(givenDamage);
-        currentHp -= givenDamage.GetFinalMult();
+        float finalAmount = givenDamage.GetFinalMult();
+        finalAmount = ReduceDecayingHealth(finalAmount);
+        currentHp -= finalAmount;
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -91,8 +93,9 @@ public class Damageable : MonoBehaviour
         givenDamageDealer.OnDealDamage?.Invoke(givenDamage);
         OnTotalDamageCalcRecieve?.Invoke(givenDamage);
         givenDamageDealer.OnTotalDamageCalcDeal?.Invoke(givenDamage);
-
-        currentHp -= givenDamage.GetFinalMult();
+        float finalAmount = givenDamage.GetFinalMult();
+        finalAmount =  ReduceDecayingHealth(finalAmount);
+        currentHp -= finalAmount;
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -108,6 +111,14 @@ public class Damageable : MonoBehaviour
     {
         OnGetHealed?.Invoke(givenDamage);
     }
+    
+    private float ReduceDecayingHealth(float finalDamage)
+    {
+        float currentDecayingHealth = owner.StatSheet.DecayingHealth.CurrentDecayingHealth;
+        owner.StatSheet.DecayingHealth.CurrentDecayingHealth -= finalDamage;
+        finalDamage -= currentDecayingHealth;
+        return finalDamage;
+    }
 
     private void ClampHp()
     {
@@ -120,6 +131,7 @@ public class Damageable : MonoBehaviour
         yield return new WaitForSeconds(invulnerabilityDuration);
         _canReciveDamage = true;
     }
+
 }
 
 public enum TargetType

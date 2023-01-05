@@ -11,6 +11,8 @@ public class AttackAnimationHandler : MonoBehaviour
 
     [SerializeField] private Animator anim;
 
+    public UnityEvent OnAttackPerformed;
+
     private void Start()
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
@@ -45,5 +47,6 @@ public class AttackAnimationHandler : MonoBehaviour
         }
         lastAttacked = Time.time;
         anim.SetBool(animTrigger, true);
+        OnAttackPerformed?.Invoke();
     }
 }

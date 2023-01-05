@@ -4,20 +4,27 @@ using UnityEngine;
 public class CemuSpeedBoost : StatusEffect
 {
     //get buff time from manager
+    Coroutine activeBuffRoutine;
     public override void StartEffect()
     {
         base.StartEffect();
-        if (host is BaseEnemy)
+        Boost speedBosst = host.GetBoostFromBoostType(BoostType.Speed);
+        if (ReferenceEquals(speedBosst, null))
         {
-            //((BaseEnemy)host).EnemyStatSheet.OverrideSpeed(get amount from manager);
-            //host.StartCoroutine(BuffDurationTimer());
+            Debug.LogError("no speed boost given to " + host.name);
         }
-
+        Debug.Log("starting speed boost on " + host.name);
+        host.StatSheet.OverrideSpeed(speedBosst.BoostValue);
+        activeBuffRoutine = host.StartCoroutine(BuffDurationTimer());
     }
 
     public override void Reset()
     {
-
+        if (!ReferenceEquals(activeBuffRoutine, null))
+        {
+            host.StopCoroutine(activeBuffRoutine);
+        }
+        StartEffect();
     }
 
     protected override void Subscribe()
@@ -30,9 +37,10 @@ public class CemuSpeedBoost : StatusEffect
         //nothing to unsub from here
     }
 
-  /*  IEnumerator BuffDurationTimer()
+    IEnumerator BuffDurationTimer()
     {
-        yield return new WaitForSecondsRealtime(*//*get buff time from manager*//*);
+        yield return new WaitForSecondsRealtime((host.GetBoostFromBoostType(BoostType.Speed).BoostDuration));
+        host.StatSheet.ResetSpeed();
         Remove();
-    }*/
+    }
 }
