@@ -150,6 +150,8 @@ GameObject:
   - component: {fileID: 684794236260423742}
   - component: {fileID: 684794236260423741}
   - component: {fileID: 684794236260423740}
+  - component: {fileID: 2523725584667933375}
+  - component: {fileID: 4614162803186384033}
   m_Layer: 9
   m_Name: Cemu Enemy
   m_TagString: Untagged
@@ -215,6 +217,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284dcc7c8aa39314b8aaa9fb0d13d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageDealer: {fileID: 684794236260423736}
+  damageable: {fileID: 684794236260423737}
+  effectable: {fileID: 4614162803186384033}
+  effector: {fileID: 2523725584667933375}
+  statSheet: {fileID: 684794236260423738}
+  boosts:
+  - BoostValue: 3
+    BoostDuration: 5
+    BoostType: 0
   _boundHandler:
     _bound:
       m_Center: {x: 0, y: 0.44, z: 0}
@@ -286,9 +297,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2830323c6146ab14d8af2afb972e4bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 16
+  baseMaxHp: 0
   invulnerabilityDuration: 0.3
-  speed: 1
+  baseSpeed: 0
+  OnOverrideSpeed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetSpeed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &684794236260423728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +494,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cemuStateHandler: {fileID: 684794236260423731}
+--- !u!114 &2523725584667933375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684794236260423885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ecd3ad6b55953248ac877851656ed17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnApplyStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4614162803186384033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684794236260423885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406eaf71099df84a943b111358ef26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnRecieveStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatusEffectRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &684794236275958480
 GameObject:
   m_ObjectHideFlags: 0

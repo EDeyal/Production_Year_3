@@ -290,8 +290,6 @@ GameObject:
   - component: {fileID: 6427850386398440210}
   - component: {fileID: 30781684}
   - component: {fileID: 30781685}
-  - component: {fileID: 591745884}
-  - component: {fileID: 591745885}
   - component: {fileID: 591745886}
   - component: {fileID: 591745887}
   - component: {fileID: 591745895}
@@ -299,6 +297,9 @@ GameObject:
   - component: {fileID: 591745901}
   - component: {fileID: 1708975603}
   - component: {fileID: 591745902}
+  - component: {fileID: 606722691}
+  - component: {fileID: 606722692}
+  - component: {fileID: 881559586}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -377,12 +378,13 @@ MonoBehaviour:
   groundCheck: {fileID: 6427850385640673735}
   ceilingDetector: {fileID: 175699345}
   jumpHeldTime: 0.1
-  numberOfJumps: 2
+  numberOfJumps: 1
   coyoteThreshold: 0.1
   extraJumpsHeightModifier: 0.5
   apexGravityScale: 6
   gravityScale: 8
   maxGravity: 25
+  midAirAttackStopDuration: 0.116
   animBlender: {fileID: 1708975603}
   OnRecieveForce:
     m_PersistentCalls:
@@ -391,36 +393,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   facingRight: 0
---- !u!114 &591745884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6427850386398440204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c441d95fc418f944588b580e96ce7f7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDamageable: {fileID: 591745901}
-  playerDamageDealer: {fileID: 591745900}
-  playerStats: {fileID: 591745902}
---- !u!114 &591745885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6427850386398440204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4036c33c74c411a4e9606ad24a6f54e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 30781685}
-  playerMeleeAttackAnimationHandler: {fileID: 5252180134498417000}
-  playerMeleeAttackCollider: {fileID: 3851436537349780074}
 --- !u!114 &591745886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,8 +405,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d601c944746c6a498b08815a764d8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visuals: {fileID: 591745885}
-  data: {fileID: 591745884}
+  damageDealer: {fileID: 591745900}
+  damageable: {fileID: 591745901}
+  effectable: {fileID: 606722692}
+  effector: {fileID: 606722691}
+  statSheet: {fileID: 591745902}
+  boosts:
+  - BoostValue: 20
+    BoostDuration: 5
+    BoostType: 0
+  playerController: {fileID: 30781685}
+  playerMeleeAttackAnimationHandler: {fileID: 5252180134498417000}
+  playerMeleeAttackCollider: {fileID: 3851436537349780074}
+  playerAbilityHandler: {fileID: 881559586}
 --- !u!114 &591745887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +480,9 @@ MonoBehaviour:
   OnTotalDamageCalcDeal:
     m_PersistentCalls:
       m_Calls: []
+  OnKill:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &591745901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36496159610ac984bb90604219ffc314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHp: 0
+  maxHp: 0
+  invulnerabilityDuration: 0
   targetType: 0
   OnGetHit:
     m_PersistentCalls:
@@ -550,10 +539,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd91e2f73e32084082a4e6481eca278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
-  maxHp: 100
+  baseMaxHp: 10
+  invulnerabilityDuration: 0.1
+  baseSpeed: 8
+  OnOverrideSpeed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetSpeed:
+    m_PersistentCalls:
+      m_Calls: []
   meleeAttack: {fileID: 11400000, guid: 7e7b99ad91adbdb4d8dbf39aeeeb029f, type: 2}
   meleeBaseDamage: 10
+--- !u!114 &606722691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427850386398440204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ecd3ad6b55953248ac877851656ed17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnApplyStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &606722692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427850386398440204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406eaf71099df84a943b111358ef26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnRecieveStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatusEffectRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &881559586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427850386398440204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044efae56521b0c4b8030543553003f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEquipAbility:
+    m_PersistentCalls:
+      m_Calls: []
+  test: {fileID: 11400000, guid: 91b47a9ced809b94db8978492b3b24d2, type: 2}
 --- !u!1 &9034421212541725412
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +648,9 @@ MonoBehaviour:
   attackCoolDown: 0.2
   animTrigger: BasicAttack
   anim: {fileID: 4571289915659959250}
+  OnAttackPerformed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &100823484007165910
 SphereCollider:
   m_ObjectHideFlags: 0

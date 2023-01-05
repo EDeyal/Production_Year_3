@@ -1729,7 +1729,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2612674708798706809}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881559584}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d601c944746c6a498b08815a764d8b3, type: 3}
@@ -3302,28 +3302,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 087932bfd0e7db149b7e604943e47caf, type: 3}
---- !u!1 &881559584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9040512330958915590, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2612674708798706809}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &881559586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881559584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044efae56521b0c4b8030543553003f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnEquipAbility:
-    m_PersistentCalls:
-      m_Calls: []
-  test: {fileID: 11400000, guid: 91b47a9ced809b94db8978492b3b24d2, type: 2}
 --- !u!1 &889080187
 GameObject:
   m_ObjectHideFlags: 0
@@ -9298,61 +9276,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerHolder
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427860, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: boosts.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427860, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: playerAbilityHandler
-      value: 
-      objectReference: {fileID: 881559586}
-    - target: {fileID: 2612674708868427860, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: boosts.Array.data[0].BoostValue
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427860, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: boosts.Array.data[0].BoostDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427876, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: baseMaxHp
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427876, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: baseSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427876, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: meleeBaseDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674708868427876, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: invulnerabilityDuration
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674709362250751, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: SpeedPointer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674709362250751, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: numberOfJumps
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612674709362250751, guid: f8d6a8ef8169f9b419e5dea98f9041c6,
-        type: 3}
-      propertyPath: midAirAttackStopDuration
-      value: 0.116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8d6a8ef8169f9b419e5dea98f9041c6, type: 3}
