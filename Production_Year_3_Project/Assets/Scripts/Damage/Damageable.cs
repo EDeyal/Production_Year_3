@@ -94,7 +94,7 @@ public class Damageable : MonoBehaviour
         OnTotalDamageCalcRecieve?.Invoke(givenDamage);
         givenDamageDealer.OnTotalDamageCalcDeal?.Invoke(givenDamage);
         float finalAmount = givenDamage.GetFinalMult();
-        finalAmount =  ReduceDecayingHealth(finalAmount);
+        finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
         if (currentHp <= 0)
         {
@@ -111,11 +111,12 @@ public class Damageable : MonoBehaviour
     {
         OnGetHealed?.Invoke(givenDamage);
     }
-    
+
     private float ReduceDecayingHealth(float finalDamage)
     {
         float currentDecayingHealth = owner.StatSheet.DecayingHealth.CurrentDecayingHealth;
         owner.StatSheet.DecayingHealth.CurrentDecayingHealth -= finalDamage;
+        //owner.StatSheet.DecayingHealth.ClampHealth(MaxHp);
         finalDamage -= currentDecayingHealth;
         return finalDamage;
     }

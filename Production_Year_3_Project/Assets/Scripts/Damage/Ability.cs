@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Ability : ScriptableObject
 {
-    private PlayerManager owner;
+    private BaseCharacter owner;
 
     [SerializeField] private float coolDown;
     [SerializeField] private string animationTrigger;
 
 
-    public PlayerManager Owner { get => owner; }
+    public BaseCharacter Owner { get => owner; }
     public float CoolDown { get => coolDown; }
     public string AnimationTrigger { get => animationTrigger; }
 
-    public void CahceOwner(PlayerManager givenPlayer)
+    public void CahceOwner(BaseCharacter givenCharacter)
     {
-        owner = givenPlayer;
+        owner = givenCharacter;
     }
 
     public virtual void Cast()
