@@ -46,14 +46,16 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             throw new System.Exception("BaseEnemy has no SensorTarget on player sensor");
         }
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         BoundHandler.DrawBounds();
-        _playerSensor.DrawLineToTarget(transform, _noticePlayerDistance.Distance);
+        if (!GameManager.Instance)
+            return;
+        _playerSensor.DrawLineToTarget(transform,GameManager.Instance.PlayerManager.transform ,_noticePlayerDistance.Distance);
     }
     public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
     {
-        return _playerSensor.SendRayToTarget(transform, maxDistanceToPlayer);
+        return _playerSensor.SendRayToTarget(transform,GameManager.Instance.PlayerManager.transform ,maxDistanceToPlayer);
     }
     protected bool WaitAction(BaseAction<ActionCooldownData> action, ref ActionCooldown cooldown)
     {
