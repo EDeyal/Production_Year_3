@@ -49,13 +49,13 @@ public class RaycastSensor
             OnSensorMiss?.Invoke();
         }
     }
-    public bool SendRayToTarget(Transform transform, float maxDistance)
+    public bool SendRayToTarget(Transform transform,Transform targetTransform ,float maxDistance)
     {
         //can have multiple starting positions
         //will not call events, this is only to check for hit or miss
         bool isHitAll = true;
         bool isHitPartialy = false;
-        var playerPos = GameManager.Instance.PlayerManager.transform.position;
+        var playerPos = targetTransform.position;
         var directionToPlayer = playerPos - transform.position;
         directionToPlayer.Normalize();
         foreach (var item in _sensors)
@@ -138,7 +138,7 @@ public class RaycastSensor
             Gizmos.DrawLine(relativePos, to);
         }
     }
-    public void DrawLineToTarget(Transform transform, float maxDistance)
+    public void DrawLineToTarget(Transform transform,Transform targetTransform, float maxDistance)
     {
 
         if (IsActive == false)
@@ -147,7 +147,7 @@ public class RaycastSensor
         bool isHitPartialy = false;
         if (!GameManager.Instance)
             return;
-        var playerPos = GameManager.Instance.PlayerManager.transform.position;
+        var playerPos = targetTransform.position;
         var directionToPlayer = playerPos - transform.position;
         directionToPlayer.Normalize();
         foreach (var item in _sensors)
