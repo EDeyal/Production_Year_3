@@ -19,6 +19,10 @@ public class DecayingHealth
         activeDecayingRoutine =  GameManager.Instance.StartCoroutine(DecayHealth());
     }
 
+    public void ClampHealth(float maxHp)
+    {
+        currentDecayingHealth = Mathf.Clamp(currentDecayingHealth, 0, maxHp);
+    }
 
     private IEnumerator DecayHealth()
     {
