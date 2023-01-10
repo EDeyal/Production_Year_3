@@ -52,8 +52,14 @@ public abstract class FlyingEnemy : BaseEnemy
     public virtual void Patrol()
     {
         bool moveToNextPoint = false;//check if need to move to next point
+        //check if reached the next waypoint
         if (_waypointXYDistanceAction.InitAction(new DistanceData(transform.position, _waypoints[_nextWaypoint].position)))
         {
+            if(!CheckForCooldown(_idleMovementAction, _idleCooldown))
+            {
+                Debug.Log("Waiting for movement cooldown");
+                return;
+            }
             moveToNextPoint = true;
         }
         if (_boundsXYDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.max))
