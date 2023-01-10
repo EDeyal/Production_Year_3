@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 684794236260423729}
   - component: {fileID: 684794236260423742}
   - component: {fileID: 684794236260423741}
-  - component: {fileID: 684794236260423740}
   - component: {fileID: 2044695640459412864}
   - component: {fileID: 2523725584667933375}
   - component: {fileID: 4614162803186384033}
@@ -432,7 +431,6 @@ MonoBehaviour:
   _deathState: {fileID: 2044695640459412864}
   _patrolState: {fileID: 684794236260423729}
   _chaseState: {fileID: 684794236260423741}
-  _boostState: {fileID: 684794236260423740}
 --- !u!114 &684794236260423730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,19 +480,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cabd6e9267e5084e898c162be624e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cemuStateHandler: {fileID: 684794236260423731}
---- !u!114 &684794236260423740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684794236260423885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a77303e2c56df1c4ebd1cb0d04f448a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cemuStateHandler: {fileID: 684794236260423731}
