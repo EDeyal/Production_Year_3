@@ -17,6 +17,7 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
     [SerializeField] WallSensorInfo _ceilingSensorInfo;
 
+    Vector2 _randomPoint;
     private void OnEnable()
     {
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
@@ -39,6 +40,7 @@ public abstract class FlyingEnemy : BaseEnemy
     {
         base.Awake();
         _idleCooldown = new ActionCooldown();
+        _randomPoint = Vector2.zero;
     }
     public bool IdleWaitAction()
     {
@@ -101,6 +103,26 @@ public abstract class FlyingEnemy : BaseEnemy
 
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
+    }
+    public virtual void RandomMovement()
+    {
+        //need to make checks and get random position
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        Vector2 target = new Vector2(_randomPoint.x, _randomPoint.y);
+        var direction = target - position;
+
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
+    }
+    protected virtual void GetNewRandomPoint()
+    {
+        var x = Random.Range(0, 100);
+        var y = Random.Range(0, 100);
+        var direction = new Vector2(x, y);
+        direction.Normalize();
+        var length = Random.Range(1, 5);
+        direction = direction * length;
+        _randomPoint = new Vector2 (transform.position.x + direction.x, transform.position.y + direction.y);
     }
     private bool IsMovingToNextPoint()
     {
