@@ -8,7 +8,12 @@ public class CemuChaseState : BaseCemuState
     {
         //if boost is not active
         //Debug.Log("CemuChaseState");
-        ((GroundEnemy)_cemuStateHandler.RefEnemy).Chase();
+        var cemu = (CemuEnemy)_cemuStateHandler.RefEnemy;
+        if (!cemu.IsBoostActive)
+        {
+            cemu.CheckBoostActivation();
+        }
+        cemu.Chase();
         return _cemuStateHandler.CombatState;
     }
     public override void EnterState()
