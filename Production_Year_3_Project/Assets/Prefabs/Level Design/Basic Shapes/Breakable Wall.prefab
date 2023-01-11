@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6918209584201121778}
-  m_Layer: 7
-  m_Name: Floor
+  m_Layer: 0
+  m_Name: Breakable Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6634675066430115265}
   - component: {fileID: 6977707600060059668}
   m_Layer: 7
-  m_Name: Floor (Temp Shape)
+  m_Name: Wall (Temp Shape)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 8589170521359405079}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9, y: 0.5, z: 5}
+  m_LocalScale: {x: 2.5, y: 3, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6918209584201121778}
@@ -94,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63eb380f9103720489e8f8a66bc0a861, type: 2}
+  - {fileID: 2100000, guid: 78a9b4580018bd641a00ee69ab72dd36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
