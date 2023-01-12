@@ -53,6 +53,7 @@ public class CCController : MonoBehaviour
 
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+    public bool CanMove { get => canMove; set => canMove = value; }
 
     Vector3 oldPos;
 
