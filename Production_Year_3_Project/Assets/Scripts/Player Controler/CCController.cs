@@ -111,7 +111,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        animBlender.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+        //animBlender.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");
