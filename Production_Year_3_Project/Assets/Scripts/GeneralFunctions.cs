@@ -14,7 +14,7 @@ public static class GeneralFunctions
     {
         var currentDistance = Vector3.Distance(a, b);
         //Debug.Log("Current Distance From Targer is: " + currentDistance);
-        if (currentDistance < distance)
+        if (currentDistance <= distance)
             return true;
         return false;
     }

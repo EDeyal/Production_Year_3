@@ -4,7 +4,10 @@ using UnityEngine.Events;
 public class PlayerAbilityHandler : MonoBehaviour
 {
     private Ability currentAbility;
+
+    private bool canCast;
     public Ability CurrentAbility { get => currentAbility; }
+    public bool CanCast { get => canCast; set => canCast = value; }
 
     private float lastCastSpell;
 
@@ -17,12 +20,13 @@ public class PlayerAbilityHandler : MonoBehaviour
 
     private void Start()
     {
+        canCast = true;
         GameManager.Instance.InputManager.OnSpellCast.AddListener(CastAbility);
         EquipSpell(test);
     }
     public virtual void CastAbility()
     {
-        if (lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
+        if (!canCast ||lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
         {
             return;
         }

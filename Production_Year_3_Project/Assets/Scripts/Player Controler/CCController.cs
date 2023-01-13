@@ -53,6 +53,7 @@ public class CCController : MonoBehaviour
 
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
+    public bool CanMove { get => canMove; set => canMove = value; }
 
     Vector3 oldPos;
 
@@ -110,7 +111,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        animBlender.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+        //animBlender.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");

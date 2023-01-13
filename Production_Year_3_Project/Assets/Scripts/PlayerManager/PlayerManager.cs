@@ -6,12 +6,15 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
     [SerializeField] private DamageDealingCollider playerMeleeAttackCollider;
     [SerializeField] private PlayerAbilityHandler playerAbilityHandler;
+    [SerializeField] private EnemyProximitySensor enemyProximitySensor;
 
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
     public DamageDealingCollider PlayerMeleeAttackCollider { get => playerMeleeAttackCollider; }
     public PlayerAbilityHandler PlayerAbilityHandler { get => playerAbilityHandler; }
+    public EnemyProximitySensor EnemyProximitySensor { get => enemyProximitySensor; }
+
     protected override void SetUp()
     {
         base.SetUp();
