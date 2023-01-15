@@ -17,6 +17,8 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
     [SerializeField] WallSensorInfo _ceilingSensorInfo;
 
+    [SerializeField] RandomMovementSO _randomMovementSO;
+
     Vector2 _randomPoint;
     private void OnEnable()
     {
@@ -40,7 +42,7 @@ public abstract class FlyingEnemy : BaseEnemy
     {
         base.Awake();
         _idleCooldown = new ActionCooldown();
-        _randomPoint = Vector2.zero;
+        _randomPoint = Vector3.zero;
     }
     public bool IdleWaitAction()
     {
@@ -51,28 +53,66 @@ public abstract class FlyingEnemy : BaseEnemy
     {
         _moveData = new MoveData(RB, Vector3.zero, EnemyStatSheet.Speed);
     }
+    protected virtual bool CheckBounds()
+    {
+        if (_boundsXYDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.max))
+|| _boundsXYDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.min)))
+        {
+            return true;
+        }
+        return false;
+    }
+    protected virtual bool CheckWaypoint(Vector3 a, Vector3 b, bool checkForCooldown, out bool returnBack)
+    {
+        if (_waypointXYDistanceAction.InitAction(new DistanceData(a, b)))
+        {
+            if (checkForCooldown)
+            {
+                if (CheckForCooldown(_idleMovementAction, _idleCooldown))
+                {
+                    //Debug.Log("Waiting for movement cooldown");
+                    returnBack = false;
+                }
+                else
+                {
+                    returnBack = true;
+                    return true;
+                }
+            }
+            returnBack = false;
+            return true;
+        }
+        returnBack = false;
+        return false;
+    }
+    protected virtual bool CheckWalls()
+    {
+        if (_groundSensorInfo.IsNearWall || _ceilingSensorInfo.IsNearWall ||
+    _rightWallSensorInfo.IsNearWall || _leftWallSensorInfo.IsNearWall)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public virtual void Patrol()
     {
-        bool moveToNextPoint = false;//check if need to move to next point
+        bool moveToNextPoint = false;
+        //check if need to move to next point
         //check if reached the next waypoint
-        if (_waypointXYDistanceAction.InitAction(new DistanceData(transform.position, _waypoints[_nextWaypoint].position)))
+        if (CheckWaypoint(transform.position, _waypoints[_nextWaypoint].position, true, out bool returnBack))
         {
-            if(!CheckForCooldown(_idleMovementAction, _idleCooldown))
+            if (returnBack)
             {
-                Debug.Log("Waiting for movement cooldown");
                 return;
             }
             moveToNextPoint = true;
         }
-        if (_boundsXYDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.max))
-    || _boundsXYDistanceAction.InitAction(new DistanceData(transform.position, BoundHandler.Bound.min)))
+        if (CheckBounds())
         {
             moveToNextPoint = true;
         }
-
-        //check walls around you
-        if (_groundSensorInfo.IsNearWall || _ceilingSensorInfo.IsNearWall||
-            _rightWallSensorInfo.IsNearWall||_leftWallSensorInfo.IsNearWall)
+        if (CheckWalls())
         {
             moveToNextPoint = true;
         }
@@ -83,7 +123,7 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
-        var direction =  target - position;
+        var direction = target - position;
         direction.Normalize();
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
@@ -107,22 +147,44 @@ public abstract class FlyingEnemy : BaseEnemy
     public virtual void RandomMovement()
     {
         //need to make checks and get random position
+        bool getNextPoint = false;
+        if (_randomPoint == Vector2.zero)
+        {
+            getNextPoint = true;
+        }
+        if (CheckWaypoint(transform.position, _randomPoint, false, out bool returnBack))
+        {
+            getNextPoint = true;
+        }
+        if (CheckBounds())
+        {
+            getNextPoint = true;
+        }
+        if (CheckWalls())
+        {
+            getNextPoint = true;
+        }
+        //if one check showed that we should change the random point, create a new point.
+        if (getNextPoint)
+        {
+            GetNewRandomPoint();
+        }
+
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Vector2 target = new Vector2(_randomPoint.x, _randomPoint.y);
         var direction = target - position;
-
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
     protected virtual void GetNewRandomPoint()
     {
-        var x = Random.Range(0, 100);
-        var y = Random.Range(0, 100);
+        var x = Random.Range(_randomMovementSO.RandomDirection.x, _randomMovementSO.RandomDirection.y);
+        var y = Random.Range(_randomMovementSO.RandomDirection.x, _randomMovementSO.RandomDirection.y);
         var direction = new Vector2(x, y);
         direction.Normalize();
-        var length = Random.Range(1, 5);
+        var length = Random.Range(_randomMovementSO.RandomLength.x,_randomMovementSO.RandomLength.y);
         direction = direction * length;
-        _randomPoint = new Vector2 (transform.position.x + direction.x, transform.position.y + direction.y);
+        _randomPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, ZERO);
     }
     private bool IsMovingToNextPoint()
     {
