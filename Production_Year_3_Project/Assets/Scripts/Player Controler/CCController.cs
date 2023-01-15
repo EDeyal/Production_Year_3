@@ -49,7 +49,8 @@ public class CCController : MonoBehaviour
     private bool midAirAttackUsed;
 
     [SerializeField] AnimationHandler animBlender;
-    bool isFalling => DistanceFromPreviousPos().y < 0 && !groundCheck.IsGrounded();
+
+    [SerializeField] private bool isFalling;
 
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
@@ -84,6 +85,7 @@ public class CCController : MonoBehaviour
         OnJump.AddListener(JumpAnim);
 
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
+        groundCheck.OnNotGrounded.AddListener(DisableGroundedAnims);
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
@@ -102,7 +104,7 @@ public class CCController : MonoBehaviour
         }
         SetInputVelocity();
         ApplyGravity();
-
+        SetAnimatorFlags();
     }
     private void LateUpdate()
     {
@@ -111,7 +113,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        //animBlender.SetSpeed((int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+      
         if (jumpPressed)
         {
             Debug.Log("jumped");
@@ -148,11 +150,30 @@ public class CCController : MonoBehaviour
             velocity.y -= gravityForce * gravityScale * Time.deltaTime;
         }
         velocity.y = Mathf.Clamp(velocity.y, maxGravity * -1, 100);
-
     }
     private void MoveController()
     {
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void SetAnimatorFlags()
+    {
+        isFalling = !groundCheck.IsGrounded() && velocity.y < 0;
+
+        if (groundCheck.IsGrounded())
+        {
+            animBlender.SetFloat("Speed", (int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
+        }
+        if (isFalling)
+        {
+            Debug.Log("falling anim");
+            animBlender.SetBool("Falling", true);
+        }
+        else
+        {
+            animBlender.SetBool("Falling", false);
+        }
+
     }
 
     private void ApplyExtrenalForces(Vector3 force)
@@ -355,12 +376,17 @@ public class CCController : MonoBehaviour
 
     private void JumpAnim()
     {
-        animBlender.SetTrigger("Jumped");
+        animBlender.SetTrigger("Jump");
+    }
+
+    private void DisableGroundedAnims()
+    {
+        animBlender.SetFloat("Speed", 0);
     }
 
     private void LandAnim()
     {
-        animBlender.SetTrigger("Landed");
+        animBlender.SetTrigger("Land");
     }
     private void ResetMidAirAttackUsed()
     {
