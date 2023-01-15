@@ -1,8 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-
+    [SerializeField] private Damageable playerDamageable;
+    [SerializeField] private DamageDealer playerDamageDealer;
+    [SerializeField] private StatusEffectable playerStatusEffectable;
+    [SerializeField] private PlayerStatSheet playerStats;
+    [SerializeField] private StatusEffector playerStatusEffector;
+    public Damageable PlayerDamageable { get => playerDamageable; }
+    public DamageDealer PlayerDamageDealer { get => playerDamageDealer; }
+    public PlayerStatSheet PlayerStats { get => playerStats; }
+    public StatusEffectable PlayerStatusEffectable { get => playerStatusEffectable; }
+    public StatusEffector PlayerStatusEffector { get => playerStatusEffector; }
 }

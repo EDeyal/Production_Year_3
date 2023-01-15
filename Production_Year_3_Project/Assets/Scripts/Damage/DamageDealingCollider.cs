@@ -3,10 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class DamageDealingCollider : MonoBehaviour
 {
-    [SerializeField] private Attack attack;
-
+     private Attack attack;
     //if you want the attack to trigger events on the attacker too put something in the inspector
-    [SerializeField] private DamageDealer damageDealer;
+     private DamageDealer damageDealer;
+
+    public void CacheReferences(Attack givenAttack, DamageDealer dealer = null)
+    {
+        attack = givenAttack;
+        damageDealer = dealer;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
