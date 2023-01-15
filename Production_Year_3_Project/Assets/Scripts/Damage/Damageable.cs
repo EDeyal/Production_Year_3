@@ -34,6 +34,8 @@ public class Damageable : MonoBehaviour
     /// Invoked when this object takes leathal damage
     /// </summary>
     public UnityEvent OnDeath;
+    public UnityEvent OnTakeDmgGFX;
+    public UnityEvent OnHealGFX;
 
 
 
@@ -78,6 +80,9 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenDamage.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
+
+        OnTakeDmgGFX?.Invoke();
+
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -96,6 +101,9 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenDamage.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
+
+        OnTakeDmgGFX?.Invoke();
+
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -110,13 +118,15 @@ public class Damageable : MonoBehaviour
     public virtual void Heal(DamageHandler givenDamage)
     {
         OnGetHealed?.Invoke(givenDamage);
+        OnHealGFX?.Invoke();
+
     }
 
     private float ReduceDecayingHealth(float finalDamage)
     {
         float currentDecayingHealth = owner.StatSheet.DecayingHealth.CurrentDecayingHealth;
         owner.StatSheet.DecayingHealth.CurrentDecayingHealth -= finalDamage;
-        //owner.StatSheet.DecayingHealth.ClampHealth(MaxHp);
+        owner.StatSheet.DecayingHealth.ClampHealth();
         finalDamage -= currentDecayingHealth;
         return finalDamage;
     }
