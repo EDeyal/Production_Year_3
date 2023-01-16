@@ -14,7 +14,6 @@ public class QovaxCombatState : BaseQovaxState
             if (qovax.CheckForEvasionCooldown())
             {
                 //after time is over
-                //reset evasion time
                 //move to charge state
                 return _qovaxStateHandler.ChargeState;
             }

@@ -62,9 +62,9 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         return false;
     }
-    protected virtual bool CheckWaypoint(Vector3 a, Vector3 b, bool checkForCooldown, out bool returnBack)
+    protected virtual bool CheckWaypoint(Vector3 myPosition, Vector3 targetPosition, bool checkForCooldown, out bool returnBack)
     {
-        if (_waypointXYDistanceAction.InitAction(new DistanceData(a, b)))
+        if (_waypointXYDistanceAction.InitAction(new DistanceData(myPosition, targetPosition)))
         {
             if (checkForCooldown)
             {
@@ -123,8 +123,7 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
-        var direction = target - position;
-        direction.Normalize();
+        var direction = GetNormilizedDirectionToTarget(position,target);
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
@@ -133,15 +132,16 @@ public abstract class FlyingEnemy : BaseEnemy
         _moveData.UpdateData(ZERO);
         _moveAction.InitAction(_moveData);
     }
-    public virtual void Chase()
+    protected Vector3 GetNormilizedDirectionToTarget(Vector3 myPosition, Vector3 targetPosition)
     {
-        //find player and determin his direction
-        var playerPos = GameManager.Instance.PlayerManager.transform.position;
-
-        Vector2 direction = new Vector2(GeneralFunctions.GetXDirectionToTarget(transform.position, playerPos),
-            GeneralFunctions.GetYDirectionToTarget(transform.position, playerPos));
-
-        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
+        var direction = targetPosition - myPosition;
+        direction.Normalize();
+        return direction;
+    }
+    public virtual void MoveTo(Vector3 target, float speedMultiplyer = 1)
+    {
+        Vector3 direction = GetNormilizedDirectionToTarget(transform.position, target);
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed* speedMultiplyer);
         _moveAction.InitAction(_moveData);
     }
     public virtual void RandomMovement()

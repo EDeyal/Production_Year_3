@@ -8,13 +8,13 @@ public class QovaxChargeState : BaseQovaxState
     {
         Debug.Log("Qovax Charge State");
         var qovax = (QovaxEnemy)_qovaxStateHandler.RefEnemy;
-        if (qovax.CheckForChargeCooldown())
+        //stay in charge state until finished charge
+        if (qovax.Charge())
         {
+            //from charge state he will have fatigue state
+            //he will move only small movements in it
             return _qovaxStateHandler.FatigueState;
         }
-        //stay in charge state until finished charge
-        //from charge state he will have fatigue state
-        //he will move only small movements in it
         return this;
     }
 }
