@@ -13,6 +13,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] CheckDistanceAction _noticePlayerDistance;
     [SerializeField] CheckDistanceAction _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
+    [SerializeField] Ability _droppedAbilityForPlayer;
 
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
@@ -26,6 +27,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public AnimatorHandler AnimatorHandler => _animatorHandler;
     public EnemyStatSheet EnemyStatSheet => StatSheet as EnemyStatSheet;
     public BoundHandler BoundHandler => _boundHandler;
+    public Ability DroppedAbilityForPlayer => _droppedAbilityForPlayer;
     #endregion
     private void OnValidate()
     {

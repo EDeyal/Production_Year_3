@@ -241,7 +241,8 @@ MonoBehaviour:
     type: 2}
   _animatorHandler:
     _animator: {fileID: 6407062145061780909}
-  _enemyStatSheet: {fileID: 684794236260423738}
+  _droppedAbilityForPlayer: {fileID: 11400000, guid: bfabcac723921df4abab4209014f1b73,
+    type: 2}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -287,6 +288,7 @@ MonoBehaviour:
       _attack: {fileID: 11400000, guid: 30e21aa0d59627e46849828f65ce8c47, type: 2}
     _damageDealer: {fileID: 684794236260423736}
     _damagable: {fileID: 684794236260423737}
+  _cemuAbility: {fileID: 11400000, guid: 15a189a901cca5f498d20bd41227fc27, type: 2}
 --- !u!114 &684794236260423738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +303,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxHp: 16
   invulnerabilityDuration: 0.3
+  decayingHealth:
+    onDecayingHealthChange:
+      m_PersistentCalls:
+        m_Calls: []
   baseSpeed: 1
   OnOverrideSpeed:
     m_PersistentCalls:
@@ -386,6 +392,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDmgGFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &684794236260423736

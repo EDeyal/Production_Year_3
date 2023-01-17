@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CemuSpeedBoost : StatusEffect
+public class MovementSpeedBoost : StatusEffect
 {
     //get buff time from manager
     Coroutine activeBuffRoutine;

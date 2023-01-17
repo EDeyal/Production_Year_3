@@ -21,5 +21,8 @@ public class Ability : ScriptableObject
     {
 
     }
+    public virtual void Cast(BaseCharacter givenCharacte)
+    {
 
+    }
 }
