@@ -37,6 +37,7 @@ public class BaseCharacter : MonoBehaviour
     {
         Effectable.CacheOwner(this);
         Damageable.CacheOwner(this);
+        StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
     }
 }
 
