@@ -42,7 +42,7 @@ public class PlayerDash : MonoBehaviour
 
     private void RollAnim()
     {
-        anim.SetTrigger("Roll");
+        //anim.SetTrigger("Roll");
     }
 
     IEnumerator Dash()

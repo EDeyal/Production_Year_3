@@ -3,14 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class DamageDealingCollider : MonoBehaviour
 {
-     private Attack attack;
-    //if you want the attack to trigger events on the attacker too put something in the inspector
-     private DamageDealer damageDealer;
+    private Attack attack;
+    private DamageDealer damageDealer;
+    private Collider myCollider;
+
+    public Collider MyCollider { get => myCollider; }
 
     public void CacheReferences(Attack givenAttack, DamageDealer dealer = null)
     {
         attack = givenAttack;
         damageDealer = dealer;
+        myCollider = GetComponent<Collider>();
     }
 
     private void OnTriggerEnter(Collider other)
