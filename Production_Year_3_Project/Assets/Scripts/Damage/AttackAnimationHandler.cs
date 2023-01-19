@@ -36,7 +36,7 @@ public class AttackAnimationHandler : MonoBehaviour
     private void AttackDownOff()
     {
         attackDown = false;
-        //anim.SetBool(animTrigger, false);
+        anim.SetBool(animTrigger, false);
     }
 
     protected virtual void Attack()
@@ -46,7 +46,7 @@ public class AttackAnimationHandler : MonoBehaviour
             return;
         }
         lastAttacked = Time.time;
-        //anim.SetBool(animTrigger, true);
+        anim.SetBool(animTrigger, true);
         OnAttackPerformed?.Invoke();
     }
 }

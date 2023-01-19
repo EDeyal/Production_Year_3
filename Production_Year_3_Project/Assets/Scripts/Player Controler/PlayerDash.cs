@@ -28,8 +28,10 @@ public class PlayerDash : MonoBehaviour
         OnDash.AddListener(controller.StartDashReset);
         OnDash.AddListener(RollAnim);
         OnDash.AddListener(TurnOnWallChecks);
+        OnDash.AddListener(DashAnimOn);
         OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
+        OnDashEnd.AddListener(DashAnimOff);
     }
 
     private void StartDash()
@@ -84,6 +86,14 @@ public class PlayerDash : MonoBehaviour
         leftCheck.gameObject.SetActive(false);
     }
 
+    private void DashAnimOn()
+    {
+        anim.SetBool("Dash", true);
+    }
+    private void DashAnimOff()
+    {
+        anim.SetBool("Dash", false);
+    }
 
 
 }
