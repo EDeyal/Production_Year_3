@@ -745,13 +745,19 @@ MonoBehaviour:
   apexGravityScale: 6
   gravityScale: 8
   maxGravity: 25
-  midAirAttackStopDuration: 0.044
+  midAirAttackStopDuration: 0.33
   animBlender: {fileID: 3372554570951282699}
   isFalling: 0
   OnRecieveForce:
     m_PersistentCalls:
       m_Calls: []
   OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartRunning:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopRunning:
     m_PersistentCalls:
       m_Calls: []
   facingRight: 0
@@ -796,7 +802,7 @@ MonoBehaviour:
   controller: {fileID: 3372554572628395277}
   dashCoolDown: 1
   dashDuration: 0.2
-  dashSpeed: 40
+  dashSpeed: 30
   anim: {fileID: 4841199929293049319}
   rightCheck: {fileID: 7550398056346097911}
   leftCheck: {fileID: 5068695436016827411}
