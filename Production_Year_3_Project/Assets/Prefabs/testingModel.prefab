@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 54579202376848230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.937, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7971037099538507362}
@@ -403,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3372554572719439991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 0}
+  m_LocalPosition: {x: 0, y: 1.841, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,7 +425,7 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 0, y: 1}
     Offset: {x: 0, y: 0}
-    Range: 0.3
+    Range: 0.4
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -561,8 +561,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.82
-  m_Center: {x: 0, y: 0.99, z: -0.26}
+  m_Radius: 0.65
+  m_Center: {x: 0.48, y: 1, z: -0.4}
 --- !u!114 &1999234966709766034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,9 +699,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 1.7843447
+  m_Height: 2.823483
   m_Direction: 1
-  m_Center: {x: 0, y: -0.13561034, z: 0}
+  m_Center: {x: -0, y: 0.38395882, z: 0}
 --- !u!143 &3372554572628395276
 CharacterController:
   m_ObjectHideFlags: 0
@@ -713,13 +713,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.784345
+  m_Height: 2.823483
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.1356103, z: 0}
+  m_Center: {x: 0, y: 0.3839588, z: 0}
 --- !u!114 &3372554572628395277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,13 +745,19 @@ MonoBehaviour:
   apexGravityScale: 6
   gravityScale: 8
   maxGravity: 25
-  midAirAttackStopDuration: 0.044
+  midAirAttackStopDuration: 0.33
   animBlender: {fileID: 3372554570951282699}
   isFalling: 0
   OnRecieveForce:
     m_PersistentCalls:
       m_Calls: []
   OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartRunning:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopRunning:
     m_PersistentCalls:
       m_Calls: []
   facingRight: 0
@@ -796,7 +802,7 @@ MonoBehaviour:
   controller: {fileID: 3372554572628395277}
   dashCoolDown: 1
   dashDuration: 0.2
-  dashSpeed: 40
+  dashSpeed: 30
   anim: {fileID: 4841199929293049319}
   rightCheck: {fileID: 7550398056346097911}
   leftCheck: {fileID: 5068695436016827411}
@@ -1035,13 +1041,13 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 0, y: -1}
     Offset: {x: 0, y: 0}
-    Range: 0.25
+    Range: 0.4
   - Direcion: {x: 0, y: -1}
     Offset: {x: -0.3, y: 0.2}
-    Range: 0.45
+    Range: 0.6
   - Direcion: {x: 0, y: -1}
     Offset: {x: 0.3, y: 0.2}
-    Range: 0.45
+    Range: 0.6
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
