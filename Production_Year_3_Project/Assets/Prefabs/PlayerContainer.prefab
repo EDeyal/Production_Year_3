@@ -734,11 +734,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3372554572628395276}
   movementSpeed: 10
-  jumpHeight: 12
+  jumpHeight: 14
   velocity: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 8645212940658500671}
   ceilingDetector: {fileID: 3372554572719439977}
-  jumpHeldTime: 0.1
+  jumpHeldTime: 0.2
   numberOfJumps: 1
   coyoteThreshold: 0.1
   extraJumpsHeightModifier: 0.5
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3372554572628395277}
-  dashCoolDown: 1
+  dashCoolDown: 0.6
   dashDuration: 0.2
   dashSpeed: 30
   anim: {fileID: 4841199929293049319}
