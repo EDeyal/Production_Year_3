@@ -171,7 +171,6 @@ public class CCController : MonoBehaviour
         externalForces.Clear();
         controller.Move(totalExternalForce * Time.deltaTime);
     }
-
     private void RunEvents(float xInput)
     {
         if (xInput == lastInput)
@@ -397,7 +396,6 @@ public class CCController : MonoBehaviour
     private void StopRunAnim()
     {
         animBlender.SetBool("Run", false);
-        Debug.Log("Stopped");
     }
     private void ResetMidAirAttackUsed()
     {

@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
 public class AttackAnimationHandler : MonoBehaviour
 {
-    [SerializeField] private float attackCoolDown;
     private float lastAttacked;
     
-    [SerializeField] private string animTrigger;
     
     private bool attackDown;
 
-    [SerializeField] private Animator anim;
+    private float AttackAnimationDuration;
 
     public UnityEvent OnAttackPerformed;
-
+    [SerializeField] private float attackCoolDown;
+    [SerializeField] private string animTrigger;
+    [SerializeField] private AnimationClip attackAnimation;
+    [SerializeField] private Animator anim;
     private void Start()
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
