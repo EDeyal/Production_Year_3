@@ -214,7 +214,7 @@ public class CCController : MonoBehaviour
         }
     }
 
-    private void ReleaseJumpHeld()
+    public void ReleaseJumpHeld()
     {
         if (jumpIsHeld)
         {

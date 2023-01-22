@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashTowardsEnemy", menuName = "Ability/QuovaxDrop")]
 public class DashTowardsEnemy : Ability
 {
-    private PlayerManager player => Owner as PlayerManager;
     [SerializeField] private float dashSpeed;
     [SerializeField] private Attack dashEndAbility;
+    private PlayerManager player => Owner as PlayerManager;
     public override void Cast()
     {
         player.StartCoroutine(dashTowardsTarget());
