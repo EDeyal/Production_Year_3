@@ -24,12 +24,18 @@ public class PlayerManager : BaseCharacter
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(playerController.ResetVelocity);
+        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
+
     }
 
     private void CachePlayerOnAbility(Ability givenAbility)
     {
         givenAbility.CahceOwner(this);
+    }
+
+    private void PlayAttackAnimation()
+    {
+        playerController.AnimBlender.SetTrigger("Attack");
     }
 
 }
