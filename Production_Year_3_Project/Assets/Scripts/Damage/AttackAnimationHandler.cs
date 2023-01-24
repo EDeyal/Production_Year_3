@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
-using System.Collections.Generic;
 public class AttackAnimationHandler : MonoBehaviour
 {
     private float lastAttacked;
-    
+
     private bool attackDown;
     private bool attackFinished;
 
@@ -13,15 +11,22 @@ public class AttackAnimationHandler : MonoBehaviour
 
 
     public UnityEvent OnAttackPerformed;
+    [SerializeField] private Attack meleeAttack;
     [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
     [SerializeField] private string animTriggerRun;
     [SerializeField] private AnimationClip attackAnimation;
     [SerializeField] private Animator anim;
+    [SerializeField] private Transform vfxSpawnPoint;
+    [SerializeField] private SwordSlashObjectPooler swordSlashOP;
+    public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
+    public Attack MeleeAttack { get => meleeAttack; }
+
     private void Start()
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
+        OnAttackPerformed.AddListener(SpawnSwordSlashVfx);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
     }
@@ -64,5 +69,13 @@ public class AttackAnimationHandler : MonoBehaviour
     {
         Debug.Log("Attack finished");
         attackFinished = true;
+    }
+
+    private void SpawnSwordSlashVfx()
+    {
+        SwordSlash slash = swordSlashOP.GetPooledObject();
+        slash.gameObject.SetActive(true);
+        slash.transform.position = vfxSpawnPoint.position;
+        slash.Effect.Play();
     }
 }

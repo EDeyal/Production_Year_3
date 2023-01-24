@@ -4,14 +4,12 @@ public class PlayerManager : BaseCharacter
 {
     [SerializeField] private CCController playerController;
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
-    [SerializeField] private DamageDealingCollider playerMeleeAttackCollider;
     [SerializeField] private PlayerAbilityHandler playerAbilityHandler;
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
 
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
-    public DamageDealingCollider PlayerMeleeAttackCollider { get => playerMeleeAttackCollider; }
     public PlayerAbilityHandler PlayerAbilityHandler { get => playerAbilityHandler; }
     public EnemyProximitySensor EnemyProximitySensor { get => enemyProximitySensor; }
 
@@ -19,12 +17,12 @@ public class PlayerManager : BaseCharacter
     {
         base.SetUp();
         PlayerStatSheet.InitializeStats();
-        PlayerMeleeAttackCollider.CacheReferences(PlayerStatSheet.MeleeAttack, DamageDealer);
         playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
         playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
+        PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
 
     }
 

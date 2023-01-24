@@ -46,7 +46,6 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         T[] legalTargets = GetLegalTargets();
         if (ReferenceEquals(legalTargets, null) || legalTargets.Length == 0)
         {
-            Debug.Log("no enemies found");
             return null;
         }
         T closestPoint = legalTargets[0];
