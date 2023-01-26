@@ -26,10 +26,12 @@ public class PlayerDash : MonoBehaviour
         lastDashed = dashCoolDown * -1;
         GameManager.Instance.InputManager.OnDashDown.AddListener(StartDash);
         OnDash.AddListener(controller.StartDashReset);
-        OnDash.AddListener(RollAnim);
         OnDash.AddListener(TurnOnWallChecks);
+        OnDash.AddListener(DashAnimOn);
+        OnDash.AddListener(controller.ReleaseJumpHeld);
         OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
+        OnDashEnd.AddListener(DashAnimOff);
     }
 
     private void StartDash()
@@ -38,11 +40,6 @@ public class PlayerDash : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-    }
-
-    private void RollAnim()
-    {
-        //anim.SetTrigger("Roll");
     }
 
     IEnumerator Dash()
@@ -84,6 +81,14 @@ public class PlayerDash : MonoBehaviour
         leftCheck.gameObject.SetActive(false);
     }
 
+    private void DashAnimOn()
+    {
+        anim.SetBool("Dash", true);
+    }
+    private void DashAnimOff()
+    {
+        anim.SetBool("Dash", false);
+    }
 
 
 }

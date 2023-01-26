@@ -46,15 +46,15 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         T[] legalTargets = GetLegalTargets();
         if (ReferenceEquals(legalTargets, null) || legalTargets.Length == 0)
         {
-            Debug.Log("no enemies found");
             return null;
         }
         T closestPoint = legalTargets[0];
-        for (int i = 0; i < legalTargets.Length - 1; i++)
+        for (int i = 0; i < legalTargets.Length; i++)
         {
-            if (GeneralFunctions.CalcRange(legalTargets[i].transform.position, transform.position) <= GeneralFunctions.CalcRange(legalTargets[i + 1].transform.position, transform.position))
+            float dist = GeneralFunctions.CalcRange(closestPoint.transform.position, transform.position);
+            if (GeneralFunctions.CalcRange(legalTargets[i].transform.position, transform.position) < dist)
             {
-                closestPoint = legalTargets[i + 1];
+                closestPoint = legalTargets[i];
             }
         }
         Debug.Log(closestPoint.transform.parent.name);
@@ -66,6 +66,11 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
+        if (!ReferenceEquals(GetClosestLegalTarget(), null))
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, GetClosestLegalTarget().transform.position);
+        }
     }
 
 }

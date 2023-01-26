@@ -2,22 +2,33 @@ using UnityEngine;
 using UnityEngine.Events;
 public class AttackAnimationHandler : MonoBehaviour
 {
-    [SerializeField] private float attackCoolDown;
     private float lastAttacked;
-    
-    [SerializeField] private string animTrigger;
-    
-    private bool attackDown;
 
-    [SerializeField] private Animator anim;
+    private bool attackDown;
+    private bool attackFinished;
+
+    private float AttackAnimationDuration;
+
 
     public UnityEvent OnAttackPerformed;
+    [SerializeField] private Attack meleeAttack;
+    [SerializeField] private float attackCoolDown;
+    [SerializeField] private string animTrigger;
+    [SerializeField] private string animTriggerRun;
+    [SerializeField] private AnimationClip attackAnimation;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform vfxSpawnPoint;
+    [SerializeField] private SwordSlashObjectPooler swordSlashOP;
+    public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
+    public Attack MeleeAttack { get => meleeAttack; }
 
     private void Start()
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
+        OnAttackPerformed.AddListener(SpawnSwordSlashVfx);
         lastAttacked = attackCoolDown * -1;
+        attackFinished = true;
     }
 
     private void Update()
@@ -36,17 +47,35 @@ public class AttackAnimationHandler : MonoBehaviour
     private void AttackDownOff()
     {
         attackDown = false;
-        //anim.SetBool(animTrigger, false);
     }
 
     protected virtual void Attack()
     {
-        if (Time.time - lastAttacked < attackCoolDown)
+        //only call this if attack animation is finished + attackdown + cd finished
+        if (Time.time - lastAttacked < attackCoolDown || !attackFinished)
         {
             return;
         }
-        lastAttacked = Time.time;
-        //anim.SetBool(animTrigger, true);
+        attackFinished = false;
         OnAttackPerformed?.Invoke();
+        Debug.Log("OnAttackPreformed");
+    }
+
+    public void SetLastAttacked(float givenTime)
+    {
+        lastAttacked = givenTime;
+    }
+    public void AttackFinishedTrue()
+    {
+        Debug.Log("Attack finished");
+        attackFinished = true;
+    }
+
+    private void SpawnSwordSlashVfx()
+    {
+        SwordSlash slash = swordSlashOP.GetPooledObject();
+        slash.gameObject.SetActive(true);
+        slash.transform.position = vfxSpawnPoint.position;
+        slash.Effect.Play();
     }
 }

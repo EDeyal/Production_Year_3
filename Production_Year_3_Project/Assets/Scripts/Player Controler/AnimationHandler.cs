@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class AnimationHandler : MonoBehaviour
 {
@@ -21,4 +23,6 @@ public class AnimationHandler : MonoBehaviour
     {
         anim.SetTrigger(name);
     }
+
+   
 }
