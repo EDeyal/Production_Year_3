@@ -96,7 +96,10 @@ MonoBehaviour:
   effectable: {fileID: 1695415332058508740}
   effector: {fileID: 1695415332058508743}
   statSheet: {fileID: 4395971687601065794}
-  boosts: []
+  boosts:
+  - BoostValue: 0.3
+    BoostDuration: 2
+    BoostType: 0
   _boundHandler:
     _bound:
       m_Center: {x: 2.35, y: 14.78, z: 0}
@@ -112,6 +115,8 @@ MonoBehaviour:
     type: 2}
   _animatorHandler:
     _animator: {fileID: 7812396649550523093}
+  _droppedAbilityForPlayer: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496,
+    type: 2}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -180,6 +185,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxHp: 100
   invulnerabilityDuration: 0.3
+  decayingHealth:
+    onDecayingHealthChange:
+      m_PersistentCalls:
+        m_Calls: []
   baseSpeed: 1
   OnOverrideSpeed:
     m_PersistentCalls:
@@ -265,6 +274,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDmgGFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4395971687601065792
