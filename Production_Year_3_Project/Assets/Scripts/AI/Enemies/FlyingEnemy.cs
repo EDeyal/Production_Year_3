@@ -150,8 +150,15 @@ public abstract class FlyingEnemy : BaseEnemy
         bool getNextPoint = false;
         if (_randomPoint == Vector2.zero)
         {
-            getNextPoint = true;
+            GetNewRandomPoint();
         }
+
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        Vector2 target = new Vector2(_randomPoint.x, _randomPoint.y);
+        var direction = target - position;
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
+        _moveAction.InitAction(_moveData);
+
         if (CheckWaypoint(transform.position, _randomPoint, false, out bool returnBack))
         {
             getNextPoint = true;
@@ -169,17 +176,32 @@ public abstract class FlyingEnemy : BaseEnemy
         {
             GetNewRandomPoint();
         }
-
-        Vector2 position = new Vector2(transform.position.x, transform.position.y);
-        Vector2 target = new Vector2(_randomPoint.x, _randomPoint.y);
-        var direction = target - position;
-        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
-        _moveAction.InitAction(_moveData);
+    }
+    protected int CheckNewPointValidDirection(bool isTouchingPositiveWall,bool isTouchingNegativeWall,int currentNum)
+    {
+        if (isTouchingPositiveWall && isTouchingNegativeWall)
+        {
+            return 0;
+        }
+        else if (isTouchingPositiveWall)
+        {
+            if (currentNum > 0)
+                currentNum *= -1;
+        }
+        else if (isTouchingNegativeWall)
+        {
+            if (currentNum < 0)
+                currentNum *= -1;
+        }
+        return currentNum;
     }
     protected virtual void GetNewRandomPoint()
     {
-        var x = Random.Range(_randomMovementSO.RandomDirection.x, _randomMovementSO.RandomDirection.y);
+        //need to add logic for sensors and limitations based on them
+        int x = Random.Range(_randomMovementSO.RandomDirection.x, _randomMovementSO.RandomDirection.y);
+        x = CheckNewPointValidDirection(_rightWallSensorInfo.IsNearWall, _leftWallSensorInfo.IsNearWall, x);
         var y = Random.Range(_randomMovementSO.RandomDirection.x, _randomMovementSO.RandomDirection.y);
+        y = CheckNewPointValidDirection(_ceilingSensorInfo.IsNearWall, _groundSensorInfo.IsNearWall, y);
         var direction = new Vector2(x, y);
         direction.Normalize();
         var length = Random.Range(_randomMovementSO.RandomLength.x,_randomMovementSO.RandomLength.y);

@@ -11,6 +11,9 @@ public class QovaxEnemy : FlyingEnemy
     [SerializeField] BaseAction<ActionCooldownData> _fatigueCooldownAction;
     protected Vector3 _chargePoint;
     bool _isCharging;
+    bool _isFatigued;
+    public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
+
 
     public override void Awake()
     {
@@ -123,5 +126,14 @@ public class QovaxEnemy : FlyingEnemy
     {
         ChasePlayerDistance.DrawGizmos(transform.position);
         NoticePlayerDistance.DrawGizmos(transform.position);
+    }
+    public void CheckFatigued()
+    {
+        if (!_isFatigued)
+        {
+            _isFatigued = true;
+            _qovaxStateHandler.RefEnemy.Effectable.ApplyStatusEffect(new MovementSpeedBoost());
+            //add slow boost
+        }
     }
 }

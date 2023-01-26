@@ -7,8 +7,10 @@ public class QovaxFatigueState : BaseQovaxState
         var qovax = (QovaxEnemy)_qovaxStateHandler.RefEnemy;
         if (qovax.CheckForFatigueCooldown())
         {
+            qovax.IsFatigued = false;
             return _qovaxStateHandler.CombatState;
         }
+        qovax.CheckFatigued();
         return this;
     }
 }
