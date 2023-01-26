@@ -14,8 +14,6 @@ public class AttackAnimationHandler : MonoBehaviour
     [SerializeField] private Attack meleeAttack;
     [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
-    [SerializeField] private string animTriggerRun;
-    [SerializeField] private AnimationClip attackAnimation;
     [SerializeField] private Animator anim;
     [SerializeField] private Transform vfxSpawnPoint;
     [SerializeField] private SwordSlashObjectPooler swordSlashOP;
