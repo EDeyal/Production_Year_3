@@ -40,6 +40,7 @@ public class CCFlip : MonoBehaviour
         {
             StopCoroutine(active);
         }
+        controller.facingRight = true;
         objectToFlip.rotation = Quaternion.Euler(rightVector);
         active = StartCoroutine(WaitForMovingLeft());
     }
@@ -49,6 +50,7 @@ public class CCFlip : MonoBehaviour
         {
             StopCoroutine(active);
         }
+        controller.facingRight = false;
         objectToFlip.rotation = Quaternion.Euler(leftVector);
         active = StartCoroutine(WaitForMovingRight());
     }

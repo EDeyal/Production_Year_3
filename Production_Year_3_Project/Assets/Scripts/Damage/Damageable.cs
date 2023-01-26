@@ -68,6 +68,8 @@ public class Damageable : MonoBehaviour
     {
         if (!_canReciveDamage)
             return;
+
+        Debug.Log(gameObject.name + " was hit by " + givenDealer.name);
         OnGetHit?.Invoke(givenAttack);
         givenDealer.OnHitAttack?.Invoke(givenAttack);
         TakeDamage(givenAttack.DamageHandler, givenDealer);
@@ -82,7 +84,7 @@ public class Damageable : MonoBehaviour
         currentHp -= finalAmount;
 
         OnTakeDmgGFX?.Invoke();
-
+        givenDamage.ClearModifiers();
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
