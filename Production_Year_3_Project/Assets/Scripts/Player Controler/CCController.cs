@@ -53,12 +53,13 @@ public class CCController : MonoBehaviour
     [SerializeField] AnimationHandler animBlender;
 
     [SerializeField] private bool isFalling;
+    public bool facingRight;
 
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
     public GroundCheck GroundCheck { get => groundCheck; }
-    public AnimationHandler AnimBlender { get => animBlender;  }
+    public AnimationHandler AnimBlender { get => animBlender; }
 
     Vector3 oldPos;
 
@@ -68,7 +69,6 @@ public class CCController : MonoBehaviour
     public UnityEvent OnStartRunning;
     public UnityEvent OnStopRunning;
 
-    public bool facingRight;
     private void Start()
     {
         GameManager.Instance.InputManager.OnJumpDown.AddListener(Jump);
