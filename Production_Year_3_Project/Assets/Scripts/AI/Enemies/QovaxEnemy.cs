@@ -13,6 +13,7 @@ public class QovaxEnemy : FlyingEnemy
     bool _isCharging;
     bool _isFatigued;
     public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
+    public QovaxStatSheet QovaxStatSheet => StatSheet as QovaxStatSheet;
 
 
     public override void Awake()
@@ -104,7 +105,7 @@ public class QovaxEnemy : FlyingEnemy
         }
 
         //charge Logic
-        MoveTo(_chargePoint,4);
+        MoveTo(_chargePoint,QovaxStatSheet.ChargeSpeed);
         return false;
     }
     private void ResetCharge()

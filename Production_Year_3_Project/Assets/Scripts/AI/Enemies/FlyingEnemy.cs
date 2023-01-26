@@ -11,7 +11,6 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] CheckXYDistanceAction _waypointXYDistanceAction;
     [SerializeField] BaseAction<ActionCooldownData> _idleMovementAction;
     ActionCooldown _idleCooldown;
-
     [SerializeField] WallSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
