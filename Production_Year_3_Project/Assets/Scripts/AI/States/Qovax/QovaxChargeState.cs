@@ -7,9 +7,8 @@ public class QovaxChargeState : BaseQovaxState
     public override BaseState RunCurrentState()
     {
         Debug.Log("Qovax Charge State");
-        var qovax = (QovaxEnemy)_qovaxStateHandler.RefEnemy;
         //stay in charge state until finished charge
-        if (qovax.Charge())
+        if (_qovax.Charge())
         {
             //from charge state he will have fatigue state
             //he will move only small movements in it

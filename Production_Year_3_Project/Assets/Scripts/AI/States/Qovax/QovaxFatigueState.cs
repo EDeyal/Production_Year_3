@@ -4,13 +4,12 @@ public class QovaxFatigueState : BaseQovaxState
     public override BaseState RunCurrentState()
     {
         Debug.Log("Qovax Fatige State");
-        var qovax = (QovaxEnemy)_qovaxStateHandler.RefEnemy;
-        if (qovax.CheckForFatigueCooldown())
+        if (_qovax.CheckForFatigueCooldown())
         {
-            qovax.IsFatigued = false;
+            _qovax.IsFatigued = false;
             return _qovaxStateHandler.CombatState;
         }
-        qovax.CheckFatigued();
+        _qovax.CheckFatigued();
         return this;
     }
 }

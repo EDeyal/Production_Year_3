@@ -13,7 +13,7 @@ public class MovementSpeedBoost : StatusEffect
         {
             Debug.LogError("no speed boost given to " + host.name);
         }
-        Debug.Log("starting speed boost on " + host.name);
+        //Debug.Log("starting speed boost on " + host.name);
         host.StatSheet.OverrideSpeed(speedBosst.BoostValue);
         activeBuffRoutine = host.StartCoroutine(BuffDurationTimer());
     }
