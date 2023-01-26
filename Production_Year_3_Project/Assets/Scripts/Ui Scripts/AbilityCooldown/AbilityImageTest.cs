@@ -26,12 +26,12 @@ public class AbilityImageTest : MonoBehaviour
         RecievingNewAbility(shownAbility);
     }
 #endif
-    
+    Coroutine activeRoutine;
     [SerializeField] Slider cooldown;
 
     private void Awake()
     {
-        cooldown.value= 0;
+        cooldown.value = 0;
     }
     private void OnValidate()
     {
@@ -56,19 +56,27 @@ public class AbilityImageTest : MonoBehaviour
         SetValueForCooldown(abilitySO.CoolDown);
         // setting sprite
         ResetAbilityCooldown();
-        
+
 
 
     }
     public void UseAbility()
     {
-        StopAllCoroutines();
+        
+        if (!ReferenceEquals(activeRoutine,null))
+        {
+            StopCoroutine(activeRoutine);
+        }
         cooldown.value = cooldown.maxValue;
-        StartCoroutine(CoolDown());
+        activeRoutine = StartCoroutine(CoolDown());
+        
     }
     void ResetAbilityCooldown()
     {
-        StopAllCoroutines();
+        if (!ReferenceEquals(activeRoutine, null))
+        {
+            StopCoroutine(activeRoutine);
+        }
         cooldown.value = 0;
     }
     void SetValueForCooldown(float value)

@@ -4,16 +4,31 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using Sirenix.OdinInspector;
 
 public class BaseHealthBar : MonoBehaviour
 {
-    //set amount of hp
-    //reduce hp
-    //add hp
-    //HP transition
-    //
+#if UNITY_EDITOR
+    [Button("ReduceHealth")]
+    void DecreaseHealth()
+    {
+        ReduceHp(15f, true);
+    }
+    [Button("AddHealth")]
+    void AddHealth()
+    {
+        AddHp(15f, true);
+    }
+    [Button("SetMaxHp")]
+    void SetMaxHp()
+    {
+        SetHealthBar(75);
+        Debug.Log(healthBar.maxValue);
+        Debug.Log(healthBar.value);
+    } 
 
+
+#endif
 
     [SerializeField] float currentHp;
     [SerializeField] float transitionDuration;
@@ -22,7 +37,7 @@ public class BaseHealthBar : MonoBehaviour
     [SerializeField] Slider healthBar;
     [SerializeField] Color mainColor;
 
-    
+
 
     public void SetHealthBar(float hp)
     {
@@ -41,20 +56,20 @@ public class BaseHealthBar : MonoBehaviour
     }
     public void AddHp(float amount, bool hasTransition = false)
     {
-        ChangeHp(amount, hasTransition,addHealthBarCurve);
+        ChangeHp(amount, hasTransition, addHealthBarCurve);
     }
 
     public void ReduceHp(float amount, bool hasTransition = false)
     {
-       ChangeHp(-amount, hasTransition,reduceHealthBarCurve);
+        ChangeHp(-amount, hasTransition, reduceHealthBarCurve);
     }
 
-   protected virtual void ChangeHp(float amount , bool hasTransition, AnimationCurve curve) 
+    protected virtual void ChangeHp(float amount, bool hasTransition, AnimationCurve curve)
     {
         if (hasTransition)
         {
             var endAmount = healthBar.value + amount;
-            healthBar.DOValue(endAmount,transitionDuration).SetEase(curve);
+            healthBar.DOValue(endAmount, transitionDuration).SetEase(curve);
         }
         else
         {
