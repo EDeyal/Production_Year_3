@@ -57,7 +57,6 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
                 closestPoint = legalTargets[i];
             }
         }
-        Debug.Log(closestPoint.transform.parent.name);
         return closestPoint;
     }
 
