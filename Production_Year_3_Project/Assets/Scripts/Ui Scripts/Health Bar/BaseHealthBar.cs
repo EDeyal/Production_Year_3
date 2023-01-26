@@ -9,28 +9,30 @@ using Sirenix.OdinInspector;
 public class BaseHealthBar : MonoBehaviour
 {
 #if UNITY_EDITOR
+    [SerializeField] float maxHPTest;
+    [SerializeField] float testingNumber;
     [Button("ReduceHealth")]
     void DecreaseHealth()
     {
-        ReduceHp(15f, true);
+        ReduceHp(testingNumber, true);
     }
     [Button("AddHealth")]
     void AddHealth()
     {
-        AddHp(15f, true);
+        AddHp(testingNumber, true);
     }
     [Button("SetMaxHp")]
     void SetMaxHp()
     {
-        SetHealthBar(75);
-        Debug.Log(healthBar.maxValue);
-        Debug.Log(healthBar.value);
-    } 
+        SetHealthBar(maxHPTest);
+        Debug.Log("Health bar max value: " + healthBar.maxValue);
+        Debug.Log("Health bar value: " + healthBar.value);
+    }
 
 
 #endif
 
-    [SerializeField] float currentHp;
+    float currentHp;
     [SerializeField] float transitionDuration;
     [SerializeField] AnimationCurve addHealthBarCurve;
     [SerializeField] AnimationCurve reduceHealthBarCurve;
@@ -39,10 +41,11 @@ public class BaseHealthBar : MonoBehaviour
 
 
 
-    public void SetHealthBar(float hp)
+    public void SetHealthBar(float startingHP)
     {
-        healthBar.maxValue = hp;
-        healthBar.value = hp;
+        currentHp = startingHP;
+        healthBar.maxValue = startingHP;
+        healthBar.value = currentHp;
     }
 
     public void AddMaxHp(float addedAmount, bool replenishHealth = false)
@@ -66,14 +69,15 @@ public class BaseHealthBar : MonoBehaviour
 
     protected virtual void ChangeHp(float amount, bool hasTransition, AnimationCurve curve)
     {
+            currentHp += amount;
         if (hasTransition)
         {
-            var endAmount = healthBar.value + amount;
-            healthBar.DOValue(endAmount, transitionDuration).SetEase(curve);
+
+            healthBar.DOValue(currentHp, transitionDuration).SetEase(curve);
         }
         else
         {
-            healthBar.value += amount;
+            healthBar.value = currentHp;
         }
     }
 
