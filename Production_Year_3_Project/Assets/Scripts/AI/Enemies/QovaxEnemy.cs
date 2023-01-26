@@ -15,7 +15,6 @@ public class QovaxEnemy : FlyingEnemy
     public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
     public QovaxStatSheet QovaxStatSheet => StatSheet as QovaxStatSheet;
 
-
     public override void Awake()
     {
         base.Awake();
@@ -78,8 +77,9 @@ public class QovaxEnemy : FlyingEnemy
                 return false;
             }
         }
-        //Add buffs for immunity and more use On for help
-
+        //--------
+        //add can't be staggered or stunned but can still take damage
+        //--------
         if (CheckBounds())
         {
             Debug.Log("Hit Bounds, Returning");

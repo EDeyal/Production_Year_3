@@ -35,7 +35,8 @@ public abstract class FlyingEnemy : BaseEnemy
     }
     public override void OnDeath()
     {
-        throw new System.NotImplementedException();
+        base.OnDeath();
+        RB.useGravity = true;
     }
     public override void Awake()
     {

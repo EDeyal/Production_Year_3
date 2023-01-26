@@ -17,6 +17,11 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
 
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
+
+    [SerializeField] BaseAction<ActionCooldownData> _deathAction;
+    ActionCooldown _deathCooldown;
+
+
     #endregion
 
     #region Properties
@@ -37,6 +42,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     {
         base.Awake();
         StatSheet.InitializeStats();
+        _deathCooldown = new ActionCooldown();
     }
     public virtual void CheckValidation()
     {
@@ -74,6 +80,15 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         }
         return false;
     }
-    public abstract void OnDeath();
+    public virtual void OnDeath()
+    {
+        //can add logic until destroyed cooldown is completed
+        if (_deathAction.InitAction(new ActionCooldownData(ref _deathCooldown)))
+        {
+            //can add logic to frame of death
+            transform.gameObject.SetActive(false);
+            //Destroy(this);
+        }
+    }
 
 }
