@@ -10,11 +10,12 @@ public class CCFlip : MonoBehaviour
     [SerializeField] Vector3 leftVector;
     [SerializeField] CCController controller;
     [SerializeField] Transform objectToFlip;
+    Coroutine active;
 
     private void Start()
     {
         controller.facingRight = true;
-        StartCoroutine(WaitForMovingLeft());
+        active = StartCoroutine(WaitForMovingLeft());
     }
 
     IEnumerator WaitForMovingLeft()
@@ -22,7 +23,7 @@ public class CCFlip : MonoBehaviour
         yield return new WaitUntil(() => controller.Velocity.x < 0);
         objectToFlip.rotation = Quaternion.Euler(leftVector);
         controller.facingRight = false;
-        StartCoroutine(WaitForMovingRight());
+        active = StartCoroutine(WaitForMovingRight());
     }
 
     IEnumerator WaitForMovingRight()
@@ -30,7 +31,28 @@ public class CCFlip : MonoBehaviour
         yield return new WaitUntil(() => controller.Velocity.x > 0);
         objectToFlip.rotation = Quaternion.Euler(rightVector);
         controller.facingRight = true;
-        StartCoroutine(WaitForMovingLeft());
+        active = StartCoroutine(WaitForMovingLeft());
+    }
+
+    public void FlipRight()
+    {
+        if (!ReferenceEquals(active, null))
+        {
+            StopCoroutine(active);
+        }
+        controller.facingRight = true;
+        objectToFlip.rotation = Quaternion.Euler(rightVector);
+        active = StartCoroutine(WaitForMovingLeft());
+    }
+    public void FlipLeft()
+    {
+        if (!ReferenceEquals(active, null))
+        {
+            StopCoroutine(active);
+        }
+        controller.facingRight = false;
+        objectToFlip.rotation = Quaternion.Euler(leftVector);
+        active = StartCoroutine(WaitForMovingRight());
     }
 
 }

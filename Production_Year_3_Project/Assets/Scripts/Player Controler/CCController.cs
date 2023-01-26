@@ -41,6 +41,8 @@ public class CCController : MonoBehaviour
 
     [SerializeField] float apexGravityScale;
 
+    private float lastInput;
+
     private float gravityForce = 9.81f;
     private float startingGravityScale;
     [SerializeField] float gravityScale;
@@ -51,21 +53,24 @@ public class CCController : MonoBehaviour
     [SerializeField] AnimationHandler animBlender;
 
     [SerializeField] private bool isFalling;
+    public bool facingRight;
 
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
+    public GroundCheck GroundCheck { get => groundCheck; }
+    public AnimationHandler AnimBlender { get => animBlender; }
 
     Vector3 oldPos;
 
     List<Vector3> externalForces = new List<Vector3>();
     public UnityEvent<Vector3> OnRecieveForce;
     public UnityEvent OnJump;
+    public UnityEvent OnStartRunning;
+    public UnityEvent OnStopRunning;
 
-    public bool facingRight;
     private void Start()
     {
-        //inputs
         GameManager.Instance.InputManager.OnJumpDown.AddListener(Jump);
         GameManager.Instance.InputManager.OnJump.AddListener(HoldJump);
         GameManager.Instance.InputManager.OnJumpUp.AddListener(ReleaseJumpHeld);
@@ -84,8 +89,12 @@ public class CCController : MonoBehaviour
         OnJump.AddListener(ResetCanHoldJump);
         OnJump.AddListener(JumpAnim);
 
+        OnStartRunning.AddListener(StartRunAnim);
+
+        OnStopRunning.AddListener(StopRunAnim);
+
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
-        groundCheck.OnNotGrounded.AddListener(DisableGroundedAnims);
+        groundCheck.OnNotGrounded.AddListener(FallAnim);
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
@@ -104,7 +113,6 @@ public class CCController : MonoBehaviour
         }
         SetInputVelocity();
         ApplyGravity();
-        SetAnimatorFlags();
     }
     private void LateUpdate()
     {
@@ -113,7 +121,7 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-      
+        RunEvents(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             Debug.Log("jumped");
@@ -155,27 +163,6 @@ public class CCController : MonoBehaviour
     {
         controller.Move(velocity * Time.deltaTime);
     }
-
-    private void SetAnimatorFlags()
-    {
-        isFalling = !groundCheck.IsGrounded() && velocity.y < 0;
-
-        if (groundCheck.IsGrounded())
-        {
-            animBlender.SetFloat("Speed", (int)Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
-        }
-        if (isFalling)
-        {
-            Debug.Log("falling anim");
-            animBlender.SetBool("Falling", true);
-        }
-        else
-        {
-            animBlender.SetBool("Falling", false);
-        }
-
-    }
-
     private void ApplyExtrenalForces(Vector3 force)
     {
         Vector3 totalExternalForce = Vector3.zero;
@@ -186,7 +173,22 @@ public class CCController : MonoBehaviour
         externalForces.Clear();
         controller.Move(totalExternalForce * Time.deltaTime);
     }
-
+    private void RunEvents(float xInput)
+    {
+        if (xInput == lastInput)
+        {
+            return;
+        }
+        lastInput = xInput;
+        if (lastInput == 0)
+        {
+            OnStopRunning?.Invoke();
+        }
+        else
+        {
+            OnStartRunning?.Invoke();
+        }
+    }
     private void Jump()
     {
         if (canJump && (groundCheck.IsGrounded() || coyoteAvailable || (jumpsLeft > 0 && jumped)))
@@ -213,7 +215,7 @@ public class CCController : MonoBehaviour
         }
     }
 
-    private void ReleaseJumpHeld()
+    public void ReleaseJumpHeld()
     {
         if (jumpIsHeld)
         {
@@ -379,14 +381,23 @@ public class CCController : MonoBehaviour
         animBlender.SetTrigger("Jump");
     }
 
-    private void DisableGroundedAnims()
-    {
-        animBlender.SetFloat("Speed", 0);
-    }
-
     private void LandAnim()
     {
         animBlender.SetTrigger("Land");
+    }
+
+    private void FallAnim()
+    {
+        animBlender.SetTrigger("Fall");
+    }
+
+    private void StartRunAnim()
+    {
+        animBlender.SetBool("Run", true);
+    }
+    private void StopRunAnim()
+    {
+        animBlender.SetBool("Run", false);
     }
     private void ResetMidAirAttackUsed()
     {

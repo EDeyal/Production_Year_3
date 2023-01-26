@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
-   public void TurnOnMeleeAttackCollider()
+   public void Attack()
     {
-        GameManager.Instance.PlayerManager.PlayerMeleeAttackCollider.MyCollider.enabled = true;
-    }
-    public void TurnOffMeleeAttackCollider()
-    {
-        GameManager.Instance.PlayerManager.PlayerMeleeAttackCollider.MyCollider.enabled = false;
+        GameManager.Instance.PlayerManager.PlayerMeleeAttack.MeleeAttackEvent();
     }
 }

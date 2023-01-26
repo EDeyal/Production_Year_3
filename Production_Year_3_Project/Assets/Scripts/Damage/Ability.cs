@@ -1,10 +1,13 @@
 using UnityEngine;
 
+
 public class Ability : ScriptableObject
 {
     private BaseCharacter owner;
 
+
     [SerializeField] private float coolDown;
+    [SerializeField] private Sprite abilityArtwork;
     [SerializeField] private string animationTrigger;
 
 
@@ -21,5 +24,8 @@ public class Ability : ScriptableObject
     {
 
     }
+    public virtual void Cast(BaseCharacter givenCharacte)
+    {
 
+    }
 }
