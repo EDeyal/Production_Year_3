@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 146567258257489539}
   - component: {fileID: 146567258257489541}
   - component: {fileID: 146567258257489540}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PlayerWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2738,7 +2738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.00005777816, y: 0.00011382709, z: -0.0008360412, w: 0.99999964}
-  m_LocalPosition: {x: -0.002277507, y: 1.3588463, z: -9.999999}
+  m_LocalPosition: {x: -0.0022773743, y: 1.358846, z: -9.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3929,6 +3929,7 @@ MonoBehaviour:
   playerMeleeAttackAnimationHandler: {fileID: 146567258257489539}
   playerAbilityHandler: {fileID: 146567259415107163}
   enemyProximitySensor: {fileID: 146567259415107162}
+  testProximitySensor: {fileID: 0}
 --- !u!114 &146567259415105966
 MonoBehaviour:
   m_ObjectHideFlags: 0
