@@ -4,6 +4,8 @@ public class GameManagerHelper : MonoBehaviour
 {
     [SerializeField] GameManager _gameManagerPrefab;
     [SerializeField] PlayerManager _playerManager;
+
+    
     private void OnValidate()
     {
         if (_playerManager == null)

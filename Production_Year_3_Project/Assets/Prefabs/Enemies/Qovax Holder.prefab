@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4395971687601065799}
   - component: {fileID: 4395971687601065804}
   - component: {fileID: 1695415332058508741}
-  - component: {fileID: 4395971687601065794}
+  - component: {fileID: 5600296455491009426}
   - component: {fileID: 4395971687601065800}
   - component: {fileID: 4395971687601065793}
   - component: {fileID: 4395971687601065792}
@@ -23,7 +23,10 @@ GameObject:
   - component: {fileID: 1695415332058508750}
   - component: {fileID: 1695415332058508737}
   - component: {fileID: 1695415332058508736}
-  m_Layer: 9
+  - component: {fileID: 7514718406992976221}
+  - component: {fileID: 2783436909935434233}
+  - component: {fileID: 4234912027724230736}
+  m_Layer: 10
   m_Name: Qovax Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,8 +95,11 @@ MonoBehaviour:
   damageable: {fileID: 4395971687601065793}
   effectable: {fileID: 1695415332058508740}
   effector: {fileID: 1695415332058508743}
-  statSheet: {fileID: 4395971687601065794}
-  boosts: []
+  statSheet: {fileID: 5600296455491009426}
+  boosts:
+  - BoostValue: 0.3
+    BoostDuration: 2
+    BoostType: 0
   _boundHandler:
     _bound:
       m_Center: {x: 2.35, y: 14.78, z: 0}
@@ -109,7 +115,8 @@ MonoBehaviour:
     type: 2}
   _animatorHandler:
     _animator: {fileID: 7812396649550523093}
-  _enemyStatSheet: {fileID: 4395971687601065794}
+  _droppedAbilityForPlayer: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496,
+    type: 2}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -117,6 +124,7 @@ MonoBehaviour:
       Range: 0
     _sensorTarget: {fileID: 11400000, guid: b6e8a161e89ce4e4cb6c3b0f73c2c383, type: 2}
     IsActive: 1
+  _deathAction: {fileID: 11400000, guid: 19b3704f2e453814681447148c60c0eb, type: 2}
   _nextWaypoint: 0
   _waypoints:
   - {fileID: 4395971688710028950}
@@ -150,6 +158,7 @@ MonoBehaviour:
     _sensorInfoType: 0
     IsActive: 0
     IsNearWall: 0
+  _randomMovementSO: {fileID: 11400000, guid: 31b6d5ff6b914774f930598b87e151b7, type: 2}
   _qovaxStateHandler: {fileID: 1695415332058508739}
   _combatHandler:
     _attacksWrapper:
@@ -157,7 +166,13 @@ MonoBehaviour:
       _attack: {fileID: 11400000, guid: 428b3195b2a54d14d99712c23dc1ee02, type: 2}
     _damageDealer: {fileID: 4395971687601065792}
     _damagable: {fileID: 4395971687601065793}
---- !u!114 &4395971687601065794
+  _evasionCooldownAction: {fileID: 11400000, guid: 3532226d5f1c0ef4385fcb0e8489ea09,
+    type: 2}
+  _chargeCooldownAction: {fileID: 11400000, guid: 6e6e352a3cc3dc244970214c775d2c0e,
+    type: 2}
+  _fatigueCooldownAction: {fileID: 11400000, guid: 8d547c5348c5169439fec8c3971254c1,
+    type: 2}
+--- !u!114 &5600296455491009426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,11 +181,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4395971687601065909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2830323c6146ab14d8af2afb972e4bda, type: 3}
+  m_Script: {fileID: 11500000, guid: 875917e68bf63744d914d6d7e0a8e74b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseMaxHp: 100
   invulnerabilityDuration: 0.3
+  decayingHealth:
+    onDecayingHealthChange:
+      m_PersistentCalls:
+        m_Calls: []
   baseSpeed: 1
   OnOverrideSpeed:
     m_PersistentCalls:
@@ -178,6 +197,7 @@ MonoBehaviour:
   OnResetSpeed:
     m_PersistentCalls:
       m_Calls: []
+  chargeSpeed: 10
 --- !u!114 &4395971687601065800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +278,12 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  OnTakeDmgGFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealGFX:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4395971687601065792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +359,9 @@ MonoBehaviour:
   _combatState: {fileID: 1695415332058508737}
   _deathState: {fileID: 1695415332058508736}
   _patrolState: {fileID: 1695415332058508750}
+  _evasionState: {fileID: 4234912027724230736}
+  _chargeState: {fileID: 2783436909935434233}
+  _fatigueState: {fileID: 7514718406992976221}
 --- !u!114 &1695415332058508738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +411,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b8ac31205f402f4ebf77cdf0e197b8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _qovaxStateHandler: {fileID: 1695415332058508739}
+--- !u!114 &7514718406992976221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4395971687601065909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c27ea5360daa63429c996e9f5433608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _qovaxStateHandler: {fileID: 1695415332058508739}
+--- !u!114 &2783436909935434233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4395971687601065909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1b191e7689d454ba28a6d47897ffd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _qovaxStateHandler: {fileID: 1695415332058508739}
+--- !u!114 &4234912027724230736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4395971687601065909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30813fe6a2477945af08bb25bdeafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _qovaxStateHandler: {fileID: 1695415332058508739}
@@ -516,7 +584,7 @@ GameObject:
   - component: {fileID: 4395971688025945119}
   - component: {fileID: 4395971688025945113}
   - component: {fileID: 4395971688025945112}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Damage Dealing Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

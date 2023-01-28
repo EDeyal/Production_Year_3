@@ -6,7 +6,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected float checkRadius;
     [SerializeField] protected LayerMask targetLayer;
 
-    public T[] GetTargetsInProximity()
+    public T[] GetTargetsInProximity()//without line of sight
     {
         Collider[] foundColliders = Physics.OverlapSphere(transform.position, checkRadius, targetLayer);
         List<T> foundObjects = new List<T>();
@@ -20,7 +20,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         }
         return foundObjects.ToArray();
     }
-    public T[] GetLegalTargets()
+    public T[] GetLegalTargets()//with line of sight
     {
         T[] targets = GetTargetsInProximity();
         if (targets.Length == 0)
@@ -41,7 +41,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         return legalTargets.ToArray();
     }
 
-    public T GetClosestLegalTarget()
+    public T GetClosestLegalTarget()//closest with line of sight
     {
         T[] legalTargets = GetLegalTargets();
         if (ReferenceEquals(legalTargets, null) || legalTargets.Length == 0)
@@ -57,7 +57,6 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
                 closestPoint = legalTargets[i];
             }
         }
-        Debug.Log(closestPoint.transform.parent.name);
         return closestPoint;
     }
 

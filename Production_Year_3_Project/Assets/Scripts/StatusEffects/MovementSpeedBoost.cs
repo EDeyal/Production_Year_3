@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CemuSpeedBoost : StatusEffect
+public class MovementSpeedBoost : StatusEffect
 {
     //get buff time from manager
     Coroutine activeBuffRoutine;
@@ -13,7 +13,7 @@ public class CemuSpeedBoost : StatusEffect
         {
             Debug.LogError("no speed boost given to " + host.name);
         }
-        Debug.Log("starting speed boost on " + host.name);
+        //Debug.Log("starting speed boost on " + host.name);
         host.StatSheet.OverrideSpeed(speedBosst.BoostValue);
         activeBuffRoutine = host.StartCoroutine(BuffDurationTimer());
     }
