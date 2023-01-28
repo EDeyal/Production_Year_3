@@ -48,4 +48,19 @@ public class PlayerAbilityHandler : MonoBehaviour
         ResetLastCastSpell();
     }
 
+
+    public void OnKillStealSpellEvent(Damageable target, DamageHandler dmg)
+    {
+        Ability droppedAbility = ((BaseEnemy)target.Owner).DroppedAbilityForPlayer;
+        if (droppedAbility == currentAbility)
+        {
+            return;
+        }
+
+        ParticleEvents particle =  GameManager.Instance.ObjectPoolsHandler.AbiltiyStealParticle.GetPooledObject();
+        particle.transform.position = target.transform.position;
+        particle.gameObject.SetActive(true);
+        EquipSpell(droppedAbility);
+
+    }
 }

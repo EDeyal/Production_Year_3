@@ -29,7 +29,7 @@ public class PlayerManager : BaseCharacter
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
         playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
         PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
-
+        DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
     }
 
     private void CachePlayerOnAbility(Ability givenAbility)

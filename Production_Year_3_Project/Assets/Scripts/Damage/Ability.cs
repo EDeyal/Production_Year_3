@@ -14,6 +14,7 @@ public class Ability : ScriptableObject
     public BaseCharacter Owner { get => owner; }
     public float CoolDown { get => coolDown; }
     public string AnimationTrigger { get => animationTrigger; }
+    public Sprite AbilityArtwork { get => abilityArtwork;}
 
     public void CahceOwner(BaseCharacter givenCharacter)
     {
