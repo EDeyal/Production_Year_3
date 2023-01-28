@@ -14,6 +14,7 @@ public class PlayerAbilityHandler : MonoBehaviour
     private Animator anim;
 
     public UnityEvent<Ability> OnEquipAbility;
+    public UnityEvent<Ability> OnCast;
 
     [SerializeField] Ability test;
 
@@ -31,6 +32,7 @@ public class PlayerAbilityHandler : MonoBehaviour
             return;
         }
         currentAbility.Cast();
+        OnCast?.Invoke(currentAbility);
         lastCastSpell = Time.time;
     }
 
