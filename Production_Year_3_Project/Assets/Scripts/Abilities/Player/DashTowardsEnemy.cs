@@ -40,6 +40,7 @@ public class DashTowardsEnemy : Ability
         Invulnerability buff = new Invulnerability();
         player.Effectable.ApplyStatusEffect(buff);
         player.PlayerController.AnimBlender.SetBool("SuperDash", true);
+        player.SwordVFX.PlayQuovaxDashParticle();
         while (counter < 1)
         {
             Vector3 positionLerp = Vector3.Lerp(startPos, dest, counter);
@@ -47,8 +48,9 @@ public class DashTowardsEnemy : Ability
             counter += Time.deltaTime * dashSpeed;
             yield return new WaitForEndOfFrame();
         }
-
+        player.SwordVFX.StopQuovaxDashParticle();
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
+        yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetGravity();
         player.PlayerController.ResetVelocity();
         player.PlayerController.CanMove = true;

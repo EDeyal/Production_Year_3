@@ -8,6 +8,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
     [SerializeField] private TestProximitySensor testProximitySensor;
     [SerializeField] private CCFlip playerFlipper;
+    [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
 
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
@@ -18,6 +19,7 @@ public class PlayerManager : BaseCharacter
     public TestProximitySensor TestProximitySensor { get => testProximitySensor; }
     public CCFlip PlayerFlipper { get => playerFlipper; }
     public Transform Gfx { get => gfx; }
+    public PlayerSwordVFX SwordVFX { get => swordVFX; }
 
     protected override void SetUp()
     {
