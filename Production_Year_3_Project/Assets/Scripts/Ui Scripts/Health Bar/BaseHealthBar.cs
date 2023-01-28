@@ -50,7 +50,6 @@ public class BaseHealthBar : MonoBehaviour
 
     public void AddMaxHp(float addedAmount, bool replenishHealth = false)
     {
-
         healthBar.maxValue = addedAmount;
         if (replenishHealth)
         {

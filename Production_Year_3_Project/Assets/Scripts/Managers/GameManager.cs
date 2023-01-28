@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] GameManagerHelper _gameManagerHelper;
     [SerializeField] InputManager _inputManager;
     [SerializeField] ObjectPoolHandler objectPoolsHandler;
+    [SerializeField] UIManager uiManager;
     #endregion
     #region Properties
     public SceneLoaderManager SceneManager => _sceneManager;
@@ -19,6 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
     public InputManager InputManager => _inputManager;
 
     public ObjectPoolHandler ObjectPoolsHandler { get => objectPoolsHandler; }
+    public UIManager UiManager { get => uiManager; }
     #endregion
 
     public override void Awake()
