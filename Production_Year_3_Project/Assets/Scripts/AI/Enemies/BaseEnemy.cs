@@ -53,7 +53,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             throw new System.Exception("BaseEnemy has no SensorTarget on player sensor");
         }
     }
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         BoundHandler.DrawBounds();
         if (!GameManager.Instance)

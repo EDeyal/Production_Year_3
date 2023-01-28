@@ -51,6 +51,7 @@ public class Boost
 
 }
 
+
 public enum BoostType
 {
     Speed,

@@ -123,8 +123,9 @@ public class QovaxEnemy : FlyingEnemy
         //Fatige Logic
         return CheckForCooldown(_fatigueCooldownAction, _actionCooldown);
     }
-    private void OnDrawGizmosSelected()
+    public override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
         ChasePlayerDistance.DrawGizmos(transform.position);
         NoticePlayerDistance.DrawGizmos(transform.position);
     }

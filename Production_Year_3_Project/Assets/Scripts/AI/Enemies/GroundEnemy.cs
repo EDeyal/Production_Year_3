@@ -35,7 +35,7 @@ public abstract class GroundEnemy : BaseEnemy
     }
     private void Start()
     {
-        _moveData = new MoveData(RB, Vector3.zero,EnemyStatSheet.Speed);
+        _moveData = new MoveData(RB, Vector3.zero, EnemyStatSheet.Speed);
     }
 
     public override void CheckValidation()
@@ -70,7 +70,7 @@ public abstract class GroundEnemy : BaseEnemy
             }
         }
         //wall Check
-        if (_rightWallSensorInfo.IsNearWall||_leftWallSensorInfo.IsNearWall)
+        if (_rightWallSensorInfo.IsNearWall || _leftWallSensorInfo.IsNearWall)
         {
             moveToNextPoint = true;
         }
@@ -81,7 +81,7 @@ public abstract class GroundEnemy : BaseEnemy
             IsMovingToNextPoint();
         }
         var direction = ZERO;
-        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE :MINUS_ONE;
+        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE : MINUS_ONE;
 
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
@@ -94,7 +94,7 @@ public abstract class GroundEnemy : BaseEnemy
     public virtual void Chase()
     {
         //find player and determin his direction
-        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.transform.position);
+        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
@@ -106,5 +106,9 @@ public abstract class GroundEnemy : BaseEnemy
             _nextWaypoint = 0;
         }
         return true;
+    }
+    public override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
     }
 }
