@@ -7,6 +7,7 @@ public class DashTowardsEnemy : Ability
 {
     [SerializeField] private float dashSpeed;
     [SerializeField] private Attack dashEndAbility;
+    [SerializeField, Range(0f, 0.1f)] private float dashApex;
     private PlayerManager player => Owner as PlayerManager;
     public override void Cast()
     {
@@ -30,6 +31,8 @@ public class DashTowardsEnemy : Ability
         {
             player.PlayerFlipper.FlipLeft();
         }
+
+
         player.PlayerController.ResetGravity();
         player.PlayerController.ResetVelocity();
         player.PlayerController.CanMove = false;
@@ -46,6 +49,7 @@ public class DashTowardsEnemy : Ability
             counter += Time.deltaTime * dashSpeed;
             yield return new WaitForEndOfFrame();
         }
+
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
         player.PlayerController.ResetGravity();
         player.PlayerController.ResetVelocity();

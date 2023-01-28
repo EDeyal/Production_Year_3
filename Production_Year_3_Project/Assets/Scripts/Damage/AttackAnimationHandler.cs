@@ -77,11 +77,11 @@ public class AttackAnimationHandler : MonoBehaviour
     }
 
     private void SpawnSwordSlashVfx()
-    {
+    {/*
         SwordSlash slash = swordSlashOP.GetPooledObject();
         slash.gameObject.SetActive(true);
         slash.transform.position = vfxSpawnPoint.position;
-        slash.Effect.Play();
+        slash.Effect.Play();*/
     }
 
     //call this from a specific frame in the animation, if the anim doesnt reach this frame the attack wont trigger
