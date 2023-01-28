@@ -1658,7 +1658,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567258442153098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.30364, y: -2.1358979, z: 0.011199671}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2811,7 +2811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.000057794146, y: 0.00011382702, z: -0.0008359819, w: 0.99999964}
-  m_LocalPosition: {x: -50.305008, y: 3.5774612, z: -22}
+  m_LocalPosition: {x: -0.005010605, y: 1.35746, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4000,7 +4000,7 @@ MonoBehaviour:
   effector: {fileID: 146567259415107157}
   statSheet: {fileID: 146567259415107156}
   boosts:
-  - BoostValue: 15
+  - BoostValue: 20
     BoostDuration: 5
     BoostType: 0
   playerController: {fileID: 146567259415107161}
@@ -4137,7 +4137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd91e2f73e32084082a4e6481eca278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHp: 10
+  baseMaxHp: 50
   invulnerabilityDuration: 0.1
   decayingHealth:
     onDecayingHealthChange:
@@ -4200,7 +4200,7 @@ MonoBehaviour:
   OnEquipAbility:
     m_PersistentCalls:
       m_Calls: []
-  test: {fileID: 11400000, guid: bfabcac723921df4abab4209014f1b73, type: 2}
+  test: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496, type: 2}
 --- !u!114 &146567259415107162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5981,8 +5981,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.92
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.99508286
+  m_Center: {x: 0, y: 0.4523201, z: 0}
 --- !u!1 &989864718966217928
 GameObject:
   m_ObjectHideFlags: 0
@@ -6090,8 +6090,8 @@ ParticleSystemForceField:
   m_Enabled: 1
   m_Parameters:
     m_Shape: 0
-    m_StartRange: 1.19
-    m_EndRange: 10
+    m_StartRange: 1
+    m_EndRange: 15
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -6416,7 +6416,7 @@ ParticleSystemForceField:
     m_DragCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6470,7 +6470,7 @@ ParticleSystemForceField:
     m_VectorFieldSpeedCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.43
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6523,7 +6523,7 @@ ParticleSystemForceField:
     m_VectorFieldAttractionCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.96
       minScalar: 0
       maxCurve:
         serializedVersion: 2
