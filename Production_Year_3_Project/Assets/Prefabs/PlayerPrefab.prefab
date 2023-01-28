@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 146567258442153096}
-  minHeight: -0.1
+  minHeight: 0.05
 --- !u!1 &146567258467212142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,7 +2811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.000057794146, y: 0.00011382702, z: -0.0008359819, w: 0.99999964}
-  m_LocalPosition: {x: -0.005010605, y: 1.3574612, z: -22}
+  m_LocalPosition: {x: -0.005010513, y: 1.3574612, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4140,7 +4140,10 @@ MonoBehaviour:
   baseMaxHp: 50
   invulnerabilityDuration: 0.1
   decayingHealth:
-    onDecayingHealthChange:
+    onDecayingHealthReduce:
+      m_PersistentCalls:
+        m_Calls: []
+    onDecayingHealthGain:
       m_PersistentCalls:
         m_Calls: []
   baseSpeed: 8
