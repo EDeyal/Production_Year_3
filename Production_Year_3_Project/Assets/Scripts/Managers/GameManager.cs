@@ -11,6 +11,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] InputManager _inputManager;
     [SerializeField] ObjectPoolHandler objectPoolsHandler;
     [SerializeField] UIManager uiManager;
+    [SerializeField] CameraMovement cam;
     #endregion
     #region Properties
     public SceneLoaderManager SceneManager => _sceneManager;
@@ -21,6 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public ObjectPoolHandler ObjectPoolsHandler { get => objectPoolsHandler; }
     public UIManager UiManager { get => uiManager; }
+    public CameraMovement Cam { get => cam;}
     #endregion
 
     public override void Awake()
@@ -36,8 +38,12 @@ public class GameManager : MonoSingleton<GameManager>
             _playerManager = _gameManagerHelper.GetPlayerManager;
         }
     }
-    public void GetObjectPoolsHandler(ObjectPoolHandler givenHandler)
+    public void CacheObjectPoolsHandler(ObjectPoolHandler givenHandler)
     {
         objectPoolsHandler = givenHandler;
+    }
+    public void CacheCam(CameraMovement givenCam)
+    {
+        cam = givenCam;
     }
 }

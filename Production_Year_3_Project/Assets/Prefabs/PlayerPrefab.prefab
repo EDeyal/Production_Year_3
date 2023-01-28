@@ -1718,6 +1718,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 146567258442153096}
   minHeight: 0.05
+  amplitude: 2
+  frequency: 2
+  shakeDuration: 0.2
 --- !u!1 &146567258467212142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,7 +2814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.000057794146, y: 0.00011382702, z: -0.0008359819, w: 0.99999964}
-  m_LocalPosition: {x: -0.005010513, y: 1.3574612, z: -22}
+  m_LocalPosition: {x: -0.005010605, y: 1.35746, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4203,6 +4206,9 @@ MonoBehaviour:
   OnEquipAbility:
     m_PersistentCalls:
       m_Calls: []
+  OnCast:
+    m_PersistentCalls:
+      m_Calls: []
   test: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496, type: 2}
 --- !u!114 &146567259415107162
 MonoBehaviour:
@@ -4331,6 +4337,7 @@ GameObject:
   - component: {fileID: 146567259421296266}
   - component: {fileID: 146567259421296264}
   - component: {fileID: 146567259421296267}
+  - component: {fileID: 125921081}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -4408,6 +4415,23 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &125921081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146567259421296269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &146567259441389040
 GameObject:
   m_ObjectHideFlags: 0
