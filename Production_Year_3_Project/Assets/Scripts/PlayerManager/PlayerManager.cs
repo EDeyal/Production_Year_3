@@ -46,6 +46,9 @@ public class PlayerManager : BaseCharacter
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
         Damageable.OnTakeDamage.AddListener(UpdateHpbarTakeDmg);
         Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
+        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbarHeal);
+        //PlayerAbilityHandler.OnEquipAbility.AddListener()
     }
 
     private void UpdateHpbarTakeDmg(DamageHandler givenDmg)
@@ -55,5 +58,14 @@ public class PlayerManager : BaseCharacter
     private void UpdateHpbarHeal(DamageHandler givenDmg)
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDmg.GetFinalMult(), true);
+    }
+
+    private void UpdateDecayinHpbarTakeDmg(float amount)
+    {
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.ReduceHp(amount, true);
+    }
+    private void UpdateDecayinHpbarHeal(float amount)
+    {
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, true);
     }
 }

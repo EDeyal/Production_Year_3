@@ -8,7 +8,8 @@ public class DecayingHealth
 {
     private float currentDecayingHealth;
     private Coroutine activeDecayingRoutine;
-    public UnityEvent onDecayingHealthChange;
+    public UnityEvent<float> onDecayingHealthReduce;
+    public UnityEvent<float> onDecayingHealthGain;
     private float currentPossibleMax;
 
     public float CurrentDecayingHealth { get => currentDecayingHealth; set => currentDecayingHealth = value; }
@@ -21,7 +22,7 @@ public class DecayingHealth
     public void AddDecayingHealth(float amount)
     {
         currentDecayingHealth += amount;
-        onDecayingHealthChange?.Invoke();
+        onDecayingHealthGain?.Invoke(amount);
         ClampHealth();
         if (!ReferenceEquals(activeDecayingRoutine, null))
         {
@@ -40,7 +41,7 @@ public class DecayingHealth
         while (currentDecayingHealth > 0)
         {
             currentDecayingHealth -= 10;
-            onDecayingHealthChange?.Invoke();
+            onDecayingHealthReduce?.Invoke(10f);
             ClampHealth();
             yield return new WaitForSecondsRealtime(1f);
         }

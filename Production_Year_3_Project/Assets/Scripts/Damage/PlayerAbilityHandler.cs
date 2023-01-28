@@ -32,8 +32,6 @@ public class PlayerAbilityHandler : MonoBehaviour
         }
         currentAbility.Cast();
         lastCastSpell = Time.time;
-        //  anim.SetTrigger(currentAbility.AnimationTrigger);
-
     }
 
     private void ResetLastCastSpell()
