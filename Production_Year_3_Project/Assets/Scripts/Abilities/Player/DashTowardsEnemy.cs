@@ -31,6 +31,10 @@ public class DashTowardsEnemy : Ability
         {
             player.PlayerFlipper.FlipLeft();
         }
+
+        Vector3 playerRot = player.Gfx.transform.eulerAngles;
+        player.Gfx.LookAt(dest);
+        player.Gfx.eulerAngles = new Vector3(player.Gfx.eulerAngles.x, playerRot.y, playerRot.z);
         player.PlayerController.ResetGravity();
         player.PlayerController.ResetVelocity();
         player.PlayerController.CanMove = false;
@@ -49,6 +53,7 @@ public class DashTowardsEnemy : Ability
             yield return new WaitForEndOfFrame();
         }
         player.SwordVFX.StopQuovaxDashParticle();
+        player.Gfx.eulerAngles = playerRot;
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
         yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetGravity();
