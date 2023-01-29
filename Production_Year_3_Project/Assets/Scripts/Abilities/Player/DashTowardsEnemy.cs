@@ -22,6 +22,12 @@ public class DashTowardsEnemy : Ability
         {
             yield break;
         }
+
+        player.PlayerController.ResetGravity();
+        player.PlayerController.ResetVelocity();
+        player.PlayerController.CanMove = false;
+        player.PlayerAbilityHandler.CanCast = false;
+       
         Vector3 dest = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0);
         if (dest.x > player.transform.position.x)
         {
@@ -35,10 +41,7 @@ public class DashTowardsEnemy : Ability
         Vector3 playerRot = player.Gfx.transform.eulerAngles;
         player.Gfx.LookAt(dest);
         player.Gfx.eulerAngles = new Vector3(player.Gfx.eulerAngles.x, playerRot.y, playerRot.z);
-        player.PlayerController.ResetGravity();
-        player.PlayerController.ResetVelocity();
-        player.PlayerController.CanMove = false;
-        player.PlayerAbilityHandler.CanCast = false;
+
         Vector3 startPos = player.transform.position;
         float counter = 0;
         Invulnerability buff = new Invulnerability();
