@@ -55,8 +55,9 @@ public class CemuEnemy : GroundEnemy
         _isBoostActive = false;
         return false;
     }
-    private void OnDrawGizmosSelected()
+    public override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
         ChasePlayerDistance.DrawGizmos(transform.position);
         NoticePlayerDistance.DrawGizmos(transform.position);
     }

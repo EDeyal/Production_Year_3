@@ -123,7 +123,7 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         Vector2 position = new Vector2(transform.position.x, transform.position.y);
         Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
-        var direction = GetNormilizedDirectionToTarget(position,target);
+        var direction = GetNormilizedDirectionToTarget(position, target);
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
@@ -141,7 +141,7 @@ public abstract class FlyingEnemy : BaseEnemy
     public virtual void MoveTo(Vector3 target, float speedMultiplyer = 1)
     {
         Vector3 direction = GetNormilizedDirectionToTarget(transform.position, target);
-        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed* speedMultiplyer);
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed * speedMultiplyer);
         _moveAction.InitAction(_moveData);
     }
     public virtual void RandomMovement()
@@ -177,7 +177,7 @@ public abstract class FlyingEnemy : BaseEnemy
             GetNewRandomPoint();
         }
     }
-    protected int CheckNewPointValidDirection(bool isTouchingPositiveWall,bool isTouchingNegativeWall,int currentNum)
+    protected int CheckNewPointValidDirection(bool isTouchingPositiveWall, bool isTouchingNegativeWall, int currentNum)
     {
         if (isTouchingPositiveWall && isTouchingNegativeWall)
         {
@@ -204,7 +204,7 @@ public abstract class FlyingEnemy : BaseEnemy
         y = CheckNewPointValidDirection(_ceilingSensorInfo.IsNearWall, _groundSensorInfo.IsNearWall, y);
         var direction = new Vector2(x, y);
         direction.Normalize();
-        var length = Random.Range(_randomMovementSO.RandomLength.x,_randomMovementSO.RandomLength.y);
+        var length = Random.Range(_randomMovementSO.RandomLength.x, _randomMovementSO.RandomLength.y);
         direction = direction * length;
         _randomPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, ZERO);
     }
@@ -216,5 +216,10 @@ public abstract class FlyingEnemy : BaseEnemy
             _nextWaypoint = 0;
         }
         return true;
+    }
+
+    public override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
     }
 }
