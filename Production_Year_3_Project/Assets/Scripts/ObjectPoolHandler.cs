@@ -8,7 +8,7 @@ public class ObjectPoolHandler : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.GetObjectPoolsHandler(this);
+        GameManager.Instance.CacheObjectPoolsHandler(this);
     }
     public AbilityStealParticleObjectPool AbiltiyStealParticle { get => abiltiyStealParticle; }
     public SwordSlashObjectPooler SwordSlashVFX { get => swordSlashVFX; }

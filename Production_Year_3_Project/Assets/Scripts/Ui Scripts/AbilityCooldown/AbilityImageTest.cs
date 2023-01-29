@@ -14,17 +14,6 @@ public class AbilityImageTest : MonoBehaviour
     [SerializeField] Sprite abilityThree;
     [SerializeField] Ability shownAbility;
     [SerializeField] Image currentImage;
-    [Button("CooldownTest")]
-    void Play()
-    {
-        UseAbility();
-    }
-    [Button("AssignAbility")]
-    void AssignAbility()
-    {
-
-        RecievingNewAbility(shownAbility);
-    }
 #endif
     Coroutine activeRoutine;
     [SerializeField] Slider cooldown;
@@ -43,7 +32,6 @@ public class AbilityImageTest : MonoBehaviour
 
     IEnumerator CoolDown()
     {
-
         while (cooldown.value > 0)//cooldown seconds
         {
             cooldown.value -= Time.deltaTime;
@@ -54,13 +42,10 @@ public class AbilityImageTest : MonoBehaviour
     public void RecievingNewAbility(Ability abilitySO)
     {
         SetValueForCooldown(abilitySO.CoolDown);
-        // setting sprite
+        currentImage.sprite = abilitySO.AbilityArtwork;
         ResetAbilityCooldown();
-
-
-
     }
-    public void UseAbility()
+    public void UseAbility(Ability abilitySO)
     {
         
         if (!ReferenceEquals(activeRoutine,null))

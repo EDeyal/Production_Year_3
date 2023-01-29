@@ -128,6 +128,7 @@ public class Damageable : MonoBehaviour
     {
         float currentDecayingHealth = owner.StatSheet.DecayingHealth.CurrentDecayingHealth;
         owner.StatSheet.DecayingHealth.CurrentDecayingHealth -= finalDamage;
+        owner.StatSheet.DecayingHealth.onDecayingHealthReduce?.Invoke(finalDamage);
         owner.StatSheet.DecayingHealth.ClampHealth();
         finalDamage -= currentDecayingHealth;
         return finalDamage;

@@ -8,6 +8,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
     [SerializeField] private TestProximitySensor testProximitySensor;
     [SerializeField] private CCFlip playerFlipper;
+    [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
 
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
@@ -18,6 +19,7 @@ public class PlayerManager : BaseCharacter
     public TestProximitySensor TestProximitySensor { get => testProximitySensor; }
     public CCFlip PlayerFlipper { get => playerFlipper; }
     public Transform Gfx { get => gfx; }
+    public PlayerSwordVFX SwordVFX { get => swordVFX; }
 
     protected override void SetUp()
     {
@@ -46,6 +48,10 @@ public class PlayerManager : BaseCharacter
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
         Damageable.OnTakeDamage.AddListener(UpdateHpbarTakeDmg);
         Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
+        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbarHeal);
+        PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
+        playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
     private void UpdateHpbarTakeDmg(DamageHandler givenDmg)
@@ -55,5 +61,18 @@ public class PlayerManager : BaseCharacter
     private void UpdateHpbarHeal(DamageHandler givenDmg)
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDmg.GetFinalMult(), true);
+    }
+
+    private void UpdateDecayinHpbarTakeDmg(float amount)
+    {
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.ReduceHp(amount, true);
+    }
+    private void UpdateDecayinHpbarHeal(float amount)
+    {
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, true);
+    }
+    private void UpdateAbilityUi(Ability givenAbility)
+    {
+        GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
     }
 }
