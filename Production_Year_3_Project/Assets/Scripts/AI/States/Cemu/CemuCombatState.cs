@@ -16,13 +16,6 @@ public class CemuCombatState : BaseCemuState
             return _cemuStateHandler.IdleState;
         }
 
-        if (cemu.IsBoostActive)
-        {
-            return _cemuStateHandler.ChaseState;
-        }
-        else
-        {
-            return _cemuStateHandler.BoostState;
-        }
+        return _cemuStateHandler.ChaseState;
     }
 }

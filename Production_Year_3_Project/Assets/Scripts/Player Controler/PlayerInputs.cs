@@ -218,6 +218,45 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""0d62bb39-2999-4948-8f42-5dc45e14e809"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""e741b71e-097c-40d5-b675-6c2f16ad7309"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""097b41dd-5277-4331-9dfb-e87446873c4c"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1043fde1-e94a-4bbc-9a2d-4265b7d5d2bf"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -229,6 +268,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_BasicAttack = m_BasicActions.FindAction("BasicAttack", throwIfNotFound: true);
         m_BasicActions_SpellAttack = m_BasicActions.FindAction("SpellAttack", throwIfNotFound: true);
         m_BasicActions_Dash = m_BasicActions.FindAction("Dash", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -349,6 +391,39 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         }
     }
     public BasicActionsActions @BasicActions => new BasicActionsActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_MoveDown;
+    public struct CameraActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public CameraActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveDown => m_Wrapper.m_Camera_MoveDown;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            {
+                @MoveDown.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
+                @MoveDown.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
+                @MoveDown.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
+            }
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveDown.started += instance.OnMoveDown;
+                @MoveDown.performed += instance.OnMoveDown;
+                @MoveDown.canceled += instance.OnMoveDown;
+            }
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IBasicActionsActions
     {
         void OnJump(InputAction.CallbackContext context);
@@ -356,5 +431,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnBasicAttack(InputAction.CallbackContext context);
         void OnSpellAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnMoveDown(InputAction.CallbackContext context);
     }
 }

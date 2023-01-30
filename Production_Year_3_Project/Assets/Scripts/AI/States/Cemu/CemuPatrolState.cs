@@ -3,17 +3,16 @@ public class CemuPatrolState : BaseCemuState
 
     public override BaseState RunCurrentState()
     {
-        var enemyRef = _cemuStateHandler.RefEnemy;
         //Debug.Log("Cemu Patrol State");
-        if (enemyRef.NoticePlayerDistance.InitAction(new DistanceData(_cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position)))
+        if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(_cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position)))
         {
-            if (enemyRef.HasDirectLineToPlayer(enemyRef.NoticePlayerDistance.Distance))
+            if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))
             {
-                ((GroundEnemy)enemyRef).StopMovement();
+                _cemu.StopMovement();
                 return _cemuStateHandler.CombatState;
             }
         }
-        ((GroundEnemy)enemyRef).Patrol();
+        _cemu.Patrol();
         return this;
     }
     public override void EnterState()

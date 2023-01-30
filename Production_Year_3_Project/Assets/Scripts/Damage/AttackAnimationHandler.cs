@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
 public class AttackAnimationHandler : MonoBehaviour
 {
     private float lastAttacked;
@@ -14,11 +16,15 @@ public class AttackAnimationHandler : MonoBehaviour
     [SerializeField] private Attack meleeAttack;
     [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
-    [SerializeField] private string animTriggerRun;
-    [SerializeField] private AnimationClip attackAnimation;
     [SerializeField] private Animator anim;
     [SerializeField] private Transform vfxSpawnPoint;
     [SerializeField] private SwordSlashObjectPooler swordSlashOP;
+
+    [SerializeField] private float attackRadius;
+    [SerializeField] private Transform rightAttackPos;
+    [SerializeField] private Transform leftAttackPos;
+    [SerializeField] private LayerMask enemyHitLayer;
+
     public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
     public Attack MeleeAttack { get => meleeAttack; }
 
@@ -67,15 +73,48 @@ public class AttackAnimationHandler : MonoBehaviour
     }
     public void AttackFinishedTrue()
     {
-        Debug.Log("Attack finished");
         attackFinished = true;
     }
 
     private void SpawnSwordSlashVfx()
-    {
+    {/*
         SwordSlash slash = swordSlashOP.GetPooledObject();
         slash.gameObject.SetActive(true);
         slash.transform.position = vfxSpawnPoint.position;
-        slash.Effect.Play();
+        slash.Effect.Play();*/
+    }
+
+    //call this from a specific frame in the animation, if the anim doesnt reach this frame the attack wont trigger
+    public void MeleeAttackEvent()
+    {
+        Transform attackPos;
+        if (GameManager.Instance.PlayerManager.PlayerController.facingRight)
+        {
+            attackPos = rightAttackPos;
+        }
+        else
+        {
+            attackPos = leftAttackPos;
+        }
+        Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, enemyHitLayer);
+        List<BaseEnemy> enemiesFound = new List<BaseEnemy>();
+        foreach (var item in collidersFound)
+        {
+            BaseEnemy enemy = item.GetComponent<BaseEnemy>();
+            if (!ReferenceEquals(enemy,null))
+            {
+                enemiesFound.Add(enemy);
+            }
+        }
+        foreach (var item in enemiesFound)
+        {
+            item.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(rightAttackPos.position, attackRadius);
+        Gizmos.DrawWireSphere(leftAttackPos.position, attackRadius);
     }
 }

@@ -8,8 +8,6 @@ public abstract class GroundEnemy : BaseEnemy
     [SerializeField] BaseAction<MoveData> _moveAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
-    [SerializeField] BaseAction<ActionCooldownData> _deathAction;
-    ActionCooldown _deathCooldown;
     [SerializeField] GroundSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
@@ -20,7 +18,6 @@ public abstract class GroundEnemy : BaseEnemy
     public override void Awake()
     {
         base.Awake();
-        _deathCooldown = new ActionCooldown();
     }
     private void OnEnable()
     {
@@ -38,7 +35,7 @@ public abstract class GroundEnemy : BaseEnemy
     }
     private void Start()
     {
-        _moveData = new MoveData(RB, Vector3.zero,EnemyStatSheet.Speed);
+        _moveData = new MoveData(RB, Vector3.zero, EnemyStatSheet.Speed);
     }
 
     public override void CheckValidation()
@@ -73,7 +70,7 @@ public abstract class GroundEnemy : BaseEnemy
             }
         }
         //wall Check
-        if (_rightWallSensorInfo.IsNearWall||_leftWallSensorInfo.IsNearWall)
+        if (_rightWallSensorInfo.IsNearWall || _leftWallSensorInfo.IsNearWall)
         {
             moveToNextPoint = true;
         }
@@ -84,7 +81,7 @@ public abstract class GroundEnemy : BaseEnemy
             IsMovingToNextPoint();
         }
         var direction = ZERO;
-        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE :MINUS_ONE;
+        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE : MINUS_ONE;
 
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
@@ -97,7 +94,7 @@ public abstract class GroundEnemy : BaseEnemy
     public virtual void Chase()
     {
         //find player and determin his direction
-        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position,GameManager.Instance.PlayerManager.transform.position);
+        var direction = GeneralFunctions.GetXDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
@@ -110,14 +107,8 @@ public abstract class GroundEnemy : BaseEnemy
         }
         return true;
     }
-    public override void OnDeath()
+    public override void OnDrawGizmosSelected()
     {
-        //can add logic until destroyed cooldown is completed
-        if (_deathAction.InitAction(new ActionCooldownData(ref _deathCooldown)))
-        {
-            //can add logic to frame of death
-            transform.gameObject.SetActive(false);
-            //Destroy(this);
-        }
+        base.OnDrawGizmosSelected();
     }
 }

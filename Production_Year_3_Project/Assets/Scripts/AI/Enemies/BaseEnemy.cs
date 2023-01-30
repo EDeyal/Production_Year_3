@@ -13,10 +13,15 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] CheckDistanceAction _noticePlayerDistance;
     [SerializeField] CheckDistanceAction _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
-    [SerializeField] EnemyStatSheet _enemyStatSheet;
+    [SerializeField] Ability _droppedAbilityForPlayer;
 
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
+
+    [SerializeField] BaseAction<ActionCooldownData> _deathAction;
+    ActionCooldown _deathCooldown;
+
+
     #endregion
 
     #region Properties
@@ -25,8 +30,9 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public CheckDistanceAction NoticePlayerDistance => _noticePlayerDistance;
     public CheckDistanceAction ChasePlayerDistance => _chasePlayerDistance;
     public AnimatorHandler AnimatorHandler => _animatorHandler;
-    public EnemyStatSheet EnemyStatSheet => _enemyStatSheet;
+    public EnemyStatSheet EnemyStatSheet => StatSheet as EnemyStatSheet;
     public BoundHandler BoundHandler => _boundHandler;
+    public Ability DroppedAbilityForPlayer => _droppedAbilityForPlayer;
     #endregion
     private void OnValidate()
     {
@@ -36,6 +42,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     {
         base.Awake();
         StatSheet.InitializeStats();
+        _deathCooldown = new ActionCooldown();
     }
     public virtual void CheckValidation()
     {
@@ -46,7 +53,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             throw new System.Exception("BaseEnemy has no SensorTarget on player sensor");
         }
     }
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         BoundHandler.DrawBounds();
         if (!GameManager.Instance)
@@ -65,5 +72,23 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         }
         return false;
     }
-    public abstract void OnDeath();
+    public virtual bool CheckForCooldown(BaseAction<ActionCooldownData> action, ActionCooldown cooldown)
+    {
+        if (WaitAction(action, ref cooldown))
+        {
+            return true;
+        }
+        return false;
+    }
+    public virtual void OnDeath()
+    {
+        //can add logic until destroyed cooldown is completed
+        if (_deathAction.InitAction(new ActionCooldownData(ref _deathCooldown)))
+        {
+            //can add logic to frame of death
+            transform.gameObject.SetActive(false);
+            //Destroy(this);
+        }
+    }
+
 }

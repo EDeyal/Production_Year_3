@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5362763116364010858}
   - component: {fileID: 5362763116364010869}
   - component: {fileID: 2994988240799571270}
+  - component: {fileID: -6061898564584635431}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -54,6 +55,8 @@ MonoBehaviour:
   _saveManager: {fileID: 5362763116364010868}
   _gameManagerHelper: {fileID: 0}
   _inputManager: {fileID: 2994988240799571270}
+  objectPoolsHandler: {fileID: 0}
+  uiManager: {fileID: -6061898564584635431}
 --- !u!114 &5362763116364010868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,3 +108,40 @@ MonoBehaviour:
   OnJumpDown:
     m_PersistentCalls:
       m_Calls: []
+  OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJumpUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDashDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBasicAttackDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBasicAttackUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpellCast:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookDownDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLookDownUp:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-6061898564584635431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362763116364010862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1f9e352e80b004ba29d28c7c3046e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHud: {fileID: 0}

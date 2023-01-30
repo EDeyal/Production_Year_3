@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
 
     public UnityEvent OnSpellCast;
 
+    public UnityEvent OnLookDownDown;
+    public UnityEvent OnLookDownUp;
 
     private void Start()
     {
@@ -33,6 +35,17 @@ public class InputManager : MonoBehaviour
         input.BasicActions.BasicAttack.started += InvokeOnBasicAttackDown;
         input.BasicActions.BasicAttack.canceled += InvokeOnBasicAttackUp;
         input.BasicActions.SpellAttack.started += InvokeOnSpellCast;
+        input.Camera.MoveDown.started += InvokeOnLookDown;
+        input.Camera.MoveDown.canceled += InvokeOnLookDownUp;
+    }
+
+    public void InvokeOnLookDown(InputAction.CallbackContext obj)
+    {
+        OnLookDownDown?.Invoke();
+    }
+    public void InvokeOnLookDownUp(InputAction.CallbackContext obj)
+    {
+        OnLookDownUp?.Invoke();
     }
     public void InvokeOnSpellCast(InputAction.CallbackContext obj)
     {

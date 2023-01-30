@@ -7,7 +7,7 @@ public class CemuEnemy : GroundEnemy
     ActionCooldown _beforeBoostCooldown;
     [SerializeField] BaseAction<ActionCooldownData> _boostCooldownAction;
     [SerializeField] CombatHandler _combatHandler;
-
+    [SerializeField] Ability _cemuAbility;
     public bool IsBoostActive => _isBoostActive;
     public override void Awake()
     {
@@ -35,7 +35,7 @@ public class CemuEnemy : GroundEnemy
     }
     private void RemoveBuffActivation(StatusEffect boost)
     {
-        if (boost is CemuSpeedBoost)
+        if (boost is MovementSpeedBoost)
         {
             _isBoostActive = false;
             _cemuStateHandler.CurrentState.UpdateState();
@@ -48,21 +48,25 @@ public class CemuEnemy : GroundEnemy
             if (!_isBoostActive)
             {
                 _isBoostActive = true;
-                Effectable.ApplyStatusEffect(new CemuSpeedBoost(), Effector);
+                _cemuAbility.Cast(this);
             }
-            //add status effect for decaying health
             return true;
         }
         _isBoostActive = false;
         return false;
     }
-    private void OnDrawGizmosSelected()
+    public override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
         ChasePlayerDistance.DrawGizmos(transform.position);
         NoticePlayerDistance.DrawGizmos(transform.position);
     }
     private void OnDestroy()
     {
         Effectable.OnStatusEffectRemoved.RemoveListener(RemoveBuffActivation);
+    }
+    public override void OnDeath()
+    {
+        base.OnDeath();
     }
 }
