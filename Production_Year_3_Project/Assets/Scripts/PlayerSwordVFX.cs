@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerSwordVFX : MonoBehaviour
 {
     [SerializeField] private ParticleSystem quovaxDashParticle;
-
     public void PlayQuovaxDashParticle()
     {
         quovaxDashParticle.gameObject.SetActive(true);
