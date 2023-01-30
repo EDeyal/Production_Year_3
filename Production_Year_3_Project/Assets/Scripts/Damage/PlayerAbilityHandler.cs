@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,8 +7,11 @@ public class PlayerAbilityHandler : MonoBehaviour
     private Ability currentAbility;
 
     private bool canCast;
+
+    private float currentRemainingCooldDown;
     public Ability CurrentAbility { get => currentAbility; }
     public bool CanCast { get => canCast; set => canCast = value; }
+    public float CurrentRemainingCooldDown { get => currentRemainingCooldDown; }
 
     private float lastCastSpell;
 
@@ -27,12 +31,14 @@ public class PlayerAbilityHandler : MonoBehaviour
     }
     public virtual void CastAbility()
     {
-        if (!canCast ||lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
+        if (!canCast || lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
         {
             return;
         }
+        currentRemainingCooldDown = currentAbility.CoolDown;
         currentAbility.Cast();
         OnCast?.Invoke(currentAbility);
+        StartCoroutine(CountDownCoolDoown());
         lastCastSpell = Time.time;
     }
 
@@ -52,11 +58,18 @@ public class PlayerAbilityHandler : MonoBehaviour
     public void OnKillStealSpellEvent(Damageable target, DamageHandler dmg)
     {
         Ability droppedAbility = ((BaseEnemy)target.Owner).DroppedAbilityForPlayer;
-        
-        ParticleEvents particle =  GameManager.Instance.ObjectPoolsHandler.AbiltiyStealParticle.GetPooledObject();
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.AbiltiyStealParticle.GetPooledObject();
         particle.transform.position = target.transform.position;
         particle.gameObject.SetActive(true);
         EquipSpell(droppedAbility);
+    }
 
+    private IEnumerator CountDownCoolDoown()
+    {
+        while (currentRemainingCooldDown > 0)
+        {
+            currentRemainingCooldDown -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
