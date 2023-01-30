@@ -3,7 +3,7 @@ public class QovaxIdleState : BaseQovaxState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("Qovax Idle State");
+        //Debug.Log("Qovax Idle State");
         //if in notice range
         if (_qovax.NoticePlayerDistance.InitAction(new DistanceData(
             _qovaxStateHandler.transform.position, _qovaxStateHandler.PlayerManager.transform.position)))

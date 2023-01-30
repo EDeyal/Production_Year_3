@@ -108,6 +108,7 @@ MonoBehaviour:
     _boundCenterOffset: {x: -5.6, y: -0.29, z: 0}
     _boundColor: {r: 0.5238649, g: 0.07778566, b: 0.8679245, a: 1}
   _rb: {fileID: 4395971687601065804}
+  _enemyVisualHolder: {fileID: 4395971687630108072}
   _sensorHandler: {fileID: 4395971687601065800}
   _noticePlayerDistance: {fileID: 11400000, guid: 5907683beccaebf439bc84f53b6771ed,
     type: 2}
@@ -187,7 +188,10 @@ MonoBehaviour:
   baseMaxHp: 100
   invulnerabilityDuration: 0.3
   decayingHealth:
-    onDecayingHealthChange:
+    onDecayingHealthReduce:
+      m_PersistentCalls:
+        m_Calls: []
+    onDecayingHealthGain:
       m_PersistentCalls:
         m_Calls: []
   baseSpeed: 1

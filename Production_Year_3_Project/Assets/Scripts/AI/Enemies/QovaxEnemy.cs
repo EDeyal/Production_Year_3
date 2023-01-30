@@ -60,7 +60,7 @@ public class QovaxEnemy : FlyingEnemy
         if (_chargePoint == Vector3.zero)//is not set
         {
             //find player location
-            Debug.Log("Assigning New Point");
+            //Debug.Log("Assigning New Point");
             _chargePoint = GameManager.Instance.PlayerManager.transform.position;
         }
         if (_isCharging)
@@ -90,7 +90,7 @@ public class QovaxEnemy : FlyingEnemy
 
         if (CheckWalls())
         {
-            Debug.Log("Hit walls, Returning");
+            //Debug.Log("Hit walls, Returning");
             //incase reached Walls you stop
             ResetCharge();
             return true;
@@ -98,7 +98,7 @@ public class QovaxEnemy : FlyingEnemy
 
         if (CheckWaypoint(transform.position,_chargePoint,false,out bool returnBack))
         {
-            Debug.Log("Reached destination");
+            //Debug.Log("Reached destination");
             //when reached destination return true
             ResetCharge();
             return true;
@@ -133,6 +133,7 @@ public class QovaxEnemy : FlyingEnemy
     {
         if (!_isFatigued)
         {
+            ResetLookAt();
             _isFatigued = true;
             _qovaxStateHandler.RefEnemy.Effectable.ApplyStatusEffect(new MovementSpeedBoost());
             //add slow boost

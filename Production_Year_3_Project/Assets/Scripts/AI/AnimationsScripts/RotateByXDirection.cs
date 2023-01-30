@@ -57,7 +57,7 @@ public class RotateByXDirection : MonoBehaviour
             yield return new WaitUntil(() => _controller.Velocity.x < 0);
         }
 
-        _objectToFlip.rotation = Quaternion.Euler(_leftVector);
+        _objectToFlip.eulerAngles = new Vector3(_objectToFlip.eulerAngles.x,_leftVector.y, _objectToFlip.eulerAngles.z);
 
         if (!_isUsingRigidbody)
             _controller.facingRight = false;
@@ -75,7 +75,7 @@ public class RotateByXDirection : MonoBehaviour
         {
             yield return new WaitUntil(() => _controller.Velocity.x > 0);
         }
-        _objectToFlip.rotation = Quaternion.Euler(_rightVector);
+        _objectToFlip.eulerAngles = new Vector3(_objectToFlip.eulerAngles.x, _rightVector.y, _objectToFlip.eulerAngles.z);
 
         if (!_isUsingRigidbody)
             _controller.facingRight = true;

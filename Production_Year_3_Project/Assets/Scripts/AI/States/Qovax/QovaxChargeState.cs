@@ -4,7 +4,7 @@ public class QovaxChargeState : BaseQovaxState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("Qovax Charge State");
+        //Debug.Log("Qovax Charge State");
         //stay in charge state until finished charge
         if (_qovax.Charge())
         {

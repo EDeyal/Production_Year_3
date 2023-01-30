@@ -9,18 +9,19 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     #region Fields
     [SerializeField] BoundHandler _boundHandler;
     [SerializeField] Rigidbody _rb;
+    [SerializeField] GameObject _enemyVisualHolder;
     [SerializeField] SensorHandler _sensorHandler;
     [SerializeField] CheckDistanceAction _noticePlayerDistance;
     [SerializeField] CheckDistanceAction _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
     [SerializeField] Ability _droppedAbilityForPlayer;
 
+
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
 
     [SerializeField] BaseAction<ActionCooldownData> _deathAction;
     ActionCooldown _deathCooldown;
-
 
     #endregion
 
@@ -33,6 +34,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public EnemyStatSheet EnemyStatSheet => StatSheet as EnemyStatSheet;
     public BoundHandler BoundHandler => _boundHandler;
     public Ability DroppedAbilityForPlayer => _droppedAbilityForPlayer;
+    public GameObject EnemyVisualHolder => _enemyVisualHolder;
     #endregion
     private void OnValidate()
     {
@@ -51,6 +53,10 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         if (!_playerSensor.SensorTarget)
         {
             throw new System.Exception("BaseEnemy has no SensorTarget on player sensor");
+        }
+        if (!EnemyVisualHolder)
+        {
+            throw new System.Exception("Enemy has no Visual Holder");
         }
     }
     public virtual void OnDrawGizmosSelected()

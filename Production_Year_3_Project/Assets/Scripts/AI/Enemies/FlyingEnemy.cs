@@ -142,7 +142,20 @@ public abstract class FlyingEnemy : BaseEnemy
     {
         Vector3 direction = GetNormilizedDirectionToTarget(transform.position, target);
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed * speedMultiplyer);
+        LookAtTarget(target);
         _moveAction.InitAction(_moveData);
+    }
+    protected void LookAtTarget(Vector3 targetPos)
+    {
+        //Rotation Assignment
+        Vector3 rotation = EnemyVisualHolder.transform.eulerAngles;
+        EnemyVisualHolder.transform.LookAt(targetPos);
+        EnemyVisualHolder.transform.eulerAngles = new Vector3(EnemyVisualHolder.transform.eulerAngles.x, rotation.y, rotation.z);
+    }
+    protected void ResetLookAt()
+    {
+        Vector3 rotation = EnemyVisualHolder.transform.eulerAngles;
+        EnemyVisualHolder.transform.eulerAngles = new Vector3(ZERO, rotation.y, rotation.z);
     }
     public virtual void RandomMovement()
     {
