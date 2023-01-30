@@ -14,4 +14,15 @@ public class QovaxChargeState : BaseQovaxState
         }
         return this;
     }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _qovax.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsCharging), true);
+    }
+    public override void ExitState()
+    {
+        base.ExitState();
+        _qovax.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsCharging), false);
+        _qovax.ResetCharge();
+    }
 }

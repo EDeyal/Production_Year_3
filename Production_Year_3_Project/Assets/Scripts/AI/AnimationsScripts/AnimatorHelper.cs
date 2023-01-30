@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum AnimatorParameterType
 {
     Speed,
     IsDead,
+    IsCharging,
+    IsGrounded,
 }
 public static class AnimatorHelper
 {
@@ -15,8 +13,12 @@ public static class AnimatorHelper
         {
             case AnimatorParameterType.Speed:
                 return "Speed";
-                case AnimatorParameterType.IsDead:
+            case AnimatorParameterType.IsDead:
                 return "IsDead";
+            case AnimatorParameterType.IsCharging:
+                return "IsCharging";
+            case AnimatorParameterType.IsGrounded:
+                return "IsGrounded";
             default:
                 throw new System.Exception("Animator Helper Recived Wrong AnimatorParameterType");
         }

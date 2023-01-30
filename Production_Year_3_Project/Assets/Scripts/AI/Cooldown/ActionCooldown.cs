@@ -43,7 +43,6 @@ public class ActionCooldown
     }
     void CooldownCompleted()
     {
-        _isActive = false;
-        _currentCount = _cooldownTime;
+        ResetCooldown();
     }
 }

@@ -7,4 +7,11 @@ public class QovaxDeathState : BaseQovaxState
         _qovax.OnDeath();
         return this;
     }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _qovax.RB.drag = 0;
+        _qovax.AnimatorHandler.Animator.SetTrigger(
+        AnimatorHelper.GetParameter(AnimatorParameterType.IsDead));
+    }
 }

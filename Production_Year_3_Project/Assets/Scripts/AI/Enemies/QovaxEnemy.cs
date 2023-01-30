@@ -63,13 +63,14 @@ public class QovaxEnemy : FlyingEnemy
             //Debug.Log("Assigning New Point");
             _chargePoint = GameManager.Instance.PlayerManager.transform.position;
         }
-        if (_isCharging)
+        if (!_isCharging)
         {
-            if (CheckForChargeCooldown())//cooldown before attack
+             if (CheckForChargeCooldown())//cooldown before attack
             {
                 //Start Movement after cooldown
                 _isCharging = true;
                 Debug.Log("Charging");
+                AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), QovaxStatSheet.ChargeSpeed);
             }
             else
             {
@@ -108,7 +109,7 @@ public class QovaxEnemy : FlyingEnemy
         MoveTo(_chargePoint,QovaxStatSheet.ChargeSpeed);
         return false;
     }
-    private void ResetCharge()
+    public void ResetCharge()
     {
         _isCharging = false;
         _chargePoint = Vector3.zero;
@@ -137,6 +138,14 @@ public class QovaxEnemy : FlyingEnemy
             _isFatigued = true;
             _qovaxStateHandler.RefEnemy.Effectable.ApplyStatusEffect(new MovementSpeedBoost());
             //add slow boost
+        }
+    }
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        if (_groundSensorInfo.IsNearWall)
+        {
+            AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsGrounded), true);
         }
     }
 }

@@ -11,7 +11,7 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] CheckXYDistanceAction _waypointXYDistanceAction;
     [SerializeField] BaseAction<ActionCooldownData> _idleMovementAction;
     ActionCooldown _idleCooldown;
-    [SerializeField] WallSensorInfo _groundSensorInfo;
+    [SerializeField] protected WallSensorInfo _groundSensorInfo;
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
     [SerializeField] WallSensorInfo _ceilingSensorInfo;
@@ -71,13 +71,16 @@ public abstract class FlyingEnemy : BaseEnemy
                 if (CheckForCooldown(_idleMovementAction, _idleCooldown))
                 {
                     //Debug.Log("Waiting for movement cooldown");
+                    AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), StatSheet.Speed);
                     returnBack = false;
                 }
                 else
                 {
+                    AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), RB.velocity.x);
                     returnBack = true;
                     return true;
                 }
+                //set animation based on speed
             }
             returnBack = false;
             return true;
@@ -235,4 +238,5 @@ public abstract class FlyingEnemy : BaseEnemy
     {
         base.OnDrawGizmosSelected();
     }
+
 }

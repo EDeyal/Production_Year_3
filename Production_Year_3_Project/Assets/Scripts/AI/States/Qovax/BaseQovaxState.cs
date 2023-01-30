@@ -14,4 +14,9 @@ public abstract class BaseQovaxState : BaseState
             _qovaxStateHandler = GetComponent<QovaxStateHandler>();
     }
     [SerializeField] protected QovaxStateHandler _qovaxStateHandler;
+    public override void EnterState()
+    {
+        base.EnterState();
+        _qovax.AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), _qovax.QovaxStatSheet.Speed);
+    }
 }

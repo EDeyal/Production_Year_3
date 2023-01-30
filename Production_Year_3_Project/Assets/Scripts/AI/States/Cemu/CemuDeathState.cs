@@ -12,7 +12,7 @@ public class CemuDeathState : BaseCemuState
     public override void EnterState()
     {
         base.EnterState();
-        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetBool(
+        _cemu.AnimatorHandler.Animator.SetBool(
     AnimatorHelper.GetParameter(AnimatorParameterType.IsDead),true);
     }
 }
