@@ -32,6 +32,9 @@ public class PlayerManager : BaseCharacter
         playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
         PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
+        PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
+        PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
+
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
@@ -74,5 +77,12 @@ public class PlayerManager : BaseCharacter
     private void UpdateAbilityUi(Ability givenAbility)
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
+    }
+
+    //call func on base character and send in normalized direction
+    public override void OnTakeDamageKnockBack(Vector3 normalizedDir)
+    {
+        Debug.Log("Pushing player");
+        playerController.AddForce(normalizedDir * PlayerStatSheet.TakeDamageKnockBackForce);
     }
 }
