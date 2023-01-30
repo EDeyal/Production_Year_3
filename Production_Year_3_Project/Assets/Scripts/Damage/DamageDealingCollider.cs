@@ -33,9 +33,18 @@ public class DamageDealingCollider : MonoBehaviour
             }
             if (applyKnockBack)
             {
-                Vector3 normalizedDir = new Vector3(targetHit.transform.position.x - transform.position.x, 0, 0).normalized;
-                targetHit.Owner.OnTakeDamageKnockBack(normalizedDir);
+                targetHit.OnTotalDamageCalcRecieve.AddListener(OnTakeDamageKnockBack);
             }
         }
+    }
+
+    private void OnTakeDamageKnockBack(Attack givenAttack, Damageable target)
+    {
+        if (givenAttack.DamageHandler.GetFinalMult() > 0)
+        {
+            Vector3 normalizedDir = new Vector3(target.transform.position.x - transform.position.x, 0, 0).normalized;
+            target.Owner.OnTakeDamageKnockBack(normalizedDir);
+        }
+        target.OnTotalDamageCalcRecieve.RemoveListener(OnTakeDamageKnockBack);
     }
 }

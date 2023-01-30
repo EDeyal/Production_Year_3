@@ -34,7 +34,8 @@ public class PlayerManager : BaseCharacter
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
-
+        Damageable.OnTakeDmgGFX.AddListener(PlayHitAnimation);
+        Damageable.OnDeath.AddListener(PlayDeathAnimation);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
@@ -45,7 +46,18 @@ public class PlayerManager : BaseCharacter
     {
         playerController.AnimBlender.SetTrigger("Attack");
     }
-
+    private void PlayHitAnimation()
+    {
+        playerController.AnimBlender.SetTrigger("GetHit");
+    }
+    private void PlayDeathAnimation()
+    {
+        playerController.AnimBlender.SetTrigger("Die");
+        //lock inputs 
+        playerController.CanMove = false;
+        PlayerAbilityHandler.CanCast = false;
+        PlayerMeleeAttack.CanAttack = false;
+    }
     public void SubscirbeUI()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
@@ -57,13 +69,13 @@ public class PlayerManager : BaseCharacter
         playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
-    private void UpdateHpbarTakeDmg(DamageHandler givenDmg)
+    private void UpdateHpbarTakeDmg(Attack givenAttack, Damageable target)
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.ReduceHp(givenDmg.GetFinalMult(), true);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.ReduceHp(givenAttack.DamageHandler.GetFinalMult(), true);
     }
-    private void UpdateHpbarHeal(DamageHandler givenDmg)
+    private void UpdateHpbarHeal(DamageHandler givenDamage, Damageable target)
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDmg.GetFinalMult(), true);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDamage.GetFinalMult(), true);
     }
 
     private void UpdateDecayinHpbarTakeDmg(float amount)
@@ -82,6 +94,7 @@ public class PlayerManager : BaseCharacter
     //call func on base character and send in normalized direction
     public override void OnTakeDamageKnockBack(Vector3 normalizedDir)
     {
+        //only apply if damage taken > 0
         Debug.Log("Pushing player");
         playerController.AddForce(normalizedDir * PlayerStatSheet.TakeDamageKnockBackForce);
     }

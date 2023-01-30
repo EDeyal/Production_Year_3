@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
-using System.Collections.Generic;
 public class AttackAnimationHandler : MonoBehaviour
 {
     private float lastAttacked;
 
     private bool attackDown;
     private bool attackFinished;
+    private bool canAttack;
 
     private float AttackAnimationDuration;
 
@@ -27,6 +27,7 @@ public class AttackAnimationHandler : MonoBehaviour
 
     public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
     public Attack MeleeAttack { get => meleeAttack; }
+    public bool CanAttack { get => canAttack; set => canAttack = value; }
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class AttackAnimationHandler : MonoBehaviour
 
     private void Update()
     {
-        if (attackDown)
+        if (canAttack || attackDown)
         {
             Attack();
         }
@@ -101,7 +102,7 @@ public class AttackAnimationHandler : MonoBehaviour
         foreach (var item in collidersFound)
         {
             BaseEnemy enemy = item.GetComponent<BaseEnemy>();
-            if (!ReferenceEquals(enemy,null))
+            if (!ReferenceEquals(enemy, null))
             {
                 enemiesFound.Add(enemy);
             }
