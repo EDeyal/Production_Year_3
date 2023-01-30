@@ -250,14 +250,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensors:
   - Direcion: {x: 0, y: -1}
-    Offset: {x: 0, y: 0}
-    Range: 0.25
+    Offset: {x: 0, y: 0.2}
+    Range: 0.35
   - Direcion: {x: 0, y: -1}
     Offset: {x: -0.3, y: 0.2}
-    Range: 0.45
+    Range: 0.35
   - Direcion: {x: 0, y: -1}
     Offset: {x: 0.3, y: 0.2}
-    Range: 0.45
+    Range: 0.35
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -293,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567258442153098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.901983, y: 82.56339, z: 0.014087914}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -480,7 +480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.000057794146, y: 0.00011382702, z: -0.0008359819, w: 0.99999964}
-  m_LocalPosition: {x: -20.045012, y: -81.17254, z: -22}
+  m_LocalPosition: {x: -0.005012512, y: 1.35746, z: -21.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -909,6 +909,7 @@ MonoBehaviour:
       m_Calls: []
   meleeAttack: {fileID: 11400000, guid: 7e7b99ad91adbdb4d8dbf39aeeeb029f, type: 2}
   meleeBaseDamage: 10
+  takeDamageKnockBackForce: 14.8
 --- !u!114 &146567259415107157
 MonoBehaviour:
   m_ObjectHideFlags: 0

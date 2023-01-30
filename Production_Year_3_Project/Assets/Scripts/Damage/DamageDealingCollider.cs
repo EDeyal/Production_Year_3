@@ -7,6 +7,8 @@ public class DamageDealingCollider : MonoBehaviour
     private DamageDealer damageDealer;
     private Collider myCollider;
 
+    [SerializeField] private bool applyKnockBack;
+
     public Collider MyCollider { get => myCollider; }
 
     public void CacheReferences(Attack givenAttack, DamageDealer dealer = null)
@@ -28,6 +30,11 @@ public class DamageDealingCollider : MonoBehaviour
             else
             {
                 targetHit.GetHit(attack);
+            }
+            if (applyKnockBack)
+            {
+                Vector3 normalizedDir = new Vector3(targetHit.transform.position.x - transform.position.x, 0, 0).normalized;
+                targetHit.Owner.OnTakeDamageKnockBack(normalizedDir);
             }
         }
     }
