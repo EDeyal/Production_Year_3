@@ -33,6 +33,8 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
+        PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
+
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
