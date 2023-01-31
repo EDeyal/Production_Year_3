@@ -191,16 +191,16 @@ AnimatorStateMachine:
     m_Position: {x: 1110, y: -310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5473513573336951623}
-    m_Position: {x: 80, y: 170, z: 0}
+    m_Position: {x: 860, y: -350, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -775563641525868435}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: 830, y: -500, z: 0}
   m_EntryPosition: {x: 1090, y: -470, z: 0}
-  m_ExitPosition: {x: 200, y: 370, z: 0}
+  m_ExitPosition: {x: 980, y: -150, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -6818726596225657598}
 --- !u!114 &-5388563972518834068
@@ -604,12 +604,12 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Torso - Get Hit
     m_StateMachine: {fileID: -5979649013829221524}
-    m_Mask: {fileID: 0}
+    m_Mask: {fileID: 31900000, guid: 44382c038b2db5c43971f34c295e74fe, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
