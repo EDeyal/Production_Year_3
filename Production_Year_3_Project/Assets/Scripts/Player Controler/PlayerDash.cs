@@ -19,8 +19,12 @@ public class PlayerDash : MonoBehaviour
     public UnityEvent OnDashEnd;
 
     bool dashDurationUp;
+    bool canDash;
 
     int dashDir;
+
+    public bool CanDash { get => canDash; set => canDash = value; }
+
     private void Start()
     {
         lastDashed = dashCoolDown * -1;
@@ -32,11 +36,12 @@ public class PlayerDash : MonoBehaviour
         OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
         OnDashEnd.AddListener(DashAnimOff);
+        canDash = true;
     }
 
     private void StartDash()
     {
-        if (Time.time - lastDashed >= dashCoolDown)
+        if (Time.time - lastDashed >= dashCoolDown && canDash)
         {
             StartCoroutine(Dash());
         }
@@ -46,6 +51,7 @@ public class PlayerDash : MonoBehaviour
     {
         OnDash?.Invoke();
         StartCoroutine(DashCounter());
+        GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
         if (!controller.facingRight)
         {
             dashDir = -1;
@@ -58,6 +64,7 @@ public class PlayerDash : MonoBehaviour
         yield return new WaitUntil(() => dashDurationUp || rightCheck.IsGrounded() || leftCheck.IsGrounded());
         lastDashed = Time.time;
         controller.ResetGravity();
+        GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
         OnDashEnd?.Invoke();
     }
 
