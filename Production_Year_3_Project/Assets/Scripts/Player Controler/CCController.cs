@@ -97,7 +97,6 @@ public class CCController : MonoBehaviour
         OnStopRunning.AddListener(StopRunAnim);
 
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
-        groundCheck.OnNotGrounded.AddListener(FallAnim);
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
@@ -153,15 +152,12 @@ public class CCController : MonoBehaviour
         {
             return;
         }
-        if (groundCheck.IsGrounded())
-        {
-            //gravity = Vector3.zero;
-        }
-        else
+        else if (!groundCheck.IsGrounded())
         {
             velocity.y -= gravityForce * gravityScale * Time.deltaTime;
         }
         velocity.y = Mathf.Clamp(velocity.y, maxGravity * -1, 100);
+        isFalling = velocity.y < 0;
     }
     private void MoveController()
     {
@@ -375,19 +371,6 @@ public class CCController : MonoBehaviour
     {
         externalForces.Add(force);
     }
-
-    private Vector3 DistanceFromPreviousPos()
-    {
-        if (ReferenceEquals(oldPos, null))
-        {
-            oldPos = transform.position;
-            return Vector3.zero;
-        }
-        Vector3 olderpos = oldPos;
-        oldPos = transform.position;
-        return transform.position - olderpos;
-    }
-
     private void JumpAnim()
     {
         animBlender.SetTrigger("Jump");

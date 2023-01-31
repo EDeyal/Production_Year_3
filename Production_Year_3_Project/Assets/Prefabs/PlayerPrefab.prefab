@@ -629,7 +629,6 @@ GameObject:
   - component: {fileID: 146567259415107154}
   - component: {fileID: 146567259415107163}
   - component: {fileID: 146567259415107162}
-  - component: {fileID: 1184450244}
   - component: {fileID: 1778845608595465663}
   - component: {fileID: 2109781805}
   m_Layer: 8
@@ -761,7 +760,7 @@ MonoBehaviour:
   playerMeleeAttackAnimationHandler: {fileID: 1778845608595465663}
   playerAbilityHandler: {fileID: 146567259415107163}
   enemyProximitySensor: {fileID: 146567259415107162}
-  testProximitySensor: {fileID: 1184450244}
+  testProximitySensor: {fileID: 0}
   playerFlipper: {fileID: 146567259415107153}
   swordVFX: {fileID: 2109781805}
   gfx: {fileID: 2762639599565499701}
@@ -974,22 +973,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db4634aabce617845b485dd0b21a0f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkRadius: 10
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 1024
---- !u!114 &1184450244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146567259415107164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c171c400baaa3c244a4494d9cfa37b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 10

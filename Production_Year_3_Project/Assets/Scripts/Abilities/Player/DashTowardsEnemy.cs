@@ -16,8 +16,7 @@ public class DashTowardsEnemy : Ability
 
     private IEnumerator dashTowardsTarget()
     {
-        //BaseEnemy enemy = player.EnemyProximitySensor.GetClosestLegalTarget();
-        Test enemy = player.TestProximitySensor.GetClosestLegalTarget();
+        BaseEnemy enemy = player.EnemyProximitySensor.GetClosestLegalTarget();
         if (ReferenceEquals(enemy, null))
         {
             yield break;
@@ -66,7 +65,7 @@ public class DashTowardsEnemy : Ability
         enemy.gameObject.SetActive(false);
         buff.Remove();
         GameManager.Instance.Cam.CamShake();
-        //enemy.Damageable.GetHit(dashEndAbility, player.DamageDealer);
+        enemy.Damageable.GetHit(dashEndAbility, player.DamageDealer);
     }
 
 }
