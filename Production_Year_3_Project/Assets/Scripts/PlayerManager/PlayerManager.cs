@@ -20,7 +20,7 @@ public class PlayerManager : BaseCharacter
     public CCFlip PlayerFlipper { get => playerFlipper; }
     public Transform Gfx { get => gfx; }
     public PlayerSwordVFX SwordVFX { get => swordVFX; }
-    public PlayerDash PlayerDash { get => playerDash;}
+    public PlayerDash PlayerDash { get => playerDash; }
 
     protected override void SetUp()
     {
@@ -35,7 +35,7 @@ public class PlayerManager : BaseCharacter
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
-        Damageable.OnTakeDmgGFX.AddListener(PlayHitAnimation);
+        Damageable.OnTotalDamageCalcRecieve.AddListener(PlayHitAnimation);
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
         Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
@@ -49,9 +49,12 @@ public class PlayerManager : BaseCharacter
     {
         playerController.AnimBlender.SetTrigger("Attack");
     }
-    private void PlayHitAnimation()
+    private void PlayHitAnimation(Attack givenAttack, Damageable target)
     {
-        playerController.AnimBlender.SetTrigger("GetHit");
+        if (givenAttack.DamageHandler.GetFinalMult() > 0)
+        {
+            playerController.AnimBlender.SetTrigger("GetHit");
+        }
     }
     private void PlayDeathAnimation()
     {
