@@ -18,8 +18,6 @@ public class PlayerAbilityHandler : MonoBehaviour
     public UnityEvent<Ability> OnCast;
 
     [SerializeField] Ability test;
-
-
     private void Start()
     {
         canCast = true;
