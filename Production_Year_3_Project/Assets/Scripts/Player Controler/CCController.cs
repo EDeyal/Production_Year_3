@@ -55,6 +55,9 @@ public class CCController : MonoBehaviour
     [SerializeField] private bool isFalling;
     public bool facingRight;
 
+    private Vector3 currentExternalForce;
+    private float kockBackDuration;
+
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
@@ -98,7 +101,7 @@ public class CCController : MonoBehaviour
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
-        OnRecieveForce.AddListener(ApplyExtrenalForces);
+        //OnRecieveForce.AddListener(ApplyExtrenalForces);
 
         startingGravityScale = gravityScale;
         useGravity = true;
@@ -113,6 +116,7 @@ public class CCController : MonoBehaviour
         }
         SetInputVelocity();
         ApplyGravity();
+        ApplyExtrenalForces();
     }
     private void LateUpdate()
     {
@@ -163,15 +167,19 @@ public class CCController : MonoBehaviour
     {
         controller.Move(velocity * Time.deltaTime);
     }
-    private void ApplyExtrenalForces(Vector3 force)
+    private void ApplyExtrenalForces()
     {
-        Vector3 totalExternalForce = Vector3.zero;
         foreach (var item in externalForces)
         {
-            totalExternalForce += item;
+            currentExternalForce += item;
         }
         externalForces.Clear();
-        controller.Move(totalExternalForce * Time.deltaTime);
+        currentExternalForce = Vector3.Lerp(currentExternalForce, Vector3.zero, Time.deltaTime * kockBackDuration);
+        if (currentExternalForce.x > -1 && currentExternalForce.x < 1)
+        {
+            currentExternalForce.x = 0;
+        }
+        velocity += currentExternalForce;
     }
     private void RunEvents(float xInput)
     {
@@ -239,6 +247,11 @@ public class CCController : MonoBehaviour
     private void ResetJumpHeldTimer()
     {
         jumpHeldTimer = jumpHeldTime;
+    }
+
+    public void CacheKnockBackDuration(float givenMod)
+    {
+        kockBackDuration = givenMod;
     }
 
     public void ResetGravity()
@@ -361,7 +374,6 @@ public class CCController : MonoBehaviour
     public void AddForce(Vector3 force) //direction * force
     {
         externalForces.Add(force);
-        OnRecieveForce?.Invoke(force);
     }
 
     private Vector3 DistanceFromPreviousPos()

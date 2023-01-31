@@ -39,6 +39,11 @@ public class BaseCharacter : MonoBehaviour
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
     }
+
+    //call add force on enemies 
+    public virtual void OnTakeDamageKnockBack(Vector3 normalizedDir)
+    {
+    }
 }
 
 

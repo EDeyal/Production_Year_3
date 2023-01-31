@@ -7,7 +7,7 @@ public class DashTowardsEnemy : Ability
 {
     [SerializeField] private float dashSpeed;
     [SerializeField] private Attack dashEndAbility;
-    [SerializeField, Range(0f, 0.1f)] private float dashApex;
+    [SerializeField, Range(0f, 10f)] private float dashApex;
     private PlayerManager player => Owner as PlayerManager;
     public override void Cast()
     {
