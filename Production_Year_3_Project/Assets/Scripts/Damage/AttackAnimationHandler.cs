@@ -36,11 +36,12 @@ public class AttackAnimationHandler : MonoBehaviour
         OnAttackPerformed.AddListener(SpawnSwordSlashVfx);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
+        CanAttack = true;
     }
 
     private void Update()
     {
-        if (canAttack || attackDown)
+        if (canAttack && attackDown)
         {
             Attack();
         }
@@ -48,10 +49,14 @@ public class AttackAnimationHandler : MonoBehaviour
 
     private void AttackDownOn()
     {
+        if (!CanAttack)
+        {
+            return;
+        }
         attackDown = true;
     }
 
-    private void AttackDownOff()
+    public void AttackDownOff()
     {
         attackDown = false;
     }
@@ -112,7 +117,7 @@ public class AttackAnimationHandler : MonoBehaviour
             item.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
         }
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(rightAttackPos.position, attackRadius);

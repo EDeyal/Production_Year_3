@@ -92,8 +92,6 @@ public class PlayerManager : BaseCharacter
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
     }
-
-    //call func on base character and send in normalized direction
     public override void OnTakeDamageKnockBack(Vector3 normalizedDir)
     {
         //only apply if damage taken > 0

@@ -179,7 +179,7 @@ public class CCController : MonoBehaviour
         {
             currentExternalForce.x = 0;
         }
-        velocity += currentExternalForce;
+        controller.Move(currentExternalForce * Time.deltaTime);
     }
     private void RunEvents(float xInput)
     {
