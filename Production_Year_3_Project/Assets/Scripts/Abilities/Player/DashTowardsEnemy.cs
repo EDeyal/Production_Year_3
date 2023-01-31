@@ -62,7 +62,7 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.ResetVelocity();
         player.PlayerController.CanMove = true;
         player.PlayerAbilityHandler.CanCast = true;
-        enemy.gameObject.SetActive(false);
+        
         buff.Remove();
         GameManager.Instance.Cam.CamShake();
         enemy.Damageable.GetHit(dashEndAbility, player.DamageDealer);
