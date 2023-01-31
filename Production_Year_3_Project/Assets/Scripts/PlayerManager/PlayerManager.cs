@@ -10,7 +10,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
-
+    [SerializeField] private PlayerDash playerDash;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -20,6 +20,7 @@ public class PlayerManager : BaseCharacter
     public CCFlip PlayerFlipper { get => playerFlipper; }
     public Transform Gfx { get => gfx; }
     public PlayerSwordVFX SwordVFX { get => swordVFX; }
+    public PlayerDash PlayerDash { get => playerDash;}
 
     protected override void SetUp()
     {

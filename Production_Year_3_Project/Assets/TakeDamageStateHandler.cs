@@ -9,6 +9,8 @@ public class TakeDamageStateHandler : StateMachineBehaviour
     {
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.AttackDownOff();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
+        GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = false;
+        GameManager.Instance.PlayerManager.PlayerDash.CanDash = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,6 +24,9 @@ public class TakeDamageStateHandler : StateMachineBehaviour
     {
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.AttackDownOff();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
+        GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = true;
+        GameManager.Instance.PlayerManager.PlayerDash.CanDash = true;
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
