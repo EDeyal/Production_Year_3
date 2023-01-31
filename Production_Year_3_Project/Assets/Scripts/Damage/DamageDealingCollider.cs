@@ -43,7 +43,7 @@ public class DamageDealingCollider : MonoBehaviour
         if (givenAttack.DamageHandler.GetFinalMult() > 0)
         {
             Vector3 normalizedDir = new Vector3(target.transform.position.x - transform.position.x, 0, 0).normalized;
-            target.Owner.OnTakeDamageKnockBack(normalizedDir);
+            target.Owner.ApplyKnockBack(normalizedDir);
         }
         target.OnTotalDamageCalcRecieve.RemoveListener(OnTakeDamageKnockBack);
     }

@@ -92,7 +92,7 @@ public class PlayerManager : BaseCharacter
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
     }
-    public override void OnTakeDamageKnockBack(Vector3 normalizedDir)
+    public override void ApplyKnockBack(Vector3 normalizedDir)
     {
         //only apply if damage taken > 0
         Debug.Log("Pushing player");

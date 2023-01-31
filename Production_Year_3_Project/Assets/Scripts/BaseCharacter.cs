@@ -41,8 +41,9 @@ public class BaseCharacter : MonoBehaviour
     }
 
     //call add force on enemies 
-    public virtual void OnTakeDamageKnockBack(Vector3 normalizedDir)
+    public virtual void ApplyKnockBack(Vector3 normalizedDir)
     {
+
     }
 }
 
