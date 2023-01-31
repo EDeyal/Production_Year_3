@@ -97,11 +97,12 @@ public class CCController : MonoBehaviour
         OnStopRunning.AddListener(StopRunAnim);
 
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
+        groundCheck.OnNotGrounded.AddListener(StopRunAnim);
+        groundCheck.OnNotGrounded.AddListener(ResetLastInput);
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
         //OnRecieveForce.AddListener(ApplyExtrenalForces);
-
         startingGravityScale = gravityScale;
         useGravity = true;
         canMove = true;
@@ -116,6 +117,7 @@ public class CCController : MonoBehaviour
         SetInputVelocity();
         ApplyGravity();
         ApplyExtrenalForces();
+        SetAnimatorParameters();
     }
     private void LateUpdate()
     {
@@ -177,9 +179,17 @@ public class CCController : MonoBehaviour
         }
         controller.Move(currentExternalForce * Time.deltaTime);
     }
+
+    private void SetAnimatorParameters()
+    {
+        if (isFalling)
+        {
+            FallAnim();
+        }              
+    }
     private void RunEvents(float xInput)
     {
-        if (xInput == lastInput)
+        if (xInput == lastInput || !groundCheck.IsGrounded())
         {
             return;
         }
@@ -286,8 +296,6 @@ public class CCController : MonoBehaviour
     {
         velocity = givenVelocity;
     }
-
-
     private void CeilingReset()
     {
         ResetVelocityY();
@@ -298,6 +306,10 @@ public class CCController : MonoBehaviour
         jumpsLeft = numberOfJumps;
     }
 
+    private void ResetLastInput()
+    {
+        lastInput = 0;
+    }
     private void ResetCanJump()
     {
         canJump = true;
@@ -378,12 +390,12 @@ public class CCController : MonoBehaviour
 
     private void LandAnim()
     {
-        animBlender.SetTrigger("Land");
+        animBlender.SetBool("Fall", false);
     }
 
     private void FallAnim()
     {
-        animBlender.SetTrigger("Fall");
+        animBlender.SetBool("Fall", true);
     }
 
     private void StartRunAnim()
