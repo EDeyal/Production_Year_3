@@ -17,19 +17,19 @@ public class Damageable : MonoBehaviour
     /// <summary>
     /// Invoked when this object gets hit with an attack
     /// </summary>
-    public UnityEvent<Attack> OnGetHit;
+    public UnityEvent<Attack, Damageable> OnGetHit;
     /// <summary>
     /// Invoked when this object takes damage
     /// </summary>
-    public UnityEvent<DamageHandler> OnTakeDamage;
+    public UnityEvent<Attack, Damageable> OnTakeDamage;
     /// <summary>
     /// Invoked when this object is done adding damage mods
     /// </summary>
-    public UnityEvent<DamageHandler> OnTotalDamageCalcRecieve;
+    public UnityEvent<Attack, Damageable> OnTotalDamageCalcRecieve;
     /// <summary>
     /// Invoked when this object is healed
     /// </summary>
-    public UnityEvent<DamageHandler> OnGetHealed;
+    public UnityEvent<DamageHandler, Damageable> OnGetHealed;
     /// <summary>
     /// Invoked when this object takes leathal damage
     /// </summary>
@@ -60,8 +60,8 @@ public class Damageable : MonoBehaviour
     {
         if (!_canReciveDamage)
             return;
-        OnGetHit?.Invoke(givenAttack);
-        TakeDamage(givenAttack.DamageHandler);
+        OnGetHit?.Invoke(givenAttack, this);
+        TakeDamage(givenAttack);
     }
 
     public virtual void GetHit(Attack givenAttack, DamageDealer givenDealer)
@@ -70,21 +70,21 @@ public class Damageable : MonoBehaviour
             return;
 
         Debug.Log(gameObject.name + " was hit by " + givenDealer.name);
-        OnGetHit?.Invoke(givenAttack);
+        OnGetHit?.Invoke(givenAttack, this);
         givenDealer.OnHitAttack?.Invoke(givenAttack);
-        TakeDamage(givenAttack.DamageHandler, givenDealer);
+        TakeDamage(givenAttack, givenDealer);
     }
 
-    public virtual void TakeDamage(DamageHandler givenDamage)
+    public virtual void TakeDamage(Attack givenAttack)
     {
-        OnTakeDamage?.Invoke(givenDamage);
-        OnTotalDamageCalcRecieve?.Invoke(givenDamage);
-        float finalAmount = givenDamage.GetFinalMult();
+        OnTakeDamage?.Invoke(givenAttack, this);
+        OnTotalDamageCalcRecieve?.Invoke(givenAttack, this);
+        float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
 
         OnTakeDmgGFX?.Invoke();
-        givenDamage.ClearModifiers();
+        givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -94,13 +94,13 @@ public class Damageable : MonoBehaviour
             StartCoroutine(InvulnerabilityPhase());
     }
 
-    public virtual void TakeDamage(DamageHandler givenDamage, DamageDealer givenDamageDealer)
+    public virtual void TakeDamage(Attack givenAttack, DamageDealer givenDamageDealer)
     {
-        OnTakeDamage?.Invoke(givenDamage);
-        givenDamageDealer.OnDealDamage?.Invoke(givenDamage);
-        OnTotalDamageCalcRecieve?.Invoke(givenDamage);
-        givenDamageDealer.OnTotalDamageCalcDeal?.Invoke(givenDamage);
-        float finalAmount = givenDamage.GetFinalMult();
+        OnTakeDamage?.Invoke(givenAttack, this);
+        givenDamageDealer.OnDealDamage?.Invoke(givenAttack.DamageHandler);
+        OnTotalDamageCalcRecieve?.Invoke(givenAttack, this);
+        givenDamageDealer.OnTotalDamageCalcDeal?.Invoke(givenAttack.DamageHandler);
+        float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
 
@@ -109,7 +109,7 @@ public class Damageable : MonoBehaviour
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
-            givenDamageDealer.OnKill?.Invoke(this, givenDamage);
+            givenDamageDealer.OnKill?.Invoke(this, givenAttack.DamageHandler);
         }
         ClampHp();
         if (_canReciveDamage)
@@ -117,9 +117,9 @@ public class Damageable : MonoBehaviour
     }
 
 
-    public virtual void Heal(DamageHandler givenDamage)
+    public virtual void Heal(Attack givenAttack)
     {
-        OnGetHealed?.Invoke(givenDamage);
+        OnGetHealed?.Invoke(givenAttack.DamageHandler, this);
         OnHealGFX?.Invoke();
 
     }

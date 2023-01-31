@@ -14,9 +14,6 @@ public class PlayerAbilityHandler : MonoBehaviour
     public float CurrentRemainingCooldDown { get => currentRemainingCooldDown; }
 
     private float lastCastSpell;
-
-    private Animator anim;
-
     public UnityEvent<Ability> OnEquipAbility;
     public UnityEvent<Ability> OnCast;
 
