@@ -15,6 +15,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] CheckDistanceAction _chasePlayerDistance;
     [SerializeField] AnimatorHandler _animatorHandler;
     [SerializeField] Ability _droppedAbilityForPlayer;
+    [SerializeField] Collider _damageDealingCollider;
 
 
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
@@ -35,6 +36,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public BoundHandler BoundHandler => _boundHandler;
     public Ability DroppedAbilityForPlayer => _droppedAbilityForPlayer;
     public GameObject EnemyVisualHolder => _enemyVisualHolder;
+    public Collider DamageDealingCollider => _damageDealingCollider;
     #endregion
     private void OnValidate()
     {
@@ -88,6 +90,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     }
     public virtual void OnDeath()
     {
+        _damageDealingCollider.gameObject.SetActive(false);
         //can add logic until destroyed cooldown is completed
         if (_deathAction.InitAction(new ActionCooldownData(ref _deathCooldown)))
         {
