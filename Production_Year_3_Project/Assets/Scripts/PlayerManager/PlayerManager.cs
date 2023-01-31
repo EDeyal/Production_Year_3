@@ -36,6 +36,8 @@ public class PlayerManager : BaseCharacter
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
         Damageable.OnTakeDmgGFX.AddListener(PlayHitAnimation);
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
+        Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
+        Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
