@@ -1,17 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class HallwayHandler: ICheckValidation
+public class HallwayHandler:MonoBehaviour, ICheckValidation
 {
     [SerializeField] List<RoomHandler> _connectedRooms;
-    [SerializeField] HallwayTrigger _trigger1;
-    [SerializeField] HallwayTrigger _trigger2;
+    [SerializeField] List<HallwayTrigger> _triggers;
     [SerializeField] LayerMask _targetLayer;
     public int HallwayIndex;
+    private void Start()
+    {
+        InitRoomTriggers();
+    }
     public void InitRoomTriggers()
     {
-        _trigger1.TargetLayer = _targetLayer;
-        _trigger2.TargetLayer = _targetLayer;    
+        foreach (var trigger in _triggers)
+        {
+            trigger.TargetLayerValue = _targetLayer.value;
+        }
     }      
     public void CheckValidation()
     {
