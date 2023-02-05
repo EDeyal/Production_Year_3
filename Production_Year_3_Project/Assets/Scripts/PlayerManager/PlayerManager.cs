@@ -41,6 +41,7 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
         Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
+        PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
