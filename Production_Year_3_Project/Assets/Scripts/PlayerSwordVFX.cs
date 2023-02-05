@@ -57,4 +57,10 @@ public class PlayerSwordVFX : MonoBehaviour
         }
         bladeMat.color = chargedColor;
     }
+
+    private void OnApplicationQuit()
+    {
+        //This function makes sure the sword's color doesn't change between sessions, which also helps with GIT not recognizing any changes for each run.
+        bladeMat.color = basicColor;
+    }
 }
