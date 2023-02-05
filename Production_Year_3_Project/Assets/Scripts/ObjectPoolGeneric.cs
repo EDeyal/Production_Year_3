@@ -13,7 +13,7 @@ public class ObjectPoolGeneric<T> : MonoBehaviour where T : MonoBehaviour
     {
         for (int i = 0; i < NumToPool; i++)
         {
-            T newPooledObject = Instantiate(PrefabToPool);
+            T newPooledObject = Instantiate(PrefabToPool, transform);
             pooledObjects.Add(newPooledObject);
             newPooledObject.gameObject.SetActive(false);
         }
@@ -29,7 +29,7 @@ public class ObjectPoolGeneric<T> : MonoBehaviour where T : MonoBehaviour
             }
         }
 
-        T newPooledObject = Instantiate(PrefabToPool);
+        T newPooledObject = Instantiate(PrefabToPool, transform);
         pooledObjects.Add(newPooledObject);
         newPooledObject.gameObject.SetActive(false);
         return newPooledObject;
