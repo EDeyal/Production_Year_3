@@ -4,13 +4,19 @@ public class GameManagerHelper : MonoBehaviour
 {
     [SerializeField] GameManager _gameManagerPrefab;
     [SerializeField] PlayerManager _playerManager;
+    [SerializeField] RoomsManager _roomsManager;
 
     public PlayerManager GetPlayerManager => _playerManager;
+    public RoomsManager GetRoomsManager => _roomsManager;
     private void OnValidate()
     {
         if (_playerManager == null)
         {
             _playerManager = FindObjectOfType<PlayerManager>();
+        }
+        if (_roomsManager == null)
+        {
+            _roomsManager = FindObjectOfType<RoomsManager>();
         }
     }
 
