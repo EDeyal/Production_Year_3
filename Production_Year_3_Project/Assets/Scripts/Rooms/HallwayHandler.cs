@@ -1,26 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
-
-public class HallwayHandler : MonoBehaviour
+[System.Serializable]
+public class HallwayHandler: ICheckValidation
 {
-    List<RoomHandler> _rooms;
-    [SerializeField] List<BoxCollider> _roomColliders;
-    [SerializeField] LayerMask _playerLayer;
+    [SerializeField] List<RoomHandler> _connectedRooms;
+    [SerializeField] HallwayTrigger _trigger1;
+    [SerializeField] HallwayTrigger _trigger2;
+    [SerializeField] LayerMask _targetLayer;
+    public int HallwayIndex;
+    public void InitRoomTriggers()
+    {
+        _trigger1.TargetLayer = _targetLayer;
+        _trigger2.TargetLayer = _targetLayer;    
+    }      
+    public void CheckValidation()
+    {
+        if (_connectedRooms.Count == 0)
+        {
+            throw new System.Exception($"Hallway number {HallwayIndex} has no rooms connected");
+        }
+    }
     //need to add triggers in order to know if the player entered the room or left the room
-    //Trigger need to be a class with 2 colliders, one for entering the hallway and one for exiting the hallway
     //when exiting need to know to what room maybe a dictionary that connects the triggers to the room
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == _playerLayer)
-        {
-            Debug.Log("Player Entered Hallway Trigger");
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == _playerLayer)
-        {
-            Debug.Log("Player Exited Hallway Trigger");
-        }
-    }
 }

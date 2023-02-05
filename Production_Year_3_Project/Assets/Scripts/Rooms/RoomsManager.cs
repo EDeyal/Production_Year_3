@@ -6,6 +6,7 @@ using UnityEngine;
 public class RoomsManager : MonoBehaviour
 {
     [ReadOnly] Dictionary<string,RoomHandler> _roomsDictionary;
+    string _currentRoom;
     private void Awake()
     {
         _roomsDictionary = new Dictionary<string,RoomHandler>();
@@ -21,5 +22,10 @@ public class RoomsManager : MonoBehaviour
             Debug.LogError($"Room with name {roomHandler.RoomName} not could not be added," +
                 $"check room name or if it is allready exists");
         }
+    }
+    public void ResetRoom()
+    {
+        _roomsDictionary.TryGetValue(_currentRoom,out RoomHandler roomHandler);
+        roomHandler.ResetRoom();
     }
 }
