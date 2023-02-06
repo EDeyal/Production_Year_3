@@ -12,8 +12,8 @@ public class DashTowardsEnemy : Ability
 
     public override bool TryCast()
     {
-        BaseEnemy enemy = player.EnemyProximitySensor.GetClosestLegalTarget();
-        if (ReferenceEquals(enemy, null))
+        BaseCharacter target = player.EnemyProximitySensor.GetClosestLegalTarget();
+        if (ReferenceEquals(target, null))
         {
             return false;
         }
@@ -26,8 +26,8 @@ public class DashTowardsEnemy : Ability
 
     private IEnumerator dashTowardsTarget()
     {
-        BaseEnemy enemy = player.EnemyProximitySensor.GetClosestLegalTarget();
-        if (ReferenceEquals(enemy, null))
+        BaseCharacter target = player.EnemyProximitySensor.GetClosestLegalTarget();
+        if (ReferenceEquals(target, null))
         {
             yield break;
         }
@@ -37,7 +37,7 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.CanMove = false;
         player.PlayerAbilityHandler.CanCast = false;
        
-        Vector3 dest = new Vector3(enemy.transform.position.x, enemy.transform.position.y, 0);
+        Vector3 dest = new Vector3(target.transform.position.x, target.transform.position.y, 0);
         if (dest.x > player.transform.position.x)
         {
             player.PlayerFlipper.FlipRight();
@@ -73,7 +73,7 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.CanMove = true;
         player.PlayerAbilityHandler.CanCast = true;
         GameManager.Instance.Cam.CamShake();
-        enemy.Damageable.GetHit(dashEndAbility, player.DamageDealer);
+        target.Damageable.GetHit(dashEndAbility, player.DamageDealer);
         buff.Remove();
     }
 

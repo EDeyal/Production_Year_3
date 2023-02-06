@@ -58,7 +58,7 @@ public class Damageable : MonoBehaviour
 
     public virtual void GetHit(Attack givenAttack)
     {
-        if (!_canReciveDamage)
+        if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
         OnGetHit?.Invoke(givenAttack, this);
         TakeDamage(givenAttack);
@@ -66,7 +66,7 @@ public class Damageable : MonoBehaviour
 
     public virtual void GetHit(Attack givenAttack, DamageDealer givenDealer)
     {
-        if (!_canReciveDamage)
+        if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
 
         Debug.Log(gameObject.name + " was hit by " + givenDealer.name);
@@ -96,6 +96,7 @@ public class Damageable : MonoBehaviour
 
     public virtual void TakeDamage(Attack givenAttack, DamageDealer givenDamageDealer)
     {
+        Debug.Log(gameObject.name + "got hit");
         OnTakeDamage?.Invoke(givenAttack, this);
         givenDamageDealer.OnDealDamage?.Invoke(givenAttack.DamageHandler);
         OnTotalDamageCalcRecieve?.Invoke(givenAttack, this);
@@ -117,9 +118,9 @@ public class Damageable : MonoBehaviour
     }
 
 
-    public virtual void Heal(Attack givenAttack)
+    public virtual void Heal(DamageHandler givenDamage)
     {
-        OnGetHealed?.Invoke(givenAttack.DamageHandler, this);
+        OnGetHealed?.Invoke(givenDamage, this);
         OnHealGFX?.Invoke();
 
     }

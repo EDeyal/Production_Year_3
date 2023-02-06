@@ -41,7 +41,7 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
         Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
-        Damageable.OnDeath.AddListener(LockPlayer);
+        Damageable.OnDeath.AddListener(LockInputs);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
@@ -118,5 +118,10 @@ public class PlayerManager : BaseCharacter
         PlayerController.CanMove = true;
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;
+    }
+
+    private void LockInputs()
+    {
+        GameManager.Instance.InputManager.LockInputs = true;
     }
 }
