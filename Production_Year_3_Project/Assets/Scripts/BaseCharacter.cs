@@ -39,11 +39,15 @@ public class BaseCharacter : MonoBehaviour
         Effectable?.CacheOwner(this);
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
-        damageable.OnTakeDmgGFX.AddListener(PlaceHitParticle);
+        damageable.OnTotalDamageCalcRecieve.AddListener(PlaceHitParticle);
     }
 
-    private void PlaceHitParticle()
+    private void PlaceHitParticle(Attack givenAttack, Damageable target)
     {
+        if (givenAttack.DamageHandler.GetFinalMult() <= 0)
+        {
+            return;
+        }
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
         particle.transform.position = particleSpawnPoint.position;
         particle.gameObject.SetActive(true);
