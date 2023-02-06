@@ -97,5 +97,10 @@ public class PlayerDash : MonoBehaviour
         anim.SetBool("Dash", false);
     }
 
+    public void ResetDashCoolDoown(Ability givenAbility)
+    {
+        lastDashed = dashCoolDown * -1;
+    }
+
 
 }

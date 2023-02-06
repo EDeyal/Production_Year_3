@@ -30,11 +30,15 @@ public class PlayerAbilityHandler : MonoBehaviour
         {
             return;
         }
-        currentRemainingCooldDown = currentAbility.CoolDown;
-        currentAbility.Cast();
-        OnCast?.Invoke(currentAbility);
-        StartCoroutine(CountDownCoolDoown());
-        lastCastSpell = Time.time;
+        else if (currentAbility.TryCast())
+        {
+            currentAbility.Cast();
+            currentRemainingCooldDown = currentAbility.CoolDown;
+            OnCast?.Invoke(currentAbility);
+            StartCoroutine(CountDownCoolDown());
+            lastCastSpell = Time.time;
+        }
+      
     }
 
     private void ResetLastCastSpell()
@@ -59,7 +63,7 @@ public class PlayerAbilityHandler : MonoBehaviour
         EquipSpell(droppedAbility);
     }
 
-    private IEnumerator CountDownCoolDoown()
+    private IEnumerator CountDownCoolDown()
     {
         while (currentRemainingCooldDown > 0)
         {

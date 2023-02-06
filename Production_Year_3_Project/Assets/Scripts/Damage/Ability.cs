@@ -20,7 +20,10 @@ public class Ability : ScriptableObject
     {
         owner = givenCharacter;
     }
-
+    public virtual bool TryCast()
+    {
+        return true;
+    }
     public virtual void Cast()
     {
 
@@ -29,4 +32,5 @@ public class Ability : ScriptableObject
     {
 
     }
+   
 }

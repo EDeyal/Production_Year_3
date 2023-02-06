@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class DamageDealingCollider : MonoBehaviour
@@ -6,6 +7,9 @@ public class DamageDealingCollider : MonoBehaviour
     private Attack attack;
     private DamageDealer damageDealer;
     private Collider myCollider;
+
+
+    public UnityEvent OnColliderDealtDamage;
 
     [SerializeField] private bool applyKnockBack;
 
@@ -35,6 +39,7 @@ public class DamageDealingCollider : MonoBehaviour
             {
                 targetHit.OnTotalDamageCalcRecieve.AddListener(OnTakeDamageKnockBack);
             }
+            OnColliderDealtDamage?.Invoke();
         }
     }
 

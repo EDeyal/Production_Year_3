@@ -229,7 +229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567258331003638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.96, z: 0}
+  m_LocalPosition: {x: 0, y: -0.848, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -250,14 +250,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensors:
   - Direcion: {x: 0, y: -1}
-    Offset: {x: 0, y: 0.2}
-    Range: 0.35
+    Offset: {x: 0, y: 0}
+    Range: 0.2
   - Direcion: {x: 0, y: -1}
-    Offset: {x: -0.3, y: 0.2}
-    Range: 0.35
+    Offset: {x: -0.3, y: 0}
+    Range: 0.2
   - Direcion: {x: 0, y: -1}
-    Offset: {x: 0.3, y: 0.2}
-    Range: 0.35
+    Offset: {x: 0.3, y: 0}
+    Range: 0.2
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -293,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567258442153098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 58.67584, y: 14.49813, z: 0.015030236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -355,7 +355,7 @@ MonoBehaviour:
   minHeight: 0.05
   amplitude: 2
   frequency: 2
-  shakeDuration: 0.2
+  shakeDuration: 0.4
 --- !u!1 &146567258467212142
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.00005777816, y: 0.00011382709, z: -0.0008360412, w: 0.99999964}
-  m_LocalPosition: {x: -0.0050086975, y: 1.3574638, z: -21.999998}
+  m_LocalPosition: {x: -58.70501, y: -13.042538, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -497,8 +497,8 @@ Camera:
   m_GameObject: {fileID: 146567259025661827}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -675,7 +675,7 @@ CapsuleCollider:
   m_Radius: 0.3
   m_Height: 2.823483
   m_Direction: 1
-  m_Center: {x: -0, y: 0.38395882, z: 0}
+  m_Center: {x: -0, y: 0.5, z: 0}
 --- !u!143 &146567259415107159
 CharacterController:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.3839588, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &146567259415107161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
   effector: {fileID: 146567259415107157}
   statSheet: {fileID: 146567259415107156}
   boosts:
-  - BoostValue: 20
+  - BoostValue: 12
     BoostDuration: 5
     BoostType: 0
   playerController: {fileID: 146567259415107161}
@@ -765,6 +765,7 @@ MonoBehaviour:
   swordVFX: {fileID: 2109781805}
   gfx: {fileID: 2762639599565499701}
   playerDash: {fileID: 146567259415105966}
+  currentRoom: {fileID: 0}
 --- !u!114 &146567259415105966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,7 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd91e2f73e32084082a4e6481eca278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHp: 200
+  baseMaxHp: 10
   invulnerabilityDuration: 0.1
   decayingHealth:
     onDecayingHealthReduce:
@@ -2071,6 +2072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962508006248171674, guid: 832b8ef503011594fb6cda203e322324,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 832b8ef503011594fb6cda203e322324, type: 3}

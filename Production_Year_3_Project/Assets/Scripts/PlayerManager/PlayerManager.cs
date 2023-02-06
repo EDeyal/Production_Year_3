@@ -41,6 +41,8 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
         Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
+        Damageable.OnDeath.AddListener(LockPlayer);
+        PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
@@ -103,5 +105,18 @@ public class PlayerManager : BaseCharacter
         //only apply if damage taken > 0
         Debug.Log("Pushing player");
         playerController.AddForce(normalizedDir * PlayerStatSheet.TakeDamageKnockBackForce);
+    }
+
+    public void LockPlayer()
+    {
+        PlayerController.CanMove = false;
+        PlayerAbilityHandler.CanCast = false;
+        PlayerMeleeAttack.CanAttack = false;
+    }
+    public void UnLockPlayer()
+    {
+        PlayerController.CanMove = true;
+        PlayerAbilityHandler.CanCast = true;
+        PlayerMeleeAttack.CanAttack = true;
     }
 }
