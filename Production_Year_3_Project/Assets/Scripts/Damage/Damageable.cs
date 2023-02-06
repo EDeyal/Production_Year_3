@@ -56,6 +56,11 @@ public class Damageable : MonoBehaviour
         invulnerabilityDuration = stats.InvulnerabilityDuration;
     }
 
+    public void ResetParameters()
+    {
+        Heal(new DamageHandler() { BaseAmount = maxHp });
+    }
+
     public virtual void GetHit(Attack givenAttack)
     {
         if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
@@ -122,7 +127,6 @@ public class Damageable : MonoBehaviour
     {
         OnGetHealed?.Invoke(givenDamage, this);
         OnHealGFX?.Invoke();
-
     }
 
     private float ReduceDecayingHealth(float finalDamage)
