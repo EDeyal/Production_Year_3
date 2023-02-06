@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,11 @@ public class Spikes : DamageDealingCollider
         //routine blackscreen fadeout...
         //+ reset room
         StartCoroutine(RespawnPlayer());
+    }
+
+    internal void AssignCheckpoint(Transform assignedRespawnCheckpoint)
+    {
+        respawnPoint = assignedRespawnCheckpoint;
     }
 
     private IEnumerator RespawnPlayer()
