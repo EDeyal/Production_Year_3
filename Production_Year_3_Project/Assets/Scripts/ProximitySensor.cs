@@ -61,6 +61,20 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     }
 
 
+    public bool IsTargetLegal(T instance)
+    {
+        T[] legals = GetLegalTargets();
+        foreach (var item in legals)
+        {
+            if (ReferenceEquals(item, instance))
+            {
+                return true;
+            }
+        }
+        Debug.Log(instance.name + " isnt legal");
+        return false;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;

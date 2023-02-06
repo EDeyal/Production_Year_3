@@ -9,7 +9,7 @@ public class DamageHandler
 
     [SerializeField] private DamageType damageType;
     
-    public float BaseAmount { get => baseAmount; }
+    public float BaseAmount { get => baseAmount; set => baseAmount = value; }
     public List<float> Modifiers { get => modifiers; }
     public DamageType DamageType { get => damageType; }
 

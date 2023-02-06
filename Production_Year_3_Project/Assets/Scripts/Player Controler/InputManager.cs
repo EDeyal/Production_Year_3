@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     public bool LockInputs;
     private void Start()
     {
+        LockInputs = false;
         input = new PlayerInputs();
         input.Enable();
 
