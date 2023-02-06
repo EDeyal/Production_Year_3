@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : DamageDealingCollider
@@ -28,6 +27,7 @@ public class Spikes : DamageDealingCollider
         GameManager.Instance.PlayerManager.PlayerController.CanMove = false;
         GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = false;
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
+        yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
         Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
         float counter = 0f;
         while (counter < 1)
@@ -37,10 +37,13 @@ public class Spikes : DamageDealingCollider
             yield return new WaitForEndOfFrame();
         }
         //GameManager.Instance.PlayerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
-        yield return new WaitForEndOfFrame();
+        GameManager.Instance.InputManager.LockInputs = true;
         GameManager.Instance.PlayerManager.PlayerController.CanMove = true;
         GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = true;
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
+        yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
+        GameManager.Instance.InputManager.LockInputs = false;
+
 
 
     }

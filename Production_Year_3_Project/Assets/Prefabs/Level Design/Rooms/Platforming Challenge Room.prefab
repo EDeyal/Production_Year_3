@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &489725451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489725452}
+  m_Layer: 0
+  m_Name: RespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489725452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489725451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.71, y: 12.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7538549767256079688}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69228651409930096
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +930,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 2812254525079068490, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
+    - target: {fileID: 6663655338348762010, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
     - target: {fileID: 7780515853159867541, guid: 69d585ee7385fed49b375bd61cffa43b,
         type: 3}
       propertyPath: m_RootOrder
@@ -954,6 +995,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8371309714414476501, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d585ee7385fed49b375bd61cffa43b, type: 3}
 --- !u!4 &7538549767256079688 stripped
@@ -5549,6 +5595,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikes Platform (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2812254525079068490, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
+    - target: {fileID: 6663655338348762010, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
     - target: {fileID: 7780515853159867541, guid: 69d585ee7385fed49b375bd61cffa43b,
         type: 3}
       propertyPath: m_RootOrder
@@ -5604,6 +5660,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8371309714414476501, guid: 69d585ee7385fed49b375bd61cffa43b,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 489725452}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d585ee7385fed49b375bd61cffa43b, type: 3}
 --- !u!4 &6014081588930505107 stripped
