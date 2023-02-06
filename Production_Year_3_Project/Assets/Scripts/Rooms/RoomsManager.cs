@@ -15,14 +15,14 @@ public class RoomsManager : MonoBehaviour
     }
     public void AddRoom(RoomHandler roomHandler)
     {
-        if (_roomsDictionary.TryAdd(roomHandler.RoomName, roomHandler))
-        {
-            Debug.Log($"Room with name: {roomHandler.RoomName} has been added to Rooms Manager");
-        }
-        else
+        if (!_roomsDictionary.TryAdd(roomHandler.RoomName, roomHandler))
         {
             Debug.LogError($"Room with name {roomHandler.RoomName} not could not be added," +
                 $"check room name or if it is allready exists");
+        }
+        else
+        {
+            //Debug.Log($"Room with name: {roomHandler.RoomName} has been added to Rooms Manager");
         }
     }
     public void ResetRoom()

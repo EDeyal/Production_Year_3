@@ -9,6 +9,11 @@ public class CemuEnemy : GroundEnemy
     [SerializeField] CombatHandler _combatHandler;
     [SerializeField] Ability _cemuAbility;
     public bool IsBoostActive => _isBoostActive;
+
+    protected override void OnDisable()
+    {
+        _isBoostActive = false;
+    }
     public override void Awake()
     {
         base.Awake();
@@ -19,6 +24,7 @@ public class CemuEnemy : GroundEnemy
         _combatHandler.Init();
         Effectable.OnStatusEffectRemoved.AddListener(RemoveBuffActivation);
     }
+
     private void Update()
     {
         BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();

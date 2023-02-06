@@ -15,6 +15,11 @@ public class QovaxEnemy : FlyingEnemy
     public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
     public QovaxStatSheet QovaxStatSheet => StatSheet as QovaxStatSheet;
 
+    protected override void OnDisable()
+    {
+        _isCharging = false;
+        _isFatigued=false;
+    }
     public override void Awake()
     {
         base.Awake();

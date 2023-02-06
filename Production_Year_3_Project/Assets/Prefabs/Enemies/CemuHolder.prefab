@@ -245,6 +245,7 @@ MonoBehaviour:
   _droppedAbilityForPlayer: {fileID: 11400000, guid: bfabcac723921df4abab4209014f1b73,
     type: 2}
   _damageDealingCollider: {fileID: 684794236416992097}
+  _startingPosition: {fileID: 684794236130240597}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -660,6 +661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
   applyKnockBack: 0
 --- !u!1001 &5732440906287327127
 PrefabInstance:

@@ -41,4 +41,8 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
         if (_deathState == null)
             throw new System.Exception("Death state is Null");
     }
+    private void OnDisable()
+    {
+        _currentState = IdleState;
+    }
 }

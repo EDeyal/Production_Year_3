@@ -9,7 +9,7 @@ public class SpawningHandler
 
     public void SpawnEnemies()
     {
-        Debug.Log("Spawning enemies");
+        //Debug.Log("Spawning enemies");
         foreach (var enemy in _enemies)
         {
             enemy.gameObject.SetActive(true);

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class FlyingEnemy : BaseEnemy
 {
-    [SerializeField] int _nextWaypoint;
+    [SerializeField] int _startingPointIndex = 0;
+    int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
@@ -19,15 +20,18 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] RandomMovementSO _randomMovementSO;
 
     Vector2 _randomPoint;
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.SubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
         _ceilingSensorInfo.SubscribeToEvents(SensorHandler);
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+        _nextWaypoint = _startingPointIndex;
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.UnsubscribeToEvents(SensorHandler);

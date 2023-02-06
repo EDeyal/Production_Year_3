@@ -3,7 +3,8 @@ using UnityEngine;
 
 public abstract class GroundEnemy : BaseEnemy
 {
-    [SerializeField] int _nextWaypoint;
+    [SerializeField] int _startingPointIndex = 0;
+    int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<MoveData> _moveAction;
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
@@ -19,15 +20,18 @@ public abstract class GroundEnemy : BaseEnemy
     {
         base.Awake();
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.SubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
         _ledgeSensorInfo.SubscribeToEvents(SensorHandler);
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        _nextWaypoint = _startingPointIndex;
+        base.OnDisable();
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.UnsubscribeToEvents(SensorHandler);

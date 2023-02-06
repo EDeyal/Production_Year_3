@@ -16,6 +16,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     [SerializeField] AnimatorHandler _animatorHandler;
     [SerializeField] Ability _droppedAbilityForPlayer;
     [SerializeField] Collider _damageDealingCollider;
+    [SerializeField] GameObject _startingPosition;
 
 
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
@@ -96,8 +97,14 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         {
             //can add logic to frame of death
             transform.gameObject.SetActive(false);
-            //Destroy(this);
         }
     }
-
+    protected virtual void OnDisable()
+    {
+        RB.useGravity = false;
+    }
+    protected virtual void OnEnable()
+    {
+        transform.position = _startingPosition.transform.position;
+    }
 }

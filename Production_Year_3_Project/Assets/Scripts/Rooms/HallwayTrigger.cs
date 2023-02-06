@@ -27,7 +27,7 @@ public class HallwayTrigger: MonoBehaviour, ICheckValidation
         //Debug.Log($"Something with layer {other.gameObject.layer} entered trigger");
         if (other.gameObject.layer == _targetlayerValue)
         {
-            Debug.Log("target entred a room trigger");
+            //Debug.Log("target entred a room trigger");
             OnEnteredTrigger.Invoke();
         }
     }
@@ -36,7 +36,7 @@ public class HallwayTrigger: MonoBehaviour, ICheckValidation
         //Debug.Log($"Something with layer {other.gameObject.layer} entered trigger");
         if (other.gameObject.layer == _targetlayerValue)
         {
-            Debug.Log("target exited a room trigger");
+            //Debug.Log("target exited a room trigger");
             GameManager.Instance.PlayerManager.CurrentRoom = ClosestRoom;
         }
     }

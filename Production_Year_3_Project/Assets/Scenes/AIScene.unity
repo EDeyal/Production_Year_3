@@ -1371,6 +1371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sensor: {fileID: 395877938}
+  ClosestRoom: {fileID: 1958112142}
+  _targetlayerValue: 0
 --- !u!1001 &403652616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2068,9 +2070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c84ddc185f5b8a448f00c9bb98e2f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connectedRooms:
-  - {fileID: 237637591}
-  - {fileID: 1958112142}
   _triggers:
   - {fileID: 1399888641}
   - {fileID: 395877939}
@@ -10835,6 +10834,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sensor: {fileID: 1399888640}
+  ClosestRoom: {fileID: 237637591}
+  _targetlayerValue: 0
 --- !u!1001 &1424162916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19029,6 +19030,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1602987910887301263, guid: 9feb003afccead44c823a152aa824797,
+        type: 3}
+      propertyPath: _startingRoom
+      value: 
+      objectReference: {fileID: 237637591}
     - target: {fileID: 3747653141858540662, guid: 9feb003afccead44c823a152aa824797,
         type: 3}
       propertyPath: m_RootOrder
