@@ -103,18 +103,13 @@ public class AttackAnimationHandler : MonoBehaviour
             attackPos = leftAttackPos;
         }
         Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, enemyHitLayer);
-        List<BaseEnemy> enemiesFound = new List<BaseEnemy>();
         foreach (var item in collidersFound)
         {
-            BaseEnemy enemy = item.GetComponent<BaseEnemy>();
-            if (!ReferenceEquals(enemy, null))
+            BaseCharacter enemy = item.GetComponent<BaseCharacter>();
+            if (!ReferenceEquals(enemy, null) && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(enemy))
             {
-                enemiesFound.Add(enemy);
+                enemy.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
-        }
-        foreach (var item in enemiesFound)
-        {
-            item.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
         }
     }
     private void OnDrawGizmosSelected()

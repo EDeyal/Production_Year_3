@@ -1,9 +1,11 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class FlyingEnemy : BaseEnemy
 {
-    [SerializeField] int _nextWaypoint;
+    [SerializeField] int _startingPointIndex = 0;
+    [ReadOnly][SerializeField] int _nextWaypoint;
     [SerializeField] List<Transform> _waypoints;
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
@@ -19,15 +21,18 @@ public abstract class FlyingEnemy : BaseEnemy
     [SerializeField] RandomMovementSO _randomMovementSO;
 
     Vector2 _randomPoint;
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        RB.useGravity = false;
         _groundSensorInfo.SubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.SubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
         _ceilingSensorInfo.SubscribeToEvents(SensorHandler);
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
+        _nextWaypoint = _startingPointIndex;
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.UnsubscribeToEvents(SensorHandler);
