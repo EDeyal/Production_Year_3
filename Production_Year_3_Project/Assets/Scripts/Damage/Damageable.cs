@@ -101,7 +101,6 @@ public class Damageable : MonoBehaviour
 
     public virtual void TakeDamage(Attack givenAttack, DamageDealer givenDamageDealer)
     {
-        Debug.Log(gameObject.name + "got hit");
         OnTakeDamage?.Invoke(givenAttack, this);
         givenDamageDealer.OnDealDamage?.Invoke(givenAttack.DamageHandler);
         OnTotalDamageCalcRecieve?.Invoke(givenAttack, this);
