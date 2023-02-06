@@ -102,10 +102,10 @@ MonoBehaviour:
     BoostType: 0
   _boundHandler:
     _bound:
-      m_Center: {x: 2.35, y: 14.78, z: 0}
-      m_Extent: {x: 13.52, y: 3.85, z: 0}
+      m_Center: {x: 7.95, y: 15.07, z: 0}
+      m_Extent: {x: 4, y: 4, z: 0}
     _holder: {fileID: 4395971687740112685}
-    _boundCenterOffset: {x: -5.6, y: -0.29, z: 0}
+    _boundCenterOffset: {x: 0, y: 0, z: 0}
     _boundColor: {r: 0.5238649, g: 0.07778566, b: 0.8679245, a: 1}
   _rb: {fileID: 4395971687601065804}
   _enemyVisualHolder: {fileID: 4395971687630108072}
@@ -651,6 +651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
   applyKnockBack: 0
 --- !u!1 &4395971688710028949
 GameObject:
