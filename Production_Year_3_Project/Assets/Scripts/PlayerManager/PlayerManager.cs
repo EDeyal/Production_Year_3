@@ -6,7 +6,6 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
     [SerializeField] private PlayerAbilityHandler playerAbilityHandler;
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
-    [SerializeField] private TestProximitySensor testProximitySensor;
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
@@ -17,7 +16,6 @@ public class PlayerManager : BaseCharacter
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
     public PlayerAbilityHandler PlayerAbilityHandler { get => playerAbilityHandler; }
     public EnemyProximitySensor EnemyProximitySensor { get => enemyProximitySensor; }
-    public TestProximitySensor TestProximitySensor { get => testProximitySensor; }
     public CCFlip PlayerFlipper { get => playerFlipper; }
     public Transform Gfx { get => gfx; }
     public PlayerSwordVFX SwordVFX { get => swordVFX; }
