@@ -24,9 +24,7 @@ public class Spikes : DamageDealingCollider
     private IEnumerator RespawnPlayer()
     {
         GameManager.Instance.PlayerManager.PlayerController.ResetVelocity();
-        GameManager.Instance.PlayerManager.PlayerController.CanMove = false;
-        GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = false;
-        GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
+        GameManager.Instance.PlayerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
         Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
         float counter = 0f;
@@ -38,9 +36,7 @@ public class Spikes : DamageDealingCollider
         }
         //GameManager.Instance.PlayerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
         GameManager.Instance.InputManager.LockInputs = true;
-        GameManager.Instance.PlayerManager.PlayerController.CanMove = true;
-        GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = true;
-        GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
+        GameManager.Instance.PlayerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
         GameManager.Instance.InputManager.LockInputs = false;
 

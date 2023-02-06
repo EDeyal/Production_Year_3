@@ -9,6 +9,16 @@ public class DashTowardsEnemy : Ability
     [SerializeField] private Attack dashEndAbility;
     [SerializeField, Range(0f, 10f)] private float dashApex;
     private PlayerManager player => Owner as PlayerManager;
+
+    public override bool TryCast()
+    {
+        BaseEnemy enemy = player.EnemyProximitySensor.GetClosestLegalTarget();
+        if (ReferenceEquals(enemy, null))
+        {
+            return false;
+        }
+        return true;
+    }
     public override void Cast()
     {
         player.StartCoroutine(dashTowardsTarget());

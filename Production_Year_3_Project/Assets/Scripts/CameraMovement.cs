@@ -24,6 +24,7 @@ public class CameraMovement : MonoBehaviour
         GameManager.Instance.InputManager.OnLookDownDown.AddListener(HoldDown);
         GameManager.Instance.InputManager.OnLookDownUp.AddListener(ReleaseHoldingDown);
         GameManager.Instance.CacheCam(this);
+        GameManager.Instance.PlayerManager.Damageable.OnTakeDmgGFX.AddListener(CamShake);
     }
 
     private void Update()
@@ -37,6 +38,7 @@ public class CameraMovement : MonoBehaviour
     [ContextMenu("Shake")]
     public void CamShake()
     {
+        Debug.Log("shaking");
         camShakeComp.m_AmplitudeGain = amplitude;
         camShakeComp.m_FrequencyGain = frequency;
         if (!ReferenceEquals(activeShakeRoutine, null))
