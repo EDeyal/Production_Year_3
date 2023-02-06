@@ -9,6 +9,7 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] private StatusEffector effector;
     [SerializeField] private StatSheet statSheet;
     [SerializeField] private List<Boost> boosts = new List<Boost>();
+    [SerializeField] private Transform particleSpawnPoint;
     public DamageDealer DamageDealer { get => damageDealer; }
     public Damageable Damageable { get => damageable; }
     public StatusEffectable Effectable { get => effectable; }
