@@ -56,6 +56,10 @@ public class PlayerAbilityHandler : MonoBehaviour
 
     public void OnKillStealSpellEvent(Damageable target, DamageHandler dmg)
     {
+        if (target.Owner is not BaseEnemy)
+        {
+            return;
+        }
         Ability droppedAbility = ((BaseEnemy)target.Owner).DroppedAbilityForPlayer;
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.AbiltiyStealParticle.GetPooledObject();
         particle.transform.position = target.transform.position;

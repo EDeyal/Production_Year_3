@@ -35,11 +35,18 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void SetUp()
     {
-        Effectable.CacheOwner(this);
+        Effectable?.CacheOwner(this);
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
+        damageable.OnTakeDmgGFX.AddListener(PlaceHitParticle);
     }
 
+    private void PlaceHitParticle()
+    {
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
+        particle.transform.position = transform.position;
+        particle.gameObject.SetActive(true);
+    }
     //call add force on enemies 
     public virtual void ApplyKnockBack(Vector3 normalizedDir)
     {
