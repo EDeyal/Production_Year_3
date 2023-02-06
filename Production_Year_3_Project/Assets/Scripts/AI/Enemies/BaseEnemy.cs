@@ -6,6 +6,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     protected const float ZERO = 0;
     protected const float ONE = 1;
     protected const float MINUS_ONE = -1;
+    private float _rbStartingDrag;
     #region Fields
     [SerializeField] BoundHandler _boundHandler;
     [SerializeField] Rigidbody _rb;
@@ -48,6 +49,7 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         base.Awake();
         StatSheet.InitializeStats();
         _deathCooldown = new ActionCooldown();
+        _rbStartingDrag = RB.drag;
     }
     public virtual void CheckValidation()
     {
@@ -99,12 +101,13 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             transform.gameObject.SetActive(false);
         }
     }
-    protected virtual void OnDisable()
-    {
-        RB.useGravity = false;
-    }
     protected virtual void OnEnable()
     {
+        RB.velocity = Vector3.zero;
+        RB.drag = _rbStartingDrag;
+        _damageDealingCollider.gameObject.SetActive(true);
         transform.position = _startingPosition.transform.position;
+        StatSheet.InitializeStats();
+        Damageable.ResetParameters();
     }
 }

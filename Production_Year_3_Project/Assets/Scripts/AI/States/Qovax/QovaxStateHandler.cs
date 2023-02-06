@@ -18,4 +18,9 @@ public class QovaxStateHandler : BaseStateHandler
         if (_patrolState == null)
             throw new System.Exception("Patrol state is Null");
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        RefEnemy.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsCharging), false);
+    }
 }

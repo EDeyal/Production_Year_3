@@ -12,6 +12,7 @@ public class CemuEnemy : GroundEnemy
 
     protected override void OnDisable()
     {
+        base.OnDisable();
         _isBoostActive = false;
     }
     public override void Awake()

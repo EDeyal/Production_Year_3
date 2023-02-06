@@ -254,7 +254,7 @@ MonoBehaviour:
     _sensorTarget: {fileID: 11400000, guid: b6e8a161e89ce4e4cb6c3b0f73c2c383, type: 2}
     IsActive: 1
   _deathAction: {fileID: 11400000, guid: e06e4fca30327ae4c9bb888fbe89962a, type: 2}
-  _nextWaypoint: 0
+  _startingPointIndex: 0
   _waypoints:
   - {fileID: 684794235154033134}
   - {fileID: 684794235833240075}
@@ -581,6 +581,7 @@ Transform:
   m_Children:
   - {fileID: 684794236416992103}
   - {fileID: 5190119142481576060}
+  - {fileID: 4405906836718567807}
   m_Father: {fileID: 684794236260423882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -665,6 +666,37 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   applyKnockBack: 0
+--- !u!1 &5435630099192719675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4405906836718567807}
+  m_Layer: 9
+  m_Name: Middle of Cemu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4405906836718567807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435630099192719675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684794236275958481}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5732440906287327127
 PrefabInstance:
   m_ObjectHideFlags: 0
