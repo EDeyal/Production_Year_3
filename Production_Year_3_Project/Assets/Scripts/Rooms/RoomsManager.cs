@@ -6,10 +6,12 @@ using UnityEngine;
 public class RoomsManager : MonoBehaviour
 {
     [ReadOnly] Dictionary<string,RoomHandler> _roomsDictionary;
-    string _currentRoom;
+    [SerializeField] RoomHandler _startingRoom;
+    string _currentRoom = "Environment";
     private void Awake()
     {
         _roomsDictionary = new Dictionary<string,RoomHandler>();
+        GameManager.Instance.PlayerManager.CurrentRoom  = _startingRoom;
     }
     public void AddRoom(RoomHandler roomHandler)
     {

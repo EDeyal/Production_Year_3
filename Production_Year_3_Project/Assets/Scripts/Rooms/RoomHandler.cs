@@ -21,7 +21,10 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
         _spawnHandler.DespawnEnemies();
         _spawnHandler.SpawnEnemies();
     }
-
+    public void ActivateRoom()
+    {
+        _spawnHandler.SpawnEnemies();
+    }
     public void CheckValidation()
     {
         if (_spawnHandler == null)
