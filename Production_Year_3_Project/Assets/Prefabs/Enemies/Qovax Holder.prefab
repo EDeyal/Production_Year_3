@@ -119,6 +119,7 @@ MonoBehaviour:
   _droppedAbilityForPlayer: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496,
     type: 2}
   _damageDealingCollider: {fileID: 4395971688025945113}
+  _startingPosition: {fileID: 4395971687740112685}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -127,7 +128,7 @@ MonoBehaviour:
     _sensorTarget: {fileID: 11400000, guid: b6e8a161e89ce4e4cb6c3b0f73c2c383, type: 2}
     IsActive: 1
   _deathAction: {fileID: 11400000, guid: 19b3704f2e453814681447148c60c0eb, type: 2}
-  _nextWaypoint: 0
+  _startingPointIndex: 0
   _waypoints:
   - {fileID: 4395971688710028950}
   - {fileID: 4395971689674448243}
@@ -286,19 +287,7 @@ MonoBehaviour:
       m_Calls: []
   OnDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4395971687601065799}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnTakeDmgGFX:
     m_PersistentCalls:
       m_Calls: []
@@ -505,6 +494,7 @@ Transform:
   m_Children:
   - {fileID: 4395971688025945119}
   - {fileID: 6679483346529712317}
+  - {fileID: 6576933199167884628}
   m_Father: {fileID: 4395971687601065906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -651,6 +641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
   applyKnockBack: 0
 --- !u!1 &4395971688710028949
 GameObject:
@@ -713,6 +706,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4395971687635954055}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6123553905011317605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6576933199167884628}
+  m_Layer: 9
+  m_Name: Middle Of Qovax
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6576933199167884628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6123553905011317605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.236, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4395971687630108073}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6573271712164945750
 PrefabInstance:
