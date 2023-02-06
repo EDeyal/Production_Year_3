@@ -9,6 +9,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] float dashCoolDown;
     [SerializeField] float dashDuration;
     [SerializeField] float dashSpeed;
+    [SerializeField] float dashApexTime;
     [SerializeField] Animator anim;
     [SerializeField] GroundCheck rightCheck;
     [SerializeField] GroundCheck leftCheck;
@@ -65,6 +66,7 @@ public class PlayerDash : MonoBehaviour
         lastDashed = Time.time;
         controller.ResetGravity();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
+        yield return StartCoroutine(OnDashEndApex());
         OnDashEnd?.Invoke();
     }
 
@@ -76,7 +78,11 @@ public class PlayerDash : MonoBehaviour
 
     }
 
-
+    IEnumerator OnDashEndApex()
+    {
+        controller.ResetVelocity();
+        yield return new WaitForSecondsRealtime(dashApexTime);
+    }
     private void TurnOnWallChecks()
     {
         rightCheck.gameObject.SetActive(true);

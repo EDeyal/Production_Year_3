@@ -45,7 +45,7 @@ public class BaseCharacter : MonoBehaviour
     private void PlaceHitParticle()
     {
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
-        particle.transform.position = transform.position;
+        particle.transform.position = particleSpawnPoint.position;
         particle.gameObject.SetActive(true);
     }
     //call add force on enemies 
