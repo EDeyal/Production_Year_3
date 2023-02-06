@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RotateByXDirection : MonoBehaviour
@@ -40,12 +41,14 @@ public class RotateByXDirection : MonoBehaviour
         }
 
     }
-
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(WaitForMovingLeft());
     }
-
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
     IEnumerator WaitForMovingLeft()
     {
         if (_isUsingRigidbody)

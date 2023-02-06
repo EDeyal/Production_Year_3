@@ -9,6 +9,7 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] private StatusEffector effector;
     [SerializeField] private StatSheet statSheet;
     [SerializeField] private List<Boost> boosts = new List<Boost>();
+    [SerializeField] private Transform particleSpawnPoint;
     public DamageDealer DamageDealer { get => damageDealer; }
     public Damageable Damageable { get => damageable; }
     public StatusEffectable Effectable { get => effectable; }
@@ -35,11 +36,18 @@ public class BaseCharacter : MonoBehaviour
 
     protected virtual void SetUp()
     {
-        Effectable.CacheOwner(this);
+        Effectable?.CacheOwner(this);
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
+        damageable.OnTakeDmgGFX.AddListener(PlaceHitParticle);
     }
 
+    private void PlaceHitParticle()
+    {
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
+        particle.transform.position = particleSpawnPoint.position;
+        particle.gameObject.SetActive(true);
+    }
     //call add force on enemies 
     public virtual void ApplyKnockBack(Vector3 normalizedDir)
     {

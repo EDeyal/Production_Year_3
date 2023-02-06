@@ -33,7 +33,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         {
             Vector2 dir = item.transform.position - transform.position;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, dir, out hit) && item.transform.position == hit.collider.transform.position)
+            if (Physics.Raycast(transform.position, dir, out hit) && item.transform.position == hit.collider.transform.position && Condition(item))
             {
                 legalTargets.Add(item);
             }
@@ -60,6 +60,25 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         return closestPoint;
     }
 
+
+    public bool IsTargetLegal(T instance)
+    {
+        T[] legals = GetLegalTargets();
+        foreach (var item in legals)
+        {
+            if (ReferenceEquals(item, instance))
+            {
+                return true;
+            }
+        }
+        Debug.Log(instance.name + " isnt legal");
+        return false;
+    }
+
+    public virtual bool Condition(T Instance)
+    {
+        return true;
+    }
 
     private void OnDrawGizmos()
     {
