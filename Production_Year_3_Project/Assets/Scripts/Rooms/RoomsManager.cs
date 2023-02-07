@@ -6,12 +6,16 @@ using UnityEngine;
 public class RoomsManager : MonoBehaviour
 {
     [ReadOnly] Dictionary<string,RoomHandler> _roomsDictionary;
-    [SerializeField] RoomHandler _startingRoom;
-    string _currentRoom = "Environment";
+    [SerializeField] RoomHandler _currentRoom;
+    
     private void Awake()
     {
         _roomsDictionary = new Dictionary<string,RoomHandler>();
-        GameManager.Instance.PlayerManager.CurrentRoom  = _startingRoom;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.PlayerManager.CurrentRoom  = _currentRoom;        
     }
     public void AddRoom(RoomHandler roomHandler)
     {
@@ -27,7 +31,13 @@ public class RoomsManager : MonoBehaviour
     }
     public void ResetRoom()
     {
-        _roomsDictionary.TryGetValue(_currentRoom,out RoomHandler roomHandler);
-        roomHandler.ResetRoom();
+        if (_roomsDictionary.TryGetValue(_currentRoom.RoomName, out RoomHandler roomHandler))
+        {
+            roomHandler.ResetRoom();
+        }
+        else
+        {
+            Debug.LogWarning($"RoomsManager tried to get Room:{_currentRoom.RoomName}  from room dictionary with no success can not reset room");
+        }
     }
 }
