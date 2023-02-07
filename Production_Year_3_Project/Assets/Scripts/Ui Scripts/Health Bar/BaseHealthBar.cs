@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
-using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseHealthBar : MonoBehaviour
 {
@@ -68,7 +65,7 @@ public class BaseHealthBar : MonoBehaviour
 
     protected virtual void ChangeHp(float amount, bool hasTransition, AnimationCurve curve)
     {
-            currentHp += amount;
+        currentHp += amount;
         if (hasTransition)
         {
 

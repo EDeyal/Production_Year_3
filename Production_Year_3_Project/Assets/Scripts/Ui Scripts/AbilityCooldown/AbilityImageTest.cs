@@ -1,8 +1,6 @@
-using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
 
 public class AbilityImageTest : MonoBehaviour
 {
@@ -13,8 +11,8 @@ public class AbilityImageTest : MonoBehaviour
     [SerializeField] Sprite abilityTwo;
     [SerializeField] Sprite abilityThree;
     [SerializeField] Ability shownAbility;
-    [SerializeField] Image currentImage;
 #endif
+    [SerializeField] Image currentImage;
     Coroutine activeRoutine;
     [SerializeField] Slider cooldown;
 
@@ -22,6 +20,7 @@ public class AbilityImageTest : MonoBehaviour
     {
         cooldown.value = 0;
     }
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (currentImage == null)
@@ -29,6 +28,7 @@ public class AbilityImageTest : MonoBehaviour
             currentImage = GetComponent<Image>();
         }
     }
+#endif
 
     IEnumerator CoolDown()
     {
@@ -47,14 +47,14 @@ public class AbilityImageTest : MonoBehaviour
     }
     public void UseAbility(Ability abilitySO)
     {
-        
-        if (!ReferenceEquals(activeRoutine,null))
+
+        if (!ReferenceEquals(activeRoutine, null))
         {
             StopCoroutine(activeRoutine);
         }
         cooldown.value = cooldown.maxValue;
         activeRoutine = StartCoroutine(CoolDown());
-        
+
     }
     void ResetAbilityCooldown()
     {

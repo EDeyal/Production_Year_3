@@ -118,8 +118,10 @@ public abstract class GroundEnemy : BaseEnemy
         }
         return true;
     }
+#if UNITY_EDITOR
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
     }
+#endif
 }

@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : BaseCharacter, ICheckValidation
@@ -40,10 +39,12 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     public GameObject EnemyVisualHolder => _enemyVisualHolder;
     public Collider DamageDealingCollider => _damageDealingCollider;
     #endregion
+#if UNITY_EDITOR
     private void OnValidate()
     {
         _boundHandler.ValidateBounds();
     }
+#endif
     public override void Awake()
     {
         base.Awake();
@@ -64,16 +65,18 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             throw new System.Exception("Enemy has no Visual Holder");
         }
     }
+#if UNITY_EDITOR
     public virtual void OnDrawGizmosSelected()
     {
         BoundHandler.DrawBounds();
         if (!GameManager.Instance)
             return;
-        _playerSensor.DrawLineToTarget(transform,GameManager.Instance.PlayerManager.transform ,_noticePlayerDistance.Distance);
+        _playerSensor.DrawLineToTarget(transform, GameManager.Instance.PlayerManager.transform, _noticePlayerDistance.Distance);
     }
+#endif
     public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
     {
-        return _playerSensor.SendRayToTarget(transform,GameManager.Instance.PlayerManager.transform ,maxDistanceToPlayer);
+        return _playerSensor.SendRayToTarget(transform, GameManager.Instance.PlayerManager.transform, maxDistanceToPlayer);
     }
     protected bool WaitAction(BaseAction<ActionCooldownData> action, ref ActionCooldown cooldown)
     {

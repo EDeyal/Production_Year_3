@@ -238,10 +238,10 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         return true;
     }
-
+#if UNITY_EDITOR
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
     }
-
+#endif
 }

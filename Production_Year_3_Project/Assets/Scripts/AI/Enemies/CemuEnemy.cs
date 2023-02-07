@@ -62,12 +62,14 @@ public class CemuEnemy : GroundEnemy
         _isBoostActive = false;
         return false;
     }
+#if UNITY_EDITOR
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
         ChasePlayerDistance.DrawGizmos(transform.position);
         NoticePlayerDistance.DrawGizmos(transform.position);
     }
+#endif
     private void OnDestroy()
     {
         Effectable.OnStatusEffectRemoved.RemoveListener(RemoveBuffActivation);

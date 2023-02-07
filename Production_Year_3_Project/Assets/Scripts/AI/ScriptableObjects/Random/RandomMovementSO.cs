@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Drawers;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Random Movement SO", menuName = "ScriptableObjects/Random/RandomMovement")]

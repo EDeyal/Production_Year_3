@@ -49,7 +49,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
                 continue;
             }
             RaycastHit hit;
-            if (Physics.Raycast(rayFirePoint.position, dir, out hit, blockedLayer)  && Condition(item))
+            if (Physics.Raycast(rayFirePoint.position, dir, out hit, blockedLayer) && Condition(item))
             {
                 if (hit.collider.gameObject.CompareTag(tag))
                 {
@@ -103,15 +103,15 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
-       /* Gizmos.color = Color.magenta;
-        T[] legals = GetLegalTargets();
-        if (!ReferenceEquals(legals, null) && legals.Length > 0)
-        {
-            foreach (var item in legals)
-            {
-                Gizmos.DrawLine(rayFirePoint.position, item.transform.position);
-            }
-        }*/
+        /* Gizmos.color = Color.magenta;
+         T[] legals = GetLegalTargets();
+         if (!ReferenceEquals(legals, null) && legals.Length > 0)
+         {
+             foreach (var item in legals)
+             {
+                 Gizmos.DrawLine(rayFirePoint.position, item.transform.position);
+             }
+         }*/
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeZone);
         if (!ReferenceEquals(GetClosestLegalTarget(), null))
