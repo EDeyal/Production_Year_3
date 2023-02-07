@@ -91,7 +91,6 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
-
         OnTakeDmgGFX?.Invoke();
         givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
@@ -112,7 +111,7 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
-
+        Debug.Log(finalAmount +" was dealt to " + gameObject.name + " by " + givenDamageDealer.gameObject.name);
         OnTakeDmgGFX?.Invoke();
         givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
@@ -129,6 +128,11 @@ public class Damageable : MonoBehaviour
     public virtual void Heal(DamageHandler givenDamage)
     {
         OnGetHealed?.Invoke(givenDamage, this);
+        float finalAmount = givenDamage.GetFinalMult();
+        currentHp += finalAmount;
+        ClampHp();
+        givenDamage.ClearModifiers();
+
         OnHealGFX?.Invoke();
     }
 
