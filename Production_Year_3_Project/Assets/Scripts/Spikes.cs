@@ -41,20 +41,20 @@ public class Spikes : DamageDealingCollider
         playerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
         GameManager.Instance.RoomsManager.ResetRoom();
-        //Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
-        //float counter = 0f;
-        //while (counter < 1)
-        //{
-        //    counter += Time.deltaTime;
-        //    GameManager.Instance.PlayerManager.PlayerController.transform.position = Vector3.Lerp(startPos, respawnPoint.position, counter);
-        //    yield return new WaitForEndOfFrame();
-        //}
+        Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
+        float counter = 0f;
+        while (counter < 1)
+        {
+            counter += Time.deltaTime;
+            GameManager.Instance.PlayerManager.PlayerController.transform.position = Vector3.Lerp(startPos, respawnPoint.position, counter);
+            yield return new WaitForEndOfFrame();
+        }
 
         // TODO: Move player should be a function in player, that should also reset all forces applied to the player CC
-        yield return new WaitForEndOfFrame();
-        playerManager.PlayerController.enabled = false;
-        playerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
-        playerManager.PlayerController.enabled = true;
+        /*   yield return new WaitForEndOfFrame();
+           playerManager.PlayerController.enabled = false;
+           playerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
+           playerManager.PlayerController.enabled = true;*/
         playerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
         GameManager.Instance.InputManager.LockInputs = false;
