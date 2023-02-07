@@ -11,8 +11,6 @@ public class DashPopup : MonoBehaviour
     }
     public void ToggleDashPopup(bool state)
     {
-
-        Debug.Log("Toggle");
         GameManager.Instance.PlayerManager.enabled = !state;
         GameManager.Instance.InputManager.LockInputs = state;
         gameObject.SetActive(state);

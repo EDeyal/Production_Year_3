@@ -120,6 +120,11 @@ public class InputManager : MonoBehaviour
     }
     public Vector2 GetMoveVector()
     {
+        if (LockInputs)
+        {
+            return Vector2.zero;
+        }
         return input.BasicActions.Move.ReadValue<Vector2>();
+
     }
 }

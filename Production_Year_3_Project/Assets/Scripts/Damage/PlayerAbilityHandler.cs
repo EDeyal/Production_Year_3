@@ -22,11 +22,12 @@ public class PlayerAbilityHandler : MonoBehaviour
     {
         canCast = true;
         GameManager.Instance.InputManager.OnSpellCast.AddListener(CastAbility);
-        EquipSpell(test);
+        //EquipSpell(test);
     }
     public virtual void CastAbility()
     {
-        if (!canCast || lastCastSpell > Time.time - currentAbility.CoolDown || ReferenceEquals(currentAbility, null))
+
+        if (ReferenceEquals(currentAbility, null) || !canCast || lastCastSpell > Time.time - currentAbility.CoolDown)
         {
             return;
         }
@@ -38,7 +39,7 @@ public class PlayerAbilityHandler : MonoBehaviour
             StartCoroutine(CountDownCoolDown());
             lastCastSpell = Time.time;
         }
-      
+
     }
 
     private void ResetLastCastSpell()
