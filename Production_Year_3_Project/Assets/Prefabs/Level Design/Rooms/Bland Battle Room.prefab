@@ -2538,6 +2538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4818646375610584475}
+  - component: {fileID: 4235534179647026808}
   m_Layer: 0
   m_Name: Bland Battle Room
   m_TagString: Untagged
@@ -2562,6 +2563,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4235534179647026808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818646375610584474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7481e8300b4735d40840508fd6883006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnHandler:
+    _enemies:
+    - {fileID: 4290299250717302784}
+    - {fileID: 1956756430426413401}
 --- !u!1 &4818646376069662526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6437,6 +6454,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1344090438403785106}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1956756430426413401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1344090438403785106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284dcc7c8aa39314b8aaa9fb0d13d904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1346067648150205149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8158,6 +8187,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18f89cfebc0aee74885ec79d57472b7c, type: 3}
+--- !u!114 &4290299250717302784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3605928419195926731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284dcc7c8aa39314b8aaa9fb0d13d904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4290299250856661149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 684794236130240598, guid: 18f89cfebc0aee74885ec79d57472b7c,
