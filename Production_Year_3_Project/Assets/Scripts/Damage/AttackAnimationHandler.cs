@@ -70,7 +70,6 @@ public class AttackAnimationHandler : MonoBehaviour
         }
         attackFinished = false;
         OnAttackPerformed?.Invoke();
-        Debug.Log("OnAttackPreformed");
     }
 
     public void SetLastAttacked(float givenTime)
@@ -112,10 +111,10 @@ public class AttackAnimationHandler : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmosSelected()
+   /* private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(rightAttackPos.position, attackRadius);
         Gizmos.DrawWireSphere(leftAttackPos.position, attackRadius);
-    }
+    }*/
 }

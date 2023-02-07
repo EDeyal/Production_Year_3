@@ -58,6 +58,10 @@ public class Damageable : MonoBehaviour
 
     public void ResetParameters()
     {
+        if (ReferenceEquals(GameManager.Instance, null))
+        {
+            return;
+        }
         Heal(new DamageHandler() { BaseAmount = maxHp });
     }
 
@@ -65,6 +69,7 @@ public class Damageable : MonoBehaviour
     {
         if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
+
         OnGetHit?.Invoke(givenAttack, this);
         TakeDamage(givenAttack);
     }
@@ -74,7 +79,6 @@ public class Damageable : MonoBehaviour
         if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
 
-        Debug.Log(gameObject.name + " was hit by " + givenDealer.name);
         OnGetHit?.Invoke(givenAttack, this);
         givenDealer.OnHitAttack?.Invoke(givenAttack);
         TakeDamage(givenAttack, givenDealer);
@@ -87,7 +91,6 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
-
         OnTakeDmgGFX?.Invoke();
         givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
@@ -108,9 +111,9 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
-
+        Debug.Log(finalAmount +" was dealt to " + gameObject.name + " by " + givenDamageDealer.gameObject.name);
         OnTakeDmgGFX?.Invoke();
-
+        givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();
@@ -125,6 +128,11 @@ public class Damageable : MonoBehaviour
     public virtual void Heal(DamageHandler givenDamage)
     {
         OnGetHealed?.Invoke(givenDamage, this);
+        float finalAmount = givenDamage.GetFinalMult();
+        currentHp += finalAmount;
+        ClampHp();
+        givenDamage.ClearModifiers();
+
         OnHealGFX?.Invoke();
     }
 

@@ -4,8 +4,19 @@ using UnityEngine;
 public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] protected float checkRadius;
+    [SerializeField] private Transform rayFirePoint;
     [SerializeField] protected LayerMask targetLayer;
+    [SerializeField] protected LayerMask blockedLayer;
+    [SerializeField] private float meleeZone;
+    [SerializeField] private string tag;
 
+    private void Start()
+    {
+        if (ReferenceEquals(rayFirePoint, null))
+        {
+            rayFirePoint = transform;
+        }
+    }
     public T[] GetTargetsInProximity()//without line of sight
     {
         Collider[] foundColliders = Physics.OverlapSphere(transform.position, checkRadius, targetLayer);
@@ -31,11 +42,19 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
 
         foreach (var item in targets)
         {
-            Vector2 dir = item.transform.position - transform.position;
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, dir, out hit) && item.transform.position == hit.collider.transform.position && Condition(item))
+            Vector2 dir = (item.transform.position - transform.position);
+            if (dir.magnitude <= meleeZone && Condition(item))
             {
                 legalTargets.Add(item);
+                continue;
+            }
+            RaycastHit hit;
+            if (Physics.Raycast(rayFirePoint.position, dir, out hit, blockedLayer)  && Condition(item))
+            {
+                if (hit.collider.gameObject.CompareTag(tag))
+                {
+                    legalTargets.Add(item);
+                }
             }
         }
         return legalTargets.ToArray();
@@ -80,14 +99,25 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         return true;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
+       /* Gizmos.color = Color.magenta;
+        T[] legals = GetLegalTargets();
+        if (!ReferenceEquals(legals, null) && legals.Length > 0)
+        {
+            foreach (var item in legals)
+            {
+                Gizmos.DrawLine(rayFirePoint.position, item.transform.position);
+            }
+        }*/
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, meleeZone);
         if (!ReferenceEquals(GetClosestLegalTarget(), null))
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, GetClosestLegalTarget().transform.position);
+            Gizmos.DrawLine(rayFirePoint.position, GetClosestLegalTarget().transform.position);
         }
     }
 

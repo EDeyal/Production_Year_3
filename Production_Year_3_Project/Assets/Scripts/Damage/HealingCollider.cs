@@ -15,5 +15,6 @@ public class HealingCollider : MonoBehaviour
             return;
         }
         character.Damageable.Heal(damage);
+        gameObject.SetActive(false);
     }
 }
