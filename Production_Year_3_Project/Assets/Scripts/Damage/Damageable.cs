@@ -58,6 +58,10 @@ public class Damageable : MonoBehaviour
 
     public void ResetParameters()
     {
+        if (ReferenceEquals(GameManager.Instance, null))
+        {
+            return;
+        }
         Heal(new DamageHandler() { BaseAmount = maxHp });
     }
 
@@ -65,6 +69,7 @@ public class Damageable : MonoBehaviour
     {
         if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
+
         OnGetHit?.Invoke(givenAttack, this);
         TakeDamage(givenAttack);
     }
@@ -74,7 +79,6 @@ public class Damageable : MonoBehaviour
         if (!_canReciveDamage || currentHp <= 0 || !givenAttack.CheckTargetValidity(targetType))
             return;
 
-        Debug.Log(gameObject.name + " was hit by " + givenDealer.name);
         OnGetHit?.Invoke(givenAttack, this);
         givenDealer.OnHitAttack?.Invoke(givenAttack);
         TakeDamage(givenAttack, givenDealer);
@@ -110,7 +114,7 @@ public class Damageable : MonoBehaviour
         currentHp -= finalAmount;
 
         OnTakeDmgGFX?.Invoke();
-
+        givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)
         {
             OnDeath?.Invoke();

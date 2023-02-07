@@ -40,15 +40,27 @@ public class BaseCharacter : MonoBehaviour
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
         damageable.OnTotalDamageCalcRecieve.AddListener(PlaceHitParticle);
+        damageable.OnHealGFX.AddListener(PlaceHealParticle);
     }
 
     private void PlaceHitParticle(Attack givenAttack, Damageable target)
     {
-        if (givenAttack.DamageHandler.GetFinalMult() <= 0)
+        if (givenAttack.DamageHandler.GetFinalMult() <= 0 || ReferenceEquals(GameManager.Instance.ObjectPoolsHandler, null))
         {
             return;
         }
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
+        particle.transform.position = particleSpawnPoint.position;
+        particle.gameObject.SetActive(true);
+    }
+
+    private void PlaceHealParticle()
+    {
+        if (ReferenceEquals(GameManager.Instance.ObjectPoolsHandler, null))
+        {
+            return;
+        }
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HealParticle.GetPooledObject();
         particle.transform.position = particleSpawnPoint.position;
         particle.gameObject.SetActive(true);
     }

@@ -70,7 +70,6 @@ public class AttackAnimationHandler : MonoBehaviour
         }
         attackFinished = false;
         OnAttackPerformed?.Invoke();
-        Debug.Log("OnAttackPreformed");
     }
 
     public void SetLastAttacked(float givenTime)
