@@ -11,7 +11,11 @@ public class RoomsManager : MonoBehaviour
     private void Awake()
     {
         _roomsDictionary = new Dictionary<string,RoomHandler>();
-        GameManager.Instance.PlayerManager.CurrentRoom  = _startingRoom;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.PlayerManager.CurrentRoom  = _startingRoom;        
     }
     public void AddRoom(RoomHandler roomHandler)
     {
