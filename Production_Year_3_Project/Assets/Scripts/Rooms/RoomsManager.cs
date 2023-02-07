@@ -31,7 +31,13 @@ public class RoomsManager : MonoBehaviour
     }
     public void ResetRoom()
     {
-        _roomsDictionary.TryGetValue(_currentRoom,out RoomHandler roomHandler);
-        roomHandler.ResetRoom();
+        if (_roomsDictionary.TryGetValue(_currentRoom, out RoomHandler roomHandler))
+        {
+            roomHandler.ResetRoom();
+        }
+        else
+        {
+            Debug.LogWarning($"RoomsManager tried to get Room:{_currentRoom}  from room dictionary with no success can not reset room");
+        }
     }
 }
