@@ -32,6 +32,7 @@ public class Spikes : DamageDealingCollider
         GameManager.Instance.PlayerManager.PlayerController.ResetVelocity();
         GameManager.Instance.PlayerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
+        GameManager.Instance.RoomsManager.ResetRoom();
         Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
         //float counter = 0f;
         //while (counter < 1)
