@@ -5,17 +5,24 @@ using UnityEngine;
 
 public class RoomsManager : MonoBehaviour
 {
-    [ReadOnly] Dictionary<string,RoomHandler> _roomsDictionary;
+    [ReadOnly] Dictionary<string, RoomHandler> _roomsDictionary;
     [SerializeField] RoomHandler _currentRoom;
-    
+    public RoomHandler CurrentRoom
+    {
+        set
+        {
+            _currentRoom = value;
+            GameManager.Instance.PlayerManager.CurrentRoom = _currentRoom;
+        }
+    }
     private void Awake()
     {
-        _roomsDictionary = new Dictionary<string,RoomHandler>();
+        _roomsDictionary = new Dictionary<string, RoomHandler>();
     }
 
     private void Start()
     {
-        GameManager.Instance.PlayerManager.CurrentRoom  = _currentRoom;        
+        GameManager.Instance.PlayerManager.CurrentRoom = _currentRoom;
     }
     public void AddRoom(RoomHandler roomHandler)
     {

@@ -6,6 +6,7 @@ public class Spikes : DamageDealingCollider
 {
     [SerializeField] private Attack refAttack;
     [SerializeField] private Transform respawnPoint;
+    bool _respawning = false;
 
 
     private void Start()
@@ -29,11 +30,18 @@ public class Spikes : DamageDealingCollider
 
     private IEnumerator RespawnPlayer()
     {
-        GameManager.Instance.PlayerManager.PlayerController.ResetVelocity();
-        GameManager.Instance.PlayerManager.LockPlayer();
+        if (_respawning)
+        {
+            yield break;
+        }
+        _respawning = true;
+        var playerManager = GameManager.Instance.PlayerManager;
+        playerManager.PlayerController.ResetVelocity();
+        GameManager.Instance.InputManager.LockInputs = true;
+        playerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
         GameManager.Instance.RoomsManager.ResetRoom();
-        Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
+        //Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
         //float counter = 0f;
         //while (counter < 1)
         //{
@@ -44,15 +52,12 @@ public class Spikes : DamageDealingCollider
 
         // TODO: Move player should be a function in player, that should also reset all forces applied to the player CC
         yield return new WaitForEndOfFrame();
-        GameManager.Instance.PlayerManager.PlayerController.enabled = false;
-        GameManager.Instance.PlayerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
-        GameManager.Instance.PlayerManager.PlayerController.enabled = true;
-        GameManager.Instance.InputManager.LockInputs = true;
-        GameManager.Instance.PlayerManager.UnLockPlayer();
+        playerManager.PlayerController.enabled = false;
+        playerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
+        playerManager.PlayerController.enabled = true;
+        playerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
         GameManager.Instance.InputManager.LockInputs = false;
-
-
-
+        _respawning = false;
     }
 }
