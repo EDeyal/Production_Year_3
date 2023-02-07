@@ -69,7 +69,7 @@ public class PlayerManager : BaseCharacter
     public void SubscirbeUI()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
-        Damageable.OnTakeDamage.AddListener(UpdateHpbarTakeDmg);
+        Damageable.OnTotalDamageCalcRecieve.AddListener(UpdateHpbarTakeDmg);
         Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
         StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbarHeal);

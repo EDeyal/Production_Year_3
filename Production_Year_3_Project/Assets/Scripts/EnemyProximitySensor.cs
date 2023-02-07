@@ -7,6 +7,7 @@ public class EnemyProximitySensor : ProximitySensor<BaseCharacter>
     {
         if (instance.Damageable.CurrentHp <=0)
         {
+            Debug.Log("dead enemy");
             return false;
         }
         return true;

@@ -38,7 +38,6 @@ public class CameraMovement : MonoBehaviour
     [ContextMenu("Shake")]
     public void CamShake()
     {
-        Debug.Log("shaking");
         camShakeComp.m_AmplitudeGain = amplitude;
         camShakeComp.m_FrequencyGain = frequency;
         if (!ReferenceEquals(activeShakeRoutine, null))

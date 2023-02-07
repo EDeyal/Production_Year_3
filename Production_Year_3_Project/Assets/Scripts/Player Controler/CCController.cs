@@ -129,7 +129,6 @@ public class CCController : MonoBehaviour
         RunEvents(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
-            Debug.Log("jumped");
             if (!IsFirstJump())
             {
                 DisableGravity();
@@ -141,8 +140,6 @@ public class CCController : MonoBehaviour
         }
         else if (jumpIsHeld && jumpHeldTimer > 0)
         {
-            Debug.Log("jump was held");
-
             jumpHeldTimer -= Time.deltaTime;
             velocity.y = Mathf.Sqrt(jumpHeight * 2f * gravityForce);
             ResetGravity();

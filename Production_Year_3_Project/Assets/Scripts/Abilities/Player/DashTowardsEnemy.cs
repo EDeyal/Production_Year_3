@@ -64,6 +64,7 @@ public class DashTowardsEnemy : Ability
             counter += Time.deltaTime * dashSpeed;
             yield return new WaitForEndOfFrame();
         }
+        target.Damageable.GetHit(dashEndAbility, player.DamageDealer);
         player.SwordVFX.StopQuovaxDashParticle();
         player.Gfx.eulerAngles = playerRot;
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
@@ -73,7 +74,6 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.CanMove = true;
         player.PlayerAbilityHandler.CanCast = true;
         GameManager.Instance.Cam.CamShake();
-        target.Damageable.GetHit(dashEndAbility, player.DamageDealer);
         buff.Remove();
     }
 
