@@ -9,5 +9,12 @@ public class UIManager : MonoBehaviour
         playerHud = givenHud;
     }
 
+    public void CacheDashPopup(DashPopup givenDashPopup)
+    {
+        DashPopup = givenDashPopup;
+    }
+
     public PlayerHud PlayerHud { get => playerHud; }
+
+    public DashPopup DashPopup;
 }
