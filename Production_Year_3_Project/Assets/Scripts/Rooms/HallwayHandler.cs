@@ -6,13 +6,25 @@ public class HallwayHandler:MonoBehaviour, ICheckValidation
     [SerializeField] List<HallwayTrigger> _triggers;
     [SerializeField] LayerMask _targetLayer;
     public int HallwayIndex;
+    private void Awake()
+    {
+        CheckValidation();
+    }
     private void Start()
     {
+        foreach (var trigger in _triggers)
+        {
+            if (!trigger.ClosestRoom.Hallways.Contains(this))
+            {
+                trigger.ClosestRoom.Hallways.Add(this);
+            }
+        }
         InitRoomTriggers();
         foreach (var trigger in _triggers)
         {
             trigger.OnEnteredTrigger += ActivateRoom;
         }
+
     }
     public void InitRoomTriggers()
     {

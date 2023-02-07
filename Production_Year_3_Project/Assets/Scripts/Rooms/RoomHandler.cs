@@ -4,12 +4,14 @@ using UnityEngine;
 public class RoomHandler : MonoBehaviour, ICheckValidation
 {
     int currentHallway = -1;
-    [SerializeField] List<HallwayHandler> _hallways;
+    List<HallwayHandler> _hallways;
     [SerializeField] SpawningHandler _spawnHandler;
     public string RoomName => gameObject.name;
+    public List<HallwayHandler> Hallways => _hallways;
 
     private void Awake()
     {
+        _hallways = new List<HallwayHandler>();
         CheckValidation();
     }
     private void Start()
@@ -35,10 +37,5 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
         {
             Debug.LogWarning($"RoomHandler {RoomName} has no enemies");
         }
-        if (_hallways.Count == 0)
-        {
-            throw new System.Exception($"RoomHandler with room name: {RoomName} has no Hallways");
-        }
-
     }
 }
