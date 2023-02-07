@@ -22,6 +22,7 @@ public class HallwayTrigger: MonoBehaviour, ICheckValidation
     {
         CheckValidation();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log($"Something with layer {other.gameObject.layer} entered trigger");
