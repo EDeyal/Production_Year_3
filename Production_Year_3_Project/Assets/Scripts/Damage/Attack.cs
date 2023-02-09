@@ -10,6 +10,12 @@ public class Attack : ScriptableObject
     public List<TargetType> TargetType { get => targetTypes; }
     public DamageHandler DamageHandler { get => damageHandler; }
 
+
+    private void OnEnable()
+    {
+        damageHandler.ClearModifiers();
+    }
+
     public bool CheckTargetValidity(TargetType givenTarget)
     {
         foreach (var item in targetTypes)
