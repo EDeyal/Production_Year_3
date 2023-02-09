@@ -353,6 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 146567258442153096}
   minHeight: 0.05
+  maxheight: 0.75
   amplitude: 2
   frequency: 2
   shakeDuration: 0.4
@@ -480,7 +481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146567259025661827}
   m_LocalRotation: {x: -0.00005777816, y: 0.00011382709, z: -0.0008360412, w: 0.99999964}
-  m_LocalPosition: {x: -0.0050104856, y: 1.35746, z: -22}
+  m_LocalPosition: {x: -0.005010508, y: 1.3574619, z: -21.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -966,7 +967,7 @@ MonoBehaviour:
   OnCast:
     m_PersistentCalls:
       m_Calls: []
-  test: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496, type: 2}
+  test: {fileID: 0}
 --- !u!114 &146567259415107162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,7 +1081,7 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 0, y: 1}
     Offset: {x: 0, y: 0}
-    Range: 0.125
+    Range: 0.2
   hitLayer:
     serializedVersion: 2
     m_Bits: 128

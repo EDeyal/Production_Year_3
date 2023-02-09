@@ -8,6 +8,8 @@ public class DashTowardsEnemy : Ability
     [SerializeField] private float dashSpeed;
     [SerializeField] private Attack dashEndAbility;
     [SerializeField, Range(0f, 10f)] private float dashApex;
+
+
     private PlayerManager player => Owner as PlayerManager;
 
     public override bool TryCast()
@@ -31,12 +33,7 @@ public class DashTowardsEnemy : Ability
         {
             yield break;
         }
-
-        player.PlayerController.ResetGravity();
-        player.PlayerController.ResetVelocity();
-        player.PlayerController.CanMove = false;
-        player.PlayerAbilityHandler.CanCast = false;
-       
+        ResetPlayer(false);
         Vector3 dest = new Vector3(target.transform.position.x, target.transform.position.y, 0);
         if (dest.x > player.transform.position.x)
         {
@@ -53,8 +50,7 @@ public class DashTowardsEnemy : Ability
 
         Vector3 startPos = player.transform.position;
         float counter = 0;
-        Invulnerability buff = new Invulnerability();
-        player.Effectable.ApplyStatusEffect(buff);
+        player.Effectable.ApplyStatusEffect(new Invulnerability());
         player.PlayerController.AnimBlender.SetBool("SuperDash", true);
         player.SwordVFX.PlayQuovaxDashParticle();
         while (counter < 1)
@@ -68,14 +64,22 @@ public class DashTowardsEnemy : Ability
         player.SwordVFX.StopQuovaxDashParticle();
         player.Gfx.eulerAngles = playerRot;
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
+        ResetPlayer(true);
+        player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetGravity();
-        player.PlayerController.ResetVelocity();
-        player.PlayerController.CanMove = true;
-        player.PlayerAbilityHandler.CanCast = true;
         GameManager.Instance.Cam.CamShake();
-        buff.Remove();
+        player.Effectable.RemoveStatusEffect(new Invulnerability());
+
     }
 
+    private void ResetPlayer(bool state)
+    {
+        player.PlayerController.ResetGravity();
+        player.PlayerController.ResetVelocity();
+        player.PlayerController.CanMove = state;
+        player.PlayerAbilityHandler.CanCast = state;
+    }
+   
 }
 
