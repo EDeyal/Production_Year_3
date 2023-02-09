@@ -18,7 +18,6 @@ public abstract class StatusEffect
     public virtual void Remove()
     {
         UnSubscribe();
-        host.Effectable.RemoveStatusEffect(this);
     }
 
     public abstract void Reset();

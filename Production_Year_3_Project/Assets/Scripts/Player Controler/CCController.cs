@@ -263,6 +263,10 @@ public class CCController : MonoBehaviour
         gravityScale = startingGravityScale;
     }
 
+    public void ZeroGravity()
+    {
+        gravityScale = 0f;
+    }
     public void StartDashReset()
     {
         canMove = false;

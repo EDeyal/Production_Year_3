@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin camShakeComp;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float minHeight;
+    [SerializeField] private float maxheight;
     [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
     [SerializeField] private float shakeDuration;
@@ -17,22 +18,35 @@ public class CameraMovement : MonoBehaviour
     Coroutine activeShakeRoutine;
 
     private bool holdingDown;
+    private bool holdingUp;
     private void Start()
     {
         moveCamComp = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         camShakeComp = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         GameManager.Instance.InputManager.OnLookDownDown.AddListener(HoldDown);
-        GameManager.Instance.InputManager.OnLookDownUp.AddListener(ReleaseHoldingDown);
+        GameManager.Instance.InputManager.OnLookUpDown.AddListener(HoldUp);
+        GameManager.Instance.InputManager.OnLookDownUp.AddListener(ReleaseHoldingCam);
+        GameManager.Instance.InputManager.OnLookUpUp.AddListener(ReleaseHoldingCam);
+
+        GameManager.Instance.PlayerManager.PlayerController.GroundCheck.OnNotGrounded.AddListener(ReleaseHoldingCam);
         GameManager.Instance.CacheCam(this);
         GameManager.Instance.PlayerManager.Damageable.OnTakeDmgGFX.AddListener(CamShake);
     }
 
     private void Update()
     {
-        if (holdingDown)
+        if (GameManager.Instance.PlayerManager.PlayerController.GroundCheck.IsGrounded())
         {
-            MoveCameraYDownWards();
+            if (holdingDown)
+            {
+                MoveCameraYDownWards();
+            }
+            else if (holdingUp)
+            {
+                MoveCameraYUpwards();
+            }
         }
+      
     }
     
     [ContextMenu("Shake")]
@@ -57,18 +71,27 @@ public class CameraMovement : MonoBehaviour
     private void MoveCameraYDownWards()
     {
         moveCamComp.m_ScreenY -= Time.deltaTime;
-        moveCamComp.m_ScreenY = Mathf.Clamp(moveCamComp.m_ScreenY, minHeight, 1.5f);
+        moveCamComp.m_ScreenY = Mathf.Clamp(moveCamComp.m_ScreenY, minHeight, maxheight);
+    }
+    private void MoveCameraYUpwards()
+    {
+        moveCamComp.m_ScreenY += Time.deltaTime;
+        moveCamComp.m_ScreenY = Mathf.Clamp(moveCamComp.m_ScreenY, minHeight, maxheight);
     }
 
-
-    private void ReleaseHoldingDown()
+    private void ReleaseHoldingCam()
     {
         holdingDown = false;
+        holdingUp = false;
         moveCamComp.m_ScreenY = 0.5f;
     }
 
     private void HoldDown()
     {
         holdingDown = true;
+    }
+    private void HoldUp()
+    {
+        holdingUp = true;
     }
 }
