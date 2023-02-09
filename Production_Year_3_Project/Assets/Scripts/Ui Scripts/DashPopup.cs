@@ -9,6 +9,14 @@ public class DashPopup : MonoBehaviour
         GameManager.Instance.UiManager.CacheDashPopup(this);
         gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+        Cursor.visible = true;
+    }
+    private void OnDisable()
+    {
+        Cursor.visible = false;
+    }
     public void ToggleDashPopup(bool state)
     {
         GameManager.Instance.PlayerManager.enabled = !state;

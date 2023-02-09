@@ -32,6 +32,10 @@ public class GameManager : MonoSingleton<GameManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
+    private void Start()
+    {
+        Cursor.visible = false;   
+    }
     public void AddGameplayManagerHelper(GameManagerHelper gameManagerHelper)
     {
         _gameManagerHelper = gameManagerHelper;

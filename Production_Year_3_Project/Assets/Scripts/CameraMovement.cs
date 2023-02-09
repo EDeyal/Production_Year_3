@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     private CinemachineFramingTransposer moveCamComp;
     private CinemachineBasicMultiChannelPerlin camShakeComp;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineBrain brain;
     [SerializeField] private float minHeight;
     [SerializeField] private float maxheight;
     [SerializeField] private float amplitude;
@@ -66,6 +67,8 @@ public class CameraMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(shakeDuration);
         camShakeComp.m_AmplitudeGain = 0f;
         camShakeComp.m_FrequencyGain = 0f;
+        brain.transform.rotation = Quaternion.Euler(Vector3.zero);
+        //set brain rotation to v3.z
     }
 
     private void MoveCameraYDownWards()
