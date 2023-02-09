@@ -75,7 +75,7 @@ public class QovaxEnemy : FlyingEnemy
             {
                 //Start Movement after cooldown
                 _isCharging = true;
-                Debug.Log("Charging");
+                //Debug.Log("Charging");
                 AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), QovaxStatSheet.ChargeSpeed);
             }
             else
