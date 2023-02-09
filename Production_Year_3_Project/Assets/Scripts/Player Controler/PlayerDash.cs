@@ -42,7 +42,7 @@ public class PlayerDash : MonoBehaviour
 
     private void StartDash()
     {
-        if (Time.time - lastDashed >= dashCoolDown && canDash)
+        if (Time.time - lastDashed >= dashCoolDown && canDash && controller.CanMove)
         {
             StartCoroutine(Dash());
         }

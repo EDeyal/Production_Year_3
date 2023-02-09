@@ -41,6 +41,6 @@ public class MovementSpeedBoost : StatusEffect
     {
         yield return new WaitForSecondsRealtime((host.GetBoostFromBoostType(BoostType.Speed).BoostDuration));
         host.StatSheet.ResetSpeed();
-        Remove();
+        host.Effectable.RemoveStatusEffect(this);
     }
 }

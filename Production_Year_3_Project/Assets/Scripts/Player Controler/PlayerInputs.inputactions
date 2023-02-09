@@ -65,17 +65,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e87c4b20-4982-432e-9e32-54727dc79e18",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d97b425e-fcef-45d1-bdd4-60dd5966c965",
                     "path": "<Keyboard>/z",
                     "interactions": "",
@@ -231,6 +220,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MoveUp",
+                    "type": "Button",
+                    "id": "8520f506-5b90-43ba-9514-c98a47bdd6ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -253,6 +251,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "796c3dee-bf94-4a4f-ba81-25b24e18af9f",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

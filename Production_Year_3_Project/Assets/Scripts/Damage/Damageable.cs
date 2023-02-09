@@ -44,6 +44,11 @@ public class Damageable : MonoBehaviour
     public float MaxHp { get => maxHp; }
     public BaseCharacter Owner { get => owner; }
 
+    private void OnEnable()
+    {
+        _canReciveDamage = true;
+    }
+
     public void CacheOwner(BaseCharacter givenCharacter)
     {
         owner = givenCharacter;

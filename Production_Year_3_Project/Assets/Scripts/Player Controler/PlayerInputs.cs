@@ -87,17 +87,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e87c4b20-4982-432e-9e32-54727dc79e18"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d97b425e-fcef-45d1-bdd4-60dd5966c965"",
                     ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
@@ -253,6 +242,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""8520f506-5b90-43ba-9514-c98a47bdd6ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -277,6 +275,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""MoveDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""796c3dee-bf94-4a4f-ba81-25b24e18af9f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -293,6 +302,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
+        m_Camera_MoveUp = m_Camera.FindAction("MoveUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -418,11 +428,13 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_MoveDown;
+    private readonly InputAction m_Camera_MoveUp;
     public struct CameraActions
     {
         private @PlayerInputs m_Wrapper;
         public CameraActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveDown => m_Wrapper.m_Camera_MoveDown;
+        public InputAction @MoveUp => m_Wrapper.m_Camera_MoveUp;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -435,6 +447,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @MoveDown.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
                 @MoveDown.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
                 @MoveDown.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveDown;
+                @MoveUp.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
+                @MoveUp.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
+                @MoveUp.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -442,6 +457,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @MoveDown.started += instance.OnMoveDown;
                 @MoveDown.performed += instance.OnMoveDown;
                 @MoveDown.canceled += instance.OnMoveDown;
+                @MoveUp.started += instance.OnMoveUp;
+                @MoveUp.performed += instance.OnMoveUp;
+                @MoveUp.canceled += instance.OnMoveUp;
             }
         }
     }
@@ -457,5 +475,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         void OnMoveDown(InputAction.CallbackContext context);
+        void OnMoveUp(InputAction.CallbackContext context);
     }
 }

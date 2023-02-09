@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(BaseCharacter))]
 public class StatusEffectable : MonoBehaviour
@@ -67,6 +68,7 @@ public class StatusEffectable : MonoBehaviour
         {
             if (item.GetType() == effect.GetType())
             {
+                item.Remove();
                 OnStatusEffectRemoved.Invoke(item);
                 statusEffects.Remove(item);
                 return;

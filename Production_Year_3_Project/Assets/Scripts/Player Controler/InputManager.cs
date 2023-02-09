@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
     public UnityEvent OnLookDownDown;
     public UnityEvent OnLookDownUp;
+    public UnityEvent OnLookUpDown;
+    public UnityEvent OnLookUpUp;
 
     public bool LockInputs;
     private void Start()
@@ -39,8 +41,26 @@ public class InputManager : MonoBehaviour
         input.BasicActions.SpellAttack.started += InvokeOnSpellCast;
         input.Camera.MoveDown.started += InvokeOnLookDown;
         input.Camera.MoveDown.canceled += InvokeOnLookDownUp;
-    }
+        input.Camera.MoveUp.started += InvokeOnLookUp;
+        input.Camera.MoveUp.canceled+= InvokeOnLookUpUp;
 
+    }
+    public void InvokeOnLookUpUp(InputAction.CallbackContext obj)
+    {
+        if (LockInputs)
+        {
+            return;
+        }
+        OnLookUpUp?.Invoke();
+    }
+    public void InvokeOnLookUp(InputAction.CallbackContext obj)
+    {
+        if (LockInputs)
+        {
+            return;
+        }
+        OnLookUpDown?.Invoke();
+    }
     public void InvokeOnLookDown(InputAction.CallbackContext obj)
     {
         if (LockInputs)
