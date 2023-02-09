@@ -9,12 +9,19 @@ public class CemuEnemy : GroundEnemy
     [SerializeField] CombatHandler _combatHandler;
     [SerializeField] Ability _cemuAbility;
     public bool IsBoostActive => _isBoostActive;
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Damageable.OnTakeDmgGFX.AddListener(TakeDamageAnimation);
+    }
 
     protected override void OnDisable()
     {
         base.OnDisable();
+        Damageable.OnTakeDmgGFX.RemoveListener(TakeDamageAnimation);
         _isBoostActive = false;
     }
+    
     public override void Awake()
     {
         base.Awake();
@@ -77,5 +84,10 @@ public class CemuEnemy : GroundEnemy
     public override void OnDeath()
     {
         base.OnDeath();
+    }
+    private void TakeDamageAnimation()
+    {
+        AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.IsHit));
+
     }
 }
