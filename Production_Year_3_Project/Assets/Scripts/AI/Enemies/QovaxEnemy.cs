@@ -5,7 +5,7 @@ public class QovaxEnemy : FlyingEnemy
     [SerializeField] QovaxStateHandler _qovaxStateHandler;
     [SerializeField] CombatHandler _combatHandler;
     ActionCooldown _actionCooldown;
-
+    [SerializeField] RotationAction _rotationChargeAction;
     [SerializeField] BaseAction<ActionCooldownData> _evasionCooldownAction;
     [SerializeField] BaseAction<ActionCooldownData> _chargeCooldownAction;
     [SerializeField] BaseAction<ActionCooldownData> _fatigueCooldownAction;
@@ -80,6 +80,8 @@ public class QovaxEnemy : FlyingEnemy
             }
             else
             {
+                var direction = GetNormilizedDirectionToTarget(transform.position, _chargePoint);
+                Rotate(direction.x,_rotationChargeAction);
                 //if still in cooldown return back and wait for next frame
                 return false;
             }
@@ -123,11 +125,15 @@ public class QovaxEnemy : FlyingEnemy
     public bool CheckForEvasionCooldown()
     {
         //Evasion Logic
+        var direction = GetNormilizedDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
+        Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_evasionCooldownAction, _actionCooldown);
     }
     public bool CheckForFatigueCooldown()
     {
         //Fatige Logic
+        var direction = GetNormilizedDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
+        Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_fatigueCooldownAction, _actionCooldown);
     }
 #if UNITY_EDITOR

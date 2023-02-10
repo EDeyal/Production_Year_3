@@ -261,6 +261,10 @@ MonoBehaviour:
   - {fileID: 684794235154033134}
   - {fileID: 684794235833240075}
   _moveAction: {fileID: 11400000, guid: 6bb168e8445fa804c90623361608e7ba, type: 2}
+  _rotationPatrolAction: {fileID: 11400000, guid: 844e7fc9dc8ff2c42890edd4316a7483,
+    type: 2}
+  _rotationChaseAction: {fileID: 11400000, guid: 3525f1cb202ac8e47b7f56df69393cb5,
+    type: 2}
   _boundsXDistanceAction: {fileID: 11400000, guid: 35cf3054c9b260a49a3b3dfe3cd44109,
     type: 2}
   _waypointXDistanceAction: {fileID: 11400000, guid: f5b31f330093d8240b2f70eb91927860,
@@ -561,7 +565,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684794236275958481}
-  - component: {fileID: 684794236275958482}
   m_Layer: 10
   m_Name: Visuals
   m_TagString: Enemy
@@ -587,24 +590,6 @@ Transform:
   m_Father: {fileID: 684794236260423882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &684794236275958482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684794236275958480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8942f6c4d8c80441b4c9893d700b341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 684794236260423732}
-  _controller: {fileID: 0}
-  _rightVector: {x: 1, y: 90, z: 1}
-  _leftVector: {x: -1, y: -90, z: 1}
-  _objectToFlip: {fileID: 684794236275958481}
-  _isUsingRigidbody: 1
 --- !u!1 &684794236416992102
 GameObject:
   m_ObjectHideFlags: 0
