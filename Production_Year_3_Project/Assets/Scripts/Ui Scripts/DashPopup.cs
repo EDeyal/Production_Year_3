@@ -2,25 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashPopup : MonoBehaviour
+public class DashPopup : Popup
 {
-    private void Start()
+
+
+    protected override void SubscribeToUiManager()
     {
+        base.SubscribeToUiManager();
         GameManager.Instance.UiManager.CacheDashPopup(this);
-        gameObject.SetActive(false);
-    }
-    private void OnEnable()
-    {
-        Cursor.visible = true;
-    }
-    private void OnDisable()
-    {
-        Cursor.visible = false;
-    }
-    public void ToggleDashPopup(bool state)
-    {
-        GameManager.Instance.PlayerManager.enabled = !state;
-        GameManager.Instance.InputManager.LockInputs = state;
-        gameObject.SetActive(state);
     }
 }

@@ -30,6 +30,6 @@ public class GameManagerHelper : MonoBehaviour
     }
     public void LoadScene(int sceneNumber)
     {
-        GameManager.Instance.SceneManager.LoadNextScene(sceneNumber);
+        GameManager.Instance.SceneManager.LoadSceneIndex(sceneNumber);
     }
 }

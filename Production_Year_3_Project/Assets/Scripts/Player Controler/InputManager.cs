@@ -24,11 +24,14 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnLookDownUp;
     public UnityEvent OnLookUpDown;
     public UnityEvent OnLookUpUp;
+    public UnityEvent OnLookLeftDown;
+    public UnityEvent OnLookLeftUp;
+    public UnityEvent OnLookRightDown;
+    public UnityEvent OnLookRightUp;
 
-    public bool LockInputs;
+    //public bool LockInputs;
     private void Start()
     {
-        LockInputs = false;
         input = new PlayerInputs();
         input.Enable();
 
@@ -42,108 +45,95 @@ public class InputManager : MonoBehaviour
         input.Camera.MoveDown.started += InvokeOnLookDown;
         input.Camera.MoveDown.canceled += InvokeOnLookDownUp;
         input.Camera.MoveUp.started += InvokeOnLookUp;
-        input.Camera.MoveUp.canceled+= InvokeOnLookUpUp;
-
+        input.Camera.MoveUp.canceled += InvokeOnLookUpUp;
+        input.Camera.MoveRight.started += InvokeOnLookRightDown;
+        input.Camera.MoveRight.canceled += InvokeOnLookRightUp;
+        input.Camera.MoveLeft.started += InvokeOnLookLeftDown;
+        input.Camera.MoveLeft.canceled += InvokeOnLookLeftUp;
     }
+
+    public void InvokeOnLookLeftDown(InputAction.CallbackContext obj)
+    {
+        OnLookLeftDown?.Invoke();
+    }
+
+    public void InvokeOnLookLeftUp(InputAction.CallbackContext obj)
+    {
+        OnLookLeftUp?.Invoke();
+    }
+
+    public void InvokeOnLookRightUp(InputAction.CallbackContext obj)
+    {
+        OnLookRightUp?.Invoke();
+    }
+
+    public void InvokeOnLookRightDown(InputAction.CallbackContext obj)
+    {
+        OnLookRightDown?.Invoke();
+    }
+
     public void InvokeOnLookUpUp(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
         OnLookUpUp?.Invoke();
     }
     public void InvokeOnLookUp(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnLookUpDown?.Invoke();
     }
     public void InvokeOnLookDown(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnLookDownDown?.Invoke();
     }
     public void InvokeOnLookDownUp(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnLookDownUp?.Invoke();
     }
     public void InvokeOnSpellCast(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnSpellCast?.Invoke();
     }
 
     public void InvokeOnBasicAttackDown(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnBasicAttackDown?.Invoke();
     }
 
     public void InvokeOnBasicAttackUp(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnBasicAttackUp?.Invoke();
     }
     public void InvokeOnDashDown(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnDashDown?.Invoke();
     }
 
     public void InvokeOnJumpDown(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnJumpDown?.Invoke();
     }
 
     public void InvokeOnJump(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnJump?.Invoke();
     }
 
     public void InvokeOnJumpUp(InputAction.CallbackContext obj)
     {
-        if (LockInputs)
-        {
-            return;
-        }
+
         OnJumpUp?.Invoke();
     }
     public Vector2 GetMoveVector()
     {
-        if (LockInputs)
-        {
-            return Vector2.zero;
-        }
+
         return input.BasicActions.Move.ReadValue<Vector2>();
 
     }
