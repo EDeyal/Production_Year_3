@@ -12,6 +12,7 @@ public class RaycastSensor
     //no logic differences can be implemented here
     [SerializeField] List<SensorData> _sensors;
     [SerializeField] SensorTarget _sensorTarget;
+    [SerializeField] LayerMask _blockMask;
     public bool IsActive = true;
     public SensorTarget SensorTarget => _sensorTarget;
     public void CheckRaycasts(Transform transform)
@@ -66,12 +67,18 @@ public class RaycastSensor
             Vector3 relativePos = new Vector3(transform.position.x + item.Offset.x, transform.position.y + item.Offset.y);
             RaycastHit hit = new RaycastHit();
             Ray ray = new Ray(relativePos, directionToPlayer);
-            Physics.Raycast(ray, out hit, maxDistance);
-            if (hit.transform != null)
+            Physics.Raycast(ray, out hit, maxDistance,_blockMask);
             {
-                if (hit.transform.gameObject.layer == rawLayerValue)
+                if (hit.transform == null)
                 {
-                    isHit = true;
+                    Physics.Raycast(ray, out hit, maxDistance, _sensorTarget.LayerMask);
+                    if (hit.transform != null)
+                    {
+                        if (hit.transform.gameObject.layer == rawLayerValue)
+                        {
+                            isHit = true;
+                        }
+                    }
                 }
             }
             //is hit partialy is true if is hit was true at some point
@@ -140,13 +147,8 @@ public class RaycastSensor
     }
     public void DrawLineToTarget(Transform transform,Transform targetTransform, float maxDistance)
     {
-
-        if (IsActive == false)
-            return;
         bool isHitAll = true;
         bool isHitPartialy = false;
-        if (!GameManager.Instance)
-            return;
         var playerPos = targetTransform.position;
         var directionToPlayer = playerPos - transform.position;
         directionToPlayer.Normalize();
@@ -158,12 +160,18 @@ public class RaycastSensor
             Vector3 relativePos = new Vector3(transform.position.x + item.Offset.x, transform.position.y + item.Offset.y);
             RaycastHit hit = new RaycastHit();
             Ray ray = new Ray(relativePos, directionToPlayer);
-            Physics.Raycast(ray, out hit, maxDistance);
-            if (hit.transform != null)
+            Physics.Raycast(ray, out hit, maxDistance, _blockMask);
             {
-                if (hit.transform.gameObject.layer == rawLayerValue)
+                if (hit.transform == null)
                 {
-                    isHit = true;
+                    Physics.Raycast(ray, out hit, maxDistance, _sensorTarget.LayerMask);
+                    if (hit.transform != null)
+                    {
+                        if (hit.transform.gameObject.layer == rawLayerValue)
+                        {
+                            isHit = true;
+                        }
+                    }
                 }
             }
             //is hit partialy is true if is hit was true at some point

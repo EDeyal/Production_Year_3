@@ -4,7 +4,7 @@ public class CemuIdleState : BaseCemuState
     {
         //Debug.Log("Cemu Idle State");
         if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(
-            _cemuStateHandler.RefEnemy.transform.position, _cemuStateHandler.PlayerManager.transform.position)))
+            _cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             //check if player is in sight
             if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))

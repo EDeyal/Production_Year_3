@@ -4,22 +4,35 @@ using UnityEngine;
 
 public abstract class FlyingEnemy : BaseEnemy
 {
+    [TabGroup("Locomotion")]
     [SerializeField] int _startingPointIndex = 0;
+    [TabGroup("Locomotion")]
     [ReadOnly][SerializeField] int _nextWaypoint;
+    [TabGroup("Locomotion")]
     [SerializeField] List<Transform> _waypoints;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
+    [TabGroup("Bounds")]
     [SerializeField] CheckXYDistanceAction _boundsXYDistanceAction;
+    [TabGroup("Locomotion")]
     [SerializeField] CheckXYDistanceAction _waypointXYDistanceAction;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _idleMovementAction;
     ActionCooldown _idleCooldown;
+    [TabGroup("Sensors")]
     [SerializeField] protected WallSensorInfo _groundSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _ceilingSensorInfo;
+    [TabGroup("Locomotion")]
     [SerializeField] RotationAction _rotationPatrolAction;
     protected RotationActionData _rotationData;
 
+    [TabGroup("Locomotion")]
     [SerializeField] RandomMovementSO _randomMovementSO;
 
     Vector2 _randomPoint;

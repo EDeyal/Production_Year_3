@@ -5,19 +5,31 @@ using UnityEngine.UIElements;
 
 public abstract class GroundEnemy : BaseEnemy
 {
+    [TabGroup("Locomotion")]
     [SerializeField] int _startingPointIndex = 0;
+    [TabGroup("Locomotion")]
     [ReadOnly][SerializeField] int _nextWaypoint;
+    [TabGroup("Locomotion")]
     [SerializeField] List<Transform> _waypoints;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
+    [TabGroup("Locomotion")]
     [SerializeField] RotationAction _rotationPatrolAction;
+    [TabGroup("Locomotion")]
     [SerializeField] RotationAction _rotationChaseAction;
     RotationActionData _rotationData;
+    [TabGroup("Bounds")]
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
+    [TabGroup("Locomotion")]
     [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
+    [TabGroup("Sensors")]
     [SerializeField] GroundSensorInfo _groundSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
 
 

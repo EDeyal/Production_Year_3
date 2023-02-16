@@ -3210,6 +3210,16 @@ PrefabInstance:
       propertyPath: _waypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1695415332058508741, guid: db256ba8199947c40b85de89646f12f7,
+        type: 3}
+      propertyPath: _boundHandler._bound.m_Center.x
+      value: -25.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695415332058508741, guid: db256ba8199947c40b85de89646f12f7,
+        type: 3}
+      propertyPath: _boundHandler._bound.m_Center.y
+      value: 4.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4395971687601065804, guid: db256ba8199947c40b85de89646f12f7,
         type: 3}
       propertyPath: m_Drag
@@ -4249,6 +4259,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: debfadae11db969498a9f8659a0f15d4, type: 3}
+--- !u!4 &1055102728 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6703380517588302043, guid: d18e3a25957aef443a1176dbc3ffeeb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1161233049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134699645
 GameObject:
   m_ObjectHideFlags: 0
@@ -4456,12 +4472,12 @@ PrefabInstance:
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.005010605
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3599999
+      value: 1.3574617
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
@@ -4471,22 +4487,22 @@ PrefabInstance:
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999964
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.00005777816
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.00011382709
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661824, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0008360412
       objectReference: {fileID: 0}
     - target: {fileID: 146567259025661852, guid: d18e3a25957aef443a1176dbc3ffeeb6,
         type: 3}
@@ -4498,6 +4514,16 @@ PrefabInstance:
       propertyPath: baseMaxHp
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 146567259415107165, guid: d18e3a25957aef443a1176dbc3ffeeb6,
+        type: 3}
+      propertyPath: middleOfBody
+      value: 
+      objectReference: {fileID: 1055102728}
+    - target: {fileID: 146567259415107165, guid: d18e3a25957aef443a1176dbc3ffeeb6,
+        type: 3}
+      propertyPath: middleOfBodyPosition
+      value: 
+      objectReference: {fileID: 1055102728}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18e3a25957aef443a1176dbc3ffeeb6, type: 3}
 --- !u!1001 &1180225796
@@ -9060,6 +9086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
         type: 3}
+      propertyPath: _playerSensor._blockMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
+        type: 3}
       propertyPath: _boundHandler._boundCenterOffset.x
       value: 3.68
       objectReference: {fileID: 0}
@@ -9072,6 +9103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _boundHandler._boundCenterOffset.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
+        type: 3}
+      propertyPath: _playerSensor._sensors.Array.data[0].Range
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 684794236260423883, guid: 18f89cfebc0aee74885ec79d57472b7c,
         type: 3}
@@ -9182,6 +9218,21 @@ PrefabInstance:
         type: 3}
       propertyPath: _waypoints.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695415332058508741, guid: db256ba8199947c40b85de89646f12f7,
+        type: 3}
+      propertyPath: _boundHandler._bound.m_Center.x
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695415332058508741, guid: db256ba8199947c40b85de89646f12f7,
+        type: 3}
+      propertyPath: _boundHandler._bound.m_Extent.x
+      value: 12.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695415332058508741, guid: db256ba8199947c40b85de89646f12f7,
+        type: 3}
+      propertyPath: _boundHandler._boundCenterOffset.x
+      value: -5.7
       objectReference: {fileID: 0}
     - target: {fileID: 4395971687601065804, guid: db256ba8199947c40b85de89646f12f7,
         type: 3}

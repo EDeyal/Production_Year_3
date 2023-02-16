@@ -2,11 +2,16 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 public class CemuEnemy : GroundEnemy
 {
+    [TabGroup("General")]
     [SerializeField] CemuStateHandler _cemuStateHandler;
+    [TabGroup("Abilities")]
     [ReadOnly] bool _isBoostActive;
     ActionCooldown _beforeBoostCooldown;
+    [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _boostCooldownAction;
+    [TabGroup("General")]
     [SerializeField] CombatHandler _combatHandler;
+    [TabGroup("Abilities")]
     [SerializeField] Ability _cemuAbility;
     public bool IsBoostActive => _isBoostActive;
     protected override void OnEnable()
@@ -73,8 +78,8 @@ public class CemuEnemy : GroundEnemy
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
-        ChasePlayerDistance.DrawGizmos(transform.position);
-        NoticePlayerDistance.DrawGizmos(transform.position);
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
     }
 #endif
     private void OnDestroy()

@@ -6,7 +6,7 @@ public class QovaxPatrolState : BaseQovaxState
         //Debug.Log("Qovax Patrol State");
         //if player is in range move to combat state if not keep patrolling
         if (_qovax.NoticePlayerDistance.InitAction(new DistanceData(
-            _qovaxStateHandler.RefEnemy.transform.position, _qovaxStateHandler.PlayerManager.transform.position)))
+            _qovaxStateHandler.RefEnemy.MiddleOfBody.position, _qovaxStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             if (_qovax.HasDirectLineToPlayer(_qovax.NoticePlayerDistance.Distance))
             {
