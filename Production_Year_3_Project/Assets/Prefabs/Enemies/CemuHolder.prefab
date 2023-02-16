@@ -253,6 +253,9 @@ MonoBehaviour:
       Offset: {x: 0, y: 0.5}
       Range: 0
     _sensorTarget: {fileID: 11400000, guid: b6e8a161e89ce4e4cb6c3b0f73c2c383, type: 2}
+    _blockMask:
+      serializedVersion: 2
+      m_Bits: 128
     IsActive: 1
   _deathAction: {fileID: 11400000, guid: e06e4fca30327ae4c9bb888fbe89962a, type: 2}
   _startingPointIndex: 0
@@ -350,6 +353,9 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
       Range: 0.5
     _sensorTarget: {fileID: 11400000, guid: 89e1f7c7d0d70004dbe8e8c05d30f653, type: 2}
+    _blockMask:
+      serializedVersion: 2
+      m_Bits: 0
     IsActive: 1
   - _sensors:
     - Direcion: {x: 0, y: -1}
@@ -359,6 +365,9 @@ MonoBehaviour:
       Offset: {x: -2, y: 0}
       Range: 0.5
     _sensorTarget: {fileID: 11400000, guid: d3f5293b8d6d1af41b0e39d068546889, type: 2}
+    _blockMask:
+      serializedVersion: 2
+      m_Bits: 0
     IsActive: 1
   - _sensors:
     - Direcion: {x: 1, y: 0}
@@ -368,6 +377,9 @@ MonoBehaviour:
       Offset: {x: 1.6, y: 0.4}
       Range: 1
     _sensorTarget: {fileID: 11400000, guid: ea63297718e1df5499e79b329b5d0898, type: 2}
+    _blockMask:
+      serializedVersion: 2
+      m_Bits: 0
     IsActive: 1
   - _sensors:
     - Direcion: {x: -1, y: 0}
@@ -377,6 +389,9 @@ MonoBehaviour:
       Offset: {x: -1.6, y: 0.4}
       Range: 1
     _sensorTarget: {fileID: 11400000, guid: b35b0fad25870fb48a8e1f08ddac6d6b, type: 2}
+    _blockMask:
+      serializedVersion: 2
+      m_Bits: 0
     IsActive: 1
 --- !u!114 &684794236260423737
 MonoBehaviour:
