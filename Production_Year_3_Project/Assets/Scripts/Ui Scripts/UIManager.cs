@@ -3,6 +3,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private PlayerHud playerHud;
+    private DashPopup dashPopup;
+    private DeathPopup deathPopup;
 
     public void CachePlayerHud(PlayerHud givenHud)
     {
@@ -11,10 +13,13 @@ public class UIManager : MonoBehaviour
 
     public void CacheDashPopup(DashPopup givenDashPopup)
     {
-        DashPopup = givenDashPopup;
+        dashPopup = givenDashPopup;
     }
-
+    public void CacheDeathPopup(DeathPopup givenDeathPopup)
+    {
+        deathPopup = givenDeathPopup;
+    }
     public PlayerHud PlayerHud { get => playerHud; }
-
-    public DashPopup DashPopup;
+    public DeathPopup DeathPopup { get => deathPopup; }
+    public DashPopup DashPopup { get => dashPopup; }
 }

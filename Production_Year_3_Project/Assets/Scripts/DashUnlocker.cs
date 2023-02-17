@@ -11,7 +11,7 @@ public class DashUnlocker : MonoBehaviour
         {
 
             GameManager.Instance.PlayerManager.PlayerDash.CanDash = true;
-            GameManager.Instance.UiManager.DashPopup.ToggleDashPopup(true);
+            GameManager.Instance.UiManager.DashPopup.TogglePopup(true);
             gameObject.SetActive(false);
         }
     }

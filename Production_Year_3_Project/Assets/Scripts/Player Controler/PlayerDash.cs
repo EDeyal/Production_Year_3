@@ -61,6 +61,7 @@ public class PlayerDash : MonoBehaviour
         {
             dashDir = 1;
         }
+        controller.ZeroGravity();
         controller.ResetVelocity(new Vector3(dashSpeed * dashDir, 0, 0));
         yield return new WaitUntil(() => dashDurationUp || rightCheck.IsGrounded() || leftCheck.IsGrounded());
         lastDashed = Time.time;
