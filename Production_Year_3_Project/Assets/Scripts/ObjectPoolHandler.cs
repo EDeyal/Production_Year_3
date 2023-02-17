@@ -6,6 +6,7 @@ public class ObjectPoolHandler : MonoBehaviour
     [SerializeField] private ParticleObjectPooler abiltiyStealParticle;
     [SerializeField] private ParticleObjectPooler hitParticle;
     [SerializeField] private ParticleObjectPooler healParticle;
+    [SerializeField] private ParticleObjectPooler closestEnemyParticle;
     [SerializeField] private SwordSlashObjectPooler swordSlashVFX;
 
     private void Start()
@@ -17,4 +18,5 @@ public class ObjectPoolHandler : MonoBehaviour
     public SwordSlashObjectPooler SwordSlashVFX { get => swordSlashVFX; }
     public ParticleObjectPooler HitParticle { get => hitParticle; }
     public ParticleObjectPooler HealParticle { get => healParticle; }
+    public ParticleObjectPooler ClosestEnemyParticle { get => closestEnemyParticle; }
 }

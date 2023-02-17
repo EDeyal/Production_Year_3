@@ -11,4 +11,16 @@ public class EnemyProximitySensor : ProximitySensor<BaseCharacter>
         }
         return true;
     }
+
+
+    protected override bool CheckIfTargetIsInMeleeZone(BaseCharacter target)
+    {
+        float dist =  GeneralFunctions.CalcRange(target.MiddleOfBody.position, transform.position);
+        if (dist <= meleeZone && Condition(target))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
