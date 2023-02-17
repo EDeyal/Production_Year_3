@@ -7,6 +7,8 @@ public class RoomsManager : MonoBehaviour
 {
     [ReadOnly] Dictionary<string, RoomHandler> _roomsDictionary;
     [SerializeField] RoomHandler _currentRoom;
+    [ReadOnly, SerializeField] Transform _currentCheckpoint;
+
     public RoomHandler CurrentRoom
     {
         set
@@ -15,6 +17,9 @@ public class RoomsManager : MonoBehaviour
             GameManager.Instance.PlayerManager.CurrentRoom = _currentRoom;
         }
     }
+
+    public Transform CurrentCheckpoint { get => _currentCheckpoint; set => _currentCheckpoint = value; }
+
     private void Awake()
     {
         _roomsDictionary = new Dictionary<string, RoomHandler>();

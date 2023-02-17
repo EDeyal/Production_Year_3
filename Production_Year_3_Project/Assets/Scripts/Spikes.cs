@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spikes : DamageDealingCollider
 {
     [SerializeField] private Attack refAttack;
-    [SerializeField] private Transform respawnPoint;
+    private Transform respawnPoint;
     bool _respawning = false;
 
 
@@ -23,13 +23,9 @@ public class Spikes : DamageDealingCollider
         StartCoroutine(RespawnPlayer());
     }
 
-    internal void AssignCheckpoint(Transform assignedRespawnCheckpoint)
-    {
-        respawnPoint = assignedRespawnCheckpoint;
-    }
-
     private IEnumerator RespawnPlayer()
     {
+        respawnPoint = GameManager.Instance.RoomsManager.CurrentCheckpoint;
         if (_respawning)
         {
             yield break;
