@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,11 @@ public class ObjectPoolGeneric<T> : MonoBehaviour where T : MonoBehaviour
     public int NumToPool;
     public List<T> PooledObjects { get => pooledObjects; set => pooledObjects = value; }
 
+
+    private void OnDestroy()
+    {
+        pooledObjects.Clear();
+    }
     public void Awake()
     {
         for (int i = 0; i < NumToPool; i++)
@@ -21,6 +25,7 @@ public class ObjectPoolGeneric<T> : MonoBehaviour where T : MonoBehaviour
 
     public T GetPooledObject()
     {
+        Debug.Log("getting pooled Object");
         foreach (var item in pooledObjects)
         {
             if (!item.gameObject.activeInHierarchy)

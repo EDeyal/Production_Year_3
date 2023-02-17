@@ -110,13 +110,12 @@ public class CCController : MonoBehaviour
 
     private void Update()
     {
-        if (!canMove)
+        if (canMove)
         {
-            return;
+            SetInputVelocity();
+            ApplyExtrenalForces();
         }
-        SetInputVelocity();
         ApplyGravity();
-        ApplyExtrenalForces();
         SetAnimatorParameters();
     }
     private void LateUpdate()
@@ -182,7 +181,7 @@ public class CCController : MonoBehaviour
         if (isFalling)
         {
             FallAnim();
-        }              
+        }
     }
     private void RunEvents(float xInput)
     {

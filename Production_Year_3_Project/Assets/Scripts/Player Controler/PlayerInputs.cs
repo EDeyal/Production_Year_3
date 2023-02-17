@@ -251,6 +251,24 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""8da44789-1783-44df-ab11-221cc1732e6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""10dabe59-ddf7-4a44-b968-ac296f77fb94"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -286,6 +304,28 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""MoveUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9ff148d-406c-48bc-8bb7-d08d205ecbd3"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e119c7ae-be98-4366-8b32-6e5ffa97269b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -303,6 +343,8 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
         m_Camera_MoveUp = m_Camera.FindAction("MoveUp", throwIfNotFound: true);
+        m_Camera_MoveLeft = m_Camera.FindAction("MoveLeft", throwIfNotFound: true);
+        m_Camera_MoveRight = m_Camera.FindAction("MoveRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -429,12 +471,16 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_MoveDown;
     private readonly InputAction m_Camera_MoveUp;
+    private readonly InputAction m_Camera_MoveLeft;
+    private readonly InputAction m_Camera_MoveRight;
     public struct CameraActions
     {
         private @PlayerInputs m_Wrapper;
         public CameraActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveDown => m_Wrapper.m_Camera_MoveDown;
         public InputAction @MoveUp => m_Wrapper.m_Camera_MoveUp;
+        public InputAction @MoveLeft => m_Wrapper.m_Camera_MoveLeft;
+        public InputAction @MoveRight => m_Wrapper.m_Camera_MoveRight;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -450,6 +496,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @MoveUp.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
                 @MoveUp.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
                 @MoveUp.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveUp;
+                @MoveLeft.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveLeft;
+                @MoveRight.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveRight;
+                @MoveRight.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveRight;
+                @MoveRight.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveRight;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -460,6 +512,12 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @MoveUp.started += instance.OnMoveUp;
                 @MoveUp.performed += instance.OnMoveUp;
                 @MoveUp.canceled += instance.OnMoveUp;
+                @MoveLeft.started += instance.OnMoveLeft;
+                @MoveLeft.performed += instance.OnMoveLeft;
+                @MoveLeft.canceled += instance.OnMoveLeft;
+                @MoveRight.started += instance.OnMoveRight;
+                @MoveRight.performed += instance.OnMoveRight;
+                @MoveRight.canceled += instance.OnMoveRight;
             }
         }
     }
@@ -476,5 +534,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     {
         void OnMoveDown(InputAction.CallbackContext context);
         void OnMoveUp(InputAction.CallbackContext context);
+        void OnMoveLeft(InputAction.CallbackContext context);
+        void OnMoveRight(InputAction.CallbackContext context);
     }
 }

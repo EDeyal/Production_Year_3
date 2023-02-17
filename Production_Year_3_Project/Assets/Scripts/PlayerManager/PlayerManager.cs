@@ -22,6 +22,11 @@ public class PlayerManager : BaseCharacter
     public PlayerDash PlayerDash { get => playerDash; }
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
 
+    private void OnEnable()
+    {
+        UnLockPlayer();
+    }
+
     protected override void SetUp()
     {
         base.SetUp();
@@ -39,8 +44,14 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayDeathAnimation);
         Damageable.OnDeath.AddListener(PlayerController.ResetVelocity);
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
-        Damageable.OnDeath.AddListener(LockInputs);
+        Damageable.OnDeath.AddListener(LockPlayer);
+        Damageable.OnDeath.AddListener(EnableDeathPopup);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
+    }
+
+    private void EnableDeathPopup()
+    {
+        GameManager.Instance.UiManager.DeathPopup.TogglePopup(true);
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
@@ -118,8 +129,8 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttack.CanAttack = true;
     }
 
-    private void LockInputs()
+  /*  private void LockInputs()
     {
         GameManager.Instance.InputManager.LockInputs = true;
-    }
+    }*/
 }

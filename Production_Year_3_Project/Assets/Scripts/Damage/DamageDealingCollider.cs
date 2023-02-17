@@ -27,7 +27,6 @@ public class DamageDealingCollider : MonoBehaviour
         Damageable targetHit = other.GetComponent<Damageable>();
         if (!ReferenceEquals(targetHit, null) && attack.CheckTargetValidity(targetHit.TargetType))
         {
-            Debug.Log(targetHit.name + "was hit");
             if (!ReferenceEquals(damageDealer, null))
             {
                 targetHit.GetHit(attack, damageDealer);

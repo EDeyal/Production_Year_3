@@ -37,7 +37,6 @@ public class Spikes : DamageDealingCollider
         _respawning = true;
         var playerManager = GameManager.Instance.PlayerManager;
         playerManager.PlayerController.ResetVelocity();
-        GameManager.Instance.InputManager.LockInputs = true;
         playerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
         GameManager.Instance.RoomsManager.ResetRoom();
@@ -45,19 +44,16 @@ public class Spikes : DamageDealingCollider
         float counter = 0f;
         while (counter < 1)
         {
-            counter += Time.deltaTime;
+            counter += Time.deltaTime * 10; //increase this/ mult by 10?
             GameManager.Instance.PlayerManager.PlayerController.transform.position = Vector3.Lerp(startPos, respawnPoint.position, counter);
             yield return new WaitForEndOfFrame();
         }
-
-        // TODO: Move player should be a function in player, that should also reset all forces applied to the player CC
-        /*   yield return new WaitForEndOfFrame();
-           playerManager.PlayerController.enabled = false;
-           playerManager.PlayerController.transform.position = new Vector3(respawnPoint.position.x, respawnPoint.position.y, respawnPoint.position.z);
-           playerManager.PlayerController.enabled = true;*/
+        /* GameManager.Instance.PlayerManager.gameObject.SetActive(false);
+         GameManager.Instance.PlayerManager.transform.position = respawnPoint.position;
+         yield return new WaitForEndOfFrame();
+         GameManager.Instance.PlayerManager.gameObject.SetActive(true);*/
         playerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
-        GameManager.Instance.InputManager.LockInputs = false;
         _respawning = false;
     }
 }

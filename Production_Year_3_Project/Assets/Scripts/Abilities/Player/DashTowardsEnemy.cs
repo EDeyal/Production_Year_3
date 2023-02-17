@@ -61,6 +61,8 @@ public class DashTowardsEnemy : Ability
             yield return new WaitForEndOfFrame();
         }
         target.Damageable.GetHit(dashEndAbility, player.DamageDealer);
+        GameManager.Instance.Cam.CamShake();
+        player.Effectable.RemoveStatusEffect(new Invulnerability());
         player.SwordVFX.StopQuovaxDashParticle();
         player.Gfx.eulerAngles = playerRot;
         player.PlayerController.AnimBlender.SetBool("SuperDash", false);
@@ -68,8 +70,6 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetGravity();
-        GameManager.Instance.Cam.CamShake();
-        player.Effectable.RemoveStatusEffect(new Invulnerability());
 
     }
 
@@ -78,7 +78,9 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.ResetGravity();
         player.PlayerController.ResetVelocity();
         player.PlayerController.CanMove = state;
+        player.PlayerMeleeAttack.CanAttack = state;
         player.PlayerAbilityHandler.CanCast = state;
+
     }
    
 }
