@@ -242,7 +242,7 @@ MonoBehaviour:
   _chasePlayerDistance: {fileID: 11400000, guid: 4fcdde5de6c35b54892ed597fe112dd4,
     type: 2}
   _animatorHandler:
-    _animator: {fileID: 2457905643755555957}
+    _animator: {fileID: 3114598737541508234}
   _droppedAbilityForPlayer: {fileID: 11400000, guid: bfabcac723921df4abab4209014f1b73,
     type: 2}
   _damageDealingCollider: {fileID: 684794236416992097}
@@ -773,15 +773,35 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: c03b0fcb248c8364fb0e34379a4c1421, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be70a6d2d3259da4d8a3820af886c843, type: 3}
---- !u!95 &2457905643755555957 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: be70a6d2d3259da4d8a3820af886c843,
-    type: 3}
-  m_PrefabInstance: {fileID: 8320023732739043812}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8429631283860575759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be70a6d2d3259da4d8a3820af886c843,
     type: 3}
   m_PrefabInstance: {fileID: 8320023732739043812}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9203035817893153973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: be70a6d2d3259da4d8a3820af886c843,
+    type: 3}
+  m_PrefabInstance: {fileID: 8320023732739043812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3114598737541508234
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203035817893153973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: be70a6d2d3259da4d8a3820af886c843, type: 3}
+  m_Controller: {fileID: 9100000, guid: c03b0fcb248c8364fb0e34379a4c1421, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
