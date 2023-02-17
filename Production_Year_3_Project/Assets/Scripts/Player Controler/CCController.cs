@@ -63,6 +63,7 @@ public class CCController : MonoBehaviour
     public bool CanMove { get => canMove; set => canMove = value; }
     public GroundCheck GroundCheck { get => groundCheck; }
     public AnimationHandler AnimBlender { get => animBlender; }
+    public bool UseGravity { get => useGravity; set => useGravity = value; }
 
     Vector3 oldPos;
 
