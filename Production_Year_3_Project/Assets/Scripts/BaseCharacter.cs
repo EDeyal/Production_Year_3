@@ -1,21 +1,30 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
+    [TabGroup("General")]
     [SerializeField] private DamageDealer damageDealer;
+    [TabGroup("General")]
     [SerializeField] private Damageable damageable;
+    [TabGroup("General")]
     [SerializeField] private StatusEffectable effectable;
+    [TabGroup("General")]
     [SerializeField] private StatusEffector effector;
+    [TabGroup("General")]
     [SerializeField] private StatSheet statSheet;
+    [TabGroup("Abilities")]
     [SerializeField] private List<Boost> boosts = new List<Boost>();
-    [SerializeField] private Transform particleSpawnPoint;
+    [TabGroup("Visuals")]
+    [SerializeField] private Transform middleOfBody;
     public DamageDealer DamageDealer { get => damageDealer; }
     public Damageable Damageable { get => damageable; }
     public StatusEffectable Effectable { get => effectable; }
     public StatusEffector Effector { get => effector; }
     public StatSheet StatSheet { get => statSheet; }
     public List<Boost> Boosts { get => boosts; }
+    public Transform MiddleOfBody => middleOfBody;
 
     public Boost GetBoostFromBoostType(BoostType givenType)
     {
@@ -50,7 +59,7 @@ public class BaseCharacter : MonoBehaviour
             return;
         }
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HitParticle.GetPooledObject();
-        particle.transform.position = particleSpawnPoint.position;
+        particle.transform.position = middleOfBody.position;
         particle.gameObject.SetActive(true);
     }
 
@@ -61,7 +70,7 @@ public class BaseCharacter : MonoBehaviour
             return;
         }
         ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.HealParticle.GetPooledObject();
-        particle.transform.position = particleSpawnPoint.position;
+        particle.transform.position = middleOfBody.position;
         particle.gameObject.SetActive(true);
     }
     //call add force on enemies 

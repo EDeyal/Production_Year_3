@@ -5,7 +5,7 @@ public class QovaxCombatState : BaseQovaxState
     public override BaseState RunCurrentState()
     {        
         if (_qovax.ChasePlayerDistance.InitAction(new DistanceData(
-            _qovaxStateHandler.RefEnemy.transform.position, _qovaxStateHandler.PlayerManager.transform.position)))
+            _qovax.MiddleOfBody.position, _qovaxStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             //Debug.Log("Qovax Combat State");
             //During X seconds

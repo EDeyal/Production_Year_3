@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : BaseCharacter, ICheckValidation
@@ -7,21 +8,34 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     protected const float MINUS_ONE = -1;
     private float _rbStartingDrag;
     #region Fields
+
+    [TabGroup("Bounds")]
     [SerializeField] BoundHandler _boundHandler;
+    [TabGroup("Locomotion")]
     [SerializeField] Rigidbody _rb;
+    [TabGroup("Visuals")]
     [SerializeField] GameObject _enemyVisualHolder;
+    [TabGroup("Sensors")]
     [SerializeField] SensorHandler _sensorHandler;
+    [TabGroup("Sensors")]
     [SerializeField] CheckDistanceAction _noticePlayerDistance;
+    [TabGroup("Sensors")]
     [SerializeField] CheckDistanceAction _chasePlayerDistance;
+    [TabGroup("Visuals")]
     [SerializeField] AnimatorHandler _animatorHandler;
+    [TabGroup("Abilities")]
     [SerializeField] Ability _droppedAbilityForPlayer;
+    [TabGroup("General")]
     [SerializeField] Collider _damageDealingCollider;
+    [TabGroup("Locomotion")]
     [SerializeField] GameObject _startingPosition;
 
 
+    [TabGroup("Sensors")]
     [Tooltip("Range does not change anything, Only change the offset of the center of the object")]
     [SerializeField] private RaycastSensor _playerSensor;
 
+    [TabGroup("General")]
     [SerializeField] BaseAction<ActionCooldownData> _deathAction;
     ActionCooldown _deathCooldown;
 
@@ -71,12 +85,12 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
         BoundHandler.DrawBounds();
         if (!GameManager.Instance)
             return;
-        _playerSensor.DrawLineToTarget(transform, GameManager.Instance.PlayerManager.transform, _noticePlayerDistance.Distance);
+        _playerSensor.DrawLineToTarget(MiddleOfBody, GameManager.Instance.PlayerManager.MiddleOfBody, _noticePlayerDistance.Distance);
     }
 #endif
     public bool HasDirectLineToPlayer(float maxDistanceToPlayer)
     {
-        return _playerSensor.SendRayToTarget(transform, GameManager.Instance.PlayerManager.transform, maxDistanceToPlayer);
+        return _playerSensor.SendRayToTarget(MiddleOfBody, GameManager.Instance.PlayerManager.MiddleOfBody, maxDistanceToPlayer);
     }
     protected bool WaitAction(BaseAction<ActionCooldownData> action, ref ActionCooldown cooldown)
     {
