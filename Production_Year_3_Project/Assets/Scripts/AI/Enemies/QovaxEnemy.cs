@@ -1,13 +1,20 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class QovaxEnemy : FlyingEnemy
 {
+    [TabGroup("General")]
     [SerializeField] QovaxStateHandler _qovaxStateHandler;
+    [TabGroup("General")]
     [SerializeField] CombatHandler _combatHandler;
     ActionCooldown _actionCooldown;
-
+    [TabGroup("Locomotion")]
+    [SerializeField] RotationAction _rotationChargeAction;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _evasionCooldownAction;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _chargeCooldownAction;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _fatigueCooldownAction;
     protected Vector3 _chargePoint;
     bool _isCharging;
@@ -80,6 +87,8 @@ public class QovaxEnemy : FlyingEnemy
             }
             else
             {
+                var direction = GetNormilizedDirectionToTarget(transform.position, _chargePoint);
+                Rotate(direction.x,_rotationChargeAction);
                 //if still in cooldown return back and wait for next frame
                 return false;
             }
@@ -123,19 +132,23 @@ public class QovaxEnemy : FlyingEnemy
     public bool CheckForEvasionCooldown()
     {
         //Evasion Logic
+        var direction = GetNormilizedDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
+        Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_evasionCooldownAction, _actionCooldown);
     }
     public bool CheckForFatigueCooldown()
     {
         //Fatige Logic
+        var direction = GetNormilizedDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
+        Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_fatigueCooldownAction, _actionCooldown);
     }
 #if UNITY_EDITOR
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
-        ChasePlayerDistance.DrawGizmos(transform.position);
-        NoticePlayerDistance.DrawGizmos(transform.position);
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
     }
 #endif
     public void CheckFatigued()

@@ -4,20 +4,35 @@ using UnityEngine;
 
 public abstract class FlyingEnemy : BaseEnemy
 {
+    [TabGroup("Locomotion")]
     [SerializeField] int _startingPointIndex = 0;
+    [TabGroup("Locomotion")]
     [ReadOnly][SerializeField] int _nextWaypoint;
+    [TabGroup("Locomotion")]
     [SerializeField] List<Transform> _waypoints;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<MoveData> _moveAction;
     MoveData _moveData;
+    [TabGroup("Bounds")]
     [SerializeField] CheckXYDistanceAction _boundsXYDistanceAction;
+    [TabGroup("Locomotion")]
     [SerializeField] CheckXYDistanceAction _waypointXYDistanceAction;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _idleMovementAction;
     ActionCooldown _idleCooldown;
+    [TabGroup("Sensors")]
     [SerializeField] protected WallSensorInfo _groundSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _rightWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _leftWallSensorInfo;
+    [TabGroup("Sensors")]
     [SerializeField] WallSensorInfo _ceilingSensorInfo;
+    [TabGroup("Locomotion")]
+    [SerializeField] RotationAction _rotationPatrolAction;
+    protected RotationActionData _rotationData;
 
+    [TabGroup("Locomotion")]
     [SerializeField] RandomMovementSO _randomMovementSO;
 
     Vector2 _randomPoint;
@@ -48,6 +63,7 @@ public abstract class FlyingEnemy : BaseEnemy
         base.Awake();
         _idleCooldown = new ActionCooldown();
         _randomPoint = Vector3.zero;
+        _rotationData = new RotationActionData(EnemyVisualHolder);
     }
     public bool IdleWaitAction()
     {
@@ -105,6 +121,11 @@ public abstract class FlyingEnemy : BaseEnemy
 
     public virtual void Patrol()
     {
+
+        Vector2 position = new Vector2(transform.position.x, transform.position.y);
+        Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
+        var direction = GetNormilizedDirectionToTarget(position, target);
+
         bool moveToNextPoint = false;
         //check if need to move to next point
         //check if reached the next waypoint
@@ -112,9 +133,14 @@ public abstract class FlyingEnemy : BaseEnemy
         {
             if (returnBack)
             {
+                //Rotate(ZERO, _rotationPatrolAction);
                 return;
             }
             moveToNextPoint = true;
+        }
+        else
+        {
+            Rotate(direction.x, _rotationPatrolAction);
         }
         if (CheckBounds())
         {
@@ -129,11 +155,24 @@ public abstract class FlyingEnemy : BaseEnemy
         {
             IsMovingToNextPoint();
         }
-        Vector2 position = new Vector2(transform.position.x, transform.position.y);
-        Vector2 target = new Vector2(_waypoints[_nextWaypoint].position.x, _waypoints[_nextWaypoint].position.y);
-        var direction = GetNormilizedDirectionToTarget(position, target);
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
+    }
+    protected void Rotate(float directionX, RotationAction rotationAction)
+    {
+        if (directionX == 0)
+        {
+            _rotationData.UpdateRotationData(RotationDirectionType.Front);
+        }
+        else if (directionX > 0)
+        {
+            _rotationData.UpdateRotationData(RotationDirectionType.Right);
+        }
+        else if (directionX < 0)
+        {
+            _rotationData.UpdateRotationData(RotationDirectionType.Left);
+        }
+        rotationAction.InitAction(_rotationData);
     }
     public virtual void StopMovement()
     {

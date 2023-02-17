@@ -7,7 +7,7 @@ public class QovaxIdleState : BaseQovaxState
         //Debug.Log("Qovax Idle State");
         //if in notice range
         if (_qovax.NoticePlayerDistance.InitAction(new DistanceData(
-            _qovaxStateHandler.transform.position, _qovaxStateHandler.PlayerManager.transform.position)))
+            _qovax.MiddleOfBody.position, _qovaxStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             //if in direct line of sight enter combat
             if (_qovax.HasDirectLineToPlayer(_qovax.NoticePlayerDistance.Distance))

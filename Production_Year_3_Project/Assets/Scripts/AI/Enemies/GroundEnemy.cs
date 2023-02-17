@@ -1,25 +1,43 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class GroundEnemy : BaseEnemy
 {
+    [TabGroup("Locomotion")]
     [SerializeField] int _startingPointIndex = 0;
-    [ReadOnly] [SerializeField] int _nextWaypoint;
+    [TabGroup("Locomotion")]
+    [ReadOnly][SerializeField] int _nextWaypoint;
+    [TabGroup("Locomotion")]
     [SerializeField] List<Transform> _waypoints;
+    [TabGroup("Locomotion")]
     [SerializeField] BaseAction<MoveData> _moveAction;
-    [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
-    [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
-    [SerializeField] GroundSensorInfo _groundSensorInfo;
-    [SerializeField] WallSensorInfo _rightWallSensorInfo;
-    [SerializeField] WallSensorInfo _leftWallSensorInfo;
-    [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
     MoveData _moveData;
+    [TabGroup("Locomotion")]
+    [SerializeField] RotationAction _rotationPatrolAction;
+    [TabGroup("Locomotion")]
+    [SerializeField] RotationAction _rotationChaseAction;
+    RotationActionData _rotationData;
+    [TabGroup("Bounds")]
+    [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
+    [TabGroup("Locomotion")]
+    [SerializeField] CheckXDistanceAction _waypointXDistanceAction;
+    [TabGroup("Sensors")]
+    [SerializeField] GroundSensorInfo _groundSensorInfo;
+    [TabGroup("Sensors")]
+    [SerializeField] WallSensorInfo _rightWallSensorInfo;
+    [TabGroup("Sensors")]
+    [SerializeField] WallSensorInfo _leftWallSensorInfo;
+    [TabGroup("Sensors")]
+    [SerializeField] LedgeSensorInfo _ledgeSensorInfo;
+
 
     public CheckXDistanceAction BoundsXDistanceAction => _boundsXDistanceAction;
     public override void Awake()
     {
         base.Awake();
+        _rotationData = new RotationActionData(EnemyVisualHolder);
     }
     protected override void OnEnable()
     {
@@ -54,9 +72,9 @@ public abstract class GroundEnemy : BaseEnemy
         if (!_groundSensorInfo.IsGrounded)
             return;
         //move first and then check surrounding
-        var direction = ZERO;
-        direction = _waypoints[_nextWaypoint].position.x > transform.position.x ? ONE : MINUS_ONE;
-
+        float direction = 0;
+        direction = GetDirection(direction);
+        Rotate(direction,_rotationPatrolAction);
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
 
@@ -81,21 +99,51 @@ public abstract class GroundEnemy : BaseEnemy
             }
         }
         //wall Check
-        if (_rightWallSensorInfo.IsNearWall && direction >0)
+        if (_rightWallSensorInfo.IsNearWall && direction > 0)
         {
             moveToNextPoint = true;
         }
-        if (_leftWallSensorInfo.IsNearWall&& direction <0)
+        if (_leftWallSensorInfo.IsNearWall && direction < 0)
         {
             moveToNextPoint = true;
-
         }
         //if needed to turn for some reason, turn to next waypoint
         if (moveToNextPoint)
         {
             IsMovingToNextPoint();
         }
+    }
+    void Rotate(float directionX, RotationAction rotationAction)
+    {
+        if (directionX == 0)
+        {
+            _rotationData.UpdateRotationData(RotationDirectionType.Front);
+        }
+        else if (directionX > 0)
+        {
+            _rotationData.UpdateRotationData(RotationDirectionType.Right);
+        }
+        else if (directionX < 0)
+        {
 
+            _rotationData.UpdateRotationData(RotationDirectionType.Left);
+        }
+        rotationAction.InitAction(_rotationData);
+    }
+    float GetDirection(float direction)
+    {
+        if (_waypoints[_nextWaypoint].position.x > transform.position.x)
+        {
+            return ONE;
+        }
+        else if (_waypoints[_nextWaypoint].position.x < transform.position.x)
+        {
+            return MINUS_ONE;
+        }
+        else
+        {
+            return ZERO;
+        }
     }
     public virtual void StopMovement()
     {
@@ -106,6 +154,7 @@ public abstract class GroundEnemy : BaseEnemy
     {
         //find player and determin his direction
         var direction = GeneralFunctions.GetXDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
+        Rotate(direction, _rotationChaseAction);
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
     }
