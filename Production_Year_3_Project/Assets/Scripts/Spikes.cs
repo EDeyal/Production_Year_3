@@ -48,12 +48,12 @@ public class Spikes : DamageDealingCollider
             GameManager.Instance.PlayerManager.PlayerController.transform.position = Vector3.Lerp(startPos, respawnPoint.position, counter);
             yield return new WaitForEndOfFrame();
         }
+        _respawning = false;
         /* GameManager.Instance.PlayerManager.gameObject.SetActive(false);
          GameManager.Instance.PlayerManager.transform.position = respawnPoint.position;
          yield return new WaitForEndOfFrame();
          GameManager.Instance.PlayerManager.gameObject.SetActive(true);*/
         playerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
-        _respawning = false;
     }
 }
