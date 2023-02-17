@@ -45,8 +45,9 @@ public abstract class FlyingEnemy : BaseEnemy
         _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
         _ceilingSensorInfo.SubscribeToEvents(SensorHandler);
     }
-    protected virtual void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         _nextWaypoint = _startingPointIndex;
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
@@ -267,6 +268,24 @@ public abstract class FlyingEnemy : BaseEnemy
         var length = Random.Range(_randomMovementSO.RandomLength.x, _randomMovementSO.RandomLength.y);
         direction = direction * length;
         _randomPoint = new Vector3(transform.position.x + direction.x, transform.position.y + direction.y, ZERO);
+    }
+    public override bool CheckKnockbackEnemy()
+    {
+        if (WaitAction(_knockbackDurationAction, ref _knockbackCooldown))
+        {
+            return true;
+        }
+        //Debug.Log("Knocking back enemy");
+        var direction = GetNormilizedDirectionToTarget(MiddleOfBody.position, GameManager.Instance.PlayerManager.MiddleOfBody.position);
+        direction *= -1;//Knock back away from player
+        _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.KnockbackSpeed);
+        _moveAction.InitAction(_moveData);
+        //RB.AddForce(new Vector3(direction* _knockbackForce, ZERO, ZERO),ForceMode.VelocityChange);
+        return false;
+    }
+    protected override void TakeDamage()
+    {
+        base.TakeDamage();
     }
     private bool IsMovingToNextPoint()
     {

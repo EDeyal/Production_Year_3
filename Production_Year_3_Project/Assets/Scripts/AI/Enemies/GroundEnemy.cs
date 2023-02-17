@@ -49,8 +49,9 @@ public abstract class GroundEnemy : BaseEnemy
         _leftWallSensorInfo.SubscribeToEvents(SensorHandler);
         _ledgeSensorInfo.SubscribeToEvents(SensorHandler);
     }
-    protected virtual void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         _groundSensorInfo.UnsubscribeToEvents(SensorHandler);
         _rightWallSensorInfo.UnsubscribeToEvents(SensorHandler);
         _leftWallSensorInfo.UnsubscribeToEvents(SensorHandler);
@@ -166,6 +167,20 @@ public abstract class GroundEnemy : BaseEnemy
             _nextWaypoint = 0;
         }
         return true;
+    }
+    public override bool CheckKnockbackEnemy()
+    {
+        if (WaitAction(_knockbackDurationAction, ref _knockbackCooldown))
+        {
+            return true;
+        }
+        Debug.Log("Knocking back enemy");
+        var direction = GeneralFunctions.GetXDirectionToTarget(MiddleOfBody.position, GameManager.Instance.PlayerManager.MiddleOfBody.position);
+        direction *= -1;//Knock back away from player
+        _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.KnockbackSpeed);
+        _moveAction.InitAction(_moveData);
+        //RB.AddForce(new Vector3(direction* _knockbackForce, ZERO, ZERO),ForceMode.VelocityChange);
+        return false;
     }
 #if UNITY_EDITOR
     public override void OnDrawGizmosSelected()

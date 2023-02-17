@@ -21,6 +21,7 @@ public class QovaxEnemy : FlyingEnemy
     bool _isFatigued;
     public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
     public QovaxStatSheet QovaxStatSheet => StatSheet as QovaxStatSheet;
+    public QovaxStateHandler QovaxStateHandler => StateHandler as QovaxStateHandler;
 
     protected override void OnEnable()
     {
@@ -78,6 +79,7 @@ public class QovaxEnemy : FlyingEnemy
         }
         if (!_isCharging)
         {
+            _isReceivingKnockback = false;
              if (CheckForChargeCooldown())//cooldown before attack
             {
                 //Start Movement after cooldown
@@ -126,6 +128,7 @@ public class QovaxEnemy : FlyingEnemy
     }
     public void ResetCharge()
     {
+        _isReceivingKnockback=true;
         _isCharging = false;
         _chargePoint = Vector3.zero;
     }
@@ -143,14 +146,7 @@ public class QovaxEnemy : FlyingEnemy
         Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_fatigueCooldownAction, _actionCooldown);
     }
-#if UNITY_EDITOR
-    public override void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected();
-        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
-        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
-    }
-#endif
+
     public void CheckFatigued()
     {
         if (!_isFatigued)
@@ -169,4 +165,12 @@ public class QovaxEnemy : FlyingEnemy
             AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsGrounded), true);
         }
     }
+#if UNITY_EDITOR
+    public override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
+    }
+#endif
 }

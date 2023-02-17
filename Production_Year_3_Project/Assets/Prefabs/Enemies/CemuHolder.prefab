@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 2044695640459412864}
   - component: {fileID: 2523725584667933375}
   - component: {fileID: 4614162803186384033}
+  - component: {fileID: 7415660646049570194}
   m_Layer: 10
   m_Name: Cemu Enemy
   m_TagString: Enemy
@@ -247,6 +248,7 @@ MonoBehaviour:
     type: 2}
   _damageDealingCollider: {fileID: 684794236416992097}
   _startingPosition: {fileID: 684794236130240597}
+  _stateHandler: {fileID: 684794236260423731}
   _playerSensor:
     _sensors:
     - Direcion: {x: 0, y: 0}
@@ -258,6 +260,9 @@ MonoBehaviour:
       m_Bits: 128
     IsActive: 1
   _deathAction: {fileID: 11400000, guid: e06e4fca30327ae4c9bb888fbe89962a, type: 2}
+  _knockbackDurationAction: {fileID: 11400000, guid: d6282bb23c8ffff4a8df5f8514431d13,
+    type: 2}
+  _isReceivingKnockback: 0
   _startingPointIndex: 0
   _nextWaypoint: 0
   _waypoints:
@@ -329,6 +334,7 @@ MonoBehaviour:
   OnResetSpeed:
     m_PersistentCalls:
       m_Calls: []
+  _knockbackSpeed: 7
 --- !u!114 &684794236260423728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +477,7 @@ MonoBehaviour:
   _idleState: {fileID: 684794236260423730}
   _combatState: {fileID: 684794236260423742}
   _deathState: {fileID: 2044695640459412864}
+  _knockBackState: {fileID: 7415660646049570194}
   _patrolState: {fileID: 684794236260423729}
   _chaseState: {fileID: 684794236260423741}
 --- !u!114 &684794236260423730
@@ -571,6 +578,19 @@ MonoBehaviour:
   OnStatusEffectRemoved:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7415660646049570194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684794236260423885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b37573ab2a46544baf252a9ae12cbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cemuStateHandler: {fileID: 684794236260423731}
 --- !u!1 &684794236275958480
 GameObject:
   m_ObjectHideFlags: 0
