@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class SpikesCheckpoint : MonoBehaviour
 {
-    [SerializeField] private List<Spikes> spikesLinked = new List<Spikes>();
+    [SerializeField] LayerMask _targetLayer;
+    int _targetlayerValue;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Spikes[] spikesInChildren = GetComponentsInChildren<Spikes>();
-
-        foreach (Spikes item in spikesInChildren)
-        {
-            spikesLinked.Add(item);
-            item.AssignCheckpoint(this.transform);
-        }
+        float rawLayerValue = _targetLayer.value;
+        rawLayerValue = Mathf.Log(rawLayerValue, 2);
+        _targetlayerValue = (int)rawLayerValue;
     }
 
-
+    private void OnTriggerEnter(Collider other)
+   {
+        if(other.gameObject.layer == _targetlayerValue)
+        {
+            GameManager.Instance.RoomsManager.CurrentCheckpoint = this.transform;
+        }
+    }
 }
