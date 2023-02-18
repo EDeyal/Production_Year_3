@@ -13,7 +13,6 @@ public class ParticleEvents : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("restarting " + gameObject.name);
         mainParticle.Clear();
         mainParticle.Play();
     }

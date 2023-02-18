@@ -737,7 +737,7 @@ MonoBehaviour:
   feetParticlePoint: {fileID: 2058297453}
   playerDash: {fileID: 146567259415105966}
   currentRoom: {fileID: 0}
-  runParticle: {fileID: 3370051442327027219}
+  runParticle: {fileID: 2620833517255956616}
   dashParticle: {fileID: 4041184633960002985}
   enemyProximityPointer: {fileID: 1677633072}
 --- !u!114 &146567259415105966
@@ -1945,7 +1945,7 @@ PrefabInstance:
     - target: {fileID: 3370051441297315937, guid: ecc03a3fe0a9674428c6c9507d8269f1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3370051441297315966, guid: ecc03a3fe0a9674428c6c9507d8269f1,
         type: 3}
@@ -2016,6 +2016,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1340089970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2620833517255956616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3370051442327027219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227113dd247ee6e4eb411781770fdfa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &297113461157561251
 PrefabInstance:
   m_ObjectHideFlags: 0

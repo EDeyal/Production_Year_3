@@ -25,7 +25,6 @@ public class ObjectPoolGeneric<T> : MonoBehaviour where T : MonoBehaviour
 
     public T GetPooledObject()
     {
-        Debug.Log("getting pooled Object");
         foreach (var item in pooledObjects)
         {
             if (!item.gameObject.activeInHierarchy)

@@ -29,7 +29,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public override void Awake()
     {
-        Debug.Log("Game Manger Active");
         base.Awake();
         DontDestroyOnLoad(this);
     }

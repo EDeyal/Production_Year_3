@@ -13,7 +13,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private Transform feetParticlePoint;
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private RoomHandler currentRoom;
-    [SerializeField] private GameObject runParticle;
+    [SerializeField] private RunParticle runParticle;
     [SerializeField] private GameObject dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
@@ -57,6 +57,7 @@ public class PlayerManager : BaseCharacter
         playerController.OnJump.AddListener(PlaceJumpParticle);
         playerController.OnStartRunning.AddListener(EnableRunParticle);
         playerController.OnStopRunning.AddListener(DisableRunParticle);
+        PlayerController.GroundCheck.OnNotGrounded.AddListener(DisableRunParticle);
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
@@ -64,11 +65,11 @@ public class PlayerManager : BaseCharacter
 
     private void DisableRunParticle()
     {
-        runParticle.SetActive(false);
+        runParticle.DisableParticle();
     }
     private void EnableRunParticle()
     {
-        runParticle.SetActive(true);
+        runParticle.RestartParticle();
     }
     private void DisableDashParticle()
     {

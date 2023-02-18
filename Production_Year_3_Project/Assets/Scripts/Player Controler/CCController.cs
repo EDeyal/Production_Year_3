@@ -186,7 +186,7 @@ public class CCController : MonoBehaviour
     }
     private void RunningEvents(float xInput)
     {
-        if (xInput == lastInput && !groundCheck.IsGrounded())
+        if (xInput == lastInput || !groundCheck.IsGrounded())
         {
             return;
         }
@@ -336,7 +336,6 @@ public class CCController : MonoBehaviour
 
     private void ResetJumped()
     {
-        Debug.Log("jumped reset");
         jumped = false;
         jumpIsHeld = false;
     }
