@@ -16,6 +16,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private RunParticle runParticle;
     [SerializeField] private GameObject dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
+    [SerializeField] private ParticleSystem jumpParticle;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -87,9 +88,12 @@ public class PlayerManager : BaseCharacter
     }
     private void PlaceJumpParticle()
     {
-        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.JumpObjectPool.GetPooledObject();
-        particle.transform.position = feetParticlePoint.position;
-        particle.gameObject.SetActive(true);
+        /* //ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.JumpObjectPool.GetPooledObject();
+         particle.transform.position = feetParticlePoint.position;
+         particle.gameObject.SetActive(true);*/
+        jumpParticle.gameObject.SetActive(true);
+        jumpParticle.Clear();
+        jumpParticle.Play();
     }
     private void EnableDeathPopup()
     {
