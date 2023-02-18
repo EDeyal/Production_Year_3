@@ -186,12 +186,12 @@ public class CCController : MonoBehaviour
     }
     private void RunningEvents(float xInput)
     {
-        if (xInput == lastInput || !groundCheck.IsGrounded())
+        if (xInput == lastInput && !groundCheck.IsGrounded())
         {
             return;
         }
         lastInput = xInput;
-        if (lastInput == 0 || !CanMove)
+        if (lastInput == 0 || !CanMove || !GroundCheck.IsGrounded())
         {
             OnStopRunning?.Invoke();
         }

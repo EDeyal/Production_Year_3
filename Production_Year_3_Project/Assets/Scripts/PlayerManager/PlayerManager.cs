@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerManager : BaseCharacter
 {
@@ -9,8 +10,11 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
+    [SerializeField] private Transform feetParticlePoint;
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private RoomHandler currentRoom;
+    [SerializeField] private GameObject runParticle;
+    [SerializeField] private GameObject dashParticle;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -47,8 +51,42 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(LockPlayer);
         Damageable.OnDeath.AddListener(EnableDeathPopup);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
+        playerController.GroundCheck.OnGrounded.AddListener(PlaceGroundedParticle);
+        playerController.OnJump.AddListener(PlaceJumpParticle);
+        playerController.OnStartRunning.AddListener(EnableRunParticle);
+        playerController.OnStopRunning.AddListener(DisableRunParticle);
+        playerDash.OnDash.AddListener(EnableDashParticle);
+        playerDash.OnDashEnd.AddListener(DisableDashParticle);
     }
 
+    private void DisableRunParticle()
+    {
+        runParticle.SetActive(false);
+    }
+    private void EnableRunParticle()
+    {
+        runParticle.SetActive(true);
+    }
+    private void DisableDashParticle()
+    {
+        dashParticle.SetActive(false);
+    }
+    private void EnableDashParticle()
+    {
+        dashParticle.SetActive(true);
+    }
+    private void PlaceGroundedParticle()
+    {
+        ParticleEvents particle =  GameManager.Instance.ObjectPoolsHandler.LandObjectPool.GetPooledObject();
+        particle.transform.position = feetParticlePoint.position;
+        particle.gameObject.SetActive(true);
+    }
+    private void PlaceJumpParticle()
+    {
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.JumpObjectPool.GetPooledObject();
+        particle.transform.position = feetParticlePoint.position;
+        particle.gameObject.SetActive(true);
+    }
     private void EnableDeathPopup()
     {
         GameManager.Instance.UiManager.DeathPopup.TogglePopup(true);
