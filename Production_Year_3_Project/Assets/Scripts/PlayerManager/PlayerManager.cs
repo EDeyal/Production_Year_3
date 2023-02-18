@@ -81,30 +81,21 @@ public class PlayerManager : BaseCharacter
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
         GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
-        Damageable.OnTotalDamageCalcRecieve.AddListener(UpdateHpbarTakeDmg);
-        Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
-        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
-        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbarHeal);
+        Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
+        Damageable.OnHealGFX.AddListener(UpdateHpbar);
+        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbar);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbar);
         PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
         playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
-    private void UpdateHpbarTakeDmg(Attack givenAttack, Damageable target)
+    private void UpdateHpbar()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.ReduceHp(givenAttack.DamageHandler.GetFinalMult(), true);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateBar(Damageable.CurrentHp);
     }
-    private void UpdateHpbarHeal(DamageHandler givenDamage, Damageable target)
+    private void UpdateDecayinHpbar(float amount)
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDamage.GetFinalMult(), true);
-    }
-
-    private void UpdateDecayinHpbarTakeDmg(float amount)
-    {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.ReduceHp(amount, true);
-    }
-    private void UpdateDecayinHpbarHeal(float amount)
-    {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, false);
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.UpdateBar(StatSheet.DecayingHealth.CurrentDecayingHealth);
     }
     private void UpdateAbilityUi(Ability givenAbility)
     {
@@ -119,12 +110,14 @@ public class PlayerManager : BaseCharacter
 
     public void LockPlayer()
     {
+        playerController.ResetVelocity();
         PlayerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
     }
     public void UnLockPlayer()
     {
+        playerController.ResetVelocity();
         PlayerController.CanMove = true;
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;

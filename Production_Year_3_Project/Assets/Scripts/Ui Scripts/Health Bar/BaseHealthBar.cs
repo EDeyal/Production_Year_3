@@ -11,12 +11,12 @@ public class BaseHealthBar : MonoBehaviour
     [Button("ReduceHealth")]
     void DecreaseHealth()
     {
-        ReduceHp(testingNumber, true);
+        //ReduceHp(testingNumber, true);
     }
     [Button("AddHealth")]
     void AddHealth()
     {
-        AddHp(testingNumber, true);
+        //AddHp(testingNumber, true);
     }
     [Button("SetMaxHp")]
     void SetMaxHp()
@@ -68,18 +68,31 @@ public class BaseHealthBar : MonoBehaviour
         ChangeHp(-amount, hasTransition, reduceHealthBarCurve);
     }
 
+    public void UpdateBar(float currenthp, bool hastransition = true, AnimationCurve curve = null)
+    {
+        if (hastransition)
+        {
+            healthBar.DOValue(currenthp, transitionDuration);
+        }
+        else
+        {
+            healthBar.value = currenthp;
+        }
+    }
+
     protected virtual void ChangeHp(float amount, bool hasTransition, AnimationCurve curve)
     {
         currentHp += amount;
-        if (hasTransition)
+        /*if (hasTransition)
         {
-
             healthBar.DOValue(currentHp, transitionDuration).SetEase(curve);
         }
         else
         {
             healthBar.value = currentHp;
-        }
+        }*/
+        healthBar.value = currentHp;
+
     }
 
 
