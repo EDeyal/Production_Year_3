@@ -18,6 +18,9 @@ public class QovaxEnemy : FlyingEnemy
     [SerializeField] BaseAction<ActionCooldownData> _fatigueCooldownAction;
     [TabGroup("Locomotion")]
     [SerializeField] CheckXYDistanceAction _chargeXYDistanceAction;
+    [TabGroup("Locomotion")]
+    [SerializeField] float _chargeRBOnPointDivide;
+
     protected Vector3 _chargePoint;
     bool _isCharging;
     bool _isFatigued;
@@ -136,6 +139,7 @@ public class QovaxEnemy : FlyingEnemy
         _isCharging = false;
         _chargePoint = Vector3.zero;
         ResetLookAt();
+        RB.velocity = (RB.velocity / _chargeRBOnPointDivide);
     }
     public bool CheckForEvasionCooldown()
     {
