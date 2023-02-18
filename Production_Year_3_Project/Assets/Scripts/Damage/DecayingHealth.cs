@@ -39,11 +39,11 @@ public class DecayingHealth
     {
         while (currentDecayingHealth > 0)
         {
+            yield return new WaitForSecondsRealtime(1f);
             currentDecayingHealth -= 10;
             onDecayingHealthReduce?.Invoke(10f);
             Debug.Log(currentDecayingHealth);
             ClampHealth();
-            yield return new WaitForSecondsRealtime(1f);
         }
 
         currentDecayingHealth = 0;

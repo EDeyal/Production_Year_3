@@ -146,7 +146,6 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
     }
     protected virtual void OnEnable()
     {
-        Debug.Log("Enemy Enabled");
         RB.velocity = Vector3.zero;
         RB.drag = _rbStartingDrag;
         _damageDealingCollider.gameObject.SetActive(true);

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DashPopup : Popup
 {
-
-
     protected override void SubscribeToUiManager()
     {
         base.SubscribeToUiManager();
         GameManager.Instance.UiManager.CacheDashPopup(this);
+    }
+    public void UnlockPlayer()
+    {
+        GameManager.Instance.PlayerManager.UnLockPlayer();
     }
 }

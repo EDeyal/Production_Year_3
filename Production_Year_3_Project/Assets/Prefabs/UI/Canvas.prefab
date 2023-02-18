@@ -549,7 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHPTest: 40
   testingNumber: 0.2
-  transitionDuration: 5
+  transitionDuration: 0.2
   addHealthBarCurve:
     serializedVersion: 2
     m_Curve:
@@ -1168,7 +1168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 242, y: -91}
+  m_AnchoredPosition: {x: 305.6, y: -91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6140353073048410575
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHPTest: 40
   testingNumber: 0.2
-  transitionDuration: 0.3
+  transitionDuration: 0.2
   addHealthBarCurve:
     serializedVersion: 2
     m_Curve:
@@ -2035,7 +2035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 242, y: -91}
+  m_AnchoredPosition: {x: 305.59998, y: -91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &7150498934003022966
@@ -2307,6 +2307,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8564683886037520381}
+        m_TargetAssemblyTypeName: DashPopup, Assembly-CSharp
+        m_MethodName: UnlockPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8403822815867086846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,7 +2404,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
