@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spikes : DamageDealingCollider
 {
     [SerializeField] private Attack refAttack;
-    [SerializeField] private Transform respawnPoint;
+    private Transform respawnPoint;
     bool _respawning = false;
 
 
@@ -23,13 +23,9 @@ public class Spikes : DamageDealingCollider
         StartCoroutine(RespawnPlayer());
     }
 
-    internal void AssignCheckpoint(Transform assignedRespawnCheckpoint)
-    {
-        respawnPoint = assignedRespawnCheckpoint;
-    }
-
     private IEnumerator RespawnPlayer()
     {
+        respawnPoint = GameManager.Instance.RoomsManager.CurrentCheckpoint;
         if (_respawning)
         {
             yield break;
@@ -48,12 +44,12 @@ public class Spikes : DamageDealingCollider
             GameManager.Instance.PlayerManager.PlayerController.transform.position = Vector3.Lerp(startPos, respawnPoint.position, counter);
             yield return new WaitForEndOfFrame();
         }
+        _respawning = false;
         /* GameManager.Instance.PlayerManager.gameObject.SetActive(false);
          GameManager.Instance.PlayerManager.transform.position = respawnPoint.position;
          yield return new WaitForEndOfFrame();
          GameManager.Instance.PlayerManager.gameObject.SetActive(true);*/
         playerManager.UnLockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
-        _respawning = false;
     }
 }

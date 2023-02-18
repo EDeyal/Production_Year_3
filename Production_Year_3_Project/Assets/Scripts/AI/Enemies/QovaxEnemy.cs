@@ -16,11 +16,14 @@ public class QovaxEnemy : FlyingEnemy
     [SerializeField] BaseAction<ActionCooldownData> _chargeCooldownAction;
     [TabGroup("Locomotion")]
     [SerializeField] BaseAction<ActionCooldownData> _fatigueCooldownAction;
+    [TabGroup("Locomotion")]
+    [SerializeField] CheckXYDistanceAction _chargeXYDistanceAction;
     protected Vector3 _chargePoint;
     bool _isCharging;
     bool _isFatigued;
     public bool IsFatigued { get => _isFatigued; set => _isFatigued = value; }
     public QovaxStatSheet QovaxStatSheet => StatSheet as QovaxStatSheet;
+    public QovaxStateHandler QovaxStateHandler => StateHandler as QovaxStateHandler;
 
     protected override void OnEnable()
     {
@@ -46,6 +49,8 @@ public class QovaxEnemy : FlyingEnemy
             throw new System.Exception("QovaxEnemy has no charge Cooldown Action");
         if (!_fatigueCooldownAction)
             throw new System.Exception("QovaxEnemy has no fatigue Cooldown Action");
+        if (!_chargeXYDistanceAction)
+            throw new System.Exception("QovaxEnemy has no charge Distance Action");
     }
     private void Update()
     {
@@ -78,6 +83,7 @@ public class QovaxEnemy : FlyingEnemy
         }
         if (!_isCharging)
         {
+            _isReceivingKnockback = false;
              if (CheckForChargeCooldown())//cooldown before attack
             {
                 //Start Movement after cooldown
@@ -112,7 +118,7 @@ public class QovaxEnemy : FlyingEnemy
             return true;
         }
 
-        if (CheckWaypoint(transform.position,_chargePoint,false,out bool returnBack))
+        if (CheckPoint(transform.position,_chargePoint, _chargeXYDistanceAction, false,out bool returnBack))
         {
             //Debug.Log("Reached destination");
             //when reached destination return true
@@ -126,6 +132,7 @@ public class QovaxEnemy : FlyingEnemy
     }
     public void ResetCharge()
     {
+        _isReceivingKnockback=true;
         _isCharging = false;
         _chargePoint = Vector3.zero;
     }
@@ -143,14 +150,7 @@ public class QovaxEnemy : FlyingEnemy
         Rotate(direction.x, _rotationChargeAction);
         return CheckForCooldown(_fatigueCooldownAction, _actionCooldown);
     }
-#if UNITY_EDITOR
-    public override void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected();
-        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
-        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
-    }
-#endif
+
     public void CheckFatigued()
     {
         if (!_isFatigued)
@@ -169,4 +169,12 @@ public class QovaxEnemy : FlyingEnemy
             AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsGrounded), true);
         }
     }
+#if UNITY_EDITOR
+    public override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
+    }
+#endif
 }

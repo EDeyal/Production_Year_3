@@ -6,15 +6,15 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
     [SerializeField] private BaseState _idleState;
     [SerializeField] private BaseState _combatState;
     [SerializeField] private BaseState _deathState;
-
-
+    [SerializeField] private BaseState _knockBackState;
 
     protected PlayerManager _player;
 
     public BaseState CurrentState { get => _currentState; set => _currentState = value; }
-    public BaseState IdleState { get => _idleState; }
-    public BaseState CombatState { get => _combatState; }
-    public BaseState DeathState { get => _deathState; }
+    public BaseState IdleState => _idleState;
+    public BaseState CombatState => _combatState;
+    public BaseState DeathState => _deathState; 
+    public BaseState KnockBackState => _knockBackState;
     public PlayerManager PlayerManager => _player;
     public BaseEnemy RefEnemy => _refEnemy;
 
@@ -40,6 +40,8 @@ public abstract class BaseStateHandler :MonoBehaviour, ICheckValidation
             throw new System.Exception("Combat state is Null");
         if (_deathState == null)
             throw new System.Exception("Death state is Null");
+        if (_knockBackState == null)
+            throw new System.Exception("Knockback state is Null");
     }
     protected virtual void OnEnable()
     {

@@ -134,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6919220697648845067}
   m_LocalRotation: {x: -0.00006113969, y: 0.000113424445, z: -0.0008377651, w: 0.9999997}
-  m_LocalPosition: {x: -0.0050105155, y: 1.3574619, z: -22}
+  m_LocalPosition: {x: 10.295007, y: 3.0273142, z: -21.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -346,8 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 6919220698274279936}
   brain: {fileID: 6919220697648845065}
-  minHeight: 0.05
-  maxheight: 0.75
+  minVerticalDistacne: 0.05
+  maxVerticalDistance: 0.75
+  minHorizontalDistance: 0.05
+  maxHorizontalDistance: 0.75
   amplitude: 2
   frequency: 2
   shakeDuration: 0.4
