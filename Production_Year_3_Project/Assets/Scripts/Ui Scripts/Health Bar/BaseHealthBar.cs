@@ -46,7 +46,7 @@ public class BaseHealthBar : MonoBehaviour
     }
     public void SetHealthBarAtZero(float startingHP)
     {
-        currentHp = startingHP;
+        currentHp = 0;
         healthBar.maxValue = startingHP;
         healthBar.value = 0;
     }

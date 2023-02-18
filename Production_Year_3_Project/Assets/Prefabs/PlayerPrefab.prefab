@@ -839,7 +839,7 @@ MonoBehaviour:
   OnCast:
     m_PersistentCalls:
       m_Calls: []
-  test: {fileID: 0}
+  test: {fileID: 11400000, guid: 19c6d4f76e9e87b4f861ef7c76e1b496, type: 2}
 --- !u!114 &146567259415107162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,10 +856,7 @@ MonoBehaviour:
   rayFirePoint: {fileID: 6703380517588302043}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1024
-  blockedLayer:
-    serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 9344
   meleeZone: 1.5
   tag: Enemy
 --- !u!114 &1778845608595465663
@@ -921,6 +918,9 @@ MonoBehaviour:
   pointer: {fileID: 2120106455}
   arrow: {fileID: 1796051242}
   sensor: {fileID: 146567259415107162}
+  OnClosestTargetChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &146567259415558790
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class DashTowardsEnemy : Ability
             yield break;
         }
         ResetPlayer(false);
-        Vector3 dest = new Vector3(target.transform.position.x, target.transform.position.y, 0);
+        Vector3 dest = new Vector3(target.MiddleOfBody.position.x, target.MiddleOfBody.position.y, 0);
         if (dest.x > player.transform.position.x)
         {
             player.PlayerFlipper.FlipRight();

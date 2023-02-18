@@ -8,7 +8,6 @@ public class DamageDealingCollider : MonoBehaviour
     private DamageDealer damageDealer;
     private Collider myCollider;
 
-
     public UnityEvent OnColliderDealtDamage;
 
     [SerializeField] private bool applyKnockBack;
