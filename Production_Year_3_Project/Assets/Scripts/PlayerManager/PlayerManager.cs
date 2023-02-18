@@ -15,6 +15,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private RoomHandler currentRoom;
     [SerializeField] private GameObject runParticle;
     [SerializeField] private GameObject dashParticle;
+    [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -25,6 +26,7 @@ public class PlayerManager : BaseCharacter
     public PlayerSwordVFX SwordVFX { get => swordVFX; }
     public PlayerDash PlayerDash { get => playerDash; }
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
+    public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
 
     private void OnEnable()
     {
@@ -57,6 +59,7 @@ public class PlayerManager : BaseCharacter
         playerController.OnStopRunning.AddListener(DisableRunParticle);
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
+        playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
     }
 
     private void DisableRunParticle()
@@ -77,7 +80,7 @@ public class PlayerManager : BaseCharacter
     }
     private void PlaceGroundedParticle()
     {
-        ParticleEvents particle =  GameManager.Instance.ObjectPoolsHandler.LandObjectPool.GetPooledObject();
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.LandObjectPool.GetPooledObject();
         particle.transform.position = feetParticlePoint.position;
         particle.gameObject.SetActive(true);
     }
@@ -144,6 +147,20 @@ public class PlayerManager : BaseCharacter
         //only apply if damage taken > 0
         Debug.Log("Pushing player");
         playerController.AddForce(normalizedDir * PlayerStatSheet.TakeDamageKnockBackForce);
+    }
+
+    private void OnEquipSpecificAbility(Ability givenAbility)
+    {
+        if (givenAbility is DashTowardsEnemy)
+        {
+            enemyProximityPointer.enabled = true;
+            enemyProximityPointer.SetActive(true);
+        }
+        else
+        {
+            enemyProximityPointer.enabled = false;
+            enemyProximityPointer.SetActive(false);
+        }
     }
 
     public void LockPlayer()
