@@ -191,12 +191,14 @@ public class CCController : MonoBehaviour
             return;
         }
         lastInput = xInput;
-        if (lastInput == 0 || !CanMove || !GroundCheck.IsGrounded())
+        if (lastInput == 0)
         {
+            Debug.Log("stopped running");
             OnStopRunning?.Invoke();
         }
         else
         {
+            Debug.Log("started running");
             OnStartRunning?.Invoke();
         }
     }
