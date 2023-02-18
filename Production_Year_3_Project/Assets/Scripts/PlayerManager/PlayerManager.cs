@@ -80,6 +80,7 @@ public class PlayerManager : BaseCharacter
     public void SubscirbeUI()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
         Damageable.OnTotalDamageCalcRecieve.AddListener(UpdateHpbarTakeDmg);
         Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
         StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
@@ -103,7 +104,7 @@ public class PlayerManager : BaseCharacter
     }
     private void UpdateDecayinHpbarHeal(float amount)
     {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, true);
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, false);
     }
     private void UpdateAbilityUi(Ability givenAbility)
     {

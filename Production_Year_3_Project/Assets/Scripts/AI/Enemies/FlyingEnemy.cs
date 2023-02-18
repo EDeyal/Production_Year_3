@@ -84,9 +84,9 @@ public abstract class FlyingEnemy : BaseEnemy
         }
         return false;
     }
-    protected virtual bool CheckWaypoint(Vector3 myPosition, Vector3 targetPosition, bool checkForCooldown, out bool returnBack)
+    protected virtual bool CheckPoint(Vector3 myPosition, Vector3 targetPosition,CheckXYDistanceAction distanceAction, bool checkForCooldown, out bool returnBack)
     {
-        if (_waypointXYDistanceAction.InitAction(new DistanceData(myPosition, targetPosition)))
+        if (distanceAction.InitAction(new DistanceData(myPosition, targetPosition)))
         {
             if (checkForCooldown)
             {
@@ -130,7 +130,7 @@ public abstract class FlyingEnemy : BaseEnemy
         bool moveToNextPoint = false;
         //check if need to move to next point
         //check if reached the next waypoint
-        if (CheckWaypoint(transform.position, _waypoints[_nextWaypoint].position, true, out bool returnBack))
+        if (CheckPoint(transform.position, _waypoints[_nextWaypoint].position,_waypointXYDistanceAction, true, out bool returnBack))
         {
             if (returnBack)
             {
@@ -220,7 +220,7 @@ public abstract class FlyingEnemy : BaseEnemy
         _moveData.UpdateData(new Vector3(direction.x, direction.y, ZERO), EnemyStatSheet.Speed);
         _moveAction.InitAction(_moveData);
 
-        if (CheckWaypoint(transform.position, _randomPoint, false, out bool returnBack))
+        if (CheckPoint(transform.position, _randomPoint,_waypointXYDistanceAction ,false, out bool returnBack))
         {
             getNextPoint = true;
         }
