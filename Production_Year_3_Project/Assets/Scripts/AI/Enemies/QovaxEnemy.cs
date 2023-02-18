@@ -135,6 +135,7 @@ public class QovaxEnemy : FlyingEnemy
         _isReceivingKnockback=true;
         _isCharging = false;
         _chargePoint = Vector3.zero;
+        ResetLookAt();
     }
     public bool CheckForEvasionCooldown()
     {
