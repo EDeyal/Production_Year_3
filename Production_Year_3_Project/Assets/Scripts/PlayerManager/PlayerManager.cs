@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerManager : BaseCharacter
 {
@@ -9,8 +10,11 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
+    [SerializeField] private Transform feetParticlePoint;
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private RoomHandler currentRoom;
+    [SerializeField] private GameObject runParticle;
+    [SerializeField] private GameObject dashParticle;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -47,8 +51,42 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(LockPlayer);
         Damageable.OnDeath.AddListener(EnableDeathPopup);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
+        playerController.GroundCheck.OnGrounded.AddListener(PlaceGroundedParticle);
+        playerController.OnJump.AddListener(PlaceJumpParticle);
+        playerController.OnStartRunning.AddListener(EnableRunParticle);
+        playerController.OnStopRunning.AddListener(DisableRunParticle);
+        playerDash.OnDash.AddListener(EnableDashParticle);
+        playerDash.OnDashEnd.AddListener(DisableDashParticle);
     }
 
+    private void DisableRunParticle()
+    {
+        runParticle.SetActive(false);
+    }
+    private void EnableRunParticle()
+    {
+        runParticle.SetActive(true);
+    }
+    private void DisableDashParticle()
+    {
+        dashParticle.SetActive(false);
+    }
+    private void EnableDashParticle()
+    {
+        dashParticle.SetActive(true);
+    }
+    private void PlaceGroundedParticle()
+    {
+        ParticleEvents particle =  GameManager.Instance.ObjectPoolsHandler.LandObjectPool.GetPooledObject();
+        particle.transform.position = feetParticlePoint.position;
+        particle.gameObject.SetActive(true);
+    }
+    private void PlaceJumpParticle()
+    {
+        ParticleEvents particle = GameManager.Instance.ObjectPoolsHandler.JumpObjectPool.GetPooledObject();
+        particle.transform.position = feetParticlePoint.position;
+        particle.gameObject.SetActive(true);
+    }
     private void EnableDeathPopup()
     {
         GameManager.Instance.UiManager.DeathPopup.TogglePopup(true);
@@ -81,30 +119,21 @@ public class PlayerManager : BaseCharacter
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
         GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
-        Damageable.OnTotalDamageCalcRecieve.AddListener(UpdateHpbarTakeDmg);
-        Damageable.OnGetHealed.AddListener(UpdateHpbarHeal);
-        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbarTakeDmg);
-        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbarHeal);
+        Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
+        Damageable.OnHealGFX.AddListener(UpdateHpbar);
+        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbar);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbar);
         PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
         playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
-    private void UpdateHpbarTakeDmg(Attack givenAttack, Damageable target)
+    private void UpdateHpbar()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.ReduceHp(givenAttack.DamageHandler.GetFinalMult(), true);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateBar(Damageable.CurrentHp);
     }
-    private void UpdateHpbarHeal(DamageHandler givenDamage, Damageable target)
+    private void UpdateDecayinHpbar(float amount)
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddHp(givenDamage.GetFinalMult(), true);
-    }
-
-    private void UpdateDecayinHpbarTakeDmg(float amount)
-    {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.ReduceHp(amount, true);
-    }
-    private void UpdateDecayinHpbarHeal(float amount)
-    {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.AddHp(amount, false);
+        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.UpdateBar(StatSheet.DecayingHealth.CurrentDecayingHealth);
     }
     private void UpdateAbilityUi(Ability givenAbility)
     {
@@ -119,12 +148,14 @@ public class PlayerManager : BaseCharacter
 
     public void LockPlayer()
     {
+        playerController.ResetVelocity();
         PlayerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
     }
     public void UnLockPlayer()
     {
+        playerController.ResetVelocity();
         PlayerController.CanMove = true;
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;

@@ -126,7 +126,6 @@ public class CCController : MonoBehaviour
     private void SetInputVelocity()
     {
         velocity.x = GameManager.Instance.InputManager.GetMoveVector().x * movementSpeed;
-        RunEvents(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
         if (jumpPressed)
         {
             if (!IsFirstJump())
@@ -183,15 +182,16 @@ public class CCController : MonoBehaviour
         {
             FallAnim();
         }
+        RunningEvents(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
     }
-    private void RunEvents(float xInput)
+    private void RunningEvents(float xInput)
     {
-        if (xInput == lastInput || !groundCheck.IsGrounded())
+        if (xInput == lastInput && !groundCheck.IsGrounded())
         {
             return;
         }
         lastInput = xInput;
-        if (lastInput == 0)
+        if (lastInput == 0 || !CanMove || !GroundCheck.IsGrounded())
         {
             OnStopRunning?.Invoke();
         }

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4603915588533925337}
   - component: {fileID: 3983326575057760133}
   - component: {fileID: 1229966921819268525}
+  - component: {fileID: 3074460181073789521}
+  - component: {fileID: 1344858970332319405}
   - component: {fileID: 2055005838120469716}
   m_Layer: 0
   m_Name: ObjectPoolers
@@ -53,6 +55,8 @@ MonoBehaviour:
   hitParticle: {fileID: 4603915588533925337}
   healParticle: {fileID: 3983326575057760133}
   closestEnemyParticle: {fileID: 1229966921819268525}
+  landObjectPool: {fileID: 3074460181073789521}
+  jumpObjectPool: {fileID: 1344858970332319405}
   swordSlashVFX: {fileID: 2055005838120469716}
 --- !u!114 &2055005838120469717
 MonoBehaviour:
@@ -116,6 +120,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   PrefabToPool: {fileID: 7574687695004912790, guid: e1f345c093f0b4a4cab69e02ffb977e3,
+    type: 3}
+  NumToPool: 5
+--- !u!114 &3074460181073789521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055005838120469715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7361f0006dc402d4e9d68994468083be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  PrefabToPool: {fileID: -3731489497090935498, guid: ed68b8ebca45334419abb56fb398ce90,
+    type: 3}
+  NumToPool: 5
+--- !u!114 &1344858970332319405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055005838120469715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7361f0006dc402d4e9d68994468083be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  PrefabToPool: {fileID: 9087096584601696396, guid: 665160e07ffccfc4c8e23871072c9a92,
     type: 3}
   NumToPool: 5
 --- !u!114 &2055005838120469716
