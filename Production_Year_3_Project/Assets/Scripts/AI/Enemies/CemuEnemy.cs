@@ -14,16 +14,16 @@ public class CemuEnemy : GroundEnemy
     [TabGroup("Abilities")]
     [SerializeField] Ability _cemuAbility;
     public bool IsBoostActive => _isBoostActive;
+    public CemuStateHandler CemuStateHandler => StateHandler as CemuStateHandler;
+
     protected override void OnEnable()
     {
         base.OnEnable();
-        Damageable.OnTakeDmgGFX.AddListener(TakeDamageAnimation);
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
-        Damageable.OnTakeDmgGFX.RemoveListener(TakeDamageAnimation);
         _isBoostActive = false;
     }
     
@@ -74,14 +74,7 @@ public class CemuEnemy : GroundEnemy
         _isBoostActive = false;
         return false;
     }
-#if UNITY_EDITOR
-    public override void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected();
-        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
-        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
-    }
-#endif
+
     private void OnDestroy()
     {
         Effectable.OnStatusEffectRemoved.RemoveListener(RemoveBuffActivation);
@@ -90,9 +83,12 @@ public class CemuEnemy : GroundEnemy
     {
         base.OnDeath();
     }
-    private void TakeDamageAnimation()
+#if UNITY_EDITOR
+    public override void OnDrawGizmosSelected()
     {
-        AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.IsHit));
-
+        base.OnDrawGizmosSelected();
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
     }
+#endif
 }

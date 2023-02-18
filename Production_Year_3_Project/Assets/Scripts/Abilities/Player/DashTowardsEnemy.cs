@@ -70,7 +70,6 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetGravity();
-
     }
 
     private void ResetPlayer(bool state)
@@ -80,7 +79,6 @@ public class DashTowardsEnemy : Ability
         player.PlayerController.CanMove = state;
         player.PlayerMeleeAttack.CanAttack = state;
         player.PlayerAbilityHandler.CanCast = state;
-
     }
    
 }

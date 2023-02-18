@@ -21,7 +21,7 @@ public class BaseHealthBar : MonoBehaviour
     [Button("SetMaxHp")]
     void SetMaxHp()
     {
-        SetHealthBar(maxHPTest);
+        //SetHealthBar(maxHPTest);
         Debug.Log("Health bar max value: " + healthBar.maxValue);
         Debug.Log("Health bar value: " + healthBar.value);
     }
@@ -44,7 +44,12 @@ public class BaseHealthBar : MonoBehaviour
         healthBar.maxValue = startingHP;
         healthBar.value = currentHp;
     }
-
+    public void SetHealthBarAtZero(float startingHP)
+    {
+        currentHp = startingHP;
+        healthBar.maxValue = startingHP;
+        healthBar.value = 0;
+    }
     public void AddMaxHp(float addedAmount, bool replenishHealth = false)
     {
         healthBar.maxValue = addedAmount;

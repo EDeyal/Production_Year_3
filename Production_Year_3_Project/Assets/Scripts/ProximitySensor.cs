@@ -6,9 +6,9 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected float checkRadius;
     [SerializeField] private Transform rayFirePoint;
     [SerializeField] protected LayerMask targetLayer;
-    [SerializeField] protected LayerMask blockedLayer;
-    [SerializeField] private float meleeZone;
+    [SerializeField] protected float meleeZone;
     [SerializeField] private string tag;
+
 
     private void Start()
     {
@@ -39,19 +39,18 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
             return null;
         }
         List<T> legalTargets = new List<T>();
-
         foreach (var item in targets)
         {
+            RaycastHit hit;
             Vector2 dir = (item.transform.position - transform.position);
-            if (dir.magnitude <= meleeZone && Condition(item))
+            if (CheckIfTargetIsInMeleeZone(item) && Condition(item))
             {
                 legalTargets.Add(item);
                 continue;
             }
-            RaycastHit hit;
-            if (Physics.Raycast(rayFirePoint.position, dir, out hit, blockedLayer) && Condition(item))
+            if (Physics.Raycast(rayFirePoint.position, dir, out hit, checkRadius, targetLayer, QueryTriggerInteraction.Ignore) && Condition(item))
             {
-                if (hit.collider.gameObject.CompareTag(tag))
+                if (ReferenceEquals(hit.collider.gameObject, item.gameObject) && hit.collider.gameObject.CompareTag(tag))
                 {
                     legalTargets.Add(item);
                 }
@@ -79,6 +78,25 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         return closestPoint;
     }
 
+    protected virtual bool CheckIfTargetIsInMeleeZone(T target)
+    {
+        Vector2 dir = (target.transform.position - transform.position);
+        if (dir.magnitude <= meleeZone && Condition(target))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    protected virtual bool CheckLayerValidation(RaycastHit hit, LayerMask layer)
+    {
+        float layerValue = hit.collider.gameObject.layer;
+        if (layerValue == Mathf.Log(layer.value, 2))
+        {
+            return true;
+        }
+        return false;
+    }
 
     public bool IsTargetLegal(T instance)
     {
@@ -99,11 +117,12 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         return true;
     }
 
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, checkRadius);
-/*        Gizmos.color = Color.magenta;
+        Gizmos.color = Color.magenta;
         T[] legals = GetLegalTargets();
         if (!ReferenceEquals(legals, null) && legals.Length > 0)
         {
@@ -111,7 +130,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
             {
                 Gizmos.DrawLine(rayFirePoint.position, item.transform.position);
             }
-        }*/
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeZone);
         if (!ReferenceEquals(GetClosestLegalTarget(), null))
@@ -122,3 +141,4 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     }
 
 }
+
