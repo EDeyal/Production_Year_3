@@ -224,7 +224,7 @@ MonoBehaviour:
   effector: {fileID: 2523725584667933375}
   statSheet: {fileID: 684794236260423738}
   boosts:
-  - BoostValue: 3
+  - BoostValue: 5
     BoostDuration: 5
     BoostType: 0
   middleOfBody: {fileID: 4405906836718567807}
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2830323c6146ab14d8af2afb972e4bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHp: 16
+  baseMaxHp: 30
   invulnerabilityDuration: 0.3
   decayingHealth:
     onDecayingHealthReduce:
@@ -327,7 +327,7 @@ MonoBehaviour:
     onDecayingHealthGain:
       m_PersistentCalls:
         m_Calls: []
-  baseSpeed: 1
+  baseSpeed: 3
   OnOverrideSpeed:
     m_PersistentCalls:
       m_Calls: []
