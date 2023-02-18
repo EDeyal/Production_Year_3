@@ -41,7 +41,6 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         List<T> legalTargets = new List<T>();
         foreach (var item in targets)
         {
-            Debug.Log(item.transform.parent);
             RaycastHit hit;
             Vector2 dir = (item.transform.position - transform.position);
             if (CheckIfTargetIsInMeleeZone(item) && Condition(item))

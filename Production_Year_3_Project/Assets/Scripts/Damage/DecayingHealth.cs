@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class DecayingHealth 
+public class DecayingHealth
 {
     private float currentDecayingHealth;
     private Coroutine activeDecayingRoutine;
@@ -28,7 +27,7 @@ public class DecayingHealth
         {
             GameManager.Instance.StopCoroutine(activeDecayingRoutine);
         }
-        activeDecayingRoutine =  GameManager.Instance.StartCoroutine(DecayHealth());
+        activeDecayingRoutine = GameManager.Instance.StartCoroutine(DecayHealth());
     }
 
     public void ClampHealth()
@@ -42,10 +41,11 @@ public class DecayingHealth
         {
             currentDecayingHealth -= 10;
             onDecayingHealthReduce?.Invoke(10f);
+            Debug.Log(currentDecayingHealth);
             ClampHealth();
             yield return new WaitForSecondsRealtime(1f);
         }
-        
+
         currentDecayingHealth = 0;
     }
 }
