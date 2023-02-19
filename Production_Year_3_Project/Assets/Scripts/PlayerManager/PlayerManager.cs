@@ -17,6 +17,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private GameObject dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     [SerializeField] private ParticleSystem jumpParticle;
+    [SerializeField] private Material outlineMat;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -182,6 +183,8 @@ public class PlayerManager : BaseCharacter
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;
     }
+
+
 
   /*  private void LockInputs()
     {
