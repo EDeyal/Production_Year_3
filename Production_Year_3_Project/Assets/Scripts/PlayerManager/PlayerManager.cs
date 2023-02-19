@@ -63,6 +63,8 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
+        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);
     }
 
     private void DisableRunParticle()
@@ -105,6 +107,26 @@ public class PlayerManager : BaseCharacter
         givenAbility.CahceOwner(this);
     }
 
+    private void CheckDecayingHealthAmount(float amount)
+    {
+        if (StatSheet.DecayingHealth.CurrentDecayingHealth > 0)
+        {
+            EnableOutline();
+        }
+        else
+        {
+            DisableOutline();
+        }
+    }
+
+    private void EnableOutline()
+    {
+        outlineMat.color = new Color(outlineMat.color.r, outlineMat.color.g, outlineMat.color.b, 70f);
+    }
+    private void DisableOutline()
+    {
+        outlineMat.color = new Color(outlineMat.color.r, outlineMat.color.g, outlineMat.color.b, 0f);
+    }
     private void PlayAttackAnimation()
     {
         playerController.AnimBlender.SetTrigger("Attack");
@@ -184,7 +206,7 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttack.CanAttack = true;
     }
 
-
+    
 
   /*  private void LockInputs()
     {
