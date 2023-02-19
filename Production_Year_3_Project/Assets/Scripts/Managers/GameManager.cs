@@ -30,11 +30,22 @@ public class GameManager : MonoSingleton<GameManager>
     public override void Awake()
     {
         base.Awake();
+        _inputManager.OnEscape.AddListener(EscapePressed);
         DontDestroyOnLoad(this);
+    }
+    public void OnDestroy()
+    {
+        _inputManager.OnEscape.RemoveListener(EscapePressed);
     }
     private void Start()
     {
-        Cursor.visible = false;   
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            InputManager.SetCurserVisability(false);
+    }
+    public void EscapePressed()
+    {
+        uiManager.EscapePressed(true);
+
     }
     public void AddGameplayManagerHelper(GameManagerHelper gameManagerHelper)
     {
@@ -56,4 +67,16 @@ public class GameManager : MonoSingleton<GameManager>
     {
         cam = givenCam;
     }
+    public void PauseGameTimeScale(bool isPaused)
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    
 }

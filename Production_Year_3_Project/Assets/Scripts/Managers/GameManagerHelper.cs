@@ -32,4 +32,11 @@ public class GameManagerHelper : MonoBehaviour
     {
         GameManager.Instance.SceneManager.LoadSceneIndex(sceneNumber);
     }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR_WIN
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
 }

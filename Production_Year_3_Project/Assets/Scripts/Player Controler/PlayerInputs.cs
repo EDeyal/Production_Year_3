@@ -71,6 +71,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7e9f793-8e32-49a7-9c20-8ff9c4fc0dcd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""BasicAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16abcc4c-b3c1-4ca2-aef4-01c5124e5a0e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -339,6 +359,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_BasicAttack = m_BasicActions.FindAction("BasicAttack", throwIfNotFound: true);
         m_BasicActions_SpellAttack = m_BasicActions.FindAction("SpellAttack", throwIfNotFound: true);
         m_BasicActions_Dash = m_BasicActions.FindAction("Dash", throwIfNotFound: true);
+        m_BasicActions_Escape = m_BasicActions.FindAction("Escape", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
@@ -409,6 +430,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_BasicAttack;
     private readonly InputAction m_BasicActions_SpellAttack;
     private readonly InputAction m_BasicActions_Dash;
+    private readonly InputAction m_BasicActions_Escape;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -418,6 +440,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @BasicAttack => m_Wrapper.m_BasicActions_BasicAttack;
         public InputAction @SpellAttack => m_Wrapper.m_BasicActions_SpellAttack;
         public InputAction @Dash => m_Wrapper.m_BasicActions_Dash;
+        public InputAction @Escape => m_Wrapper.m_BasicActions_Escape;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -442,6 +465,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnDash;
+                @Escape.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -461,6 +487,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -529,6 +558,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnBasicAttack(InputAction.CallbackContext context);
         void OnSpellAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
