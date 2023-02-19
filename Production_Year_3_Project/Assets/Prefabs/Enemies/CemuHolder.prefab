@@ -306,6 +306,9 @@ MonoBehaviour:
     _damageDealer: {fileID: 684794236260423736}
     _damagable: {fileID: 684794236260423737}
   _cemuAbility: {fileID: 11400000, guid: 15a189a901cca5f498d20bd41227fc27, type: 2}
+  _meshRenderer: {fileID: 1391541467844826804}
+  _outlineMaterial: {fileID: 0}
+  _outlineAlpha: 0
 --- !u!114 &684794236260423738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,6 +1194,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6933597390589339472, guid: be70a6d2d3259da4d8a3820af886c843,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933597390589339472, guid: be70a6d2d3259da4d8a3820af886c843,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 48cc62313014eb7489468f640773147f, type: 2}
     - target: {fileID: 6970385374081991884, guid: be70a6d2d3259da4d8a3820af886c843,
         type: 3}
       propertyPath: m_Layer
@@ -1263,6 +1276,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be70a6d2d3259da4d8a3820af886c843, type: 3}
+--- !u!137 &1391541467844826804 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6933597390589339472, guid: be70a6d2d3259da4d8a3820af886c843,
+    type: 3}
+  m_PrefabInstance: {fileID: 8320023732739043812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8429631283860575759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be70a6d2d3259da4d8a3820af886c843,

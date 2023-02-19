@@ -13,12 +13,20 @@ public class CemuEnemy : GroundEnemy
     [SerializeField] CombatHandler _combatHandler;
     [TabGroup("Abilities")]
     [SerializeField] Ability _cemuAbility;
+
+    [TabGroup("Visuals")]
+    [SerializeField] SkinnedMeshRenderer _meshRenderer;
+    [TabGroup("Visuals")]
+    [SerializeField][ReadOnly] Material _outlineMaterial;
+    [TabGroup("Visuals")]
+    [SerializeField,Range(0,1)]float _outlineAlpha;
     public bool IsBoostActive => _isBoostActive;
     public CemuStateHandler CemuStateHandler => StateHandler as CemuStateHandler;
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        SetOutline(false);
     }
 
     protected override void OnDisable()
@@ -36,8 +44,17 @@ public class CemuEnemy : GroundEnemy
         _beforeBoostCooldown = new ActionCooldown();
         _combatHandler.Init();
         Effectable.OnStatusEffectRemoved.AddListener(RemoveBuffActivation);
+        EnemyStatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(DecreacedDecayingHealth);
+        _outlineMaterial = _meshRenderer.materials[1];
     }
-
+    public override void CheckValidation()
+    {
+        base.CheckValidation();
+        if (!_meshRenderer)
+        {
+            throw new System.Exception("Cemu Enemy has no mesh menderer assigned");
+        }
+    }
     private void Update()
     {
         BaseState nextState = _cemuStateHandler.CurrentState.RunCurrentState();
@@ -60,6 +77,13 @@ public class CemuEnemy : GroundEnemy
             _cemuStateHandler.CurrentState.UpdateState();
         }
     }
+    private void DecreacedDecayingHealth(float f)
+    {
+        if (StatSheet.DecayingHealth.CurrentDecayingHealth <= 0)
+        {
+            SetOutline(false);
+        }
+    }
     public bool CheckBoostActivation()
     {
         if (WaitAction(_boostCooldownAction, ref _beforeBoostCooldown))
@@ -68,16 +92,33 @@ public class CemuEnemy : GroundEnemy
             {
                 _isBoostActive = true;
                 _cemuAbility.Cast(this);
+                SetOutline(true);
             }
             return true;
         }
+
         _isBoostActive = false;
         return false;
+    }
+    private void SetOutline(bool isActivated)
+    {
+        var color = _outlineMaterial.color;
+        if (isActivated)
+        {
+            color.a = _outlineAlpha;
+            _outlineMaterial.color = color;
+        }
+        else
+        {
+            color.a = 0;
+            _outlineMaterial.color = color;
+        }
     }
 
     private void OnDestroy()
     {
         Effectable.OnStatusEffectRemoved.RemoveListener(RemoveBuffActivation);
+        EnemyStatSheet.DecayingHealth.onDecayingHealthReduce.RemoveListener(DecreacedDecayingHealth);
     }
     public override void OnDeath()
     {
