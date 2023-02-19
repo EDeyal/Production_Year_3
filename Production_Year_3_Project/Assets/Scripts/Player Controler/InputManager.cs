@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
 
 
     private PlayerInputs input;
+    public UnityEvent OnEscape;
 
     public UnityEvent OnJumpDown;
     public UnityEvent OnJump;
@@ -42,6 +43,7 @@ public class InputManager : MonoBehaviour
         input.BasicActions.BasicAttack.started += InvokeOnBasicAttackDown;
         input.BasicActions.BasicAttack.canceled += InvokeOnBasicAttackUp;
         input.BasicActions.SpellAttack.started += InvokeOnSpellCast;
+        input.BasicActions.Escape.started += InvokeEscape;
         input.Camera.MoveDown.started += InvokeOnLookDown;
         input.Camera.MoveDown.canceled += InvokeOnLookDownUp;
         input.Camera.MoveUp.started += InvokeOnLookUp;
@@ -52,6 +54,15 @@ public class InputManager : MonoBehaviour
         input.Camera.MoveLeft.canceled += InvokeOnLookLeftUp;
     }
 
+    public void SetCurserVisability(bool isVisible)
+    {
+        Cursor.visible = isVisible;
+    }
+    public void InvokeEscape(InputAction.CallbackContext obj)
+    {
+        Debug.Log("EscapedIsPressed");
+        OnEscape?.Invoke();
+    }
     public void InvokeOnLookLeftDown(InputAction.CallbackContext obj)
     {
         OnLookLeftDown?.Invoke();
