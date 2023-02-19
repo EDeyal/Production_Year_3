@@ -14,7 +14,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private RoomHandler currentRoom;
     [SerializeField] private RunParticle runParticle;
-    [SerializeField] private GameObject dashParticle;
+    [SerializeField] private ParticleSystem dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     [SerializeField] private ParticleSystem jumpParticle;
     [SerializeField] private Material outlineMat;
@@ -77,11 +77,14 @@ public class PlayerManager : BaseCharacter
     }
     private void DisableDashParticle()
     {
-        dashParticle.SetActive(false);
+        dashParticle.gameObject.SetActive(false);
+        dashParticle.Stop();
     }
     private void EnableDashParticle()
     {
-        dashParticle.SetActive(true);
+        dashParticle.gameObject.SetActive(true);
+        dashParticle.Clear();
+        dashParticle.Play();
     }
     private void PlaceGroundedParticle()
     {
