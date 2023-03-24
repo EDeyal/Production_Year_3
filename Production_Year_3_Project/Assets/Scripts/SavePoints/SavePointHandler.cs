@@ -34,6 +34,7 @@ public class SavePointHandler : MonoBehaviour
     public int SetPlayerSavePoint(SavePoint savePoint)
     {
         _currentSavePointID = savePoint.ID;
+        Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
         return CurrentSavePointID;
     }
     public void RegisterToSavePointHandler(SavePoint savePoint)
