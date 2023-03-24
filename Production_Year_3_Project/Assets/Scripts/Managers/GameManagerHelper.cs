@@ -5,7 +5,7 @@ public class GameManagerHelper : MonoBehaviour
     [SerializeField] GameManager _gameManagerPrefab;
     [SerializeField] PlayerManager _playerManager;
     [SerializeField] RoomsManager _roomsManager;
-
+    [SerializeField] SavePointHandler _savePointHandler;
     public PlayerManager GetPlayerManager => _playerManager;
     public RoomsManager GetRoomsManager => _roomsManager;
     private void OnValidate()
@@ -18,6 +18,10 @@ public class GameManagerHelper : MonoBehaviour
         {
             _roomsManager = FindObjectOfType<RoomsManager>();
         }
+        if (_savePointHandler == null)
+        {
+            _savePointHandler = FindObjectOfType<SavePointHandler>();
+        }
     }
 
     public void Awake()
@@ -27,6 +31,10 @@ public class GameManagerHelper : MonoBehaviour
             Instantiate(_gameManagerPrefab);
         }
         GameManager.Instance.AddGameplayManagerHelper(this);
+        if (_savePointHandler!= null)
+        {
+            GameManager.Instance.SaveManager.SetSavePointHandler(_savePointHandler);
+        }
     }
     public void LoadScene(int sceneNumber)
     {
