@@ -13,7 +13,7 @@ public class PlayerSavePointHandler : MonoBehaviour
     public void SavePoint()
     {
         SavePoint point = GameManager.Instance.PlayerManager.SavePointProximityDetector.GetClosestLegalTarget();
-        if (ReferenceEquals(point, null))
+        if (!ReferenceEquals(point, null))
         {
             if (point.CanSave)
             {
