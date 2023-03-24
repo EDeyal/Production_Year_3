@@ -1,8 +1,9 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class SavePoint : MonoBehaviour
 {
-    public int ID;
+    [ReadOnly] public int ID;
     bool _canSave;
     public bool CanSave => _canSave;
     [SerializeField] public Transform _spawnPointTransform;

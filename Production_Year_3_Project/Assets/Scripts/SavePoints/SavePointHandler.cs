@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class SavePointHandler : MonoBehaviour
 {
-    [SerializeField] int _currentSavePoint;
-    public int CurrentSavePoint=>_currentSavePoint;
+    [SerializeField] int _currentSavePointID;
+    public int CurrentSavePointID=>_currentSavePointID;
 
     List<IRespawnable> _respawnAssets;
     public List<IRespawnable> RespawnAssets => _respawnAssets; 
@@ -33,8 +33,8 @@ public class SavePointHandler : MonoBehaviour
     }
     public int SetPlayerSavePoint(SavePoint savePoint)
     {
-        _currentSavePoint = savePoint.ID;
-        return CurrentSavePoint;
+        _currentSavePointID = savePoint.ID;
+        return CurrentSavePointID;
     }
     public void RegisterToSavePointHandler(SavePoint savePoint)
     {
@@ -48,7 +48,7 @@ public class SavePointHandler : MonoBehaviour
     public Transform RespawnToSpawnPoint()
     {
         RespawnObjects();
-        var transform = _savePoints[_currentSavePoint].SpawnPointTransform;
+        var transform = _savePoints[_currentSavePointID].SpawnPointTransform;
         return transform;
     }
     private void OnDestroy()

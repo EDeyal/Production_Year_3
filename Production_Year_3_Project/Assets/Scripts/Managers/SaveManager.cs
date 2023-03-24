@@ -10,4 +10,8 @@ public class SaveManager : MonoBehaviour
     {
         //logic
     }
+    public void SetSavePointHandler(SavePointHandler savePointHandler)
+    {
+        _savePointHandler = savePointHandler;
+    }
 }
