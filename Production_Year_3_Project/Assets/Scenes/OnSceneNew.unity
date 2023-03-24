@@ -2696,8 +2696,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 146567259415107165, guid: d18e3a25957aef443a1176dbc3ffeeb6,
+        type: 3}
+      propertyPath: savePointProximityDetector
+      value: 
+      objectReference: {fileID: 1782421591}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18e3a25957aef443a1176dbc3ffeeb6, type: 3}
+--- !u!114 &1782421591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8592719334060096223, guid: d18e3a25957aef443a1176dbc3ffeeb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1782421590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b1b7e3dd9c07b45bac3f78ffe0c97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1806368059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2727411965767901011, guid: 80e9d2af4cf049d4fb2a63dac924f51b,
