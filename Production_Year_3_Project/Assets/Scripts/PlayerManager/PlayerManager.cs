@@ -18,6 +18,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     [SerializeField] private ParticleSystem jumpParticle;
     [SerializeField] private Material outlineMat;
+    [SerializeField] private SavePointProximity savePointProximityDetector;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -29,6 +30,7 @@ public class PlayerManager : BaseCharacter
     public PlayerDash PlayerDash { get => playerDash; }
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
     public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
+    public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector;}
 
     private void OnEnable()
     {

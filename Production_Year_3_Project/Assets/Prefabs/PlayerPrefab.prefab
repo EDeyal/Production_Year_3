@@ -552,6 +552,8 @@ GameObject:
   - component: {fileID: 1778845608595465663}
   - component: {fileID: 2109781805}
   - component: {fileID: 1677633072}
+  - component: {fileID: 8592719334060096223}
+  - component: {fileID: 8467556766629066818}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -695,6 +697,7 @@ MonoBehaviour:
   enemyProximityPointer: {fileID: 1677633072}
   jumpParticle: {fileID: 5708936173550558139}
   outlineMat: {fileID: 2100000, guid: af3570731a387ac4da6cf206b0753900, type: 2}
+  savePointProximityDetector: {fileID: 0}
 --- !u!114 &146567259415105966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +979,37 @@ MonoBehaviour:
   OnClosestTargetChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8592719334060096223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146567259415107164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b1b7e3dd9c07b45bac3f78ffe0c97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 2
+  rayFirePoint: {fileID: 6703380517588302043}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 32768
+  meleeZone: 2
+  tag: SavePoint
+--- !u!114 &8467556766629066818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146567259415107164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfe30d30b02e154794cf02ccd4698b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &146567259415558790
 GameObject:
   m_ObjectHideFlags: 0
