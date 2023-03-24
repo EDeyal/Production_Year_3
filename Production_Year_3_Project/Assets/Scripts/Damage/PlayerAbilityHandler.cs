@@ -22,7 +22,7 @@ public class PlayerAbilityHandler : MonoBehaviour
     {
         canCast = true;
         GameManager.Instance.InputManager.OnSpellCast.AddListener(CastAbility);
-        EquipSpell(test);
+        //EquipSpell(test);
     }
     public virtual void CastAbility()
     {
