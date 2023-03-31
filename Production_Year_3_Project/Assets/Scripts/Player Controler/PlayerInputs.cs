@@ -80,6 +80,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SavePoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae0c31b9-d93b-4463-ad81-32a369f70e65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -87,6 +96,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""3fd18762-d6a4-484a-9806-eea2a8841f31"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4645d12f-8f95-4179-933b-4ded4b4be0ba"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -120,6 +140,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""e8af8b51-b44e-40e0-b828-804adead24df"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpellAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9954d26-4fd5-436b-9597-d9378d7cd2f5"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -216,9 +247,53 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""2aa82a7c-8975-43fb-b224-23cef7375d1e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""48f61888-aabf-4c01-a51e-dc754fcc98d9"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4d83ea90-9cd6-49f3-97c5-164a288c8d84"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""f7ad19c2-b9d0-43ee-b872-e94af42ea9ff"",
                     ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a5bd5f7-a24e-450f-8a85-022d79948226"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -239,12 +314,45 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bec37422-2f98-4bb1-9f66-373b928b5cd6"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BasicAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""16abcc4c-b3c1-4ca2-aef4-01c5124e5a0e"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1ca5384-084a-44b6-9bd0-e09af3aa3c82"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d56f4777-99cf-485c-a4dd-b9286fc16a67"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SavePoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -316,8 +424,30 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e7d22873-8604-43ed-aada-c3d799ed9168"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""796c3dee-bf94-4a4f-ba81-25b24e18af9f"",
                     ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c36e00c2-4e27-48c3-8213-0140d5f97791"",
+                    ""path"": ""<XInputController>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -338,8 +468,30 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ec966cd2-6c45-4b87-bdb9-53eb98811acb"",
+                    ""path"": ""<XInputController>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e119c7ae-be98-4366-8b32-6e5ffa97269b"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""329fb654-3f41-42db-a86a-49f5191010a5"",
+                    ""path"": ""<XInputController>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -360,6 +512,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_SpellAttack = m_BasicActions.FindAction("SpellAttack", throwIfNotFound: true);
         m_BasicActions_Dash = m_BasicActions.FindAction("Dash", throwIfNotFound: true);
         m_BasicActions_Escape = m_BasicActions.FindAction("Escape", throwIfNotFound: true);
+        m_BasicActions_SavePoint = m_BasicActions.FindAction("SavePoint", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
@@ -431,6 +584,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_SpellAttack;
     private readonly InputAction m_BasicActions_Dash;
     private readonly InputAction m_BasicActions_Escape;
+    private readonly InputAction m_BasicActions_SavePoint;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -441,6 +595,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @SpellAttack => m_Wrapper.m_BasicActions_SpellAttack;
         public InputAction @Dash => m_Wrapper.m_BasicActions_Dash;
         public InputAction @Escape => m_Wrapper.m_BasicActions_Escape;
+        public InputAction @SavePoint => m_Wrapper.m_BasicActions_SavePoint;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +623,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Escape.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnEscape;
+                @SavePoint.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
+                @SavePoint.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
+                @SavePoint.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -490,6 +648,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @SavePoint.started += instance.OnSavePoint;
+                @SavePoint.performed += instance.OnSavePoint;
+                @SavePoint.canceled += instance.OnSavePoint;
             }
         }
     }
@@ -559,6 +720,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnSpellAttack(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnSavePoint(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

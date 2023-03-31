@@ -37,7 +37,7 @@ public class PlayerDash : MonoBehaviour
         OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
         OnDashEnd.AddListener(DashAnimOff);
-        canDash = true;
+        canDash = false;
     }
 
     private void StartDash()

@@ -29,6 +29,8 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnLookLeftUp;
     public UnityEvent OnLookRightDown;
     public UnityEvent OnLookRightUp;
+    public UnityEvent OnSavePoint;
+
 
     //public bool LockInputs;
     private void Start()
@@ -52,11 +54,16 @@ public class InputManager : MonoBehaviour
         input.Camera.MoveRight.canceled += InvokeOnLookRightUp;
         input.Camera.MoveLeft.started += InvokeOnLookLeftDown;
         input.Camera.MoveLeft.canceled += InvokeOnLookLeftUp;
+        input.BasicActions.SavePoint.started += InvokeSavePoint;
     }
 
     public void SetCurserVisability(bool isVisible)
     {
         Cursor.visible = isVisible;
+    }
+    public void InvokeSavePoint(InputAction.CallbackContext obj)
+    {
+        OnSavePoint?.Invoke();
     }
     public void InvokeEscape(InputAction.CallbackContext obj)
     {

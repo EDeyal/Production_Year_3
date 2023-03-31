@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
         {
             //open window
             _pauseMenu.PausePanel.SetActive(isPressed);
+            GameManager.Instance.InputManager.SetCurserVisability(true);
             GameManager.Instance.PauseGameTimeScale(true);
         }
         else

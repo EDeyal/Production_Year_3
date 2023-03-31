@@ -14,10 +14,11 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private PlayerDash playerDash;
     [SerializeField] private RoomHandler currentRoom;
     [SerializeField] private RunParticle runParticle;
-    [SerializeField] private GameObject dashParticle;
+    [SerializeField] private ParticleSystem dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     [SerializeField] private ParticleSystem jumpParticle;
     [SerializeField] private Material outlineMat;
+    [SerializeField] private SavePointProximity savePointProximityDetector;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -29,6 +30,7 @@ public class PlayerManager : BaseCharacter
     public PlayerDash PlayerDash { get => playerDash; }
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
     public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
+    public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector;}
 
     private void OnEnable()
     {
@@ -63,6 +65,8 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
+       /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
+        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
 
     private void DisableRunParticle()
@@ -75,11 +79,14 @@ public class PlayerManager : BaseCharacter
     }
     private void DisableDashParticle()
     {
-        dashParticle.SetActive(false);
+        dashParticle.gameObject.SetActive(false);
+        dashParticle.Stop();
     }
     private void EnableDashParticle()
     {
-        dashParticle.SetActive(true);
+        dashParticle.gameObject.SetActive(true);
+        dashParticle.Clear();
+        dashParticle.Play();
     }
     private void PlaceGroundedParticle()
     {
@@ -105,6 +112,26 @@ public class PlayerManager : BaseCharacter
         givenAbility.CahceOwner(this);
     }
 
+    private void CheckDecayingHealthAmount(float amount)
+    {
+        if (StatSheet.DecayingHealth.CurrentDecayingHealth > 0)
+        {
+            EnableOutline();
+        }
+        else
+        {
+            DisableOutline();
+        }
+    }
+
+    private void EnableOutline()
+    {
+        outlineMat.color = new Color(outlineMat.color.r, outlineMat.color.g, outlineMat.color.b, 70f);
+    }
+    private void DisableOutline()
+    {
+        outlineMat.color = new Color(outlineMat.color.r, outlineMat.color.g, outlineMat.color.b, 0f);
+    }
     private void PlayAttackAnimation()
     {
         playerController.AnimBlender.SetTrigger("Attack");
@@ -184,7 +211,7 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttack.CanAttack = true;
     }
 
-
+    
 
   /*  private void LockInputs()
     {
