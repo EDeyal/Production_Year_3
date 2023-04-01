@@ -41,12 +41,12 @@ public class PlayerManager : BaseCharacter
     {
         base.SetUp();
         PlayerStatSheet.InitializeStats();
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayerController.MidAirGraivtyAttackStop);
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
-        PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayAttackAnimation);
+        PlayerMeleeAttack.OnAttackPerformedVisual.AddListener(playerController.ReleaseJumpHeld);
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);

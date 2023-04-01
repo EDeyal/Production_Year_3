@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 public class AttackAnimationHandler : MonoBehaviour
@@ -12,7 +11,8 @@ public class AttackAnimationHandler : MonoBehaviour
     private float AttackAnimationDuration;
 
 
-    public UnityEvent OnAttackPerformed;
+    public UnityEvent OnAttackPerformedVisual;
+    public UnityEvent<Attack> OnAttackPerformed;
     [SerializeField] private Attack meleeAttack;
     [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
@@ -33,7 +33,7 @@ public class AttackAnimationHandler : MonoBehaviour
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
-        OnAttackPerformed.AddListener(SpawnSwordSlashVfx);
+        OnAttackPerformedVisual.AddListener(SpawnSwordSlashVfx);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
         CanAttack = true;
@@ -69,7 +69,8 @@ public class AttackAnimationHandler : MonoBehaviour
             return;
         }
         attackFinished = false;
-        OnAttackPerformed?.Invoke();
+        OnAttackPerformedVisual?.Invoke();
+        OnAttackPerformed?.Invoke(MeleeAttack);
     }
 
     public void SetLastAttacked(float givenTime)
@@ -105,7 +106,7 @@ public class AttackAnimationHandler : MonoBehaviour
         foreach (var item in collidersFound)
         {
             BaseCharacter target = item.GetComponent<BaseCharacter>();
-            if (!ReferenceEquals(target, null) && target is BaseEnemy &&  GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
+            if (!ReferenceEquals(target, null) && target is BaseEnemy && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
             {
                 target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
