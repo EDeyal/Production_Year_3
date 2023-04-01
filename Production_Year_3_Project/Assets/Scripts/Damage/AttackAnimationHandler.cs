@@ -23,7 +23,7 @@ public class AttackAnimationHandler : MonoBehaviour
     [SerializeField] private float attackRadius;
     [SerializeField] private Transform rightAttackPos;
     [SerializeField] private Transform leftAttackPos;
-    [SerializeField] private LayerMask enemyHitLayer;
+    [SerializeField] private LayerMask HitLayer;
 
     public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
     public Attack MeleeAttack { get => meleeAttack; }
@@ -101,20 +101,18 @@ public class AttackAnimationHandler : MonoBehaviour
         {
             attackPos = leftAttackPos;
         }
-        Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, enemyHitLayer);
+        Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, HitLayer);
         foreach (var item in collidersFound)
         {
-            BaseCharacter enemy = item.GetComponent<BaseCharacter>();
-            if (!ReferenceEquals(enemy, null) && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(enemy))
+            BaseCharacter target = item.GetComponent<BaseCharacter>();
+            if (!ReferenceEquals(target, null) && target is BaseEnemy &&  GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
             {
-                enemy.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
+                target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
+            }
+            else if (target is not BaseEnemy)
+            {
+                target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
         }
     }
-   /* private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(rightAttackPos.position, attackRadius);
-        Gizmos.DrawWireSphere(leftAttackPos.position, attackRadius);
-    }*/
 }
