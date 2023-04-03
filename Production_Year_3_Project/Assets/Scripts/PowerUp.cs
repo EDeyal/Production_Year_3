@@ -12,10 +12,9 @@ public class PowerUp : MonoBehaviour
             OnPickedUp();
         }
     }
-
     protected virtual void OnPickedUp()
     {
-
+        //give player whatever
     }
 
 }

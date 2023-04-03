@@ -135,7 +135,7 @@ public class Damageable : MonoBehaviour
             givenDamageDealer.OnKill?.Invoke(this, givenAttack.DamageHandler);
         }
         ClampHp();
-        if (_canReciveDamage)
+        if (_canReciveDamage && gameObject.activeInHierarchy)
             StartCoroutine(InvulnerabilityPhase());
     }
 

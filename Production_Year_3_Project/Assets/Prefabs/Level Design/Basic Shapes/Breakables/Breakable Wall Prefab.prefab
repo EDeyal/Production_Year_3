@@ -103,10 +103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3787309093304623794}
   - component: {fileID: 1409091731301673058}
-  - component: {fileID: 3974287498181067976}
-  - component: {fileID: 5728279398593755931}
-  - component: {fileID: 1383853300725644644}
-  - component: {fileID: 1998752469}
   m_Layer: 16
   m_Name: Breakable Wall Prefab
   m_TagString: Untagged
@@ -145,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41aaf1eb0d5b1a48a465f00dcf1376e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageable: {fileID: 5728279398593755931}
-  statSheet: {fileID: 3974287498181067976}
+  damageable: {fileID: 2004299949459848758}
+  statSheet: {fileID: 7083002739051412699}
   _asset: {fileID: 8957563387794217187}
   _brokenAssetPrefab: {fileID: 2146424964864628114, guid: 3343bede2b795aa4dae981d3cd0058bc,
     type: 3}
@@ -157,103 +153,6 @@ MonoBehaviour:
   _leftExplosionLocation: {fileID: 3376838948440989896}
   _explosionRadius: 1
   _explosionForce: 100
---- !u!114 &3974287498181067976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795941038200503104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e13ee59c1dfce984f88e7d6f3f7f4868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaxHp: 5
-  invulnerabilityDuration: 0
-  decayingHealth:
-    onDecayingHealthReduce:
-      m_PersistentCalls:
-        m_Calls: []
-    onDecayingHealthGain:
-      m_PersistentCalls:
-        m_Calls: []
-  baseSpeed: 0
-  OnOverrideSpeed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnResetSpeed:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &5728279398593755931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795941038200503104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36496159610ac984bb90604219ffc314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHp: 0
-  maxHp: 0
-  invulnerabilityDuration: 0
-  targetType: 2
-  OnGetHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTakeDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTotalDamageCalcRecieve:
-    m_PersistentCalls:
-      m_Calls: []
-  OnGetHealed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTakeDmgGFX:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHealGFX:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!65 &1383853300725644644
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795941038200503104}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.0369935, y: 2.9443274, z: 5.965559}
-  m_Center: {x: 0.040956914, y: 0.03669858, z: -0.002808094}
---- !u!114 &1998752469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795941038200503104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 369a882e921f3a64aa60affcf74216f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageDealer: {fileID: 0}
-  damageable: {fileID: 5728279398593755931}
-  effectable: {fileID: 0}
-  effector: {fileID: 0}
-  statSheet: {fileID: 3974287498181067976}
-  boosts: []
-  middleOfBody: {fileID: 6655488496492012592}
 --- !u!1001 &8110632875143587250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,3 +244,100 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8110632875143587250}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &4611045114284719869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957563387794217187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0369935, y: 2.9443274, z: 5.965559}
+  m_Center: {x: 0.040956914, y: 0.03669858, z: -0.002808094}
+--- !u!114 &2004299949459848758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957563387794217187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36496159610ac984bb90604219ffc314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  maxHp: 0
+  invulnerabilityDuration: 0
+  targetType: 2
+  OnGetHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTotalDamageCalcRecieve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDmgGFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealGFX:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3928473811975942254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957563387794217187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369a882e921f3a64aa60affcf74216f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealer: {fileID: 0}
+  damageable: {fileID: 2004299949459848758}
+  effectable: {fileID: 0}
+  effector: {fileID: 0}
+  statSheet: {fileID: 7083002739051412699}
+  boosts: []
+  middleOfBody: {fileID: 6655488496492012592}
+--- !u!114 &7083002739051412699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957563387794217187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13ee59c1dfce984f88e7d6f3f7f4868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHp: 5
+  invulnerabilityDuration: 0
+  decayingHealth:
+    onDecayingHealthReduce:
+      m_PersistentCalls:
+        m_Calls: []
+    onDecayingHealthGain:
+      m_PersistentCalls:
+        m_Calls: []
+  baseSpeed: 0
+  OnOverrideSpeed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetSpeed:
+    m_PersistentCalls:
+      m_Calls: []
