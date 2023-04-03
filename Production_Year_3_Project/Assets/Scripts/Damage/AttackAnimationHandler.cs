@@ -7,8 +7,8 @@ public class AttackAnimationHandler : MonoBehaviour
     private bool attackDown;
     private bool attackFinished;
     private bool canAttack;
+    private float attackBoost = 1;
 
-    private float AttackAnimationDuration;
 
 
     public UnityEvent OnAttackPerformedVisual;
@@ -34,6 +34,7 @@ public class AttackAnimationHandler : MonoBehaviour
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
         OnAttackPerformedVisual.AddListener(SpawnSwordSlashVfx);
+        OnAttackPerformed.AddListener(AttackDamageBoost);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
         CanAttack = true;
@@ -45,6 +46,17 @@ public class AttackAnimationHandler : MonoBehaviour
         {
             Attack();
         }
+    }
+
+
+    public void IncreaseAttackBoost(float amount)
+    {
+        attackBoost += amount;
+    }
+
+    private void AttackDamageBoost(Attack meleeAttack)
+    {
+        meleeAttack.DamageHandler.AddModifier(attackBoost);
     }
 
     private void AttackDownOn()

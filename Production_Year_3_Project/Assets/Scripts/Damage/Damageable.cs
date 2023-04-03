@@ -49,6 +49,16 @@ public class Damageable : MonoBehaviour
         _canReciveDamage = true;
     }
 
+    public void AddMaxHP(float amount)
+    {
+        this.maxHp += amount;
+    }
+    public void SetMaxHP(float maxHP)
+    {
+        this.maxHp = maxHP;
+    }
+
+
     public void CacheOwner(BaseCharacter givenCharacter)
     {
         owner = givenCharacter;
