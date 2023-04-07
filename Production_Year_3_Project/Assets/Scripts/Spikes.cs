@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -49,7 +48,10 @@ public class Spikes : DamageDealingCollider
          GameManager.Instance.PlayerManager.transform.position = respawnPoint.position;
          yield return new WaitForEndOfFrame();
          GameManager.Instance.PlayerManager.gameObject.SetActive(true);*/
-        playerManager.UnLockPlayer();
+        if (playerManager.Damageable.CurrentHp > 0)
+        {
+            playerManager.UnLockPlayer();
+        }
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeFromBlack());
     }
 }
