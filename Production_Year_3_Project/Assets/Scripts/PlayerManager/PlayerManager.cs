@@ -1,6 +1,5 @@
 using UnityEngine;
-using Sirenix.OdinInspector;
-
+using System;
 public class PlayerManager : BaseCharacter
 {
     [SerializeField] private CCController playerController;
@@ -41,12 +40,12 @@ public class PlayerManager : BaseCharacter
     {
         base.SetUp();
         PlayerStatSheet.InitializeStats();
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayerController.MidAirGraivtyAttackStop);
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
-        PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayAttackAnimation);
+        PlayerMeleeAttack.OnAttackPerformedVisual.AddListener(playerController.ReleaseJumpHeld);
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
@@ -56,6 +55,7 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
         Damageable.OnDeath.AddListener(LockPlayer);
         Damageable.OnDeath.AddListener(EnableDeathPopup);
+        Damageable.OnDeath.AddListener(EquipEmptyAbility);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
         playerController.GroundCheck.OnGrounded.AddListener(PlaceGroundedParticle);
         playerController.OnJump.AddListener(PlaceJumpParticle);
@@ -145,8 +145,7 @@ public class PlayerManager : BaseCharacter
     }
     private void PlayDeathAnimation()
     {
-        playerController.AnimBlender.SetTrigger("Die");
-        //lock inputs 
+        playerController.AnimBlender.SetBool("Die", true);
         playerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
@@ -211,10 +210,23 @@ public class PlayerManager : BaseCharacter
         PlayerMeleeAttack.CanAttack = true;
     }
 
-    
-
-  /*  private void LockInputs()
+    public void PlayerRespawn()
     {
-        GameManager.Instance.InputManager.LockInputs = true;
-    }*/
+        playerController.AnimBlender.SetBool("Die", false);
+        UnLockPlayer();
+        Damageable.Heal(new DamageHandler() { BaseAmount = Damageable.MaxHp });
+    }
+
+    private void EquipEmptyAbility()
+    {
+        PlayerAbilityHandler.EquipSpell(null);
+    }
+
+    [SerializeField] private Attack testAttack;
+    [ContextMenu("kill player")]
+    
+    public void KillPlayerTest()
+    {
+        Damageable.TakeDamage(testAttack);
+    }
 }

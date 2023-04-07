@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 public class AttackAnimationHandler : MonoBehaviour
@@ -8,11 +7,12 @@ public class AttackAnimationHandler : MonoBehaviour
     private bool attackDown;
     private bool attackFinished;
     private bool canAttack;
+    private float attackBoost = 1;
 
-    private float AttackAnimationDuration;
 
 
-    public UnityEvent OnAttackPerformed;
+    public UnityEvent OnAttackPerformedVisual;
+    public UnityEvent<Attack> OnAttackPerformed;
     [SerializeField] private Attack meleeAttack;
     [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
@@ -23,7 +23,7 @@ public class AttackAnimationHandler : MonoBehaviour
     [SerializeField] private float attackRadius;
     [SerializeField] private Transform rightAttackPos;
     [SerializeField] private Transform leftAttackPos;
-    [SerializeField] private LayerMask enemyHitLayer;
+    [SerializeField] private LayerMask HitLayer;
 
     public Transform VfxSpawnPoint { get => vfxSpawnPoint; }
     public Attack MeleeAttack { get => meleeAttack; }
@@ -33,7 +33,8 @@ public class AttackAnimationHandler : MonoBehaviour
     {
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
-        OnAttackPerformed.AddListener(SpawnSwordSlashVfx);
+        OnAttackPerformedVisual.AddListener(SpawnSwordSlashVfx);
+        OnAttackPerformed.AddListener(AttackDamageBoost);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
         CanAttack = true;
@@ -45,6 +46,17 @@ public class AttackAnimationHandler : MonoBehaviour
         {
             Attack();
         }
+    }
+
+
+    public void IncreaseAttackBoost(float amount)
+    {
+        attackBoost += amount;
+    }
+
+    private void AttackDamageBoost(Attack meleeAttack)
+    {
+        meleeAttack.DamageHandler.AddModifier(attackBoost);
     }
 
     private void AttackDownOn()
@@ -69,7 +81,8 @@ public class AttackAnimationHandler : MonoBehaviour
             return;
         }
         attackFinished = false;
-        OnAttackPerformed?.Invoke();
+        OnAttackPerformedVisual?.Invoke();
+        OnAttackPerformed?.Invoke(MeleeAttack);
     }
 
     public void SetLastAttacked(float givenTime)
@@ -101,20 +114,18 @@ public class AttackAnimationHandler : MonoBehaviour
         {
             attackPos = leftAttackPos;
         }
-        Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, enemyHitLayer);
+        Collider[] collidersFound = Physics.OverlapSphere(attackPos.position, attackRadius, HitLayer);
         foreach (var item in collidersFound)
         {
-            BaseCharacter enemy = item.GetComponent<BaseCharacter>();
-            if (!ReferenceEquals(enemy, null) && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(enemy))
+            BaseCharacter target = item.GetComponent<BaseCharacter>();
+            if (!ReferenceEquals(target, null) && target is BaseEnemy && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
             {
-                enemy.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
+                target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
+            }
+            else if (target is not BaseEnemy)
+            {
+                target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
         }
     }
-   /* private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(rightAttackPos.position, attackRadius);
-        Gizmos.DrawWireSphere(leftAttackPos.position, attackRadius);
-    }*/
 }
