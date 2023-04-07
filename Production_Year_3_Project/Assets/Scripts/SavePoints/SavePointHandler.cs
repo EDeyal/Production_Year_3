@@ -4,6 +4,7 @@ using UnityEngine;
 public class SavePointHandler : MonoBehaviour
 {
     [SerializeField] int _currentSavePointID;
+    [SerializeField] SavePoint _startingSavePoint;
     public int CurrentSavePointID=>_currentSavePointID;
 
     List<IRespawnable> _respawnAssets;
@@ -11,6 +12,7 @@ public class SavePointHandler : MonoBehaviour
 
     List<SavePoint> _savePoints;
     public List<SavePoint> SavePoints => _savePoints;
+    public SavePoint StartingSavePoint => _startingSavePoint;
 
     private void Awake()
     {
@@ -31,9 +33,15 @@ public class SavePointHandler : MonoBehaviour
             Debug.LogWarning("Save Point Handler Respawn Assets are Null");
         }
     }
-    public int SetPlayerSavePoint(SavePoint savePoint)
+    public int SetPlayerSavePoint(SavePoint savePoint,bool withVisuals)
     {
         _currentSavePointID = savePoint.ID;
+        if (withVisuals)
+        {
+            savePoint.PlayParticles();
+        }
+        var damageable = GameManager.Instance.PlayerManager.Damageable;
+        damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp});
         Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
         return CurrentSavePointID;
     }
@@ -49,6 +57,8 @@ public class SavePointHandler : MonoBehaviour
     public Transform RespawnToSpawnPoint()
     {
         RespawnObjects();
+        GameManager.Instance.SaveManager.RoomsManager.CurrentRoom = _savePoints[_currentSavePointID].SavePointRoom;
+        GameManager.Instance.SaveManager.RoomsManager.CurrentRoom.ResetRoom();
         var transform = _savePoints[_currentSavePointID].SpawnPointTransform;
         return transform;
     }

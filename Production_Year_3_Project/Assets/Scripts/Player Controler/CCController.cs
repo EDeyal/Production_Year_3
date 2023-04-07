@@ -159,7 +159,11 @@ public class CCController : MonoBehaviour
     }
     private void MoveController()
     {
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move(new Vector3(velocity.x, velocity.y, 0) * Time.deltaTime);
+        if (transform.position.z != 0)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
     }
     private void ApplyExtrenalForces()
     {
@@ -437,5 +441,16 @@ public class CCController : MonoBehaviour
         useGravity = true;
         canMove = true;
         ResetGravity();
+    }
+
+    public void DisableCC()
+    {
+        controller.enabled = false;
+    }
+    public void EnableCC()
+    {
+        ResetGravity();
+        ResetVelocity();
+        controller.enabled = true;
     }
 }

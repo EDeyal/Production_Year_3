@@ -38,7 +38,7 @@ public class HallwayTrigger: MonoBehaviour, ICheckValidation
         if (other.gameObject.layer == _targetlayerValue)
         {
             //Debug.Log("target exited a room trigger");
-            GameManager.Instance.RoomsManager.CurrentRoom = ClosestRoom;
+            GameManager.Instance.SaveManager.RoomsManager.CurrentRoom = ClosestRoom;
         }
     }
 

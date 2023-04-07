@@ -7,7 +7,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] private Transform rayFirePoint;
     [SerializeField] protected LayerMask targetLayer;
     [SerializeField] protected float meleeZone;
-    [SerializeField] private string tag;
+    [SerializeField] private string[] tags;
 
 
     private void Start()
@@ -50,7 +50,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
             }
             if (Physics.Raycast(rayFirePoint.position, dir, out hit, checkRadius, targetLayer, QueryTriggerInteraction.Ignore) && Condition(item))
             {
-                if (ReferenceEquals(hit.collider.gameObject, item.gameObject) && hit.collider.gameObject.CompareTag(tag))
+                if (ReferenceEquals(hit.collider.gameObject, item.gameObject) && CompareTags(hit.collider.gameObject))
                 {
                     legalTargets.Add(item);
                 }
@@ -58,6 +58,19 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         }
         return legalTargets.ToArray();
     }
+
+    protected bool CompareTags(GameObject target)
+    {
+        foreach (var item in tags)
+        {
+            if (target.CompareTag(item))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public T GetClosestLegalTarget()//closest with line of sight
     {

@@ -45,7 +45,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.PlayerManager.PlayerController.GroundCheck.IsGrounded())
+        if (GameManager.Instance.PlayerManager.PlayerController.GroundCheck.IsGrounded()  && GameManager.Instance.PlayerManager.Damageable.CurrentHp > 0)
         {
             if (holdingDown)
             {

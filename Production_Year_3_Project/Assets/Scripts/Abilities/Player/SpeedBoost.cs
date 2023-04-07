@@ -10,6 +10,6 @@ public class SpeedBoost : Ability
     public override void Cast()
     {
         Owner.Effectable.ApplyStatusEffect(new MovementSpeedBoost());
-        Owner.StatSheet.DecayingHealth.AddDecayingHealth(decayingHealthAmount);
+        //Owner.StatSheet.DecayingHealth.AddDecayingHealth(decayingHealthAmount);
     }
 }

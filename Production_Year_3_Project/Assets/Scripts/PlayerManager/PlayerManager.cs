@@ -1,12 +1,12 @@
 using UnityEngine;
-using Sirenix.OdinInspector;
-
+using System;
 public class PlayerManager : BaseCharacter
 {
     [SerializeField] private CCController playerController;
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
     [SerializeField] private PlayerAbilityHandler playerAbilityHandler;
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
+    [SerializeField] private DamageAbleTerrainProximitySensor damageableTerrainProximitySensor;
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
@@ -31,6 +31,7 @@ public class PlayerManager : BaseCharacter
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
     public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
     public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector;}
+    public DamageAbleTerrainProximitySensor DamageableTerrainProximitySensor { get => damageableTerrainProximitySensor;}
 
     private void OnEnable()
     {
@@ -41,12 +42,12 @@ public class PlayerManager : BaseCharacter
     {
         base.SetUp();
         PlayerStatSheet.InitializeStats();
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayerController.MidAirGraivtyAttackStop);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayerController.MidAirGraivtyAttackStop);
         PlayerAbilityHandler.OnEquipAbility.AddListener(CachePlayerOnAbility);
         PlayerController.MovementSpeed = StatSheet.Speed;
         PlayerStatSheet.OnOverrideSpeed.AddListener(PlayerController.SetSpeed);
-        playerMeleeAttackAnimationHandler.OnAttackPerformed.AddListener(PlayAttackAnimation);
-        PlayerMeleeAttack.OnAttackPerformed.AddListener(playerController.ReleaseJumpHeld);
+        playerMeleeAttackAnimationHandler.OnAttackPerformedVisual.AddListener(PlayAttackAnimation);
+        PlayerMeleeAttack.OnAttackPerformedVisual.AddListener(playerController.ReleaseJumpHeld);
         DamageDealer.OnKill.AddListener(playerAbilityHandler.OnKillStealSpellEvent);
         PlayerController.CacheKnockBackDuration(PlayerStatSheet.KnockBackDuration);
         PlayerAbilityHandler.OnCast.AddListener(SwordVFX.ChargeSwordColorLerp);
@@ -56,6 +57,7 @@ public class PlayerManager : BaseCharacter
         Damageable.OnDeath.AddListener(PlayerController.ResetGravity);
         Damageable.OnDeath.AddListener(LockPlayer);
         Damageable.OnDeath.AddListener(EnableDeathPopup);
+        Damageable.OnDeath.AddListener(EquipEmptyAbility);
         PlayerAbilityHandler.OnCast.AddListener(PlayerDash.ResetDashCoolDoown);
         playerController.GroundCheck.OnGrounded.AddListener(PlaceGroundedParticle);
         playerController.OnJump.AddListener(PlaceJumpParticle);
@@ -145,8 +147,7 @@ public class PlayerManager : BaseCharacter
     }
     private void PlayDeathAnimation()
     {
-        playerController.AnimBlender.SetTrigger("Die");
-        //lock inputs 
+        playerController.AnimBlender.SetBool("Die", true);
         playerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
@@ -202,6 +203,7 @@ public class PlayerManager : BaseCharacter
         PlayerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
+        playerDash.CanDash = false;
     }
     public void UnLockPlayer()
     {
@@ -209,12 +211,26 @@ public class PlayerManager : BaseCharacter
         PlayerController.CanMove = true;
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;
+        playerDash.CanDash = true;
     }
 
-    
-
-  /*  private void LockInputs()
+    public void PlayerRespawn()
     {
-        GameManager.Instance.InputManager.LockInputs = true;
-    }*/
+        playerController.AnimBlender.SetBool("Die", false);
+        UnLockPlayer();
+        Damageable.Heal(new DamageHandler() { BaseAmount = Damageable.MaxHp });
+    }
+
+    private void EquipEmptyAbility()
+    {
+        PlayerAbilityHandler.EquipSpell(null);
+    }
+
+    [SerializeField] private Attack testAttack;
+    [ContextMenu("kill player")]
+    
+    public void KillPlayerTest()
+    {
+        Damageable.TakeDamage(testAttack);
+    }
 }

@@ -25,6 +25,8 @@ public class StatSheet : MonoBehaviour
     public float Speed { get => currentSpeed; }
     public DecayingHealth DecayingHealth { get => decayingHealth;}
 
+
+   
     public void OverrideSpeed(float givenSpeed)
     {
         OnOverrideSpeed?.Invoke(givenSpeed);

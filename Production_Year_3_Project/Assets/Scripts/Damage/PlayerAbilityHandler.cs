@@ -50,6 +50,10 @@ public class PlayerAbilityHandler : MonoBehaviour
     public void EquipSpell(Ability givenAbility)
     {
         currentAbility = givenAbility;
+        if (ReferenceEquals(givenAbility, null))
+        {
+            return;
+        }
         OnEquipAbility?.Invoke(givenAbility);
         ResetLastCastSpell();
     }

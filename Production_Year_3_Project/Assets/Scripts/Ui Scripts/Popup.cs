@@ -24,7 +24,7 @@ public class Popup : MonoBehaviour
     }
     public void TogglePopup(bool state)
     {
-        GameManager.Instance.PlayerManager.enabled = !state;
+        //GameManager.Instance.PlayerManager.enabled = !state;
         gameObject.SetActive(state);
     }
 

@@ -10,8 +10,14 @@ public class DeathPopup : Popup
         GameManager.Instance.UiManager.CacheDeathPopup(this);
     }
 
-    public void ResetScene()
+    public void RespawnPlayer()
     {
-        GameManager.Instance.SceneManager.ResetActiveScene();
+        GameManager.Instance.PlayerManager.PlayerController.DisableCC();
+        GameManager.Instance.PlayerManager.PlayerController.ZeroGravity();
+        GameManager.Instance.PlayerManager.transform.position = GameManager.Instance.SaveManager.SavePointHandler.RespawnToSpawnPoint().position;
+        GameManager.Instance.PlayerManager.PlayerRespawn();
+        GameManager.Instance.PlayerManager.PlayerController.EnableCC();
+        //GameManager.Instance.PlayerManager.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
