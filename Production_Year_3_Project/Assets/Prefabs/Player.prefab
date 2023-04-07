@@ -400,7 +400,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3201840432435668536}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -749,7 +749,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 74880
   meleeZone: 1.5
-  tag: Enemy
+  tags:
+  - Enemy
+  - DamageableTerrain
 --- !u!114 &3947462684361151963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +806,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3201840432435668536}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91cd93c1973bbf542b1307944b4a6bb1, type: 3}
   m_Name: 
@@ -833,7 +835,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   meleeZone: 2
-  tag: SavePoint
+  tags: []
 --- !u!114 &6621770062330923046
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6281548024191600892}
   m_Layer: 16
   m_Name: BreakingCollider
-  m_TagString: Untagged
+  m_TagString: DamageableTerrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3787309093304623794}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1541053176468669458
 BoxCollider:
@@ -184,13 +184,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3128232792650733607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.2980003, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3787309093304623794}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3595661750495040892
 GameObject:
@@ -286,8 +286,8 @@ Transform:
   - {fileID: 8576112484160930393}
   - {fileID: 4245322960205618914}
   - {fileID: 3376838948440989896}
-  - {fileID: 6655488496492012592}
   - {fileID: 3454773766306458430}
+  - {fileID: 6655488496492012592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
