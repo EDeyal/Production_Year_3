@@ -8,6 +8,7 @@ public class SavePoint : MonoBehaviour
     public bool CanSave => _canSave;
     [SerializeField] public Transform _spawnPointTransform;
     public Transform SpawnPointTransform => _spawnPointTransform;
+    [SerializeField] ParticleSystem _saveParticles;
     private void Start()
     {
         RegisterToSavePointHandler();
@@ -16,16 +17,16 @@ public class SavePoint : MonoBehaviour
     {
         GameManager.Instance.SaveManager.SavePointHandler.RegisterToSavePointHandler(this);
     }
-    //private void Update()
-    //{
-    //    if (_canSave)
-    //    {
-    //        if (true)//if player presses a key
-    //        { 
-    //            GameManager.Instance.SaveManager.SavePointHandler.SetPlayerSavePoint(this);
-    //        }
-    //    }
-    //}
+    public void PlayParticles()
+    {
+        if (_saveParticles == null)
+        {
+            Debug.LogError($"SavePoint with ID: {ID} has no Particles on save");
+            return;
+        }
+        //_saveParticles.Clear();
+        _saveParticles.Play();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
