@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 3343798263627306580}
   - component: {fileID: 6438166666116598459}
   - component: {fileID: 6621770062330923046}
+  - component: {fileID: 1225948395286552916}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -518,6 +519,7 @@ MonoBehaviour:
   playerMeleeAttackAnimationHandler: {fileID: 3947462684361151963}
   playerAbilityHandler: {fileID: 3201840432435668543}
   enemyProximitySensor: {fileID: 3201840432435668542}
+  damageableTerrainProximitySensor: {fileID: 1225948395286552916}
   playerFlipper: {fileID: 3201840432435668533}
   swordVFX: {fileID: 3343798263327016777}
   gfx: {fileID: 590341922278284625}
@@ -751,7 +753,6 @@ MonoBehaviour:
   meleeZone: 1.5
   tags:
   - Enemy
-  - DamageableTerrain
 --- !u!114 &3947462684361151963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +836,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   meleeZone: 2
-  tags: []
+  tags:
+  - SavePoint
 --- !u!114 &6621770062330923046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,6 +850,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe30d30b02e154794cf02ccd4698b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1225948395286552916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201840432435668536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66582ccb0c3e9e4683b3a1ac67e0f34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 10
+  rayFirePoint: {fileID: 8313855868218345663}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 65536
+  meleeZone: 1.5
+  tags:
+  - DamageableTerrain
 --- !u!1 &3201840433076604950
 GameObject:
   m_ObjectHideFlags: 0

@@ -126,7 +126,7 @@ public class AttackAnimationHandler : MonoBehaviour
             {
                 target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
-            else if (target is not BaseEnemy && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
+            else if (target is not BaseEnemy && GameManager.Instance.PlayerManager.DamageableTerrainProximitySensor.IsTargetLegal(target))
             {
                 target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }

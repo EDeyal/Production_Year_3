@@ -6,6 +6,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private AttackAnimationHandler playerMeleeAttackAnimationHandler;
     [SerializeField] private PlayerAbilityHandler playerAbilityHandler;
     [SerializeField] private EnemyProximitySensor enemyProximitySensor;
+    [SerializeField] private DamageAbleTerrainProximitySensor damageableTerrainProximitySensor;
     [SerializeField] private CCFlip playerFlipper;
     [SerializeField] private PlayerSwordVFX swordVFX;
     [SerializeField] private Transform gfx;
@@ -30,6 +31,7 @@ public class PlayerManager : BaseCharacter
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
     public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
     public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector;}
+    public DamageAbleTerrainProximitySensor DamageableTerrainProximitySensor { get => damageableTerrainProximitySensor;}
 
     private void OnEnable()
     {
@@ -201,6 +203,7 @@ public class PlayerManager : BaseCharacter
         PlayerController.CanMove = false;
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
+        playerDash.CanDash = false;
     }
     public void UnLockPlayer()
     {
@@ -208,6 +211,7 @@ public class PlayerManager : BaseCharacter
         PlayerController.CanMove = true;
         PlayerAbilityHandler.CanCast = true;
         PlayerMeleeAttack.CanAttack = true;
+        playerDash.CanDash = true;
     }
 
     public void PlayerRespawn()
