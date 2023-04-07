@@ -40,6 +40,8 @@ public class SavePointHandler : MonoBehaviour
         {
             savePoint.PlayParticles();
         }
+        var damageable = GameManager.Instance.PlayerManager.Damageable;
+        damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp});
         Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
         return CurrentSavePointID;
     }
