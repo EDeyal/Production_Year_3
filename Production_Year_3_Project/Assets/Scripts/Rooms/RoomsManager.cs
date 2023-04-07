@@ -10,6 +10,8 @@ public class RoomsManager : MonoBehaviour
 
     public RoomHandler CurrentRoom
     {
+        get => _currentRoom;
+
         set
         {
             _currentRoom = value;

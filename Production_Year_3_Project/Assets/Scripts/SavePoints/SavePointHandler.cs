@@ -57,7 +57,8 @@ public class SavePointHandler : MonoBehaviour
     public Transform RespawnToSpawnPoint()
     {
         RespawnObjects();
-        _savePoints[_currentSavePointID].SavePointRoom.ResetRoom();//reset the room the player will spawn within it
+        GameManager.Instance.SaveManager.RoomsManager.CurrentRoom = _savePoints[_currentSavePointID].SavePointRoom;
+        GameManager.Instance.SaveManager.RoomsManager.CurrentRoom.ResetRoom();
         var transform = _savePoints[_currentSavePointID].SpawnPointTransform;
         return transform;
     }
