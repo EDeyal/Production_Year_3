@@ -12,11 +12,12 @@ public class DeathPopup : Popup
 
     public void RespawnPlayer()
     {
-        GameManager.Instance.PlayerManager.gameObject.SetActive(false);
+        GameManager.Instance.PlayerManager.PlayerController.DisableCC();
+        GameManager.Instance.PlayerManager.PlayerController.ZeroGravity();
         GameManager.Instance.PlayerManager.transform.position = GameManager.Instance.SaveManager.SavePointHandler.RespawnToSpawnPoint().position;
         GameManager.Instance.PlayerManager.PlayerRespawn();
-        GameManager.Instance.PlayerManager.gameObject.SetActive(true);
+        GameManager.Instance.PlayerManager.PlayerController.EnableCC();
+        //GameManager.Instance.PlayerManager.gameObject.SetActive(true);
         gameObject.SetActive(false);
-
     }
 }

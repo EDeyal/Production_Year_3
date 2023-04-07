@@ -438,4 +438,15 @@ public class CCController : MonoBehaviour
         canMove = true;
         ResetGravity();
     }
+
+    public void DisableCC()
+    {
+        controller.enabled = false;
+    }
+    public void EnableCC()
+    {
+        ResetGravity();
+        ResetVelocity();
+        controller.enabled = true;
+    }
 }

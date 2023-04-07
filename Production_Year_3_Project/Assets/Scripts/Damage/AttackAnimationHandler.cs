@@ -118,7 +118,11 @@ public class AttackAnimationHandler : MonoBehaviour
         foreach (var item in collidersFound)
         {
             BaseCharacter target = item.GetComponent<BaseCharacter>();
-            if (!ReferenceEquals(target, null) && target is BaseEnemy && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
+            if (ReferenceEquals(target, null))
+            {
+                return;
+            }
+            else if (!ReferenceEquals(target, null) && target is BaseEnemy && GameManager.Instance.PlayerManager.EnemyProximitySensor.IsTargetLegal(target))
             {
                 target.Damageable.GetHit(meleeAttack, GameManager.Instance.PlayerManager.DamageDealer);
             }
