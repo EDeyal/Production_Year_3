@@ -8,7 +8,7 @@ public class CemuDecayingHealthBoost : Ability
     public override void Cast(BaseCharacter givenCharacter)
     {
         givenCharacter.Effectable.ApplyStatusEffect(new MovementSpeedBoost());
-        givenCharacter.StatSheet.DecayingHealth.AddDecayingHealth(decayingHealthAmount);
+        //givenCharacter.StatSheet.DecayingHealth.AddDecayingHealth(decayingHealthAmount);
     }
 
 
