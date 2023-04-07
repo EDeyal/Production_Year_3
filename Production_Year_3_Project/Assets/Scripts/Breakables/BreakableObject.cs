@@ -7,6 +7,9 @@ public class BreakableObject : DamageableObject
     [SerializeField] GameObject _asset;
     [TabGroup("General")]
     [SerializeField] GameObject _brokenAssetPrefab;
+    [TabGroup("General")]
+    [SerializeField] GameObject _damageableColliderGameObject;
+
     GameObject _instantiatedObject;
     BrokenAsset _brokenAsset;
     [TabGroup("General")]
@@ -46,6 +49,7 @@ public class BreakableObject : DamageableObject
     public void BreakAsset()
     {
         _asset.SetActive(false);
+        _damageableColliderGameObject.SetActive(false);
         _instantiatedObject = Instantiate(_brokenAssetPrefab, transform);
         _brokenAsset = _instantiatedObject.GetComponent<BrokenAsset>();
         ExplodeParts();
@@ -64,6 +68,7 @@ public class BreakableObject : DamageableObject
             return;
         }
         _asset.SetActive(true);
+        _damageableColliderGameObject.SetActive(true);
     }
     private void OnDisable()
     {
