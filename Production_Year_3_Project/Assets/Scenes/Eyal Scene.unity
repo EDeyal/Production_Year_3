@@ -1444,12 +1444,12 @@ PrefabInstance:
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.6
+      value: 85.12
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: -116.65
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
@@ -2089,12 +2089,12 @@ PrefabInstance:
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.4
+      value: 10.47
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
@@ -2366,12 +2366,12 @@ PrefabInstance:
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.4
+      value: -48.26
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: -145
       objectReference: {fileID: 0}
     - target: {fileID: 4260798270004011768, guid: 35a99048102c1964aad21e8ec003fd62,
         type: 3}
@@ -3127,6 +3127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3756572340921943864, guid: e100da5c7d98f3f498689f966396e1ca,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RespawnPlayer
+      objectReference: {fileID: 0}
     - target: {fileID: 3888172006282602154, guid: e100da5c7d98f3f498689f966396e1ca,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3993,16 +3998,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3128232792650733607, guid: b41d3877cfed29344aff92046ed9e867,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3595661750495040892, guid: b41d3877cfed29344aff92046ed9e867,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3787309093304623794, guid: b41d3877cfed29344aff92046ed9e867,
         type: 3}
       propertyPath: m_RootOrder
@@ -4058,20 +4053,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4405909131834230004, guid: b41d3877cfed29344aff92046ed9e867,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8795941038200503104, guid: b41d3877cfed29344aff92046ed9e867,
         type: 3}
       propertyPath: m_Name
       value: Breakable Wall Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795941038200503104, guid: b41d3877cfed29344aff92046ed9e867,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b41d3877cfed29344aff92046ed9e867, type: 3}
