@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikesCheckpoint : MonoBehaviour
@@ -15,10 +13,10 @@ public class SpikesCheckpoint : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-   {
-        if(other.gameObject.layer == _targetlayerValue)
+    {
+        if (other.gameObject.layer == _targetlayerValue)
         {
-            GameManager.Instance.RoomsManager.CurrentCheckpoint = this.transform;
+            GameManager.Instance.SaveManager.RoomsManager.CurrentCheckpoint = this.transform;
         }
     }
 }

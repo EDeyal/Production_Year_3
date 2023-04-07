@@ -14,7 +14,6 @@ public class Spikes : DamageDealingCollider
         CacheReferences(refAttack);
     }
 
-
     private void StartRespawnPlayer()
     {
         //routine blackscreen fadeout...
@@ -24,7 +23,7 @@ public class Spikes : DamageDealingCollider
 
     private IEnumerator RespawnPlayer()
     {
-        respawnPoint = GameManager.Instance.RoomsManager.CurrentCheckpoint;
+        respawnPoint = GameManager.Instance.SaveManager.RoomsManager.CurrentCheckpoint;
         if (_respawning)
         {
             yield break;
@@ -34,7 +33,7 @@ public class Spikes : DamageDealingCollider
         playerManager.PlayerController.ResetVelocity();
         playerManager.LockPlayer();
         yield return StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeToBlack());
-        GameManager.Instance.RoomsManager.ResetRoom();
+        GameManager.Instance.SaveManager.RoomsManager.ResetRoom();
         Vector3 startPos = GameManager.Instance.PlayerManager.PlayerController.transform.position;
         float counter = 0f;
         while (counter < 1)

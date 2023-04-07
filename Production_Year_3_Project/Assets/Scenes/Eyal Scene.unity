@@ -158,6 +158,18 @@ Transform:
   m_Father: {fileID: 2036691558}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &132892788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4260798270004011775, guid: 35a99048102c1964aad21e8ec003fd62,
+    type: 3}
+  m_PrefabInstance: {fileID: 1421452857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f4973c5c2a8bd4ca06eda656258167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &149687059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1496,6 +1508,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavePoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4260798270004011775, guid: 35a99048102c1964aad21e8ec003fd62,
+        type: 3}
+      propertyPath: _savePointRoom
+      value: 
+      objectReference: {fileID: 1780817928}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a99048102c1964aad21e8ec003fd62, type: 3}
 --- !u!1 &908948365
@@ -2141,6 +2158,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavePoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4260798270004011775, guid: 35a99048102c1964aad21e8ec003fd62,
+        type: 3}
+      propertyPath: _savePointRoom
+      value: 
+      objectReference: {fileID: 4756441963374571215}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a99048102c1964aad21e8ec003fd62, type: 3}
 --- !u!1001 &1463515753
@@ -2418,6 +2440,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SavePoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4260798270004011775, guid: 35a99048102c1964aad21e8ec003fd62,
+        type: 3}
+      propertyPath: _savePointRoom
+      value: 
+      objectReference: {fileID: 753181034}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35a99048102c1964aad21e8ec003fd62, type: 3}
 --- !u!1001 &1673362261
@@ -2596,6 +2623,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3156700501400400564, guid: 38e26efd381e8854e90a23ebb61c6aad,
+        type: 3}
+      propertyPath: _startingSavePoint
+      value: 
+      objectReference: {fileID: 132892788}
     - target: {fileID: 3156700501400400565, guid: 38e26efd381e8854e90a23ebb61c6aad,
         type: 3}
       propertyPath: m_RootOrder

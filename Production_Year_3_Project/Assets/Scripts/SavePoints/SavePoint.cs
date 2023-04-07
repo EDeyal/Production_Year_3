@@ -5,6 +5,9 @@ public class SavePoint : MonoBehaviour
 {
     [ReadOnly] public int ID;
     bool _canSave;
+    [Tooltip("Reference to the room the save point is located within")]
+    [SerializeField] RoomHandler _savePointRoom;
+    public RoomHandler SavePointRoom => _savePointRoom;
     public bool CanSave => _canSave;
     [SerializeField] public Transform _spawnPointTransform;
     public Transform SpawnPointTransform => _spawnPointTransform;

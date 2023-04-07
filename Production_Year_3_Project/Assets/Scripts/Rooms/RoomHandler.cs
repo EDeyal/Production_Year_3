@@ -16,7 +16,7 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
     }
     private void Start()
     {
-        GameManager.Instance.RoomsManager.AddRoom(this);
+        GameManager.Instance.SaveManager.RoomsManager.AddRoom(this);
     }
     public void ResetRoom()
     {
