@@ -46,6 +46,13 @@ public class DamageHandler
         }
         return final;
     }
+
+    public void CopyDamageHandler(DamageHandler givenDamage)
+    {
+        BaseAmount = givenDamage.baseAmount;
+        modifiers = new List<float>(givenDamage.modifiers);
+        damageType = givenDamage.damageType;
+    }
 }
 
 

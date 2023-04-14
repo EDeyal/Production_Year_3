@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1229966921819268525}
   - component: {fileID: 3074460181073789521}
   - component: {fileID: 2055005838120469716}
+  - component: {fileID: 3419742929792913847}
   m_Layer: 0
   m_Name: ObjectPoolers
   m_TagString: Untagged
@@ -55,8 +56,8 @@ MonoBehaviour:
   healParticle: {fileID: 3983326575057760133}
   closestEnemyParticle: {fileID: 1229966921819268525}
   landObjectPool: {fileID: 3074460181073789521}
-  jumpObjectPool: {fileID: 0}
   swordSlashVFX: {fileID: 2055005838120469716}
+  projectileObjectPool: {fileID: 3419742929792913847}
 --- !u!114 &2055005838120469717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +154,19 @@ MonoBehaviour:
   PrefabToPool: {fileID: 1552095460542432386, guid: 609814c46f036684db401138fb4cac9d,
     type: 3}
   NumToPool: 0
+--- !u!114 &3419742929792913847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055005838120469715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b296995a78a5f45a21dedb02b28408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  PrefabToPool: {fileID: 582677271948176790, guid: b4a1232dccc814e44a374ef3ffb182bc,
+    type: 3}
+  NumToPool: 10
