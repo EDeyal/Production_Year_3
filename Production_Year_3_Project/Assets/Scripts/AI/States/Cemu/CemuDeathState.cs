@@ -6,7 +6,7 @@ public class CemuDeathState : BaseCemuState
 {
     public override BaseState RunCurrentState()
     {
-        _cemuStateHandler.RefEnemy.OnDeath();
+        _cemu.OnDeath();
         return this;
     }
     public override void EnterState()
