@@ -68,9 +68,12 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
-        playerSaveHandler.SetStartingSavePoint();
        /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
+    }
+    private void Start()
+    {
+        playerSaveHandler.SetStartingSavePoint();
     }
 
     private void DisableRunParticle()
