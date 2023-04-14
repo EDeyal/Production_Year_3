@@ -63,6 +63,9 @@ public class ThamulEnemy : GroundEnemy
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
+        ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
+        ThamulMeleeDistance.DrawGizmos(MiddleOfBody.position);
     }
 #endif
 }

@@ -196,15 +196,15 @@ MonoBehaviour:
   middleOfBody: {fileID: 919253999900119797}
   _boundHandler:
     _bound:
-      m_Center: {x: 0, y: 0.98, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
+      m_Center: {x: 0, y: -4.44, z: 0}
+      m_Extent: {x: 15.08, y: 10.4, z: 1}
     _holder: {fileID: 4063888374932650975}
     _boundCenterOffset: {x: 0, y: 0, z: 0}
     _boundColor: {r: 0.3207547, g: 0.11867069, b: 0.013616939, a: 1}
   _rb: {fileID: 4063888375071738814}
   _enemyVisualHolder: {fileID: 4063888375072076122}
   _sensorHandler: {fileID: 4063888375071738810}
-  _noticePlayerDistance: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
+  _noticePlayerDistance: {fileID: 11400000, guid: 58b9d39f6a34a2043a9528c1072feb8c,
     type: 2}
   _chasePlayerDistance: {fileID: 11400000, guid: a764c9311c253b94f85eb99f67caac05,
     type: 2}
@@ -264,9 +264,11 @@ MonoBehaviour:
     IsActive: 0
   _thamulStateHandler: {fileID: 1360974688071084348}
   _combatHandler:
-    _attacksWrapper: []
-    _damageDealer: {fileID: 0}
-    _damagable: {fileID: 0}
+    _attacksWrapper:
+    - _damageDealingCollider: {fileID: 4063888374680432874}
+      _attack: {fileID: 11400000, guid: f866088028707e1489fe88ee7cab6e21, type: 2}
+    _damageDealer: {fileID: 4063888375071738802}
+    _damagable: {fileID: 4063888375071738803}
   _thamulMeleeDistance: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
     type: 2}
 --- !u!114 &4063888375071738800
