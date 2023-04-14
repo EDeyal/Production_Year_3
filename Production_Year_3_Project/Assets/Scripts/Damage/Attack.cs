@@ -8,7 +8,7 @@ public class Attack : ScriptableObject
     [SerializeField] private List<TargetType> targetTypes = new List<TargetType>();
 
     public List<TargetType> TargetType { get => targetTypes; }
-    public DamageHandler DamageHandler { get => damageHandler; }
+    public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
 
 
     private void OnEnable()
