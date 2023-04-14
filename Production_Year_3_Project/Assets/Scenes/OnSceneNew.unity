@@ -3875,6 +3875,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3201840432435668537, guid: 4534034086ab3e34dbfa5ef200a32a61,
+        type: 3}
+      propertyPath: playerSaveHandler
+      value: 
+      objectReference: {fileID: 3343798263522388019}
     - target: {fileID: 3201840432435668540, guid: 4534034086ab3e34dbfa5ef200a32a61,
         type: 3}
       propertyPath: m_RootOrder
@@ -3932,6 +3937,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4534034086ab3e34dbfa5ef200a32a61, type: 3}
+--- !u!114 &3343798263522388019 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6621770062330923046, guid: 4534034086ab3e34dbfa5ef200a32a61,
+    type: 3}
+  m_PrefabInstance: {fileID: 3343798263522388018}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfe30d30b02e154794cf02ccd4698b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4541673323524972965
 PrefabInstance:
   m_ObjectHideFlags: 0
