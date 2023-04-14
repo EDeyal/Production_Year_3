@@ -19,6 +19,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private ParticleSystem jumpParticle;
     [SerializeField] private Material outlineMat;
     [SerializeField] private SavePointProximity savePointProximityDetector;
+    [SerializeField] private PlayerSavePointHandler playerSaveHandler;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -67,6 +68,7 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
+        playerSaveHandler.SetStartingSavePoint();
        /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
