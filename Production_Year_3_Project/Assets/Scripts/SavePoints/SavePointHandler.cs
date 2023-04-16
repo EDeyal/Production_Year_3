@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,10 @@ public class SavePointHandler : MonoBehaviour
     }
     public int SetPlayerSavePoint(SavePoint savePoint,bool withVisuals)
     {
+        if (_savePoints.Count == 0)
+        {
+            StartCoroutine(WaitOneSecond(savePoint, withVisuals));
+        }
         _currentSavePointID = savePoint.ID;
         if (withVisuals)
         {
@@ -44,6 +49,11 @@ public class SavePointHandler : MonoBehaviour
         damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp});
         Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
         return CurrentSavePointID;
+    }
+    IEnumerator WaitOneSecond(SavePoint savePoint, bool withVisuals)
+    {
+        yield return new WaitForSeconds(1);
+        SetPlayerSavePoint(savePoint,withVisuals);
     }
     public void RegisterToSavePointHandler(SavePoint savePoint)
     {

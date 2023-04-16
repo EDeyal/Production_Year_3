@@ -17,7 +17,7 @@ public abstract class GroundEnemy : BaseEnemy
     [TabGroup("Locomotion")]
     [SerializeField] RotationAction _rotationPatrolAction;
     [TabGroup("Locomotion")]
-    [SerializeField] RotationAction _rotationChaseAction;
+    [SerializeField] protected RotationAction _rotationChaseAction;
     RotationActionData _rotationData;
     [TabGroup("Bounds")]
     [SerializeField] CheckXDistanceAction _boundsXDistanceAction;
@@ -114,7 +114,7 @@ public abstract class GroundEnemy : BaseEnemy
             IsMovingToNextPoint();
         }
     }
-    void Rotate(float directionX, RotationAction rotationAction)
+    protected void Rotate(float directionX, RotationAction rotationAction)
     {
         if (directionX == 0)
         {
