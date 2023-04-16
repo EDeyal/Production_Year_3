@@ -34,10 +34,11 @@ public class AttackAnimationHandler : MonoBehaviour
         GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
         GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
         OnAttackPerformedVisual.AddListener(SpawnSwordSlashVfx);
-        OnAttackPerformed.AddListener(AttackDamageBoost);
+        //OnAttackPerformed.AddListener(AttackDamageBoost);
         lastAttacked = attackCoolDown * -1;
         attackFinished = true;
         CanAttack = true;
+        attackBoost = meleeAttack.DamageHandler.BaseAmount;
     }
 
     private void Update()
@@ -52,6 +53,7 @@ public class AttackAnimationHandler : MonoBehaviour
     public void IncreaseAttackBoost(float amount)
     {
         attackBoost += amount;
+        meleeAttack.DamageHandler.OverrideBaseAmount(attackBoost);
     }
 
     private void AttackDamageBoost(Attack meleeAttack)
