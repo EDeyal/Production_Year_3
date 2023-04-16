@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour
     }
     protected virtual void OnPickedUp()
     {
-        //give player whatever
+        gameObject.SetActive(false);
     }
 
 }

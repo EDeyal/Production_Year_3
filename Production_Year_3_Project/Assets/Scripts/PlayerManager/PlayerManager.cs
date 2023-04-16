@@ -73,7 +73,10 @@ public class PlayerManager : BaseCharacter
     }
     private void Start()
     {
-        playerSaveHandler.SetStartingSavePoint();
+        if (!ReferenceEquals(playerSaveHandler, null))
+        {
+            playerSaveHandler.SetStartingSavePoint();
+        }
     }
 
     private void DisableRunParticle()
