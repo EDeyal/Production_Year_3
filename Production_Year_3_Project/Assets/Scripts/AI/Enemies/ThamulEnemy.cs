@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 public class ThamulEnemy : GroundEnemy
@@ -7,9 +8,15 @@ public class ThamulEnemy : GroundEnemy
     [SerializeField] ThamulStateHandler _thamulStateHandler;
     [TabGroup("General")]
     [SerializeField] CombatHandler _combatHandler;
-
+    [TabGroup("Abilities")]
+    [SerializeField] Attack _thamulProjectileAttack;
+    [TabGroup("Abilities")]
+    [SerializeField] GameObject _thamulProjectile;
     [TabGroup("Sensors")]
     [SerializeField] CheckDistanceAction _thamulMeleeDistance;
+    ActionCooldown _projectileCooldown;
+    [TabGroup("Abilities")]
+    [SerializeField] BaseAction<ActionCooldownData> _projectileCooldownAction;
     public CheckDistanceAction ThamulMeleeDistance => _thamulMeleeDistance;
 
     public ThamulStateHandler ThamulStateHandler => StateHandler as ThamulStateHandler;
@@ -28,18 +35,45 @@ public class ThamulEnemy : GroundEnemy
         _thamulStateHandler.CheckValidation();
         _thamulStateHandler.CurrentState.EnterState();
         _combatHandler.Init();
+        _projectileCooldown = new ActionCooldown();
     }
     public override void CheckValidation()
     {
         base.CheckValidation();
+        if (_thamulProjectileAttack==null)
+            throw new System.Exception("ThamulEnemy has no projetile attack");
+
     }
     public bool Shoot()
     {
         var direction = GeneralFunctions.GetXDirectionToTarget(transform.position, GameManager.Instance.PlayerManager.transform.position);
         Rotate(direction, _rotationChaseAction);
-        return true; //when completed return true
-        Debug.Log("Shooting at player");
-        //use ability
+        if (WaitAction(_projectileCooldownAction, ref _projectileCooldown))
+        {
+            Debug.Log("Shooting at player");
+            ShootProjectile(_thamulProjectileAttack,direction);
+            return true; //when completed return true
+        }
+        return false;
+    }
+    private void ShootProjectile(Attack givenAttack,int direction)
+    {
+        Projectile bullet = GameManager.Instance.ObjectPoolsHandler.ThamulProjectilePool.GetPooledObject();
+        bullet.transform.position = MiddleOfBody.position;
+        bullet.CacheStats(givenAttack, DamageDealer);
+        if (direction == 1)
+        {
+            bullet.Blast(new Vector3(1, 0, 0));
+        }
+        else if (direction == -1)
+        {
+            bullet.Blast(new Vector3(-1, 0, 0));
+        }
+        else
+        {
+            Debug.LogWarning("Wrong Data from Thamul Shoot Projectile Direction");
+        }
+        bullet.gameObject.SetActive(true);
     }
     private void Update()
     {

@@ -2698,11 +2698,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3201840432435668542, guid: 4534034086ab3e34dbfa5ef200a32a61,
-        type: 3}
-      propertyPath: meleeZone
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4534034086ab3e34dbfa5ef200a32a61, type: 3}
 --- !u!1001 &1733140014
@@ -4365,42 +4360,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4541673323524972965}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4695835112585311150 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4063888374680432874, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8741242603730535236}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4695835112965867766 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4063888375071738802, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8741242603730535236}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38072739e55cc7a40a328ee4ada49ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4695835112965867767 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4063888375071738803, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8741242603730535236}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36496159610ac984bb90604219ffc314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4756441963374571214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4602,16 +4561,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
         type: 3}
-      propertyPath: _combatHandler._damagable
-      value: 
-      objectReference: {fileID: 4695835112965867767}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _combatHandler._damageDealer
-      value: 
-      objectReference: {fileID: 4695835112965867766}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
       propertyPath: _boundHandler._bound.m_Center.y
       value: -4.44
       objectReference: {fileID: 0}
@@ -4640,17 +4589,6 @@ PrefabInstance:
       propertyPath: _combatHandler._attacksWrapper.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _combatHandler._attacksWrapper.Array.data[0]._attack
-      value: 
-      objectReference: {fileID: 11400000, guid: f866088028707e1489fe88ee7cab6e21,
-        type: 2}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _combatHandler._attacksWrapper.Array.data[0]._damageDealingCollider
-      value: 
-      objectReference: {fileID: 4695835112585311150}
     - target: {fileID: 4063888374932650972, guid: 08dcca9dfd917e645b3651f33ced0fc1,
         type: 3}
       propertyPath: m_RootOrder
