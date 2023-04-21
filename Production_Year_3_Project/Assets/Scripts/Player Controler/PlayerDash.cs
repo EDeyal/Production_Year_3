@@ -21,10 +21,12 @@ public class PlayerDash : MonoBehaviour
 
     bool dashDurationUp;
     bool canDash;
+    [SerializeField] bool dashUnlocked;
 
     int dashDir;
 
     public bool CanDash { get => canDash; set => canDash = value; }
+    public bool DashUnlocked { get => dashUnlocked; set => dashUnlocked = value; }
 
     private void Start()
     {
@@ -37,12 +39,12 @@ public class PlayerDash : MonoBehaviour
         OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
         OnDashEnd.AddListener(DashAnimOff);
-        canDash = false;
+        canDash = true;
     }
 
     private void StartDash()
     {
-        if (Time.time - lastDashed >= dashCoolDown && canDash && controller.CanMove)
+        if (dashUnlocked && Time.time - lastDashed >= dashCoolDown && canDash && controller.CanMove)
         {
             StartCoroutine(Dash());
         }
