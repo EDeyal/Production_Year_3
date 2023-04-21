@@ -112,7 +112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intervalBetweenDamage: 0
   OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnColliderHit:
     m_PersistentCalls:
       m_Calls: []
   applyKnockBack: 0

@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         damageDealingCollider.OnColliderDealtDamage.AddListener(TurnOff);
+        damageDealingCollider.OnColliderHit.AddListener(TurnOff);
     }
 
     private void OnEnable()
@@ -46,5 +47,4 @@ public class Projectile : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
 }
