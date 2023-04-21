@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private DamageDealingCollider damageDealingCollider;
     [SerializeField] private Attack projectileAttack;
+    [SerializeField, Range(0,1)] private float projectileAttackDamageMod;
+
 
     public DamageDealingCollider DamageDealingCollider { get => damageDealingCollider; }
 
@@ -31,7 +33,7 @@ public class Projectile : MonoBehaviour
     {
         projectileAttack.DamageHandler = new DamageHandler();
         projectileAttack.DamageHandler.CopyDamageHandler(givenAttack.DamageHandler);
-        projectileAttack.DamageHandler.AddModifier(0.5f);
+        projectileAttack.DamageHandler.AddModifier(projectileAttackDamageMod);
         DamageDealingCollider.CacheReferences(projectileAttack, dealer);
     }
     
