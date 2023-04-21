@@ -23,7 +23,7 @@ public class ProjectileOnMelee : StatusEffect
 
     private void ShootProjectile(Attack givenAttack)
     {
-        Projectile bullet = GameManager.Instance.ObjectPoolsHandler.ProjectileObjectPool.GetPooledObject();
+        Projectile bullet = GameManager.Instance.ObjectPoolsHandler.PlayerProjectileObjectPool.GetPooledObject();
         bullet.transform.position = player.transform.position;
         bullet.CacheStats(givenAttack, player.DamageDealer);
         if (player.PlayerController.facingRight)
