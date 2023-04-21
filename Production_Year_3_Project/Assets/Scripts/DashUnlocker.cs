@@ -9,7 +9,7 @@ public class DashUnlocker : MonoBehaviour
     {
         if (other.gameObject.GetHashCode() == GameManager.Instance.PlayerManager.gameObject.GetHashCode())
         {
-            GameManager.Instance.PlayerManager.PlayerDash.CanDash = true;
+            GameManager.Instance.PlayerManager.PlayerDash.DashUnlocked = true;
             GameManager.Instance.UiManager.DashPopup.TogglePopup(true);
             GameManager.Instance.PlayerManager.LockPlayer();
             gameObject.SetActive(false);
