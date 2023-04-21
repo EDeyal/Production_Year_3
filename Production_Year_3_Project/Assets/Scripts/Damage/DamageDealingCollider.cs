@@ -7,11 +7,12 @@ public class DamageDealingCollider : MonoBehaviour
     private Attack attack;
     private DamageDealer damageDealer;
     private Collider myCollider;
-    /*[SerializeField] */private float intervalBetweenDamage = 0.5f;
+    [SerializeField] private float intervalBetweenDamage = 0.5f;
     private float lastDamaged;
 
 
     public UnityEvent OnColliderDealtDamage;
+    public UnityEvent OnColliderHit;
 
     [SerializeField] private bool applyKnockBack;
 
@@ -72,6 +73,7 @@ public class DamageDealingCollider : MonoBehaviour
             OnColliderDealtDamage?.Invoke();
             lastDamaged = Time.time;
         }
+        OnColliderHit?.Invoke();
     }
 
     private void OnTakeDamageKnockBack(Attack givenAttack, Damageable target)

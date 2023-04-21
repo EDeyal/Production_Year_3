@@ -39,7 +39,7 @@ public class ProjectileOnMelee : StatusEffect
 
     private IEnumerator Duration()
     {
-        while (counter < 5)
+        while (counter < 10)
         {
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
