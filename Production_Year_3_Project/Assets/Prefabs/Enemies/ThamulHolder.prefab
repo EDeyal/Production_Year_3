@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2029108034767721647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4823916877820233019}
+  m_Layer: 10
+  m_Name: RightAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4823916877820233019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029108034767721647}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4063888375071738688}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4063888374680432876
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,10 +74,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.6713115
-  m_Height: 2.06003
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 2
-  m_Center: {x: 1.4082575e-10, y: 0.67023695, z: 0.08728787}
+  m_Center: {x: 1.4082575e-10, y: 0.6, z: 0}
 --- !u!114 &4063888374680432874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +153,7 @@ GameObject:
   - component: {fileID: 1360974688071084343}
   - component: {fileID: 1360974688071084342}
   - component: {fileID: 1360974688071084351}
+  - component: {fileID: 9094456294109662424}
   m_Layer: 10
   m_Name: Thamul Enemy
   m_TagString: Enemy
@@ -142,6 +174,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4063888375072076123}
+  - {fileID: 4823916877820233019}
   m_Father: {fileID: 4063888374932650972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -266,11 +299,33 @@ MonoBehaviour:
   _combatHandler:
     _attacksWrapper:
     - _damageDealingCollider: {fileID: 4063888374680432874}
-      _attack: {fileID: 11400000, guid: f866088028707e1489fe88ee7cab6e21, type: 2}
+      _attack: {fileID: 11400000, guid: f10d6b4c20b781a4ab37a9fcad89d5e4, type: 2}
     _damageDealer: {fileID: 4063888375071738802}
     _damagable: {fileID: 4063888375071738803}
+  _thamulProjectileAttack: {fileID: 11400000, guid: 56493ad8df4fa374fa8a05f259b21953,
+    type: 2}
+  _thamulMeleeAttack: {fileID: 11400000, guid: f866088028707e1489fe88ee7cab6e21, type: 2}
+  _thamulProjectile: {fileID: 5316925408529237978, guid: 9951c31dde60c954d847e84cea36985f,
+    type: 3}
   _thamulMeleeDistance: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
     type: 2}
+  _thamulRunAfterPlayerDistance: {fileID: 11400000, guid: 8c8b99932132ab1459687fd850d2e52e,
+    type: 2}
+  _thamulRangeChaseDistance: {fileID: 11400000, guid: 78eee35ed88ce094cb602da44b1f6b20,
+    type: 2}
+  _projectileCooldownAction: {fileID: 11400000, guid: eb63b9a724f71eb46a4b825e9f21b952,
+    type: 2}
+  _meleeCooldownAction: {fileID: 11400000, guid: 544a86908b9b87945b21fe3267c9e788,
+    type: 2}
+  _rightAttack: {fileID: 4823916877820233019}
+  _leftAttack: {fileID: 3769271550779120682}
+  _attackRadius: 3
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _showChaseRanges: 0
+  _showAttackRanges: 1
+  _showAttackAreas: 1
 --- !u!114 &4063888375071738800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +534,7 @@ MonoBehaviour:
   _patrolState: {fileID: 1360974688071084336}
   _chaseState: {fileID: 1360974688071084343}
   _shootState: {fileID: 1360974688071084342}
+  _meleeState: {fileID: 9094456294109662424}
 --- !u!114 &1360974688071084339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +626,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _thamulStateHandler: {fileID: 1360974688071084348}
+--- !u!114 &9094456294109662424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063888375071738695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f461e88979cb24892a0ac05d2bb92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thamulStateHandler: {fileID: 1360974688071084348}
 --- !u!1 &4063888375072076122
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +670,7 @@ Transform:
   - {fileID: 4063888374680432877}
   - {fileID: 919253999900119797}
   - {fileID: 8741242604247797311}
+  - {fileID: 3769271550779120682}
   m_Father: {fileID: 4063888375071738688}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -698,6 +768,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4063888375103909237}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4299011384182632013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3769271550779120682}
+  m_Layer: 10
+  m_Name: LeftAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3769271550779120682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299011384182632013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -0.50000006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4063888375072076123}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8741242604247797310
 GameObject:
