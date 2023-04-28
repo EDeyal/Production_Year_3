@@ -25,6 +25,10 @@ public class WorldMap : MonoBehaviour
     {
         CalculateMapRatio();
     }
+    private void Start()
+    {
+        GameManager.Instance.InputManager.OnToggleMap.AddListener(ToggleMap);
+    }
 
 
     private void Update()
@@ -33,9 +37,9 @@ public class WorldMap : MonoBehaviour
     }
 
 
-    public void ToggleMap(bool state)
+    public void ToggleMap()
     {
-        mapView.SetActive(state);
+        mapView.SetActive(!mapView.activeInHierarchy);
     }
 
     public void CalculateMapRatio()

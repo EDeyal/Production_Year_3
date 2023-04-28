@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnLookRightDown;
     public UnityEvent OnLookRightUp;
     public UnityEvent OnSavePoint;
+    public UnityEvent OnToggleMap;
 
 
     //public bool LockInputs;
@@ -55,8 +56,13 @@ public class InputManager : MonoBehaviour
         input.Camera.MoveLeft.started += InvokeOnLookLeftDown;
         input.Camera.MoveLeft.canceled += InvokeOnLookLeftUp;
         input.BasicActions.SavePoint.started += InvokeSavePoint;
+        input.BasicActions.ToggleMap.started += InvokeToggleMap;
     }
 
+    public void InvokeToggleMap(InputAction.CallbackContext obj)
+    {
+        OnToggleMap?.Invoke();
+    }
     public void SetCurserVisability(bool isVisible)
     {
         Cursor.visible = isVisible;
