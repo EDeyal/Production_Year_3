@@ -20,10 +20,19 @@ public class ThamulChaseState : BaseThamulState
         }
         //check for range attacks
         if (_thamul.ThamulRangeChaseDistance.InitAction(
+            //check that thamul is in range
             new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))
         {
-            return _thamulStateHandler.ShootState;
+            if (Mathf.Abs(_thamul.MiddleOfBody.position.y - _thamulStateHandler.PlayerManager.MiddleOfBody.position.y) < _thamul.HightDifferenceOffset)
+            {
+                return _thamulStateHandler.ShootState;
+            }
+            else
+            {
+                _thamul.Chase();
+            }
         }
+        //as long that the player is within thamul chase range he needs to chase it
         else if(_thamul.ChasePlayerDistance.InitAction(
             new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))
         {

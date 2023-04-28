@@ -5,11 +5,22 @@ public class ThamulShootState : BaseThamulState
     public override BaseState RunCurrentState()
     {
         Debug.Log("Thamul Shoot State");
-        if (_thamul.Shoot())
+        if (Mathf.Abs(_thamul.MiddleOfBody.position.y - _thamulStateHandler.PlayerManager.MiddleOfBody.position.y) < _thamul.HightDifferenceOffset)
         {
-            return _thamulStateHandler.CombatState;
+            if (_thamul.Shoot())
+            {
+                return _thamulStateHandler.CombatState;
+            }
+            else
+            {
+                return this;
+            }
         }
-        return this;
+        else
+        {
+            _thamul.ResetProjectileCooldown();
+            return _thamulStateHandler.ChaseState;
+        }
     }
     public override void EnterState()
     {
