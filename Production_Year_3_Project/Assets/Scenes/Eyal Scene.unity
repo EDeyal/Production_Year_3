@@ -130,6 +130,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1409091731301673058, guid: b41d3877cfed29344aff92046ed9e867,
+        type: 3}
+      propertyPath: _exploadeRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490406801558651129, guid: b41d3877cfed29344aff92046ed9e867,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3787309093304623794, guid: b41d3877cfed29344aff92046ed9e867,
         type: 3}
       propertyPath: m_RootOrder
@@ -209,6 +219,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Breakable Wall Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957563387794217187, guid: b41d3877cfed29344aff92046ed9e867,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b41d3877cfed29344aff92046ed9e867, type: 3}
@@ -4581,43 +4596,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
         type: 3}
-      propertyPath: _showChaseRanges
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _hightDifferenceOffset
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
       propertyPath: _boundHandler._bound.m_Center.y
       value: -4.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _boundHandler._bound.m_Extent.x
-      value: 15.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _boundHandler._bound.m_Extent.y
-      value: 10.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _boundHandler._bound.m_Extent.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _boundHandler._boundCenterOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360974688071084349, guid: 08dcca9dfd917e645b3651f33ced0fc1,
-        type: 3}
-      propertyPath: _combatHandler._attacksWrapper.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4063888374932650972, guid: 08dcca9dfd917e645b3651f33ced0fc1,
         type: 3}
