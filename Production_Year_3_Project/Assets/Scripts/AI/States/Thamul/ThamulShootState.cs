@@ -5,7 +5,7 @@ public class ThamulShootState : BaseThamulState
     public override BaseState RunCurrentState()
     {
         Debug.Log("Thamul Shoot State");
-        if (Mathf.Abs(_thamul.MiddleOfBody.position.y - _thamulStateHandler.PlayerManager.MiddleOfBody.position.y) < _thamul.HightDifferenceOffset)
+        if (Mathf.Abs(_thamul.transform.position.y - _thamulStateHandler.PlayerManager.transform.position.y) < _thamul.HightDifferenceOffset)
         {
             if (_thamul.Shoot())
             {

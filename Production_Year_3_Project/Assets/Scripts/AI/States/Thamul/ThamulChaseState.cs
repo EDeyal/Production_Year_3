@@ -23,7 +23,7 @@ public class ThamulChaseState : BaseThamulState
             //check that thamul is in range
             new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))
         {
-            if (Mathf.Abs(_thamul.MiddleOfBody.position.y - _thamulStateHandler.PlayerManager.MiddleOfBody.position.y) < _thamul.HightDifferenceOffset)
+            if (Mathf.Abs(_thamul.transform.position.y - _thamulStateHandler.PlayerManager.transform.position.y) < _thamul.HightDifferenceOffset)
             {
                 return _thamulStateHandler.ShootState;
             }
