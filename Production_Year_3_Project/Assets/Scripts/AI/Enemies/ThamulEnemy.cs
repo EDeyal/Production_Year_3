@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
-
 public class ThamulEnemy : GroundEnemy
 {
     [TabGroup("General")]
@@ -14,6 +13,8 @@ public class ThamulEnemy : GroundEnemy
     [SerializeField] Attack _thamulMeleeAttack;
     [TabGroup("Abilities")]
     [SerializeField] GameObject _thamulProjectile;
+    [TabGroup("Sensors")]
+    [SerializeField] float _hightDifferenceOffset;
     [TabGroup("Sensors")]
     [SerializeField] CheckDistanceAction _thamulMeleeDistance;
     [TabGroup("Sensors")]
@@ -45,6 +46,7 @@ public class ThamulEnemy : GroundEnemy
     public CheckDistanceAction ThamulRunAfterPlayerDistance => _thamulRunAfterPlayerDistance;
     public CheckDistanceAction ThamulRangeChaseDistance => _thamulRangeChaseDistance;
     public ThamulStateHandler ThamulStateHandler => StateHandler as ThamulStateHandler;
+    public float HightDifferenceOffset => _hightDifferenceOffset;
 
     protected override void OnEnable()
     {
@@ -132,6 +134,10 @@ public class ThamulEnemy : GroundEnemy
             return true; //when completed return true
         }
         return false;
+    }
+    public void ResetProjectileCooldown()
+    {
+        _projectileCooldown.ResetCooldown();
     }
     private void ShootProjectile(Attack givenAttack, int direction)
     {

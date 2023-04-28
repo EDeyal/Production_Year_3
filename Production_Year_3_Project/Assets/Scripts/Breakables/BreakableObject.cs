@@ -12,37 +12,25 @@ public class BreakableObject : DamageableObject
 
     GameObject _instantiatedObject;
     BrokenAsset _brokenAsset;
-    [TabGroup("General")]
-    [SerializeField] bool _isOneTime;
+    //[TabGroup("General")]
+    //[SerializeField] bool _isOneTime;
     [TabGroup("Explosion")]
     [SerializeField] float _brokenAssetlifetime = 1;
     [TabGroup("Explosion")]
     [SerializeField] bool _exploadeRight;
     [TabGroup("Explosion")]
-    [SerializeField] Transform _rightExplosionLocation;
-    [TabGroup("Explosion")]
-    [SerializeField] Transform _leftExplosionLocation;
+    [SerializeField] Transform _explosionLocation;
     [TabGroup("Explosion")]
     [SerializeField] float _explosionRadius;
     [TabGroup("Explosion")]
     [SerializeField] float _explosionForce;
 
-
     public void ExplodeParts()
     {
-        var explosionDirection = Vector3.zero;
-        if (_exploadeRight)
-        {
-            explosionDirection = _rightExplosionLocation.position;
-        }
-        else
-        {
-            explosionDirection = _leftExplosionLocation.position;
-        }
+        var explosionPosition = _explosionLocation.position;
         foreach (var part in _brokenAsset.AssetParts)
         {
-
-            part.AddExplosionForce(_explosionForce, explosionDirection, _explosionRadius);
+            part.AddExplosionForce(_explosionForce, explosionPosition, _explosionRadius);
         }
     }
 
@@ -63,20 +51,12 @@ public class BreakableObject : DamageableObject
 
     private void OnEnable()
     {
-        if (_isOneTime)
-        {
-            return;
-        }
+        //if (_isOneTime)
+        //{
+        //    return;
+        //}
         _asset.SetActive(true);
         _damageableColliderGameObject.SetActive(true);
-    }
-    private void OnDisable()
-    {
-        if (_isOneTime)
-        {
-            return;
-        }
-        //logic if needed
     }
 
 #if UNITY_EDITOR
@@ -84,6 +64,11 @@ public class BreakableObject : DamageableObject
     public void TestAsset()
     {
         BreakAsset();
+    }
+    [Button("Reset")]
+    public void ResetAsset()
+    {
+        _asset.SetActive(true);
     }
 #endif
 }
