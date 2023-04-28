@@ -157,8 +157,10 @@ public class InputManager : MonoBehaviour
     }
     public Vector2 GetMoveVector()
     {
-
+        if (!GameManager.Instance.PlayerManager.PlayerController.CanMove)
+        {
+            return Vector2.zero;
+        }
         return input.BasicActions.Move.ReadValue<Vector2>();
-
     }
 }
