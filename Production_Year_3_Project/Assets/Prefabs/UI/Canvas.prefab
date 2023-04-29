@@ -305,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: -282.4}
-  m_SizeDelta: {x: 4.3061, y: 12.5075}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1.2431, y: 3.6109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4277314122960966651
 CanvasRenderer:
@@ -794,8 +794,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -289.14, y: -254.81}
-  m_SizeDelta: {x: 8, y: 8}
+  m_AnchoredPosition: {x: -212.79, y: -264.94}
+  m_SizeDelta: {x: 3.1309, y: 3.1309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5590640438053261622
 CanvasRenderer:
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2352931332250433942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1112,7 +1112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1509, y: 786}
+  m_SizeDelta: {x: 975.77, y: 975.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &520771589197708556
 CanvasRenderer:
@@ -1135,14 +1135,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.80784315}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 86380ca07aed09545a58ae365eba0d10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb8205496562e1b4e921c209ace5b2fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1590,7 +1590,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 105993730145079662}
         m_TargetAssemblyTypeName: DeathPopup, Assembly-CSharp
-        m_MethodName: ResetScene
+        m_MethodName: RespawnPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1862,6 +1862,7 @@ MonoBehaviour:
   abilityThree: {fileID: 21300000, guid: 0d34c44cee135ae4885cf523c3fea905, type: 3}
   shownAbility: {fileID: 11400000, guid: bf4008591d7e83548b57651097bf9c4f, type: 2}
   currentImage: {fileID: 6140353073048410546}
+  empty: {fileID: 21300000, guid: 650cb39ab8a0de5458c65e7b25cdd950, type: 3}
   cooldown: {fileID: 6140353073722459793}
 --- !u!1 &6140353073185439647
 GameObject:
@@ -2672,8 +2673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -154.3, y: -280.4}
-  m_SizeDelta: {x: 8, y: 8}
+  m_AnchoredPosition: {x: 6.77, y: -236.63}
+  m_SizeDelta: {x: 2.004, y: 2.004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1447124111729202514
 CanvasRenderer:
@@ -2690,7 +2691,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6930769561797811491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

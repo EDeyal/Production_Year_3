@@ -90,7 +90,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intervalBetweenDamage: 0.5
   OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnColliderHit:
     m_PersistentCalls:
       m_Calls: []
   applyKnockBack: 0
@@ -175,6 +179,7 @@ Transform:
   m_Children:
   - {fileID: 4063888375072076123}
   - {fileID: 4823916877820233019}
+  - {fileID: 3769271550779120682}
   m_Father: {fileID: 4063888374932650972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -229,7 +234,7 @@ MonoBehaviour:
   middleOfBody: {fileID: 919253999900119797}
   _boundHandler:
     _bound:
-      m_Center: {x: 0, y: 0.98, z: 0}
+      m_Center: {x: 0, y: -4.44, z: 0}
       m_Extent: {x: 15.08, y: 10.4, z: 1}
     _holder: {fileID: 4063888374932650975}
     _boundCenterOffset: {x: 0, y: 0, z: 0}
@@ -307,6 +312,7 @@ MonoBehaviour:
   _thamulMeleeAttack: {fileID: 11400000, guid: f866088028707e1489fe88ee7cab6e21, type: 2}
   _thamulProjectile: {fileID: 5316925408529237978, guid: 9951c31dde60c954d847e84cea36985f,
     type: 3}
+  _hightDifferenceOffset: 1
   _thamulMeleeDistance: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
     type: 2}
   _thamulRunAfterPlayerDistance: {fileID: 11400000, guid: 8c8b99932132ab1459687fd850d2e52e,
@@ -324,8 +330,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _showChaseRanges: 0
-  _showAttackRanges: 1
-  _showAttackAreas: 1
+  _showAttackRanges: 0
+  _showAttackAreas: 0
 --- !u!114 &4063888375071738800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +676,6 @@ Transform:
   - {fileID: 4063888374680432877}
   - {fileID: 919253999900119797}
   - {fileID: 8741242604247797311}
-  - {fileID: 3769271550779120682}
   m_Father: {fileID: 4063888375071738688}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -792,13 +797,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4299011384182632013}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.50000006}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1, y: 1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4063888375072076123}
-  m_RootOrder: 3
+  m_Father: {fileID: 4063888375071738688}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8741242604247797310
 GameObject:

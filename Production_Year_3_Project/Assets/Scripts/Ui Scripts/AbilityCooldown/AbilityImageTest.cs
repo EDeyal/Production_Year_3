@@ -13,6 +13,7 @@ public class AbilityImageTest : MonoBehaviour
     [SerializeField] Ability shownAbility;
 #endif
     [SerializeField] Image currentImage;
+    [SerializeField] Sprite empty;
     Coroutine activeRoutine;
     [SerializeField] Slider cooldown;
 
@@ -41,6 +42,11 @@ public class AbilityImageTest : MonoBehaviour
     }
     public void RecievingNewAbility(Ability abilitySO)
     {
+        if (ReferenceEquals(abilitySO, null))
+        {
+            currentImage.sprite = empty;
+            return;
+        }
         SetValueForCooldown(abilitySO.CoolDown);
         currentImage.sprite = abilitySO.AbilityArtwork;
         ResetAbilityCooldown();

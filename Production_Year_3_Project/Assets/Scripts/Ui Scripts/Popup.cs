@@ -12,7 +12,6 @@ public class Popup : MonoBehaviour
 
     protected virtual void SubscribeToUiManager()
     {
-        //debug log sus
     }
     protected virtual void OnEnable()
     {
@@ -25,6 +24,14 @@ public class Popup : MonoBehaviour
     public void TogglePopup(bool state)
     {
         //GameManager.Instance.PlayerManager.enabled = !state;
+        if (state)
+        {
+            GameManager.Instance.PlayerManager.LockPlayer();
+        }
+        else
+        {
+            GameManager.Instance.PlayerManager.UnLockPlayer();
+        }
         gameObject.SetActive(state);
     }
 

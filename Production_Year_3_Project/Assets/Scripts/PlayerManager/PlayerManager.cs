@@ -119,7 +119,11 @@ public class PlayerManager : BaseCharacter
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
-        givenAbility.CahceOwner(this);
+       /* if (ReferenceEquals(givenAbility, null))
+        {
+            return;
+        }*/
+        givenAbility?.CahceOwner(this);
     }
 
     private void CheckDecayingHealthAmount(float amount)
@@ -212,6 +216,7 @@ public class PlayerManager : BaseCharacter
         PlayerAbilityHandler.CanCast = false;
         PlayerMeleeAttack.CanAttack = false;
         playerDash.CanDash = false;
+
     }
     public void UnLockPlayer()
     {

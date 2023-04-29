@@ -466,16 +466,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3201840432435668531}
   movementSpeed: 10
-  jumpHeight: 14
+  jumpHeight: 40
   velocity: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 3201840431372028560}
   ceilingDetector: {fileID: 3201840432435088096}
-  jumpHeldTime: 0.2
+  jumpHeldTime: 0.1
   numberOfJumps: 1
   coyoteThreshold: 0.1
   extraJumpsHeightModifier: 0.5
   apexGravityScale: 6
-  gravityScale: 8
+  gravityScale: 20
   maxGravity: 16
   midAirAttackStopDuration: 0.25
   animBlender: {fileID: 3201840432435668530}
@@ -560,6 +560,7 @@ MonoBehaviour:
   OnDashEnd:
     m_PersistentCalls:
       m_Calls: []
+  dashUnlocked: 0
 --- !u!114 &3201840432435668533
 MonoBehaviour:
   m_ObjectHideFlags: 0

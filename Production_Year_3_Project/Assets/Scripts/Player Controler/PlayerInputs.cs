@@ -89,6 +89,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""47d2ad70-de48-4d88-925d-b3fc6e2e3fb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -355,6 +364,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""SavePoint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d58b3ec7-6e06-42ea-b596-54d8967cdeb8"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -513,6 +533,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_Dash = m_BasicActions.FindAction("Dash", throwIfNotFound: true);
         m_BasicActions_Escape = m_BasicActions.FindAction("Escape", throwIfNotFound: true);
         m_BasicActions_SavePoint = m_BasicActions.FindAction("SavePoint", throwIfNotFound: true);
+        m_BasicActions_ToggleMap = m_BasicActions.FindAction("ToggleMap", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
@@ -585,6 +606,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_Dash;
     private readonly InputAction m_BasicActions_Escape;
     private readonly InputAction m_BasicActions_SavePoint;
+    private readonly InputAction m_BasicActions_ToggleMap;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -596,6 +618,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_BasicActions_Dash;
         public InputAction @Escape => m_Wrapper.m_BasicActions_Escape;
         public InputAction @SavePoint => m_Wrapper.m_BasicActions_SavePoint;
+        public InputAction @ToggleMap => m_Wrapper.m_BasicActions_ToggleMap;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -626,6 +649,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @SavePoint.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
                 @SavePoint.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
                 @SavePoint.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnSavePoint;
+                @ToggleMap.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
+                @ToggleMap.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
+                @ToggleMap.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -651,6 +677,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @SavePoint.started += instance.OnSavePoint;
                 @SavePoint.performed += instance.OnSavePoint;
                 @SavePoint.canceled += instance.OnSavePoint;
+                @ToggleMap.started += instance.OnToggleMap;
+                @ToggleMap.performed += instance.OnToggleMap;
+                @ToggleMap.canceled += instance.OnToggleMap;
             }
         }
     }
@@ -721,6 +750,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnSavePoint(InputAction.CallbackContext context);
+        void OnToggleMap(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
