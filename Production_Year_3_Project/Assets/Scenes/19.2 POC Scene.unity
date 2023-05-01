@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -752,6 +752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _boundHandler._bound.m_Center.x
       value: 62.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996949685194462639, guid: 7750b46b3f9b5ea4d89a4d2b299844c8,
+        type: 3}
+      propertyPath: _boundHandler._bound.m_Center.x
+      value: 62.77
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7750b46b3f9b5ea4d89a4d2b299844c8, type: 3}
@@ -3098,16 +3103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3189891821588786861, guid: e100da5c7d98f3f498689f966396e1ca,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3756572340921943864, guid: e100da5c7d98f3f498689f966396e1ca,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RespawnPlayer
-      objectReference: {fileID: 0}
     - target: {fileID: 3888172006282602154, guid: e100da5c7d98f3f498689f966396e1ca,
         type: 3}
       propertyPath: m_AnchorMax.y
