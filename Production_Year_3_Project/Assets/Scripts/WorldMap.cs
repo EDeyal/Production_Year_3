@@ -29,6 +29,8 @@ public class WorldMap : MonoBehaviour
     {
         playerWorld = GameManager.Instance.PlayerManager.transform;
         GameManager.Instance.InputManager.OnToggleMap.AddListener(ToggleMap);
+        ToggleMap();
+
     }
 
 
