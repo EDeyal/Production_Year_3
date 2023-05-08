@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using System.Collections;
+
 public class PlayerManager : BaseCharacter
 {
     [SerializeField] private CCController playerController;
@@ -71,8 +73,9 @@ public class PlayerManager : BaseCharacter
        /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitForSeconds(5);
         if (!ReferenceEquals(playerSaveHandler, null))
         {
             playerSaveHandler.SetStartingSavePoint();
