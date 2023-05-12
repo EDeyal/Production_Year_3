@@ -8,95 +8,64 @@ public class BaseHealthBar : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] float maxHPTest;
     [SerializeField] float testingNumber;
-    [Button("ReduceHealth")]
-    void DecreaseHealth()
+    [Button("UpdateHealth")]
+    void UpdateHealth()
     {
-        //ReduceHp(testingNumber, true);
-    }
-    [Button("AddHealth")]
-    void AddHealth()
-    {
-        //AddHp(testingNumber, true);
+        UpdateBar(testingNumber, true);
     }
     [Button("SetMaxHp")]
     void SetMaxHp()
     {
-        //SetHealthBar(maxHPTest);
-        Debug.Log("Health bar max value: " + healthBar.maxValue);
-        Debug.Log("Health bar value: " + healthBar.value);
+        SetHealthBar(maxHPTest);
+        Debug.Log("Health bar max value: " + _healthBar.maxValue);
+        Debug.Log("Health bar value: " + _healthBar.value);
     }
-
-
 #endif
 
-    float currentHp;
+    float _currentHp;
     [SerializeField] float transitionDuration;
     [SerializeField] AnimationCurve addHealthBarCurve;
     [SerializeField] AnimationCurve reduceHealthBarCurve;
-    [SerializeField] Slider healthBar;
+    [SerializeField] Slider _healthBar;
     [SerializeField] Color mainColor;
+    public float CurrentHP => _currentHp;
 
-
-
+    public void InitHealthBar(float maxHP)
+    {
+        _healthBar.maxValue = maxHP;
+        _healthBar.value = 0;
+    }
     public void SetHealthBar(float startingHP)
     {
-        currentHp = startingHP;
-        healthBar.maxValue = startingHP;
-        healthBar.value = currentHp;
+        _currentHp = startingHP;
+        _healthBar.maxValue = startingHP;
+        _healthBar.value = _currentHp;
     }
     public void SetHealthBarAtZero(float startingHP)
     {
-        currentHp = 0;
-        healthBar.maxValue = startingHP;
-        healthBar.value = 0;
+        _currentHp = 0;
+        _healthBar.maxValue = startingHP;
+        _healthBar.value = 0;
     }
     public void AddMaxHp(float addedAmount, bool replenishHealth = false)
     {
-        healthBar.maxValue = addedAmount;
+        _healthBar.maxValue = addedAmount;
         if (replenishHealth)
         {
-            healthBar.value += addedAmount;
+            _healthBar.value += addedAmount;
         }
     }
-    public void AddHp(float amount, bool hasTransition = false)
+    public void UpdateBar(float currentHp, bool hasTransition = true, AnimationCurve curve = null)
     {
-        ChangeHp(amount, hasTransition, addHealthBarCurve);
-    }
-
-    public void ReduceHp(float amount, bool hasTransition = false)
-    {
-        ChangeHp(-amount, hasTransition, reduceHealthBarCurve);
-    }
-
-    public void UpdateBar(float currenthp, bool hastransition = true, AnimationCurve curve = null)
-    {
-        if (hastransition)
+        _currentHp = currentHp;
+        if (hasTransition)
         {
-            healthBar.DOValue(currenthp, transitionDuration);
+            _healthBar.DOValue(currentHp, transitionDuration);
         }
         else
         {
-            healthBar.value = currenthp;
+            _healthBar.value = currentHp;
         }
     }
-
-    protected virtual void ChangeHp(float amount, bool hasTransition, AnimationCurve curve)
-    {
-        currentHp += amount;
-        /*if (hasTransition)
-        {
-            healthBar.DOValue(currentHp, transitionDuration).SetEase(curve);
-        }
-        else
-        {
-            healthBar.value = currentHp;
-        }*/
-        healthBar.value = currentHp;
-
-    }
-
-
-
-
 }
 
