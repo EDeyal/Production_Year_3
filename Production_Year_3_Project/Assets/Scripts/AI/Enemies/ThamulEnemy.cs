@@ -184,7 +184,13 @@ public class ThamulEnemy : GroundEnemy
         {
             ChasePlayerDistance.DrawGizmos(MiddleOfBody.position);
             NoticePlayerDistance.DrawGizmos(MiddleOfBody.position);
-
+            //draw hight difference line
+            Gizmos.color = Color.yellow;
+            Vector3 startingLocation = transform.position;
+            startingLocation.y -= _hightDifferenceOffset;
+            Vector3 endLocation = transform.position;
+            endLocation.y += _hightDifferenceOffset;
+            Gizmos.DrawLine(startingLocation, endLocation);
         }
         if (_showAttackRanges)
         {
