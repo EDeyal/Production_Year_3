@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,11 +24,12 @@ public class BaseHealthBar : MonoBehaviour
 #endif
 
     float _currentHp;
+    bool _isTransitioning;
     [SerializeField] float transitionDuration;
-    [SerializeField] AnimationCurve addHealthBarCurve;
-    [SerializeField] AnimationCurve reduceHealthBarCurve;
     [SerializeField] Slider _healthBar;
     [SerializeField] Color mainColor;
+
+    public bool IsTransitioning => _isTransitioning;
     public float CurrentHP => _currentHp;
 
     public void InitHealthBar(float maxHP)
@@ -55,17 +57,27 @@ public class BaseHealthBar : MonoBehaviour
             _healthBar.value += addedAmount;
         }
     }
-    public void UpdateBar(float currentHp, bool hasTransition = true, AnimationCurve curve = null)
+    public Tween UpdateBar(float currentHp, bool hasTransition = true, AnimationCurve curve = null)
     {
         _currentHp = currentHp;
         if (hasTransition)
         {
-            _healthBar.DOValue(currentHp, transitionDuration);
+            _isTransitioning = true;
+            if (curve != null)
+            {
+                return _healthBar.DOValue(currentHp, transitionDuration).SetEase(curve).OnComplete(TransitionCompleted);
+            }
+                return _healthBar.DOValue(currentHp, transitionDuration).OnComplete(TransitionCompleted);
         }
         else
         {
             _healthBar.value = currentHp;
+            return null;
         }
+    }
+    void TransitionCompleted()
+    {
+        _isTransitioning = false;
     }
 }
 
