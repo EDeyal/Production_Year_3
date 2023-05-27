@@ -120,6 +120,10 @@ public class HealthBarHandler : MonoBehaviour, ICheckValidation
         {
             return;
         }
+        if (currentHP <0)
+        {
+            currentHP = 0;
+        }
         float healthDelta = currentHP - _currentHealth;
         _currentHealth = currentHP;
         if (_healthBarSequence != null)

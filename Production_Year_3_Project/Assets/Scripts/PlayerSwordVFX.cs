@@ -12,6 +12,7 @@ public class PlayerSwordVFX : MonoBehaviour
     [SerializeField] private float lerpBackwardsMod = 1;
     public void PlayQuovaxDashParticle()
     {
+        return;
         quovaxDashParticle.gameObject.SetActive(true);
         quovaxDashParticle.Clear(true);
         quovaxDashParticle.Play(true);
@@ -19,17 +20,20 @@ public class PlayerSwordVFX : MonoBehaviour
 
     public void StopQuovaxDashParticle()
     {
+        return;
         quovaxDashParticle.gameObject.SetActive(false);
         quovaxDashParticle.Stop();
     }
 
     public void ChargeSwordColorLerp(Ability currentAbility)
     {
+        return;
         //StartCoroutine(LerpColorCoolDown());
         StartCoroutine(LerpColor(chargedColor, basicColor));
     }
     public void UnChargeSwordColorLerp(Ability currentAbility)
     {
+        return;
         StartCoroutine(LerpColor(chargedColor, basicColor));
     }
 
@@ -60,6 +64,7 @@ public class PlayerSwordVFX : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        return;
         //This function makes sure the sword's color doesn't change between sessions, which also helps with GIT not recognizing any changes for each run.
         bladeMat.color = basicColor;
     }

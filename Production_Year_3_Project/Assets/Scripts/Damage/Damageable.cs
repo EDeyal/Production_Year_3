@@ -34,6 +34,11 @@ public class Damageable : MonoBehaviour
     /// Invoked when this object takes leathal damage
     /// </summary>
     public UnityEvent OnDeath;
+    /// <summary>
+    /// Invoked when this object recieves extra max hp
+    /// </summary>
+    public UnityEvent<float> OnGainMaxHP;
+
     public UnityEvent OnTakeDmgGFX;
     public UnityEvent OnHealGFX;
 
@@ -52,6 +57,7 @@ public class Damageable : MonoBehaviour
     public void AddMaxHP(float amount)
     {
         this.maxHp += amount;
+        OnGainMaxHP?.Invoke(amount);
     }
     public void SetMaxHP(float maxHP)
     {
@@ -126,7 +132,7 @@ public class Damageable : MonoBehaviour
         float finalAmount = givenAttack.DamageHandler.GetFinalMult();
         finalAmount = ReduceDecayingHealth(finalAmount);
         currentHp -= finalAmount;
-        Debug.Log(finalAmount +" was dealt to " + gameObject.name + " by " + givenDamageDealer.gameObject.name);
+        Debug.Log(finalAmount + " was dealt to " + gameObject.name + " by " + givenDamageDealer.gameObject.name);
         OnTakeDmgGFX?.Invoke();
         givenAttack.DamageHandler.ClearModifiers();
         if (currentHp <= 0)

@@ -1,25 +1,40 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
-public class AbilityImageTest : MonoBehaviour
+public class AbilityUIHandler : MonoBehaviour
 {
 
 #if UNITY_EDITOR
     [Header("Test")]
-    [SerializeField] Sprite abilityOne;
-    [SerializeField] Sprite abilityTwo;
-    [SerializeField] Sprite abilityThree;
     [SerializeField] Ability shownAbility;
+    [Button("Activate Cooldown")]
+    public void TestActivateCooldown()
+    {
+        UseAbility(shownAbility);
+    }
+    [Button("Set New Ability")]
+    public void TestSetNewAbility()
+    {
+        RecievingNewAbility(shownAbility);
+    }
+    [Button("Reset Ability Cooldown")]
+    public void TestReset()
+    {
+        ResetAbilityCooldown();
+    }
+
 #endif
+    [SerializeField] Image _cooldownImage;
     [SerializeField] Image currentImage;
     [SerializeField] Sprite empty;
     Coroutine activeRoutine;
-    [SerializeField] Slider cooldown;
+    float _maxAbilityCooldown;
 
     private void Awake()
     {
-        cooldown.value = 0;
+        _cooldownImage.fillAmount = 0;
     }
 #if UNITY_EDITOR
     private void OnValidate()
@@ -30,12 +45,11 @@ public class AbilityImageTest : MonoBehaviour
         }
     }
 #endif
-
     IEnumerator CoolDown()
     {
-        while (cooldown.value > 0)//cooldown seconds
+        while (_cooldownImage.fillAmount > 0)//cooldown seconds
         {
-            cooldown.value -= Time.deltaTime;
+            _cooldownImage.fillAmount -= Time.deltaTime/ _maxAbilityCooldown;
             yield return new WaitForEndOfFrame();
         }
         ResetAbilityCooldown();
@@ -58,9 +72,8 @@ public class AbilityImageTest : MonoBehaviour
         {
             StopCoroutine(activeRoutine);
         }
-        cooldown.value = cooldown.maxValue;
+        _cooldownImage.fillAmount = 1;
         activeRoutine = StartCoroutine(CoolDown());
-
     }
     void ResetAbilityCooldown()
     {
@@ -68,10 +81,15 @@ public class AbilityImageTest : MonoBehaviour
         {
             StopCoroutine(activeRoutine);
         }
-        cooldown.value = 0;
+        _cooldownImage.fillAmount = 1;
     }
     void SetValueForCooldown(float value)
     {
-        cooldown.maxValue = value;
+        _cooldownImage.fillAmount = 1;
+        _maxAbilityCooldown = value;
+    }
+    public void ResetAbilityImage()
+    {
+        currentImage.sprite = empty;
     }
 }
