@@ -66,7 +66,7 @@ public class DashTowardsEnemy : Ability
         player.SwordVFX.StopQuovaxDashParticle();
         player.Gfx.eulerAngles = playerRot;
         player.PlayerController.AnimBlender.SetBool("Dash", false);
-        player.PlayerController.AnimBlender.SetTrigger("DashAttack");
+        //player.PlayerController.AnimBlender.SetTrigger("DashAttack");
         ResetPlayer(true);
         player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
