@@ -181,6 +181,7 @@ public class PlayerManager : BaseCharacter
     public void SubscirbeUI()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.InitHealthBars(StatSheet.MaxHp);
+        Damageable.OnGainMaxHP.AddListener(AddMaxHPUI);
         Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
         Damageable.OnHealGFX.AddListener(UpdateHpbar);
         PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
@@ -190,6 +191,10 @@ public class PlayerManager : BaseCharacter
     private void UpdateHpbar()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateHP(Damageable.CurrentHp);
+    }
+    private void AddMaxHPUI(float hpGained)
+    {
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddMaxHp(hpGained, true);
     }
   
     private void UpdateAbilityUi(Ability givenAbility)
