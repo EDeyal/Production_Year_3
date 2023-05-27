@@ -10,6 +10,7 @@ public class PopUpTrigger : MonoBehaviour,ICheckValidation
     [SerializeField] CheckDistanceAction _closePlayerDistance;
     [SerializeField] bool _isOneTime;
     [SerializeField,ReadOnly] bool _hasBeenActivated;
+    [SerializeField,ReadOnly] bool _isActive;
     public void CheckValidation()
     {
         if (_noticePlayerDistance == null)
@@ -27,16 +28,24 @@ public class PopUpTrigger : MonoBehaviour,ICheckValidation
         if (_noticePlayerDistance.InitAction(new DistanceData(transform.position, GameManager.Instance.PlayerManager.MiddleOfBody.position)))
         {
             //init popup
-            GameManager.Instance.UiManager.InstructionPopUp.UpdateInstructionText(_instructionText);
+            if (!_isActive)
+            {
+                GameManager.Instance.UiManager.InstructionPopUp.UpdateInstructionText(_instructionText);
+                _isActive = true;
+            }
             
         }
         else if (!_closePlayerDistance.InitAction(new DistanceData(transform.position, GameManager.Instance.PlayerManager.MiddleOfBody.position)))
         {
             //close popup
-            GameManager.Instance.UiManager.InstructionPopUp.CloseInstructionText();
-            if (_isOneTime)
+            if (_isOneTime&& _isActive)
             {
                 _hasBeenActivated = true;
+            }
+            if (_isActive)
+            {
+                GameManager.Instance.UiManager.InstructionPopUp.CloseInstructionText();
+                _isActive = false;
             }
         }
         else
