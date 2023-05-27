@@ -82,8 +82,8 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         T closestPoint = legalTargets[0];
         for (int i = 0; i < legalTargets.Length; i++)
         {
-            float dist = GeneralFunctions.CalcRange(closestPoint.transform.position, transform.position);
-            if (GeneralFunctions.CalcRange(legalTargets[i].transform.position, transform.position) < dist)
+            float dist = GeneralFunctions.CalcRange(transform.position, closestPoint.transform.position);
+            if (GeneralFunctions.CalcRange(transform.position ,legalTargets[i].transform.position) < dist)
             {
                 closestPoint = legalTargets[i];
             }
