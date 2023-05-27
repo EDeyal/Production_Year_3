@@ -1,7 +1,6 @@
 using Cinemachine;
-using UnityEngine;
-using System;
 using System.Collections;
+using UnityEngine;
 
 
 public class CameraMovement : MonoBehaviour
@@ -17,6 +16,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
     [SerializeField] private float shakeDuration;
+    [SerializeField] private Camera mainCam;
 
     Coroutine activeShakeRoutine;
 
@@ -24,6 +24,9 @@ public class CameraMovement : MonoBehaviour
     private bool holdingUp;
     private bool holdingLeft;
     private bool holdingRight;
+
+    public Camera MainCam { get => mainCam; }
+
     private void Start()
     {
         moveCamComp = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -49,7 +52,7 @@ public class CameraMovement : MonoBehaviour
         {
             return;
         }
-        if (GameManager.Instance.PlayerManager.PlayerController.GroundCheck.IsGrounded()  && GameManager.Instance.PlayerManager.Damageable.CurrentHp > 0)
+        if (GameManager.Instance.PlayerManager.PlayerController.GroundCheck.IsGrounded() && GameManager.Instance.PlayerManager.Damageable.CurrentHp > 0)
         {
             if (holdingDown)
             {
@@ -69,7 +72,7 @@ public class CameraMovement : MonoBehaviour
             }
         }
     }
-    
+
     [ContextMenu("Shake")]
     public void CamShake()
     {

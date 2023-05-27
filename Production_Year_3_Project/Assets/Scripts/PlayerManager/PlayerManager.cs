@@ -22,6 +22,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private Material outlineMat;
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
+    private bool attackState;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -151,7 +152,17 @@ public class PlayerManager : BaseCharacter
     }
     private void PlayAttackAnimation()
     {
-        playerController.AnimBlender.SetTrigger("Attack");
+        if (attackState && PlayerController.GroundCheck.IsGrounded())
+        {
+            playerController.AnimBlender.SetTrigger("Attack2");
+
+        }
+        else
+        {
+            playerController.AnimBlender.SetTrigger("Attack");
+
+        }
+        attackState = !attackState;
     }
     private void PlayHitAnimation(Attack givenAttack, Damageable target)
     {
@@ -170,7 +181,7 @@ public class PlayerManager : BaseCharacter
     public void SubscirbeUI()
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
+        //GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
         Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
         Damageable.OnHealGFX.AddListener(UpdateHpbar);
         StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbar);

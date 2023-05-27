@@ -51,7 +51,7 @@ public class DashTowardsEnemy : Ability
         Vector3 startPos = player.transform.position;
         float counter = 0;
         player.Effectable.ApplyStatusEffect(new Invulnerability());
-        player.PlayerController.AnimBlender.SetBool("SuperDash", true);
+        player.PlayerController.AnimBlender.SetBool("Dash", true);
         player.SwordVFX.PlayQuovaxDashParticle();
         while (counter < 1)
         {
@@ -65,7 +65,8 @@ public class DashTowardsEnemy : Ability
         player.Effectable.RemoveStatusEffect(new Invulnerability());
         player.SwordVFX.StopQuovaxDashParticle();
         player.Gfx.eulerAngles = playerRot;
-        player.PlayerController.AnimBlender.SetBool("SuperDash", false);
+        player.PlayerController.AnimBlender.SetBool("Dash", false);
+        player.PlayerController.AnimBlender.SetTrigger("DashAttack");
         ResetPlayer(true);
         player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
