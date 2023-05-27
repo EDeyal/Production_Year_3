@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
-public class AbilityImageTest : MonoBehaviour
+public class AbilityUIHandler : MonoBehaviour
 {
 
 #if UNITY_EDITOR

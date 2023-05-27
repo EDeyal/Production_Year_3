@@ -180,24 +180,18 @@ public class PlayerManager : BaseCharacter
     }
     public void SubscirbeUI()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
-        //GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.InitHealthBars(StatSheet.MaxHp);
         Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
         Damageable.OnHealGFX.AddListener(UpdateHpbar);
-        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbar);
-        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbar);
         PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
         playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
     private void UpdateHpbar()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateBar(Damageable.CurrentHp);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateHP(Damageable.CurrentHp);
     }
-    private void UpdateDecayinHpbar(float amount)
-    {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.UpdateBar(StatSheet.DecayingHealth.CurrentDecayingHealth);
-    }
+  
     private void UpdateAbilityUi(Ability givenAbility)
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
@@ -250,6 +244,7 @@ public class PlayerManager : BaseCharacter
 
     private void EquipEmptyAbility()
     {
+        GameManager.Instance.UiManager.PlayerHud.AbilityIcon.ResetAbilityImage();
         PlayerAbilityHandler.EquipSpell(null);
     }
 
