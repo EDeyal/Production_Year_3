@@ -551,7 +551,7 @@ MonoBehaviour:
   dashDuration: 0.2
   dashSpeed: 30
   dashApexTime: 0.125
-  anim: {fileID: 0}
+  anim: {fileID: 1992302602601025817}
   rightCheck: {fileID: 3201840431753116194}
   leftCheck: {fileID: 3201840432309365512}
   OnDash:
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5182779aa52b8f140ae0eb8da7e154a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 1992302602601025817}
 --- !u!114 &3201840432435668528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2140,6 +2140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a372c9a1bae71044392f4bd7dc517e9b,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 75f3e8f4f299fac408b76a52e17cc180, type: 2}
     - target: {fileID: 9088115790114876603, guid: a372c9a1bae71044392f4bd7dc517e9b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2147,6 +2152,30 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2ac7ad3fe1cfe2241b13db4a0ae31b14, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a372c9a1bae71044392f4bd7dc517e9b, type: 3}
+--- !u!95 &1992302602601025817 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a372c9a1bae71044392f4bd7dc517e9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5389824693922327688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5047946743020474841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a372c9a1bae71044392f4bd7dc517e9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5389824693922327688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1054755577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5047946743020474841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ac119fa631b9249b439f0af9716d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5568200102375525219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a372c9a1bae71044392f4bd7dc517e9b,
