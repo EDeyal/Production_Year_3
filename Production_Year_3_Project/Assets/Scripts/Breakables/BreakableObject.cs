@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class BreakableObject : DamageableObject
+public class BreakableObject : DamageableObject,IRespawnable
 {
     [TabGroup("General")]
     [SerializeField] GameObject _asset;
@@ -9,6 +9,7 @@ public class BreakableObject : DamageableObject
     [SerializeField] GameObject _brokenAssetPrefab;
     [TabGroup("General")]
     [SerializeField] GameObject _damageableColliderGameObject;
+    [SerializeField] bool _isRespawnable;
 
     GameObject _instantiatedObject;
     BrokenAsset _brokenAsset;
@@ -24,6 +25,8 @@ public class BreakableObject : DamageableObject
     [SerializeField] float _explosionRadius;
     [TabGroup("Explosion")]
     [SerializeField] float _explosionForce;
+
+
 
     public void ExplodeParts()
     {
@@ -46,19 +49,32 @@ public class BreakableObject : DamageableObject
     public override void Awake()
     {
         base.Awake();
-        Damageable.OnDeath.AddListener(BreakAsset);
+        Damageable.OnDeath.AddListener(BreakAsset);//when player is dead it probably removes the asset from the list
     }
-
+    private void Start()
+    {
+        if (_isRespawnable)
+        {
+            GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets.Add(this);
+        }
+    }
     private void OnEnable()
     {
-        //if (_isOneTime)
+        Respawn();
+    }
+    private void OnDestroy()
+    {
+        //if (_isRespawnable)
         //{
-        //    return;
+        //    GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets.Remove(this);
         //}
+    }
+    public void Respawn()
+    {
         _asset.SetActive(true);
         _damageableColliderGameObject.SetActive(true);
+        Damageable.Heal(new DamageHandler() { BaseAmount = Damageable.MaxHp });
     }
-
 #if UNITY_EDITOR
     [Button("Test")]
     public void TestAsset()
@@ -68,7 +84,7 @@ public class BreakableObject : DamageableObject
     [Button("Reset")]
     public void ResetAsset()
     {
-        _asset.SetActive(true);
+        Respawn();
     }
 #endif
 }

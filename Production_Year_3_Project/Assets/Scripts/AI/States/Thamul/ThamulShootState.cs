@@ -18,7 +18,7 @@ public class ThamulShootState : BaseThamulState
         }
         else
         {
-            _thamul.ResetProjectileCooldown();
+            //_thamul.ResetProjectileCooldown();
             return _thamulStateHandler.ChaseState;
         }
     }

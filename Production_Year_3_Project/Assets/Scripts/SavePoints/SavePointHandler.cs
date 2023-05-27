@@ -38,22 +38,23 @@ public class SavePointHandler : MonoBehaviour
     {
         if (_savePoints.Count == 0)
         {
-            StartCoroutine(WaitOneSecond(savePoint, withVisuals));
+            throw new System.Exception("Save point handler has 0 save points assigned to it");
         }
-        _currentSavePointID = savePoint.ID;
-        if (withVisuals)
+        else
         {
-            savePoint.PlayParticles();
+            Debug.Log("Save point handler is setting player point");
+            Debug.Log("Amount of save points is: " + _savePoints.Count);
+            _currentSavePointID = savePoint.ID;
+            if (withVisuals)
+            {
+                savePoint.PlayParticles();
+            }
+            var damageable = GameManager.Instance.PlayerManager.Damageable;
+            damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp });
+            Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
+            return CurrentSavePointID;
         }
-        var damageable = GameManager.Instance.PlayerManager.Damageable;
-        damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp});
-        Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
-        return CurrentSavePointID;
-    }
-    IEnumerator WaitOneSecond(SavePoint savePoint, bool withVisuals)
-    {
-        yield return new WaitForSeconds(1);
-        SetPlayerSavePoint(savePoint,withVisuals);
+        return 0;
     }
     public void RegisterToSavePointHandler(SavePoint savePoint)
     {
