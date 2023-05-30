@@ -1,14 +1,13 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBarHandler : MonoBehaviour
+public class HealthBarHandler : MonoBehaviour, ICheckValidation
 {
 #if UNITY_EDITOR
 
-    [TabGroup("Test"),SerializeField] float _maxHpTest;//with this the game will know how many health bars to create
+    [TabGroup("Test"), SerializeField] float _maxHpTest;//with this the game will know how many health bars to create
     [TabGroup("Test"), SerializeField] float _currentHealthTest;
     [TabGroup("Test"), SerializeField] float _testAmount;
     [TabGroup("Test"), SerializeField] bool _replenishHealthTest;
@@ -33,15 +32,23 @@ public class HealthBarHandler : MonoBehaviour
     {
         ResetHealthBars(_maxHealthAmount);
     }
+
+    [TabGroup("Test"), Button("SetEndPartBars")]
+    private void SetEndPartLocation()
+    {
+        float amountOfBarsToCreate = Mathf.Ceil(_maxHealthAmount / _eachBarAmount);
+        _healthBarEndPart.CalcDistance((int)amountOfBarsToCreate);
+    }
 #endif
     List<BaseHealthBar> _healthBars = new List<BaseHealthBar>();
     [SerializeField] float _eachBarAmount = 10;
-    [SerializeField,ReadOnly] float _maxHealthAmount;
-    [SerializeField,ReadOnly] float _currentHealth;
-    [SerializeField,ReadOnly] int _healthBarItterator;
+    [SerializeField, ReadOnly] float _maxHealthAmount;
+    [SerializeField, ReadOnly] float _currentHealth;
+    [SerializeField, ReadOnly] int _healthBarItterator;
     [SerializeField] GameObject _healthBarPrefab;
     [SerializeField] Transform _healthBarContainer;
     [SerializeField] AnimationCurve _updateHealthBarCurve;
+    [SerializeField] HealthBarEndPart _healthBarEndPart;
     Sequence _healthBarSequence;
     public void InitHealthBars(float maxHp)
     {
@@ -49,19 +56,20 @@ public class HealthBarHandler : MonoBehaviour
         _currentHealth = _maxHealthAmount;
         //calculate how many health bars need to be created
         float amountOfBarsToCreate = Mathf.Ceil(_maxHealthAmount / _eachBarAmount);
+        _healthBarEndPart.CalcDistance((int)amountOfBarsToCreate);
         amountOfBarsToCreate -= _healthBars.Count;
         Debug.Log("Amount of healthBarsToCreate: " + amountOfBarsToCreate);
 
         float amountToAdd = _maxHealthAmount;
         for (int i = 0; i < amountOfBarsToCreate; i++)
         {
-            var hpBar = Instantiate(_healthBarPrefab,_healthBarContainer);
+            var hpBar = Instantiate(_healthBarPrefab, _healthBarContainer);
             var healthBarInstance = hpBar.GetComponent<BaseHealthBar>();
             healthBarInstance.InitHealthBar(_eachBarAmount);
             //last bar
             if (amountToAdd < _eachBarAmount)
             {
-                healthBarInstance.UpdateBar(amountToAdd,false);
+                healthBarInstance.UpdateBar(amountToAdd, false);
                 amountToAdd = 0;
             }
             //middle bar
@@ -73,14 +81,15 @@ public class HealthBarHandler : MonoBehaviour
             //add bar to list
             _healthBars.Add(healthBarInstance);
         }
-        _healthBarItterator = _healthBars.Count -1;//set the itterator to the last health bar
+        _healthBarItterator = _healthBars.Count - 1;//set the itterator to the last health bar
         Debug.LogFormat("Health Bar Itterator is:" + _healthBarItterator);
     }
     public void AddMaxHp(float addedAmount, bool replenishHealth)
     {
         //create extra health bars
-        _maxHealthAmount+=addedAmount;
+        _maxHealthAmount += addedAmount;
         float amountOfBarsToCreate = Mathf.Ceil(_maxHealthAmount / _eachBarAmount);
+        _healthBarEndPart.CalcDistance((int)amountOfBarsToCreate);
         amountOfBarsToCreate -= _healthBars.Count;
         if (amountOfBarsToCreate < 0)
         {
@@ -102,6 +111,7 @@ public class HealthBarHandler : MonoBehaviour
             UpdateHP(newHealth, true);
             //_healthBarItterator += (int) amountOfBarsToCreate;//set the itterator to the new location
         }
+
         Debug.LogFormat("Health Bar Itterator is:" + _healthBarItterator);
     }
     public void UpdateHP(float currentHP, bool hasTransition = true)
@@ -110,9 +120,13 @@ public class HealthBarHandler : MonoBehaviour
         {
             return;
         }
+        if (currentHP <0)
+        {
+            currentHP = 0;
+        }
         float healthDelta = currentHP - _currentHealth;
         _currentHealth = currentHP;
-        if (_healthBarSequence!= null)
+        if (_healthBarSequence != null)
         {
             _healthBarSequence.Kill();
         }
@@ -128,7 +142,7 @@ public class HealthBarHandler : MonoBehaviour
                 if (healthAmountThatCanBeChanged >= healthDelta) //this is the last bar needed to be changed
                 {
                     newBarHealth += healthDelta;
-                    var tween =  _healthBars[_healthBarItterator].UpdateBar(newBarHealth, hasTransition, _updateHealthBarCurve);//make the whole change
+                    var tween = _healthBars[_healthBarItterator].UpdateBar(newBarHealth, hasTransition, _updateHealthBarCurve);//make the whole change
                     if (tween != null)
                     {
                         _healthBarSequence.Append(tween);
@@ -140,7 +154,7 @@ public class HealthBarHandler : MonoBehaviour
                 {
                     healthDelta -= healthAmountThatCanBeChanged;
                     newBarHealth += healthAmountThatCanBeChanged;
-                    var tween = _healthBars[_healthBarItterator].UpdateBar(newBarHealth,hasTransition, _updateHealthBarCurve);//change the max amount
+                    var tween = _healthBars[_healthBarItterator].UpdateBar(newBarHealth, hasTransition, _updateHealthBarCurve);//change the max amount
                     if (tween != null)
                     {
                         _healthBarSequence.Append(tween);
@@ -152,11 +166,11 @@ public class HealthBarHandler : MonoBehaviour
             else if (healthDelta < 0)
             {
                 healthAmountThatCanBeChanged = _healthBars[_healthBarItterator].CurrentHP;
-                
+
                 if (healthAmountThatCanBeChanged >= -healthDelta) //this is the last bar needed to be changed
                 {
                     newBarHealth += healthDelta;
-                    var tween = _healthBars[_healthBarItterator].UpdateBar(newBarHealth, hasTransition,_updateHealthBarCurve);//make the whole change
+                    var tween = _healthBars[_healthBarItterator].UpdateBar(newBarHealth, hasTransition, _updateHealthBarCurve);//make the whole change
                     if (tween != null)
                     {
                         _healthBarSequence.Append(tween);
@@ -173,7 +187,7 @@ public class HealthBarHandler : MonoBehaviour
                     {
                         _healthBarSequence.Append(tween);
                     }
-                    if (_healthBarItterator>0)
+                    if (_healthBarItterator > 0)
                     {
                         _healthBarItterator--;
                     }
@@ -189,7 +203,19 @@ public class HealthBarHandler : MonoBehaviour
             Debug.Log("Destroying game object " + healthBar.gameObject.name);
             Destroy(healthBar.gameObject);
         }
-            _healthBars.Clear();
+        _healthBars.Clear();
         InitHealthBars(maxHealth);
+    }
+
+    public void CheckValidation()
+    {
+        if (!_healthBarPrefab)
+            throw new System.Exception("HealthBarHandler has no health bar prefab");
+        if (!_healthBarContainer)
+            throw new System.Exception("HealthBarHandler has no health bar container");
+        if (_updateHealthBarCurve == null)
+            throw new System.Exception("HealthBarHandler has no health bar curve");
+        if (!_healthBarEndPart)
+            throw new System.Exception("HealthBarHandler has no health bar end Part script");
     }
 }

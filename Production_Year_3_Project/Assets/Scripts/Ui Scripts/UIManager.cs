@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     private DashPopup dashPopup;
     private DeathPopup deathPopup;
     private PauseMenu _pauseMenu;
+    private InstructionPopUp _instructionPopUp;
     public void CachPauseMenu(PauseMenu pauseMenu)
     {
         _pauseMenu = pauseMenu;
@@ -22,6 +23,10 @@ public class UIManager : MonoBehaviour
     public void CacheDeathPopup(DeathPopup givenDeathPopup)
     {
         deathPopup = givenDeathPopup;
+    }
+    public void CacheInstructionPopUP(InstructionPopUp givenInstructionPopUp)
+    {
+        _instructionPopUp = givenInstructionPopUp;
     }
     public void EscapePressed(bool isPressed)
     {
@@ -47,4 +52,5 @@ public class UIManager : MonoBehaviour
     public PlayerHud PlayerHud { get => playerHud; }
     public DeathPopup DeathPopup { get => deathPopup; }
     public DashPopup DashPopup { get => dashPopup; }
+    public InstructionPopUp InstructionPopUp => _instructionPopUp;
 }

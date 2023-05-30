@@ -65,7 +65,7 @@ public class BaseCharacter : MonoBehaviour
 
     private void PlaceHealParticle()
     {
-        if (ReferenceEquals(GameManager.Instance.ObjectPoolsHandler, null))
+        if (ReferenceEquals(GameManager.Instance?.ObjectPoolsHandler, null))
         {
             return;
         }

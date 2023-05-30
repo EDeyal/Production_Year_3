@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakableObject : DamageableObject,IRespawnable
@@ -25,6 +26,8 @@ public class BreakableObject : DamageableObject,IRespawnable
     [SerializeField] float _explosionRadius;
     [TabGroup("Explosion")]
     [SerializeField] float _explosionForce;
+    [TabGroup("Visuals")]
+    [SerializeField] List<ParticleSystem> _particles;
 
 
 
@@ -36,7 +39,26 @@ public class BreakableObject : DamageableObject,IRespawnable
             part.AddExplosionForce(_explosionForce, explosionPosition, _explosionRadius);
         }
     }
-
+    private void ResetParticles()
+    {
+        if (_particles!= null)
+        {
+            foreach (var particle in _particles)
+            {
+                particle.Stop();
+            }
+        }
+    }
+    private void PlayParticles()
+    {
+        if (_particles != null)
+        {
+            foreach (var particle in _particles)
+            {
+                particle.Play();
+            }
+        }
+    }
     public void BreakAsset()
     {
         _asset.SetActive(false);
@@ -44,6 +66,7 @@ public class BreakableObject : DamageableObject,IRespawnable
         _instantiatedObject = Instantiate(_brokenAssetPrefab, transform);
         _brokenAsset = _instantiatedObject.GetComponent<BrokenAsset>();
         ExplodeParts();
+        PlayParticles();
         Destroy(_instantiatedObject, _brokenAssetlifetime);
     }
     public override void Awake()
@@ -74,8 +97,16 @@ public class BreakableObject : DamageableObject,IRespawnable
         _asset.SetActive(true);
         _damageableColliderGameObject.SetActive(true);
         Damageable.Heal(new DamageHandler() { BaseAmount = Damageable.MaxHp });
+        ResetParticles();
     }
 #if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ResetAsset();
+        }
+    }
     [Button("Test")]
     public void TestAsset()
     {

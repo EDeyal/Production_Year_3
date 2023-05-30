@@ -5,9 +5,8 @@ using System.Collections;
 
 public class PlayerHud : MonoBehaviour
 {
-    [SerializeField] private BaseHealthBar healthBar;
-    [SerializeField] private BaseHealthBar decayingHealthBar;
-    [SerializeField] private AbilityImageTest abilityIcon;
+    [SerializeField] private HealthBarHandler healthBar;
+    [SerializeField] private AbilityUIHandler abilityIcon;
     [SerializeField] private Image blackBG;
     [SerializeField] private float fadeIntoBlackMod = 1;
     [SerializeField] private float fadeFromBlackMod = 1;
@@ -41,7 +40,6 @@ public class PlayerHud : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-    public BaseHealthBar HealthBar { get => healthBar; }
-    public BaseHealthBar DecayingHealthBar { get => decayingHealthBar; }
-    public AbilityImageTest AbilityIcon { get => abilityIcon; }
+    public HealthBarHandler HealthBar { get => healthBar; }
+    public AbilityUIHandler AbilityIcon { get => abilityIcon; }
 }

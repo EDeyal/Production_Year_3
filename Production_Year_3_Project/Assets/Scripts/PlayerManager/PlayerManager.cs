@@ -22,6 +22,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private Material outlineMat;
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
+    private bool attackState;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
     public AttackAnimationHandler PlayerMeleeAttack { get => playerMeleeAttackAnimationHandler; }
@@ -151,7 +152,17 @@ public class PlayerManager : BaseCharacter
     }
     private void PlayAttackAnimation()
     {
-        playerController.AnimBlender.SetTrigger("Attack");
+        if (attackState && PlayerController.GroundCheck.IsGrounded())
+        {
+            playerController.AnimBlender.SetTrigger("Attack2");
+
+        }
+        else
+        {
+            playerController.AnimBlender.SetTrigger("Attack");
+
+        }
+        attackState = !attackState;
     }
     private void PlayHitAnimation(Attack givenAttack, Damageable target)
     {
@@ -169,24 +180,23 @@ public class PlayerManager : BaseCharacter
     }
     public void SubscirbeUI()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.SetHealthBar(StatSheet.MaxHp);
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.SetHealthBarAtZero(StatSheet.MaxHp);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.InitHealthBars(StatSheet.MaxHp);
+        Damageable.OnGainMaxHP.AddListener(AddMaxHPUI);
         Damageable.OnTakeDmgGFX.AddListener(UpdateHpbar);
         Damageable.OnHealGFX.AddListener(UpdateHpbar);
-        StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(UpdateDecayinHpbar);
-        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(UpdateDecayinHpbar);
         PlayerAbilityHandler.OnEquipAbility.AddListener(UpdateAbilityUi);
         playerAbilityHandler.OnCast.AddListener(GameManager.Instance.UiManager.PlayerHud.AbilityIcon.UseAbility);
     }
 
     private void UpdateHpbar()
     {
-        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateBar(Damageable.CurrentHp);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.UpdateHP(Damageable.CurrentHp);
     }
-    private void UpdateDecayinHpbar(float amount)
+    private void AddMaxHPUI(float hpGained)
     {
-        GameManager.Instance.UiManager.PlayerHud.DecayingHealthBar.UpdateBar(StatSheet.DecayingHealth.CurrentDecayingHealth);
+        GameManager.Instance.UiManager.PlayerHud.HealthBar.AddMaxHp(hpGained, true);
     }
+  
     private void UpdateAbilityUi(Ability givenAbility)
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
@@ -239,6 +249,7 @@ public class PlayerManager : BaseCharacter
 
     private void EquipEmptyAbility()
     {
+        GameManager.Instance.UiManager.PlayerHud.AbilityIcon.ResetAbilityImage();
         PlayerAbilityHandler.EquipSpell(null);
     }
 
