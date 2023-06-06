@@ -6,6 +6,6 @@ public class SoundManager : MonoBehaviour
 {
     private void Awake()
     {
-        //Instantiate(new GameObject(), transform);
+        
     }
 }
