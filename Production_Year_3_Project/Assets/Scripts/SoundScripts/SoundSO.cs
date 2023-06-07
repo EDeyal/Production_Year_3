@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Sound", menuName = "NewSound")]
 public class SoundSO : ScriptableObject
 {
-    public string Name;
-
-   
+    public AudioClip Test;
+    public string Name; 
 }
