@@ -58,6 +58,11 @@ public class CCController : MonoBehaviour
     private Vector3 currentExternalForce;
     private float kockBackDuration;
 
+    [SerializeField] private float longFallThreshold;
+    [SerializeField] private float LongFallStunDuration;
+    private float fallingFor;
+    private bool subbedLongFall;
+
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
@@ -89,6 +94,9 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         groundCheck.OnGrounded.AddListener(LandAnim);
         groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
+        groundCheck.OnGrounded.AddListener(ResetLongFallSub);
+        groundCheck.OnGrounded.AddListener(ResetFallingFor);
+
 
         OnJump.AddListener(ResetCanHoldJump);
         OnJump.AddListener(JumpAnim);
@@ -185,6 +193,7 @@ public class CCController : MonoBehaviour
         if (isFalling)
         {
             FallAnim();
+            FallingEvents();
         }
         RunningEvents(Mathf.Abs(GameManager.Instance.InputManager.GetMoveVector().x));
     }
@@ -204,6 +213,38 @@ public class CCController : MonoBehaviour
             OnStartRunning?.Invoke();
         }
     }
+
+    private void FallingEvents()
+    {
+        if (!subbedLongFall && fallingFor >= longFallThreshold)
+        {
+            groundCheck.OnGrounded.AddListener(LongFallStunStart);
+            subbedLongFall = true;
+        }
+        fallingFor += Time.deltaTime;
+    }
+
+    private void LongFallStunStart()
+    {
+        StartCoroutine(LongFallStun());
+    }
+
+    private IEnumerator LongFallStun()
+    {
+        Debug.Log("stunning player");
+        GameManager.Instance.PlayerManager.LockPlayer();
+        yield return new WaitForSeconds(LongFallStunDuration);
+        GameManager.Instance.PlayerManager.UnLockPlayer();
+    }
+    private void ResetFallingFor()
+    {
+        fallingFor = 0f;
+    }
+    private void ResetLongFallSub()
+    {
+        subbedLongFall = false;
+    }
+
     private void Jump()
     {
         if (canJump && (groundCheck.IsGrounded() || coyoteAvailable || (jumpsLeft > 0 && jumped)))
