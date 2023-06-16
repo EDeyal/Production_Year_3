@@ -40,6 +40,9 @@ public class SoundHandler : MonoBehaviour
     private void SetAudioSource(AudioSource audioSource,SoundSO soundSO)
     {
         audioSource.clip = soundSO.audioClip;
+        audioSource.loop = soundSO.isLooping;
+        audioSource.volume = soundSO.volume;
+        audioSource.pitch = soundSO.pitch;
     }
 
     IEnumerator WaitUntilDonePlaying(AudioSource audioSource)
