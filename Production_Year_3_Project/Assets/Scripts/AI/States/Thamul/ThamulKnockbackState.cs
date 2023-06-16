@@ -14,6 +14,18 @@ public class ThamulKnockbackState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
-        //knockback animation
+        //hit
+        _thamul.AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.IsHit));
+        var randomRange = Random.Range(0, 1);
+        if (randomRange == 1)
+        {
+            _thamul.AnimatorHandler.Animator.SetTrigger(
+                AnimatorHelper.GetParameter(AnimatorParameterType.HitUp));
+        }
+        else
+        {
+            _thamul.AnimatorHandler.Animator.SetTrigger(
+                AnimatorHelper.GetParameter(AnimatorParameterType.HitDown));
+        }
     }
 }

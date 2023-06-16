@@ -4,7 +4,11 @@ public enum AnimatorParameterType
     IsDead,
     IsCharging,
     IsGrounded,
-    IsHit
+    IsHit,
+    HitUp,
+    HitDown,
+    Melee,
+    Ranged
 }
 public static class AnimatorHelper
 {
@@ -22,6 +26,15 @@ public static class AnimatorHelper
                 return "IsGrounded";
             case AnimatorParameterType.IsHit:
                 return "IsHit";
+            case AnimatorParameterType.HitUp:
+                return "HitUp";
+            case AnimatorParameterType.HitDown:
+                return "HitDown";
+            case AnimatorParameterType.Melee:
+                return "Melee";
+            case AnimatorParameterType.Ranged:
+                return "Ranged";
+
             default:
                 throw new System.Exception("Animator Helper Recived Wrong AnimatorParameterType");
         }

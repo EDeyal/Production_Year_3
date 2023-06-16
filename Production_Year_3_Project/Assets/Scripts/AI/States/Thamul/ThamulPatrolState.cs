@@ -19,11 +19,24 @@ public class ThamulPatrolState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
+        _thamul.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+            _thamul.EnemyStatSheet.Speed);
         //animations
     }
     public override void ExitState()
     {
         base.ExitState();
+        _thamul.AnimatorHandler.Animator.SetFloat(
+    AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+    _thamul.EnemyStatSheet.Speed);
         //animations
+    }
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        _thamul.AnimatorHandler.Animator.SetFloat(
+AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+_thamul.EnemyStatSheet.Speed);
     }
 }

@@ -22,9 +22,12 @@ public class ThamulEnemy : GroundEnemy
     [TabGroup("Sensors")]
     [SerializeField] CheckDistanceAction _thamulRangeChaseDistance;
     ActionCooldown _projectileCooldown;
+    ActionCooldown _afterProjectileCooldown;
     ActionCooldown _meleeCooldown;
     [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _projectileCooldownAction;
+    [TabGroup("Abilities")]
+    [SerializeField] BaseAction<ActionCooldownData> _afterProjectileCooldownAction;
     [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _meleeCooldownAction;
     [TabGroup("Abilities")]
@@ -64,6 +67,7 @@ public class ThamulEnemy : GroundEnemy
         _thamulStateHandler.CurrentState.EnterState();
         _combatHandler.Init();
         _projectileCooldown = new ActionCooldown();
+        _afterProjectileCooldown = new ActionCooldown();
         _meleeCooldown = new ActionCooldown();
     }
     public override void CheckValidation()
@@ -135,9 +139,19 @@ public class ThamulEnemy : GroundEnemy
         }
         return false;
     }
+    public bool AfterShoot()
+    {
+        ThamulRotate(out int direction);
+        if (WaitAction(_afterProjectileCooldownAction,ref _afterProjectileCooldown))
+        {
+            return true;
+        }
+        return false;
+    }
     public void ResetProjectileCooldown()
     {
         _projectileCooldown.ResetCooldown();
+        _afterProjectileCooldown.ResetCooldown();
     }
     private void ShootProjectile(Attack givenAttack, int direction)
     {

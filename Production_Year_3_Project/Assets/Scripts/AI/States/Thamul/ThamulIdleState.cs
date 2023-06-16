@@ -14,4 +14,10 @@ public class ThamulIdleState : BaseThamulState
         }
         return _thamulStateHandler.PatrolState;
     }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _thamul.AnimatorHandler.Animator.SetFloat(
+AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
+    }
 }

@@ -8,4 +8,12 @@ public class ThamulMeleeState : BaseThamulState
         }
         return this;
     }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _thamul.AnimatorHandler.Animator.SetTrigger(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Melee));
+        _thamul.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
+    }
 }
