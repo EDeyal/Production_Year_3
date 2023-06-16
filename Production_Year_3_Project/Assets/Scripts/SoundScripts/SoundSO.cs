@@ -6,6 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Sound", menuName = "NewSound")]
 public class SoundSO : ScriptableObject
 {
-    public AudioClip Test;
-    public string Name; 
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private string _name;
+    
+    public string name => _name;
+    public AudioClip audioClip => _audioClip;
+    // bool loop
+    //pitch
+    //float volume
 }

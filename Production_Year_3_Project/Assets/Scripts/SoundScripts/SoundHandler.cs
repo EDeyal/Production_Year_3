@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class SoundHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Dictionary<string, SoundSO> soundSos;
+    [SerializeField] List<SoundSO> sosBank;
+
+
+    private void Awake()
     {
-        
+        soundSos = new Dictionary<string, SoundSO>();
+        foreach (var item in sosBank)
+        {
+            soundSos.Add(item.name, item);
+        }
+
+    }
+    private void Start()
+    {
+        Debug.Log(soundSos.Count);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySound(string name,AudioSource audioSource)
     {
+        soundSos.TryGetValue(name, out SoundSO soundSo);
+        if (soundSo != null)
+        {
+            SetAudioSource(audioSource, soundSo);
+            audioSource.Play();
+            StartCoroutine(WaitUntilDonePlaying(audioSource));
+        }
+        else
+        {
+            Debug.LogError("Sound Handler: soundSo equals Null");
+        }
         
+    }
+    private void SetAudioSource(AudioSource audioSource,SoundSO soundSO)
+    {
+        audioSource.clip = soundSO.audioClip;
+    }
+
+    IEnumerator WaitUntilDonePlaying(AudioSource audioSource)
+    {
+        yield return new WaitUntil(()=>!audioSource.isPlaying);
+        audioSource.gameObject.SetActive(false);
     }
 }

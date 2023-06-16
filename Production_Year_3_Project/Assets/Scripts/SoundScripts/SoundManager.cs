@@ -1,28 +1,24 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-     private Dictionary<string, SoundSO> audioClips;
-    [SerializeField] List<SoundSO> soundClipsList;
-    
-
-    private void Awake()
+    [SerializeField] AudioSourcePooler audioSourcePooler;
+    [SerializeField] SoundHandler soundHandler;
+#if UNITY_EDITOR
+    [Button("TestPlaySound")]
+    void PlaySoundTest()
     {
-        audioClips = new Dictionary<string, SoundSO>();
-        foreach (var item in soundClipsList)
-        {
-            audioClips.Add(item.Name, item);
-        }
-        
+        PlaySound("TestSound");
     }
-    private void Start()
+#endif
+    public void PlaySound(string name)
     {
-        Debug.Log(audioClips.Count);
-    }
-    public void PlaySound(SoundSO playedsound)
-    {
-        //playedsound = audioClips.
+        AudioObject newAudio = audioSourcePooler.GetPooledObject();
+        newAudio.gameObject.SetActive(true);
+        soundHandler.PlaySound(name, newAudio.AudioSource);
     }
 }
