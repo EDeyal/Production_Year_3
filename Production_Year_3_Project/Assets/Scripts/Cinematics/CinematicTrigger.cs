@@ -14,6 +14,7 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation
     [ReadOnly] bool _isPlaying = false;
     [SerializeField] float _speed = 1;
     static int _camPriority = 11;
+    [ReadOnly] bool _hasPlayed;
     public void Awake()
     {
         _trackedDolly = _cinematicCam.GetCinemachineComponent<CinemachineTrackedDolly>();
@@ -22,44 +23,37 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("CinematicTrigger Triggered");
-
-        if (other.CompareTag("Player"))
+        if (!_hasPlayed)
         {
-            Debug.Log("CinematicTrigger Activated");
-            ActivateCinematicCamera();
+            Debug.Log("CinematicTrigger Triggered");
+
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("CinematicTrigger Activated");
+                ActivateCinematicCamera();
+            }
         }
     }
     public void ActivateCinematicCamera()
     {
         _playableDirector.Play();
-        //_isPlaying = true;
-        //_cinematicCam.gameObject.SetActive(true);
-        //_cinematicCam.Priority = _camPriority;
-        //stop player from moving
+        _hasPlayed = true;
     }
     private void Update()
     {
-        if (_isPlaying)
-        {
-            _trackedDolly.m_PathPosition += Time.deltaTime* _speed;
-        }
-        if (_trackedDolly.m_PathPosition >= _trackedDolly.m_Path.MaxPos)
-        {
-            //reached the end
-            ResetCinematic();
-        }
+        //if (_isPlaying)
+        //{
+        //    _trackedDolly.m_PathPosition += Time.deltaTime* _speed;
+        //}
+        //if (_trackedDolly.m_PathPosition >= _trackedDolly.m_Path.MaxPos)
+        //{
+        //    //reached the end
+        //    ResetCinematic();
+        //}
     }
     public void ResetCinematic()
     {
-        //_cinematicCam.Priority = 0;
-        //_cinematicCam.gameObject.SetActive(false);
-        //_isPlaying = false;
-        //if (_trackedDolly)
-        //{
-        //    //maybe need some time before changing to 0
-        //    _trackedDolly.m_PathPosition = 0;
-        //}
+
     }
 
     public void CheckValidation()
