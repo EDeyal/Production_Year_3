@@ -720,7 +720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playableDirector: {fileID: 244038237}
   _cinematicCam: {fileID: 1587966501}
-  _speed: 1
 --- !u!65 &244038235
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1110,7 +1109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &390789630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5420,6 +5419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.096
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919220697648845065, guid: eaba4d6b9e077064ebb62e3990934b0c,
+        type: 3}
+      propertyPath: m_DefaultBlend.m_Style
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6919220697648845067, guid: eaba4d6b9e077064ebb62e3990934b0c,
         type: 3}

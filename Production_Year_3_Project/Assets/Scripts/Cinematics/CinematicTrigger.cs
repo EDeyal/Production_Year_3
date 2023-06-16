@@ -10,17 +10,12 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation
 {
     [SerializeField] PlayableDirector _playableDirector;
     [SerializeField] Cinemachine.CinemachineVirtualCamera _cinematicCam;
-    Cinemachine.CinemachineTrackedDolly _trackedDolly;
-    [ReadOnly] bool _isPlaying = false;
-    [SerializeField] float _speed = 1;
+    //Cinemachine.CinemachineTrackedDolly _trackedDolly;
+    //[ReadOnly] bool _isPlaying = false;
+    //[SerializeField] float _speed = 1;
     static int _camPriority = 11;
     [ReadOnly] bool _hasPlayed;
-    public void Awake()
-    {
-        _trackedDolly = _cinematicCam.GetCinemachineComponent<CinemachineTrackedDolly>();
-        if(_trackedDolly == null)
-                    Debug.LogError("Cinematic Missing Conponnent");
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!_hasPlayed)
@@ -53,7 +48,7 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation
     }
     public void ResetCinematic()
     {
-
+        _hasPlayed = false;
     }
 
     public void CheckValidation()
