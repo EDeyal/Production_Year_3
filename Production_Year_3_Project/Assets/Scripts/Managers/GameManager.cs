@@ -12,6 +12,7 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] ObjectPoolHandler objectPoolsHandler;
     [SerializeField] UIManager uiManager;
     [SerializeField] CameraMovement cam;
+    [SerializeField] SoundManager _soundManager;
     #endregion
     #region Properties
     public SceneLoaderManager SceneManager => _sceneManager;
@@ -23,6 +24,7 @@ public class GameManager : MonoSingleton<GameManager>
     public ObjectPoolHandler ObjectPoolsHandler { get => objectPoolsHandler; }
     public UIManager UiManager { get => uiManager; }
     public CameraMovement Cam { get => cam;}
+    public SoundManager SoundManager => _soundManager;
     #endregion
 
     public override void Awake()
@@ -64,6 +66,10 @@ public class GameManager : MonoSingleton<GameManager>
     public void CacheCam(CameraMovement givenCam)
     {
         cam = givenCam;
+    }
+    public void CacheSoundManager(SoundManager soundManager)
+    {
+        _soundManager = soundManager;
     }
     public void PauseGameTimeScale(bool isPaused)
     {

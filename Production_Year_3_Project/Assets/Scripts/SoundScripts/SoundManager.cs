@@ -15,6 +15,11 @@ public class SoundManager : MonoBehaviour
         PlaySound("TestSound");
     }
 #endif
+
+    private void Start()
+    {
+        GameManager.Instance.CacheSoundManager(this);
+    }
     public void PlaySound(string name)
     {
         AudioObject newAudio = audioSourcePooler.GetPooledObject();
