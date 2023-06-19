@@ -17,10 +17,6 @@ public class SoundHandler : MonoBehaviour
         }
 
     }
-    private void Start()
-    {
-        Debug.Log(soundSos.Count);
-    }
 
     public void PlaySound(string name,AudioSource audioSource)
     {

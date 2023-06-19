@@ -9,10 +9,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSourcePooler audioSourcePooler;
     [SerializeField] SoundHandler soundHandler;
 #if UNITY_EDITOR
+    [SerializeField] string _testSoundName;
     [Button("TestPlaySound")]
     void PlaySoundTest()
     {
-        PlaySound("TestSound");
+        PlaySound(_testSoundName);
     }
 #endif
 
