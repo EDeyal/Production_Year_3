@@ -8,7 +8,8 @@ public enum AnimatorParameterType
     HitUp,
     HitDown,
     Melee,
-    Ranged
+    Ranged,
+    HasAttacked
 }
 public static class AnimatorHelper
 {
@@ -34,6 +35,8 @@ public static class AnimatorHelper
                 return "Melee";
             case AnimatorParameterType.Ranged:
                 return "Ranged";
+            case AnimatorParameterType.HasAttacked:
+                return "HasAttacked";
 
             default:
                 throw new System.Exception("Animator Helper Recived Wrong AnimatorParameterType");

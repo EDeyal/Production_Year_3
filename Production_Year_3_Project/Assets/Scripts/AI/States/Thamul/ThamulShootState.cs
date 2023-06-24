@@ -7,22 +7,21 @@ public class ThamulShootState : BaseThamulState
         {
             if(_thamul.Shoot())
             {
-            _isBeforeShoot = false;
+                _isBeforeShoot = false;
+                _thamul.AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked));
             }
-            return this;
         }
         else
         {
             if (_thamul.AfterShoot())
             {
+                //_thamul.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked), false);
                 _isBeforeShoot=true;
                 _thamul.ResetProjectileCooldown();
                 return _thamulStateHandler.CombatState;
             }
-            else
-                return this;
         }
-
+        return this;
     }
     public override void EnterState()
     {
@@ -35,5 +34,6 @@ public class ThamulShootState : BaseThamulState
     public override void ExitState()
     {
         base.ExitState();
+        //_thamul.AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked));
     }
 }

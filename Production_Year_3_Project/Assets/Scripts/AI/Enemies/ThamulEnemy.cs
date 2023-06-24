@@ -16,20 +16,26 @@ public class ThamulEnemy : GroundEnemy
     [TabGroup("Sensors")]
     [SerializeField] float _hightDifferenceOffset;
     [TabGroup("Sensors")]
-    [SerializeField] CheckDistanceAction _thamulMeleeDistance;
+    [SerializeField] CheckDistanceAction _thamulMeleeDistanceAction;
     [TabGroup("Sensors")]
-    [SerializeField] CheckDistanceAction _thamulRunAfterPlayerDistance;
+    [SerializeField] CheckDistanceAction _thamulRunAfterPlayerDistanceAction;
     [TabGroup("Sensors")]
-    [SerializeField] CheckDistanceAction _thamulRangeChaseDistance;
+    [SerializeField] CheckDistanceAction _thamulRangeChaseDistanceAction;
     ActionCooldown _projectileCooldown;
     ActionCooldown _afterProjectileCooldown;
     ActionCooldown _meleeCooldown;
+    ActionCooldown _afterMeleeCooldown;
+    ActionCooldown _meleeTransitionOutCooldown;
     [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _projectileCooldownAction;
     [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _afterProjectileCooldownAction;
     [TabGroup("Abilities")]
     [SerializeField] BaseAction<ActionCooldownData> _meleeCooldownAction;
+    [TabGroup("Abilities")]
+    [SerializeField] BaseAction<ActionCooldownData> _afterMeleeCooldownAction;
+    [TabGroup("Abilities")]
+    [SerializeField] BaseAction<ActionCooldownData> _meleeTransitionOutAction;
     [TabGroup("Abilities")]
     [SerializeField] Transform _rightAttack;
     [TabGroup("Abilities")]
@@ -45,9 +51,9 @@ public class ThamulEnemy : GroundEnemy
     [TabGroup("Abilities")]
     [SerializeField] bool _showAttackAreas = true;
 
-    public CheckDistanceAction ThamulMeleeDistance => _thamulMeleeDistance;
-    public CheckDistanceAction ThamulRunAfterPlayerDistance => _thamulRunAfterPlayerDistance;
-    public CheckDistanceAction ThamulRangeChaseDistance => _thamulRangeChaseDistance;
+    public CheckDistanceAction ThamulMeleeDistance => _thamulMeleeDistanceAction;
+    public CheckDistanceAction ThamulRunAfterPlayerDistance => _thamulRunAfterPlayerDistanceAction;
+    public CheckDistanceAction ThamulRangeChaseDistance => _thamulRangeChaseDistanceAction;
     public ThamulStateHandler ThamulStateHandler => StateHandler as ThamulStateHandler;
     public float HightDifferenceOffset => _hightDifferenceOffset;
 
@@ -69,6 +75,8 @@ public class ThamulEnemy : GroundEnemy
         _projectileCooldown = new ActionCooldown();
         _afterProjectileCooldown = new ActionCooldown();
         _meleeCooldown = new ActionCooldown();
+        _afterMeleeCooldown = new ActionCooldown();
+        _meleeTransitionOutCooldown = new ActionCooldown();
     }
     public override void CheckValidation()
     {
@@ -77,6 +85,23 @@ public class ThamulEnemy : GroundEnemy
             throw new System.Exception("ThamulEnemy has no projetile attack");
         if (_thamulMeleeAttack == null)
             throw new System.Exception("ThamulEnemy has no melee attack");
+        if (_projectileCooldownAction == null)
+            throw new System.Exception("ThamulEnemy has no projectile cooldown Action");
+        if (_afterProjectileCooldownAction == null)
+            throw new System.Exception("ThamulEnemy has no after projectile cooldown Action");
+        if (_meleeCooldownAction == null)
+            throw new System.Exception("ThamulEnemy has no melee cooldown Action");
+        if (_afterMeleeCooldownAction == null)
+            throw new System.Exception("ThamulEnemy has no after melee cooldown Action");
+        if (_thamulMeleeDistanceAction == null)
+            throw new System.Exception("ThamulEnemy has no melee Distance Action");
+        if (_thamulRunAfterPlayerDistanceAction == null)
+            throw new System.Exception("ThamulEnemy has no run after player Distance Action");
+        if (_thamulRangeChaseDistanceAction == null)
+            throw new System.Exception("ThamulEnemy has no chase Distance Action");
+        if(_meleeTransitionOutAction == null)
+            throw new System.Exception("ThamulEnemy has no melee transition out Action");
+
     }
     private void ThamulRotate(out int direction)
     {
@@ -118,7 +143,7 @@ public class ThamulEnemy : GroundEnemy
             }
             if (HasDirectLineToPlayer(_attackRadius))//has direct line to the player -> Attack
             {
-                target.Damageable.GetHit(_thamulProjectileAttack, DamageDealer);//attack the player
+                target.Damageable.GetHit(_thamulMeleeAttack, DamageDealer);//attack the player
             }
         }
     }
@@ -134,7 +159,7 @@ public class ThamulEnemy : GroundEnemy
         if (WaitAction(_projectileCooldownAction, ref _projectileCooldown))
         {
             Debug.Log("Shooting at player");
-            ShootProjectile(_thamulMeleeAttack, direction);
+            ShootProjectile(_thamulProjectileAttack, direction);
             return true; //when completed return true
         }
         return false;
@@ -148,10 +173,33 @@ public class ThamulEnemy : GroundEnemy
         }
         return false;
     }
+    public bool AfterMelee()
+    {
+        ThamulRotate(out int direction);
+        if (WaitAction(_afterMeleeCooldownAction,ref _afterMeleeCooldown))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool MeleeTransitionOut()
+    {
+        ThamulRotate(out int direction);
+        if (WaitAction(_meleeTransitionOutAction,ref _meleeTransitionOutCooldown))
+        {
+            return true;
+        }
+        return false;
+    }
     public void ResetProjectileCooldown()
     {
         _projectileCooldown.ResetCooldown();
         _afterProjectileCooldown.ResetCooldown();
+    }
+    public void ResetMeleeCooldown()
+    {
+        _meleeCooldown.ResetCooldown();
+        _afterMeleeCooldown.ResetCooldown();
     }
     private void ShootProjectile(Attack givenAttack, int direction)
     {

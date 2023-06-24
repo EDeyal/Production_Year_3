@@ -313,17 +313,21 @@ MonoBehaviour:
   _thamulProjectile: {fileID: 5316925408529237978, guid: 9951c31dde60c954d847e84cea36985f,
     type: 3}
   _hightDifferenceOffset: 3
-  _thamulMeleeDistance: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
+  _thamulMeleeDistanceAction: {fileID: 11400000, guid: 119c0c6e94589b847989dc0e06fe99a9,
     type: 2}
-  _thamulRunAfterPlayerDistance: {fileID: 11400000, guid: 8c8b99932132ab1459687fd850d2e52e,
+  _thamulRunAfterPlayerDistanceAction: {fileID: 11400000, guid: 8c8b99932132ab1459687fd850d2e52e,
     type: 2}
-  _thamulRangeChaseDistance: {fileID: 11400000, guid: 78eee35ed88ce094cb602da44b1f6b20,
+  _thamulRangeChaseDistanceAction: {fileID: 11400000, guid: 78eee35ed88ce094cb602da44b1f6b20,
     type: 2}
   _projectileCooldownAction: {fileID: 11400000, guid: 9642c1b3d4a22eb469500389b07ca87d,
     type: 2}
   _afterProjectileCooldownAction: {fileID: 11400000, guid: eb63b9a724f71eb46a4b825e9f21b952,
     type: 2}
   _meleeCooldownAction: {fileID: 11400000, guid: 544a86908b9b87945b21fe3267c9e788,
+    type: 2}
+  _afterMeleeCooldownAction: {fileID: 11400000, guid: 06beb61771acbf64e875e8741990178a,
+    type: 2}
+  _meleeTransitionOutAction: {fileID: 11400000, guid: 3f01475abf8005c4786be5854f284d3b,
     type: 2}
   _rightAttack: {fileID: 4823916877820233019}
   _leftAttack: {fileID: 3769271550779120682}
@@ -547,7 +551,6 @@ MonoBehaviour:
   _chaseState: {fileID: 1360974688071084343}
   _shootState: {fileID: 1360974688071084342}
   _meleeState: {fileID: 9094456294109662424}
-  _afterShootState: {fileID: 0}
 --- !u!114 &1360974688071084339
 MonoBehaviour:
   m_ObjectHideFlags: 0
