@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 public class ThamulEnemy : GroundEnemy
 {
@@ -206,13 +207,15 @@ public class ThamulEnemy : GroundEnemy
         Projectile bullet = GameManager.Instance.ObjectPoolsHandler.ThamulProjectilePool.GetPooledObject();
         bullet.transform.position = MiddleOfBody.position;
         bullet.CacheStats(givenAttack, DamageDealer);
-        if (direction == 1)
+        if (direction == 1)//right
         {
             bullet.Blast(new Vector3(1, 0, 0));
+            bullet.transform.eulerAngles = new Vector3(0,0,0);
         }
-        else if (direction == -1)
+        else if (direction == -1)//left
         {
             bullet.Blast(new Vector3(-1, 0, 0));
+            bullet.transform.eulerAngles = new Vector3(0,180,0);
         }
         else
         {
