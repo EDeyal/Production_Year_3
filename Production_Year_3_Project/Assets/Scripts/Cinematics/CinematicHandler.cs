@@ -6,18 +6,27 @@ public class CinematicHandler : MonoBehaviour,IRespawnable
 {
 
     [SerializeField] CinematicTrigger _trigger;
+    [SerializeField] bool _isRespawnable = true;
 
     public void Start()
     {
-        GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets.Add(this);
+        if (_isRespawnable)
+        {
+            GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets.Add(this);
+        }
     }
     public void OnDestroy()
     {
-        GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets.Remove(this);
+        if (_isRespawnable)
+        {
+            var respawnAssets = GameManager.Instance.SaveManager.SavePointHandler.RespawnAssets;
+            if (respawnAssets.Count > 0)
+                respawnAssets.Remove(this);
+        }
     }
     public void Respawn()
     {
-        _trigger.ResetCinematic();
-        Debug.LogError("Reset Cinematic Handler");
+        _trigger.Respawn();
+        //Debug.LogError("Reset Cinematic Handler");
     }
 }
