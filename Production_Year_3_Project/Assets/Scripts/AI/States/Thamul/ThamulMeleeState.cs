@@ -1,14 +1,29 @@
+using UnityEngine;
+
 public class ThamulMeleeState : BaseThamulState
 {
     bool _isBeforeAttack = true;
     bool _isTransitioningOut = false;
+    AnimatorClipInfo[] currentClipInfo = null;
     public override BaseState RunCurrentState()
     {
         if (_isBeforeAttack)
         {
-            if (_thamul.MeleeAttack())//will wait until finishing the attack
+            currentClipInfo = _thamul.AnimatorHandler.Animator.GetCurrentAnimatorClipInfo(0);
+            //Debug.Log("Thamul Animation is: " + currentClipInfo[0].clip.name);
+            if (currentClipInfo[0].clip)
             {
-                _isBeforeAttack = false;
+                if (currentClipInfo[0].clip.name == "Thamul Melee")
+                {
+                    if (_thamul.MeleeAttack())//will wait until finishing the attack
+                    {
+                        _isBeforeAttack = false;
+                    }
+                }
+                else
+                {
+                    _thamul.ResetMeleeCooldown();
+                }
             }
         }
         else
