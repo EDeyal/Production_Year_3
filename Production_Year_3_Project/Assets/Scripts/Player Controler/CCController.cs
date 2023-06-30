@@ -94,7 +94,7 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         groundCheck.OnGrounded.AddListener(LandAnim);
         groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
-        groundCheck.OnGrounded.AddListener(ResetLongFallSub);
+        groundCheck.OnGrounded.AddListener(LongFallStunStart);
         groundCheck.OnGrounded.AddListener(ResetFallingFor);
 
 
@@ -216,17 +216,15 @@ public class CCController : MonoBehaviour
 
     private void FallingEvents()
     {
-        if (!subbedLongFall && fallingFor >= longFallThreshold)
-        {
-            groundCheck.OnGrounded.AddListener(LongFallStunStart);
-            subbedLongFall = true;
-        }
         fallingFor += Time.deltaTime;
     }
 
     private void LongFallStunStart()
     {
-        StartCoroutine(LongFallStun());
+        if (fallingFor >= longFallThreshold)
+        {
+            StartCoroutine(LongFallStun());
+        }
     }
 
     private IEnumerator LongFallStun()
@@ -239,10 +237,6 @@ public class CCController : MonoBehaviour
     private void ResetFallingFor()
     {
         fallingFor = 0f;
-    }
-    private void ResetLongFallSub()
-    {
-        subbedLongFall = false;
     }
 
     private void Jump()

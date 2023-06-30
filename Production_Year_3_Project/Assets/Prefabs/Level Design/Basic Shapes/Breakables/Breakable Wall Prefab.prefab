@@ -108,6 +108,9 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  OnGainMaxHP:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeDmgGFX:
     m_PersistentCalls:
       m_Calls: []
@@ -277,11 +280,13 @@ MonoBehaviour:
   _brokenAssetPrefab: {fileID: 3654985502794105115, guid: a5d6e278727dfce459d9c8f80818a480,
     type: 3}
   _damageableColliderGameObject: {fileID: 2490406801558651129}
-  _brokenAssetlifetime: 3
+  _isRespawnable: 0
+  _brokenAssetlifetime: 2
   _exploadeRight: 0
   _explosionLocation: {fileID: 4245322960205618914}
   _explosionRadius: 2
-  _explosionForce: 5000
+  _explosionForce: 500
+  _particles: []
 --- !u!1001 &6797361918039115363
 PrefabInstance:
   m_ObjectHideFlags: 0
