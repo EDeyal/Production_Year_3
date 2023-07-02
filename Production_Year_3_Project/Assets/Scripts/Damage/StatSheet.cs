@@ -8,11 +8,12 @@ public class StatSheet : MonoBehaviour
     [SerializeField, FoldoutGroup("Combat")] private float invulnerabilityDuration;
     [SerializeField, FoldoutGroup("Combat")] private DecayingHealth decayingHealth = new DecayingHealth();
     [SerializeField, FoldoutGroup("Locomotion")] private float baseSpeed;
+    
 
     public UnityEvent<float> OnOverrideSpeed;
     public UnityEvent<float> OnResetSpeed;
 
-    private float currentSpeed;
+    [SerializeField, ReadOnly, FoldoutGroup("Locomotion")] private float currentSpeed;
 
     public virtual void InitializeStats()
     {

@@ -11,6 +11,7 @@ public class ThamulDeathState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
-        //animations
+        _thamul.AnimatorHandler.Animator.SetTrigger(
+            AnimatorHelper.GetParameter(AnimatorParameterType.IsDead));
     }
 }
