@@ -33,7 +33,7 @@ public class ThamulChaseState : BaseThamulState
             }
         }
         //as long that the player is within thamul chase range he needs to chase it
-        else if(_thamul.ChasePlayerDistance.InitAction(
+        else if (_thamul.ChasePlayerDistance.InitAction(
             new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             _thamul.Chase();
@@ -45,11 +45,8 @@ public class ThamulChaseState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
-        //animations
-    }
-    public override void ExitState()
-    {
-        base.ExitState();
-        //animations
+        _thamul.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
+            _thamul.EnemyStatSheet.Speed);
     }
 }

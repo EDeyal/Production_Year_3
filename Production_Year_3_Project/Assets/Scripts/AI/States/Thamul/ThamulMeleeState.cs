@@ -1,11 +1,68 @@
+using UnityEngine;
+
 public class ThamulMeleeState : BaseThamulState
 {
+    bool _isBeforeAttack = true;
+    bool _isTransitioningOut = false;
+    AnimatorClipInfo[] currentClipInfo = null;
     public override BaseState RunCurrentState()
     {
-        if (_thamul.MeleeAttack())//will wait until finishing the attack
+        if (_isBeforeAttack)
         {
-            return _thamulStateHandler.CombatState;
+            currentClipInfo = _thamul.AnimatorHandler.Animator.GetCurrentAnimatorClipInfo(0);
+            //Debug.Log("Thamul Animation is: " + currentClipInfo[0].clip.name);
+            if (currentClipInfo[0].clip)
+            {
+                if (currentClipInfo[0].clip.name == "Thamul Melee")
+                {
+                    if (_thamul.MeleeAttack())//will wait until finishing the attack
+                    {
+                        _isBeforeAttack = false;
+                    }
+                }
+                else
+                {
+                    _thamul.ResetMeleeCooldown();
+                }
+            }
         }
-        return this;
+        else
+        {
+            if (_isTransitioningOut)
+            {
+                if (_thamul.MeleeTransitionOut())//wait to transiton
+                {
+                    _isBeforeAttack = true;
+                    _thamul.ResetMeleeCooldown();
+                    _isTransitioningOut = false;
+                    return _thamulStateHandler.CombatState;
+                }
+            }
+            else
+            {
+                if (_thamul.AfterMelee())//wait until animation finished
+                {
+                    _thamul.AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked));
+                    _thamul.ResetMeleeCooldown();
+                    _isTransitioningOut = true;
+                }
+            }
+        }
+            return this;
+    }
+    public override void EnterState()
+    {
+        base.EnterState();
+        _thamul.AnimatorHandler.Animator.SetTrigger(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Melee));
+        _thamul.AnimatorHandler.Animator.SetFloat(
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
+    }
+    public override void ExitState()
+    {
+        base.ExitState();
+        //_thamul.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked), false);
+        //_thamul.AnimatorHandler.Animator.SetTrigger(AnimatorHelper.GetParameter(AnimatorParameterType.HasAttacked));
+
     }
 }

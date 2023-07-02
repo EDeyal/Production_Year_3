@@ -306,9 +306,6 @@ MonoBehaviour:
     _damageDealer: {fileID: 684794236260423736}
     _damagable: {fileID: 684794236260423737}
   _cemuAbility: {fileID: 11400000, guid: 15a189a901cca5f498d20bd41227fc27, type: 2}
-  _meshRenderer: {fileID: 1391541467844826804}
-  _outlineMaterial: {fileID: 0}
-  _outlineAlpha: 0
 --- !u!114 &684794236260423738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +334,7 @@ MonoBehaviour:
   OnResetSpeed:
     m_PersistentCalls:
       m_Calls: []
+  currentSpeed: 0
   _knockbackSpeed: 7
 --- !u!114 &684794236260423728
 MonoBehaviour:
@@ -431,6 +429,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainMaxHP:
     m_PersistentCalls:
       m_Calls: []
   OnTakeDmgGFX:
@@ -687,7 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2945cd91149fc1247bda80cf1c5fb3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intervalBetweenDamage: 0.5
   OnColliderDealtDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnColliderHit:
     m_PersistentCalls:
       m_Calls: []
   applyKnockBack: 0
@@ -1276,12 +1281,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be70a6d2d3259da4d8a3820af886c843, type: 3}
---- !u!137 &1391541467844826804 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6933597390589339472, guid: be70a6d2d3259da4d8a3820af886c843,
-    type: 3}
-  m_PrefabInstance: {fileID: 8320023732739043812}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8429631283860575759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be70a6d2d3259da4d8a3820af886c843,
