@@ -7,7 +7,6 @@ public class TakeDamageStateHandler : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameManager.Instance.PlayerManager.PlayerMeleeAttack.AttackDownOff();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
         GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = false;
         //GameManager.Instance.PlayerManager.PlayerDash.CanDash = false;
@@ -22,7 +21,6 @@ public class TakeDamageStateHandler : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameManager.Instance.PlayerManager.PlayerMeleeAttack.AttackDownOff();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
         GameManager.Instance.PlayerManager.PlayerAbilityHandler.CanCast = true;
         //GameManager.Instance.PlayerManager.PlayerDash.CanDash = true;

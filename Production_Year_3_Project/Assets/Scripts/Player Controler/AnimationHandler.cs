@@ -8,6 +8,8 @@ public class AnimationHandler : MonoBehaviour
 
     private int lastSpeed;
 
+    public Animator Anim { get => anim; set => anim = value; }
+
     public void SetFloat(string name, int givenSpeed)
     {
         anim.SetFloat(name, givenSpeed);

@@ -154,12 +154,12 @@ public class PlayerManager : BaseCharacter
     {
         if (attackState && PlayerController.GroundCheck.IsGrounded())
         {
-            playerController.AnimBlender.SetTrigger("Attack2");
+            playerController.AnimBlender.Anim.Play("SlashUp");
 
         }
         else
         {
-            playerController.AnimBlender.SetTrigger("Attack");
+            playerController.AnimBlender.Anim.Play("SlashDown");
 
         }
         attackState = !attackState;
