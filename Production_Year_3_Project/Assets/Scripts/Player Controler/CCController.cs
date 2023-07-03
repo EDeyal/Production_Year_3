@@ -63,6 +63,7 @@ public class CCController : MonoBehaviour
     private float fallingFor;
     private bool subbedLongFall;
 
+    public bool IsMoving;
     public Vector3 Velocity { get => velocity; }
     public float MovementSpeed { get => movementSpeed; set => movementSpeed = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
@@ -94,7 +95,7 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         groundCheck.OnGrounded.AddListener(LandAnim);
         groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
-        groundCheck.OnGrounded.AddListener(LongFallStunStart);
+        //groundCheck.OnGrounded.AddListener(LongFallStunStart);
         groundCheck.OnGrounded.AddListener(ResetFallingFor);
 
 
@@ -206,10 +207,12 @@ public class CCController : MonoBehaviour
         lastInput = xInput;
         if (lastInput == 0)
         {
+            IsMoving = false;
             OnStopRunning?.Invoke();
         }
         else
         {
+            IsMoving = true;
             OnStartRunning?.Invoke();
         }
     }

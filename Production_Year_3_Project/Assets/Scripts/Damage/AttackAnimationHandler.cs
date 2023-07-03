@@ -2,19 +2,13 @@ using UnityEngine;
 using UnityEngine.Events;
 public class AttackAnimationHandler : MonoBehaviour
 {
-    private float lastAttacked;
-
-    private bool attackDown;
-    private bool attackFinished;
     private bool canAttack;
     private float attackBoost = 1;
-
 
 
     public UnityEvent OnAttackPerformedVisual;
     public UnityEvent<Attack> OnAttackPerformed;
     [SerializeField] private Attack meleeAttack;
-    [SerializeField] private float attackCoolDown;
     [SerializeField] private string animTrigger;
     [SerializeField] private Animator anim;
     [SerializeField] private Transform vfxSpawnPoint;
@@ -31,23 +25,11 @@ public class AttackAnimationHandler : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(AttackDownOn);
-        GameManager.Instance.InputManager.OnBasicAttackUp.AddListener(AttackDownOff);
-        OnAttackPerformedVisual.AddListener(SpawnSwordSlashVfx);
-        //OnAttackPerformed.AddListener(AttackDamageBoost);
-        lastAttacked = attackCoolDown * -1;
-        attackFinished = true;
+        GameManager.Instance.InputManager.OnBasicAttackDown.AddListener(Attack);
         CanAttack = true;
         attackBoost = meleeAttack.DamageHandler.BaseAmount;
     }
 
-    private void Update()
-    {
-        if (canAttack && attackDown)
-        {
-            Attack();
-        }
-    }
 
 
     public void IncreaseAttackBoost(float amount)
@@ -61,41 +43,20 @@ public class AttackAnimationHandler : MonoBehaviour
         meleeAttack.DamageHandler.AddModifier(attackBoost);
     }
 
-    private void AttackDownOn()
-    {
-        if (!CanAttack)
-        {
-            return;
-        }
-        attackDown = true;
-    }
-
-    public void AttackDownOff()
-    {
-        attackDown = false;
-    }
 
     protected virtual void Attack()
     {
         //only call this if attack animation is finished + attackdown + cd finished
-        if (Time.time - lastAttacked < attackCoolDown || !attackFinished)
+        if (!canAttack)
         {
             return;
         }
-        attackFinished = false;
+        Debug.Log("attack performed");
         OnAttackPerformedVisual?.Invoke();
         OnAttackPerformed?.Invoke(MeleeAttack);
     }
 
-    public void SetLastAttacked(float givenTime)
-    {
-        lastAttacked = givenTime;
-    }
-    public void AttackFinishedTrue()
-    {
-        attackFinished = true;
-    }
-
+  
     private void SpawnSwordSlashVfx()
     {/*
         SwordSlash slash = swordSlashOP.GetPooledObject();

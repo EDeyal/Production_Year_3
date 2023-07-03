@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class FogOfWar2 : MonoBehaviour
 {
-    public Image fogImage;
     public Texture2D fogTexture;
     public float radius;
     public Transform playerUi;
-    private void FixedUpdate()
+
+    [ContextMenu("clear fog")]
+    public void Test()
     {
         UpdateFogOfWar(playerUi.position, radius);
     }
+
     public void UpdateFogOfWar(Vector2 position, float radius)
     {
         Vector3 screenPosition = GameManager.Instance.Cam.MainCam.WorldToScreenPoint(position);
@@ -37,11 +39,12 @@ public class FogOfWar2 : MonoBehaviour
                         Color pixelColor = fogTexture.GetPixel(pixelX, pixelY);
                         pixelColor.a = 0;
                         fogTexture.SetPixel(pixelX, pixelY, pixelColor);
+
+                        Debug.Log("pxiel changed at " + pixelX + " " + pixelY);
                     }
                 }
             }
         }
-
         fogTexture.Apply();
     }
 }
