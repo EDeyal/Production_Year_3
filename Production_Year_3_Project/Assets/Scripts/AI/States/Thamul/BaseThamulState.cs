@@ -6,11 +6,16 @@ public abstract class BaseThamulState : BaseState
     protected ThamulEnemy _thamul;
     private void Awake()
     {
-        _thamul = (ThamulEnemy)_thamulStateHandler.RefEnemy;
+        GetThamulRef();
     }
     private void OnValidate()
     {
         if (!_thamulStateHandler)
             _thamulStateHandler = GetComponent<ThamulStateHandler>();
+    }
+    public void GetThamulRef()
+    {
+        if(_thamul == null)
+            _thamul = (ThamulEnemy)_thamulStateHandler.RefEnemy;
     }
 }
