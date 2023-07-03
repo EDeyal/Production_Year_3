@@ -32,7 +32,7 @@ public class ProjectileOnMelee : StatusEffect
         }
         else
         {
-            bullet.Blast(new Vector3(-1, 0, 0));
+            bullet.Blast(new Vector3(-1, 0, 0), true);
         }
         bullet.gameObject.SetActive(true);
     }
