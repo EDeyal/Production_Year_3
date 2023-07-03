@@ -24,6 +24,10 @@ public class Projectile : MonoBehaviour
     {
         StartCoroutine(LifeTimeCountDown());
     }
+    private void OnDisable()
+    {
+        transform.eulerAngles = Vector3.zero;
+    }
 
     private IEnumerator LifeTimeCountDown()
     {
@@ -37,9 +41,13 @@ public class Projectile : MonoBehaviour
         projectileAttack.DamageHandler.AddModifier(projectileAttackDamageMod);
         DamageDealingCollider.CacheReferences(projectileAttack, dealer);
     }
-    
-    public void Blast(Vector3 direction)
+
+    public void Blast(Vector3 direction, bool flip = false)
     {
+        if (flip)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
         rb.velocity = direction * speed;
     }
 
