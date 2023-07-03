@@ -1,6 +1,5 @@
-using UnityEngine;
-using System;
 using System.Collections;
+using UnityEngine;
 
 public class PlayerManager : BaseCharacter
 {
@@ -22,6 +21,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private Material outlineMat;
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
+    [SerializeField] private PlayerSoundPlayer soundPlayer;
     private bool attackState;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
@@ -33,9 +33,10 @@ public class PlayerManager : BaseCharacter
     public PlayerSwordVFX SwordVFX { get => swordVFX; }
     public PlayerDash PlayerDash { get => playerDash; }
     public RoomHandler CurrentRoom { get => currentRoom; set => currentRoom = value; }
-    public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer;  }
-    public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector;}
-    public DamageAbleTerrainProximitySensor DamageableTerrainProximitySensor { get => damageableTerrainProximitySensor;}
+    public EnemyPorximityPointer EnemyProximityPointer { get => enemyProximityPointer; }
+    public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector; }
+    public DamageAbleTerrainProximitySensor DamageableTerrainProximitySensor { get => damageableTerrainProximitySensor; }
+    public PlayerSoundPlayer SoundPlayer { get => soundPlayer; }
 
     private void OnEnable()
     {
@@ -71,8 +72,8 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
-       /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
-        StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
+        /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
+         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
     private IEnumerator Start()
     {
@@ -123,10 +124,10 @@ public class PlayerManager : BaseCharacter
     }
     private void CachePlayerOnAbility(Ability givenAbility)
     {
-       /* if (ReferenceEquals(givenAbility, null))
-        {
-            return;
-        }*/
+        /* if (ReferenceEquals(givenAbility, null))
+         {
+             return;
+         }*/
         givenAbility?.CahceOwner(this);
     }
 
@@ -196,7 +197,7 @@ public class PlayerManager : BaseCharacter
     {
         GameManager.Instance.UiManager.PlayerHud.HealthBar.AddMaxHp(hpGained, true);
     }
-  
+
     private void UpdateAbilityUi(Ability givenAbility)
     {
         GameManager.Instance.UiManager.PlayerHud.AbilityIcon.RecievingNewAbility(givenAbility);
@@ -255,7 +256,7 @@ public class PlayerManager : BaseCharacter
 
     [SerializeField] private Attack testAttack;
     [ContextMenu("kill player")]
-    
+
     public void KillPlayerTest()
     {
         Damageable.TakeDamage(testAttack);
