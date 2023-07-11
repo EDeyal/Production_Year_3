@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    [SerializeField] bool isCollected;
+    [SerializeField] bool _isCollected;
+    public bool IsCollected => _isCollected;
     private void OnTriggerEnter(Collider other)
     {
         //identfy player using tag?
@@ -14,5 +15,6 @@ public class Key : MonoBehaviour
     {
         //isCollected == true
         //turn of key
+        //roommanager.addcollectedKey
     }
 }
