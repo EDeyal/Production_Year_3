@@ -18,5 +18,6 @@ public class Key : MonoBehaviour
         _isCollected = true;
         this.gameObject.SetActive(false);
         GameManager.Instance.SaveManager.RoomsManager.AddCollectedKey(this);
+        Debug.Log(GameManager.Instance.SaveManager.RoomsManager.collectedKeys.Count);
     }
 }

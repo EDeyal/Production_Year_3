@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2734576433813770760}
   - component: {fileID: 2734576433813770763}
+  - component: {fileID: 1131703707}
   m_Layer: 7
   m_Name: DoorHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2734576433813770760
 Transform:
   m_ObjectHideFlags: 0
@@ -47,7 +48,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanOpen: 0
   doorAnimator: {fileID: 7658341127178675359}
-  directionEnum: 0
+  directionEnum: 1
+--- !u!65 &1131703707
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2734576433813770762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0394819, y: 3.9199982, z: 3.4990566}
+  m_Center: {x: 0.08510542, y: -0.067726135, z: 0.09919441}
 --- !u!1 &8160002969459644885
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,8 +73,8 @@ GameObject:
   - component: {fileID: 2204470426222639583}
   - component: {fileID: 5610750458350568028}
   - component: {fileID: 3799952995821184775}
-  - component: {fileID: 8393887456869294985}
   - component: {fileID: 7658341127178675359}
+  - component: {fileID: 1798595769}
   m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
@@ -133,19 +147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8393887456869294985
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8160002969459644885}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &7658341127178675359
 Animator:
   serializedVersion: 4
@@ -166,3 +167,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1798595769
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160002969459644885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.0000019073486, z: 0}

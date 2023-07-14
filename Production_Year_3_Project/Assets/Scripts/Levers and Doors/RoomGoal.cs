@@ -10,15 +10,18 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
     [SerializeField] List<Key> _keysToGet;
     [SerializeField] List<Leaver> _LeaversToActive;
     [SerializeField] bool isInRoom = false;
-    [SerializeField] bool isOpened = false;
+    [SerializeField] bool isNotChecking = false;
 
     private void Awake()
     {
         CheckValidation();
-        //init Roomgoal
     }
     private void Update()
     {
+        if (isNotChecking)
+        {
+            return;
+        }
         switch (activeConditions)
         {
             case Conditions.killAllEnemies:
@@ -30,7 +33,8 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                     }
                 }
                 //if all enemies are killed
-                //Open Door Or animate door              
+                //Open Door Or animate door
+                isNotChecking = true;
                 break;
             case Conditions.Key:
                 foreach (var key in _keysToGet)
@@ -39,9 +43,10 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                     {
                         return;
                     }
-                }
-                //if a key was collected
-                //Open Door Or animate door
+
+                }            
+                RoomsDoor.CanOpen = true;
+                isNotChecking = true;
 
                 break;
             case Conditions.Leaver:
@@ -54,7 +59,7 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                 }
                 //if a Leaver was Activated
                 //Open Door Or animate door
-
+                isNotChecking = true;
                 break;
         }
     }
@@ -68,19 +73,34 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
     {
         if (activeConditions == Conditions.killAllEnemies)
         {
-
+            _enemiesToKill = goalEnemies;
         }
     }
 
     public void CheckValidation()
     {
-        if (_keysToGet.Count == 0)
-            throw new System.Exception($"RoomGoal  {gameObject.name} Has no Keys");
+        switch (activeConditions)
+        {
+            case Conditions.killAllEnemies:
+                if (RoomsDoor == null)
+                    throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
+                break;
+            case Conditions.Key:
+                if (_keysToGet.Count == 0)
+                    throw new System.Exception($"RoomGoal  {gameObject.name} Has no Keys");
+                if (RoomsDoor == null)
+                    throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
+                break;
+            case Conditions.Leaver:
+                if (_LeaversToActive.Count == 0)
+                    throw new System.Exception($"RoomGoal {gameObject.name} Has no Leavers");
+                if (RoomsDoor == null)
+                    throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
+                break;
+            default:
+                break;
+        }
 
-        if (_LeaversToActive.Count == 0)
-            throw new System.Exception($"RoomGoal {gameObject.name} Has no Leavers");
 
-        if (RoomsDoor == null)
-            throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
     }
 }
