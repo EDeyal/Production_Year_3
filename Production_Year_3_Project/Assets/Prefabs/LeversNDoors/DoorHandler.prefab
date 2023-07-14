@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2734576433813770760}
   - component: {fileID: 2734576433813770763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DoorHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2734576433813770760
 Transform:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077e5e9e1980471458bb8552d0d30aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
+  CanOpen: 0
   doorAnimator: {fileID: 7658341127178675359}
   directionEnum: 0
 --- !u!1 &8160002969459644885
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 3799952995821184775}
   - component: {fileID: 8393887456869294985}
   - component: {fileID: 7658341127178675359}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

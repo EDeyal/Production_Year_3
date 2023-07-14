@@ -12,7 +12,7 @@ public class Leaver : DamageableObject
     public override void Awake()
     {
         base.Awake();
-        Damageable.OnDeath.AddListener(ActivateLeaver);//when player is dead it probably removes the asset from the list
+        Damageable.OnDeath.AddListener(ActivateLeaver);
     }
     private void OnDestroy()
     {
@@ -20,7 +20,8 @@ public class Leaver : DamageableObject
     }
     public void ActivateLeaver()
     {
-        //if interacted or hit
+
+        Debug.Log("Leaver Activated");
         switch (directionEnum)
         {
             case direction.left:

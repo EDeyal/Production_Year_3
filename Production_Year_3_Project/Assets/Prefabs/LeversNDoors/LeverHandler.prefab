@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3037826245718925177}
-  m_Layer: 0
+  - component: {fileID: 2093167429}
+  m_Layer: 7
   m_Name: LeverHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093167429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824745363433241270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a875a09ed665e4db75977c8c3f6a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageable: {fileID: 3056687415102944741}
+  statSheet: {fileID: 3727554565048599726}
+  _isActivated: 0
+  leaverAnimator: {fileID: 7408604297698922472}
+  directionEnum: 0
 --- !u!1 &6291158368713928527
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +62,10 @@ GameObject:
   - component: {fileID: 5358342987753863069}
   - component: {fileID: 409540497475810189}
   - component: {fileID: 1015957533691728767}
-  m_Layer: 0
+  - component: {fileID: 608004772075743250}
+  - component: {fileID: 3727554565048599726}
+  - component: {fileID: 3056687415102944741}
+  m_Layer: 16
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,11 +145,99 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6291158368713928527}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &608004772075743250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291158368713928527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369a882e921f3a64aa60affcf74216f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDealer: {fileID: 0}
+  damageable: {fileID: 3056687415102944741}
+  effectable: {fileID: 0}
+  effector: {fileID: 0}
+  statSheet: {fileID: 3727554565048599726}
+  boosts: []
+  middleOfBody: {fileID: 8163762238889991492}
+--- !u!114 &3727554565048599726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291158368713928527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13ee59c1dfce984f88e7d6f3f7f4868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMaxHp: 5
+  invulnerabilityDuration: 0
+  decayingHealth:
+    onDecayingHealthReduce:
+      m_PersistentCalls:
+        m_Calls: []
+    onDecayingHealthGain:
+      m_PersistentCalls:
+        m_Calls: []
+  baseSpeed: 0
+  OnOverrideSpeed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnResetSpeed:
+    m_PersistentCalls:
+      m_Calls: []
+  currentSpeed: 0
+--- !u!114 &3056687415102944741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291158368713928527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36496159610ac984bb90604219ffc314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  maxHp: 0
+  invulnerabilityDuration: 0
+  targetType: 2
+  OnGetHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTotalDamageCalcRecieve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainMaxHP:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDmgGFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealGFX:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7268225951811269172
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8163762238889991492}
   - component: {fileID: 7408604297698922472}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
