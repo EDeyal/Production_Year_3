@@ -2,15 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leaver : MonoBehaviour
+public class Leaver : DamageableObject
 {
-   [SerializeField] bool isOpen = false;
-   [SerializeField] Animation leaverAnimation;
+    [SerializeField] bool _isActivated = false;
+    public bool IsActivated => _isActivated;
+    [SerializeField] Animator leaverAnimator;
+    [SerializeField] public direction directionEnum;
 
-
-    public void OpenLeaver()
+    public override void Awake()
     {
-        //if interacted or hit
-        //Play Animation
+        base.Awake();
+        Damageable.OnDeath.AddListener(ActivateLeaver);
+    }
+    private void OnDestroy()
+    {
+        Damageable.OnDeath.RemoveListener(ActivateLeaver);
+    }
+    public void ActivateLeaver()
+    {
+
+        Debug.Log("Leaver Activated");
+        switch (directionEnum)
+        {
+            case direction.left:
+                leaverAnimator.SetTrigger("MoveLeft");
+                break;
+            case direction.right:
+                leaverAnimator.SetTrigger("MoveRight");
+                break;
+        }
+    }
+    public enum direction
+    {
+        left,
+        right
     }
 }

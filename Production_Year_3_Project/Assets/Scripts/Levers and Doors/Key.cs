@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    [SerializeField] bool isCollected;
+    [SerializeField] bool _isCollected;
+    public bool IsCollected => _isCollected;
     private void OnTriggerEnter(Collider other)
     {
-        //identfy player using tag?
-        //play collect key method
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CollectKey();
+        }
     }
     public void CollectKey()
     {
-        //isCollected == true
-        //turn of key
+        _isCollected = true;
+        this.gameObject.SetActive(false);
+        GameManager.Instance.SaveManager.RoomsManager.AddCollectedKey(this);
     }
 }
