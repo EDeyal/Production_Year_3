@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : BaseCharacter
@@ -22,6 +23,8 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
     [SerializeField] private PlayerSoundPlayer soundPlayer;
+
+    private List<BaseEnemy> killedEnemies = new List<BaseEnemy>();
     private bool attackState;
     public PlayerStatSheet PlayerStatSheet => StatSheet as PlayerStatSheet;
     public CCController PlayerController { get => playerController; }
@@ -72,6 +75,7 @@ public class PlayerManager : BaseCharacter
         playerDash.OnDash.AddListener(EnableDashParticle);
         playerDash.OnDashEnd.AddListener(DisableDashParticle);
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
+        DamageDealer.OnKill.AddListener(EnemyFirstKill);
         /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
          StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
@@ -260,5 +264,20 @@ public class PlayerManager : BaseCharacter
     public void KillPlayerTest()
     {
         Damageable.TakeDamage(testAttack);
+    }
+
+    private void EnemyFirstKill(Damageable target, DamageHandler dmg)
+    {
+        foreach (var item in killedEnemies)
+        {
+            if (item.GetType() == target.Owner.GetType())
+            {
+                return;
+            }
+        }
+
+        killedEnemies.Add(target.Owner as BaseEnemy);
+        GameManager.Instance.UiManager.AbilityVideoPlayer.TogglePopup(true);
+        GameManager.Instance.UiManager.AbilityVideoPlayer.SetUpVideoPlayer(target.Owner as BaseEnemy);
     }
 }
