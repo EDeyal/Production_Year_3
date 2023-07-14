@@ -10,5 +10,6 @@ public class AttackPowerUp : PowerUp
     {
         base.OnPickedUp();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.IncreaseAttackBoost(attackPowerIncrease);
+        GameManager.Instance.UiManager.ProgressionPopUp.CollectNewProgression(ProgressionType.Damage);
     }
 }
