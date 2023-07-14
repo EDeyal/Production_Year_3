@@ -73,7 +73,7 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
     {
         if (activeConditions == Conditions.killAllEnemies)
         {
-
+            _enemiesToKill = goalEnemies;
         }
     }
 
