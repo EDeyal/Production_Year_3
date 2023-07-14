@@ -1,29 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class Door : MonoBehaviour ,ICheckValidation
+public class Door : MonoBehaviour, ICheckValidation
 {
-    [SerializeField] bool isOpen = false;
+    [SerializeField] bool CanOpen = false;
     [SerializeField] Animator doorAnimator;
+    [SerializeField] public direction directionEnum;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (CanOpen == true && other.gameObject.CompareTag("Player"))
+        {
+            AnimateDoor();
+        }
+    }
     public void AnimateDoor()
     {
-        doorAnimator.SetTrigger("OpenUp");
-        //if a leaver was activated
-        //play DoorAnimation
+        switch (directionEnum)
+        {
+            case direction.up:
+                doorAnimator.SetTrigger("OpenUp");
+                break;
+            case direction.down:
+                doorAnimator.SetTrigger("OpenDown");
+                break;
+            default:
+                break;
+        }
     }
-
-    public void CheckValidation()
-    {
-        //CheckAnimator
-    }
-
     public void OpenDoor()
     {
-        //if a door was interacted with and key is collected
-        //play animate door method
+        AnimateDoor();
 
     }
-    //enum direction(up,down) 
+    public void CheckValidation()
+    {
+        if (doorAnimator == null)
+            throw new System.Exception($"Door  {gameObject.name} Has no Door Animator");
+
+    }
+    public enum direction
+    {
+        up,
+        down
+    }
 }

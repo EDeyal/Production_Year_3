@@ -6,7 +6,8 @@ public class Leaver : DamageableObject
 {
     [SerializeField] bool _isActivated = false;
     public bool IsActivated => _isActivated;
-    [SerializeField] Animation leaverAnimation;
+    [SerializeField] Animator leaverAnimator;
+    [SerializeField] public direction directionEnum;
 
     public override void Awake()
     {
@@ -20,6 +21,19 @@ public class Leaver : DamageableObject
     public void ActivateLeaver()
     {
         //if interacted or hit
-        //Play Animation
+        switch (directionEnum)
+        {
+            case direction.left:
+                leaverAnimator.SetTrigger("MoveLeft");
+                break;
+            case direction.right:
+                leaverAnimator.SetTrigger("MoveRight");
+                break;
+        }
+    }
+    public enum direction
+    {
+        left,
+        right
     }
 }

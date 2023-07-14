@@ -76,10 +76,10 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
     {
         if (_keysToGet.Count == 0)
             throw new System.Exception($"RoomGoal  {gameObject.name} Has no Keys");
-        
-        if (_LeaversToActive.Count == 0)     
+
+        if (_LeaversToActive.Count == 0)
             throw new System.Exception($"RoomGoal {gameObject.name} Has no Leavers");
-        
+
         if (RoomsDoor == null)
             throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
     }
