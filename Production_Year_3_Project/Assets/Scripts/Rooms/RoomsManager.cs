@@ -7,7 +7,7 @@ public class RoomsManager : MonoBehaviour
     [ReadOnly] Dictionary<string, RoomHandler> _roomsDictionary;
     [SerializeField] RoomHandler _currentRoom;
     [ReadOnly, SerializeField] Transform _currentCheckpoint;
-    [SerializeField] List<Key> collectedKeys;
+    [SerializeField] public List<Key> collectedKeys;
 
     public RoomHandler CurrentRoom
     {
@@ -56,6 +56,6 @@ public class RoomsManager : MonoBehaviour
     }
     public void AddCollectedKey(Key key)
     {
-        //add colleceted key to list
+        collectedKeys.Add(key);
     }
 }
