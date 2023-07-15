@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, ICheckValidation
 {
-    [SerializeField] bool CanOpen = false;
+    [SerializeField] public bool CanOpen = false;
     [SerializeField] Animator doorAnimator;
     [SerializeField] public direction directionEnum;
 
