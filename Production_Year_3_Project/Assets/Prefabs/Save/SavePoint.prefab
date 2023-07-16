@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4260798270004011768}
   - component: {fileID: 4260798270004011769}
   - component: {fileID: 4260798270004011775}
+  - component: {fileID: 9025403540754130987}
   m_Layer: 15
   m_Name: SavePoint
   m_TagString: SavePoint
@@ -150,6 +151,27 @@ MonoBehaviour:
   _savePointRoom: {fileID: 0}
   _spawnPointTransform: {fileID: 4260798270319571490}
   _saveParticles: {fileID: 2641258214969862949}
+  _savePointAnimator: {fileID: 9025403540754130987}
+--- !u!95 &9025403540754130987
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260798270004011770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 050f604cbbe80764bb2d1e00af316a83, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1698ab8c94fa4474ab11bf0db2671874, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4260798270319571491
 GameObject:
   m_ObjectHideFlags: 0

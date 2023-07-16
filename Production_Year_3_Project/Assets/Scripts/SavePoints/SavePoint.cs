@@ -1,7 +1,8 @@
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
-public class SavePoint : MonoBehaviour
+public class SavePoint : MonoBehaviour,ICheckValidation
 {
     [ReadOnly] public int ID;
     bool _canSave;
@@ -12,6 +13,8 @@ public class SavePoint : MonoBehaviour
     [SerializeField] public Transform _spawnPointTransform;
     public Transform SpawnPointTransform => _spawnPointTransform;
     [SerializeField] ParticleSystem _saveParticles;
+    [SerializeField] Animator _savePointAnimator;
+
     private void Start()
     {
         RegisterToSavePointHandler();
@@ -20,7 +23,7 @@ public class SavePoint : MonoBehaviour
     {
         GameManager.Instance.SaveManager.SavePointHandler.RegisterToSavePointHandler(this);
     }
-    public void PlayParticles()
+    private void PlayParticles()
     {
         if (_saveParticles == null)
         {
@@ -29,6 +32,15 @@ public class SavePoint : MonoBehaviour
         }
         //_saveParticles.Clear();
         _saveParticles.Play();
+    }
+    public void ActivateSavePoint()
+    {
+        _savePointAnimator.SetBool("IsActive",true);
+        PlayParticles();
+    }
+    public void DeactivateSavePoint()
+    {
+        _savePointAnimator.SetBool("IsActive",false);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -48,5 +60,13 @@ public class SavePoint : MonoBehaviour
     private void OnDisable()
     {
         ID = 0;
+    }
+
+    public void CheckValidation()
+    {
+        if (_savePointAnimator == null)
+        {
+            throw new System.Exception($"SavePoint {gameObject.name} has no animator controller");
+        }
     }
 }
