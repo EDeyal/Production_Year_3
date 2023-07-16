@@ -134,7 +134,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.91, z: 0}
 --- !u!114 &4260798270004011775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +152,57 @@ MonoBehaviour:
   _spawnPointTransform: {fileID: 4260798270319571490}
   _saveParticles: {fileID: 2641258214969862949}
   _savePointAnimator: {fileID: 9025403540754130987}
+  _savePointMatObject: {fileID: 3094279905376101784}
+  _checkPointColor: {r: 0, g: 0.4509804, b: 0.3882353, a: 1}
+  _colorInEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _colorOutEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _transitionDuration: 3.2
 --- !u!95 &9025403540754130987
 Animator:
   serializedVersion: 4
@@ -307,6 +358,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 050f604cbbe80764bb2d1e00af316a83, type: 3}
+--- !u!1 &3094279905376101784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1726704312232410931, guid: 050f604cbbe80764bb2d1e00af316a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 4397601494127155883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4219259594336140608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 050f604cbbe80764bb2d1e00af316a83,
@@ -355,7 +412,7 @@ PrefabInstance:
     - target: {fileID: 7616156809750335029, guid: f747e282b1a7e8f4589872af7f684715,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 7616156809750335029, guid: f747e282b1a7e8f4589872af7f684715,
         type: 3}

@@ -55,8 +55,9 @@ public class SavePointHandler : MonoBehaviour
             _currentSavePointID = savePoint.ID;
             if (withVisuals)
             {
-                savePoint.ActivateSavePoint();
+                savePoint.PlayParticles();
             }
+            savePoint.ActivateSavePoint();
             var damageable = GameManager.Instance.PlayerManager.Damageable;
             damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp });
             Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
