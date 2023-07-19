@@ -145,6 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2078793104616498319}
   - component: {fileID: 8052587780649960792}
+  - component: {fileID: 2392457085996742241}
   m_Layer: 5
   m_Name: AbilityVideoPlayer
   m_TagString: Untagged
@@ -183,6 +184,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2687268633967237236}
   m_CullTransparentMesh: 1
+--- !u!114 &2392457085996742241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687268633967237236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989771d9f9bf07e489e667a90f9f329b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1958929030431744127}
+  videoPlayer: {fileID: 490521767810418278}
+  thamulClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
+  qovaxClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
+  cemuClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
 --- !u!1 &5839909865919795325
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +323,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6749295393746476824}
+      - m_Target: {fileID: 2392457085996742241}
         m_TargetAssemblyTypeName: Popup, Assembly-CSharp
         m_MethodName: TogglePopup
         m_Mode: 6
@@ -317,7 +335,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6749295393746476824}
+      - m_Target: {fileID: 2392457085996742241}
         m_TargetAssemblyTypeName: Popup, Assembly-CSharp
         m_MethodName: UnlockPlayer
         m_Mode: 1
@@ -395,7 +413,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -475,7 +493,6 @@ GameObject:
   - component: {fileID: 3921140965792859006}
   - component: {fileID: 5624977665501990756}
   - component: {fileID: 490521767810418278}
-  - component: {fileID: 6749295393746476824}
   - component: {fileID: 5709103466814958637}
   m_Layer: 5
   m_Name: VideoPlayer
@@ -547,23 +564,6 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &6749295393746476824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6493940362125434186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 989771d9f9bf07e489e667a90f9f329b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1958929030431744127}
-  videoPlayer: {fileID: 490521767810418278}
-  thamulClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
-  qovaxClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
-  cemuClip: {fileID: 32900000, guid: dac97d26a35e5d246be3c63174f7cc41, type: 3}
 --- !u!114 &5709103466814958637
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -268,6 +268,10 @@ public class PlayerManager : BaseCharacter
 
     private void EnemyFirstKill(Damageable target, DamageHandler dmg)
     {
+        if (target.Owner is not BaseEnemy)
+        {
+            return;
+        }
         foreach (var item in killedEnemies)
         {
             if (item.GetType() == target.Owner.GetType())
