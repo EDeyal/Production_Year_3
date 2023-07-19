@@ -7388,6 +7388,7 @@ MonoBehaviour:
     - {fileID: 3406971829017305739}
     - {fileID: 3470094224218057126}
     - {fileID: 7601781881672532645}
+  roomGoals: []
 --- !u!1 &8202482499568960268
 GameObject:
   m_ObjectHideFlags: 0
@@ -17913,8 +17914,20 @@ PrefabInstance:
     - target: {fileID: 7616156809750335028, guid: f747e282b1a7e8f4589872af7f684715,
         type: 3}
       propertyPath: _instructionText
-      value: Right Mouse Button to use Ability
+      value: Use Charge to cross the spikes
       objectReference: {fileID: 0}
+    - target: {fileID: 7616156809750335028, guid: f747e282b1a7e8f4589872af7f684715,
+        type: 3}
+      propertyPath: _closePlayerDistance
+      value: 
+      objectReference: {fileID: 11400000, guid: 4989f55c2d83f2a4ea386f7cfcb307ce,
+        type: 2}
+    - target: {fileID: 7616156809750335028, guid: f747e282b1a7e8f4589872af7f684715,
+        type: 3}
+      propertyPath: _noticePlayerDistance
+      value: 
+      objectReference: {fileID: 11400000, guid: d615458e372927c4598b3599be37a3ea,
+        type: 2}
     - target: {fileID: 7616156809750335029, guid: f747e282b1a7e8f4589872af7f684715,
         type: 3}
       propertyPath: m_RootOrder
@@ -17974,6 +17987,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pop_Up_Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616156809750335035, guid: f747e282b1a7e8f4589872af7f684715,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f747e282b1a7e8f4589872af7f684715, type: 3}
