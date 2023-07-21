@@ -45,6 +45,8 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
 
                 }            
                 RoomsDoor.CanOpen = true;
+                RoomsDoor.TurnOffPopUp(RoomsDoor.DoesntHaveKey);
+                RoomsDoor.TurnOnPopUp(RoomsDoor.HaveKey);
                 isNotChecking = true;
 
                 break;
