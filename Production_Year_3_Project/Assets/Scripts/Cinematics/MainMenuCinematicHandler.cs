@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class MainMenuCinematicHandler : MonoBehaviour
+public class MainMenuCinematicHandler : MonoBehaviour, ICheckValidation
 {
     static bool _wasActivate = false;
     bool _isPlaying;
@@ -21,6 +21,10 @@ public class MainMenuCinematicHandler : MonoBehaviour
     private void OnDisable()
     {
         _cinematicVideoPlayer.loopPointReached -= EndCinematic;
+    }
+    private void Awake()
+    {
+        CheckValidation();
     }
     private void Start()
     {
@@ -79,5 +83,17 @@ public class MainMenuCinematicHandler : MonoBehaviour
         _wasActivate = true;
         _skipImage.gameObject.SetActive(false);
         GameManager.Instance.InputManager.SetCurserVisability(true);
+    }
+
+    public void CheckValidation()
+    {
+        if (_cinematicVideoPlayer == null)
+            throw new System.Exception("MainMenuCinematicHandler has no Video Player");
+        if(_cinematicGameObject == null)
+            throw new System.Exception("MainMenuCinematicHandler has no cinematic game object");
+        if(_skipImage == null)
+            throw new System.Exception("MainMenuCinematicHandler has no skip Image");
+        if(_skipOptionCanvasGroup == null)
+            throw new System.Exception("MainMenuCinematicHandler has no skip canvasGroup");
     }
 }
