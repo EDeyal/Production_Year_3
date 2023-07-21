@@ -22,7 +22,7 @@ public class MainMenuHandler : MonoBehaviour, ICheckValidation
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        SetCurserVisable(true);
+        //SetCurserVisable(true);
     }
     public void SetCurserVisable(bool isVisable)
     {
