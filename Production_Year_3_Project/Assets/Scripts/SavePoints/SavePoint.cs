@@ -58,6 +58,7 @@ public class SavePoint : MonoBehaviour, ICheckValidation
         if (!iconCreated)
         {
             GameManager.Instance.UiManager.Map.PlaceNewSavePointIcon(transform.position);
+            iconCreated = true;
         }
         //_savePointMaterial.EnableKeyword("_EMISSION");
         //DynamicGI.SetEmissive(_savePointMaterial, _checkPointColor * _emissionOn);

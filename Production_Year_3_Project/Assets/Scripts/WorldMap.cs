@@ -50,8 +50,8 @@ public class WorldMap : MonoBehaviour
 
     public void PlaceNewSavePointIcon(Vector3 worldPosition)
     {
-        RectTransform newIcon = Instantiate(savePointIcon, transform);
-        newIcon.anchoredPosition = minimapPoint_1.anchoredPosition + new Vector2((worldPosition.x - worldPoint_1.position.x) * minimapRatio, (worldPosition.y - worldPoint_1.position.y) * minimapRatio);
+        RectTransform newIcon = Instantiate(savePointIcon, transform.parent);
+        newIcon.anchoredPosition = playerMinimap.anchoredPosition;
     }
 
 
