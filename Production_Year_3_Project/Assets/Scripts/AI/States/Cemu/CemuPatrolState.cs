@@ -1,15 +1,25 @@
+using UnityEngine;
 public class CemuPatrolState : BaseCemuState
 {
-
     public override BaseState RunCurrentState()
     {
-        //Debug.Log("Cemu Patrol State");
-        if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))
+        if (_cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.max))
+|| _cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.min)))
         {
-            if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))
+            _cemu.Patrol();
+            return this;
+        }
+        if (_cemu.IsPlayerInBounds(_cemuStateHandler.PlayerManager.MiddleOfBody))
+         {
+
+            //Debug.Log("Cemu Patrol State");
+            if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))
             {
-                _cemu.StopMovement();
-                return _cemuStateHandler.CombatState;
+                if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))
+                {
+                    _cemu.StopMovement();
+                    return _cemuStateHandler.CombatState;
+                }
             }
         }
         _cemu.Patrol();

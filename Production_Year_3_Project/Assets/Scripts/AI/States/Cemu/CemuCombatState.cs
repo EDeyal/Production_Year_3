@@ -1,3 +1,4 @@
+using UnityEngine;
 public class CemuCombatState : BaseCemuState
 {
     public override BaseState RunCurrentState()
@@ -12,6 +13,8 @@ public class CemuCombatState : BaseCemuState
         if (_cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.max))
     || _cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.min)))
         {
+            Debug.Log("Cemu returning to Idle");
+
             return _cemuStateHandler.IdleState;
         }
         return _cemuStateHandler.ChaseState;

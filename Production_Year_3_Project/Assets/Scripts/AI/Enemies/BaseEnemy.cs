@@ -169,4 +169,13 @@ public abstract class BaseEnemy : BaseCharacter, ICheckValidation
             UpdateStateMachine(_stateHandler.KnockBackState);
         }
     }
+    public bool IsPlayerInBounds(Transform playerMiddleBody)
+    {
+        if (_boundHandler.Bound.min.x < playerMiddleBody.position.x && _boundHandler.Bound.max.x > playerMiddleBody.position.x
+            && _boundHandler.Bound.min.y < playerMiddleBody.position.y && _boundHandler.Bound.max.y > playerMiddleBody.position.y)
+        {
+            return true;
+        }
+        return false;
+    }
 }

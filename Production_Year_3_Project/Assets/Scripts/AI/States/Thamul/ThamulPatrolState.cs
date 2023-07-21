@@ -4,7 +4,7 @@ public class ThamulPatrolState : BaseThamulState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("ThamulPatrolState");
+        //Debug.Log("ThamulPatrolState");
         if (_thamul.NoticePlayerDistance.InitAction(new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))
         {
             if (_thamul.HasDirectLineToPlayer(_thamul.NoticePlayerDistance.Distance))

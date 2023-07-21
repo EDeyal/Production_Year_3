@@ -109,6 +109,7 @@ public class CCController : MonoBehaviour
         groundCheck.OnNotGrounded.AddListener(StartCoyoteTime);
         groundCheck.OnNotGrounded.AddListener(StopRunAnim);
         groundCheck.OnNotGrounded.AddListener(ResetLastInput);
+        groundCheck.OnNotGrounded.AddListener(ResetJumpHeldTimer);
 
         ceilingDetector.OnGrounded.AddListener(CeilingReset);
 
