@@ -3,7 +3,7 @@ public class CemuCombatState : BaseCemuState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("CemuCombatState");
+        //Debug.Log("CemuCombatState");
         //check if is in combat range
         if (!_cemu.ChasePlayerDistance.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))
         {

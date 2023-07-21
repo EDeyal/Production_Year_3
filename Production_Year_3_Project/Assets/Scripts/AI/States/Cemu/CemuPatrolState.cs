@@ -12,7 +12,7 @@ public class CemuPatrolState : BaseCemuState
         if (_cemu.IsPlayerInBounds(_cemuStateHandler.PlayerManager.MiddleOfBody))
          {
 
-            Debug.Log("Cemu Patrol State");
+            //Debug.Log("Cemu Patrol State");
             if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))
             {
                 if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))
