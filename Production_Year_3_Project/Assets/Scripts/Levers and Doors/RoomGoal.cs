@@ -32,8 +32,7 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                         return;
                     }
                 }
-                //if all enemies are killed
-                //Open Door Or animate door
+                RoomsDoor.OpenDoor();
                 isNotChecking = true;
                 break;
             case Conditions.Key:
@@ -57,8 +56,7 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                         return;
                     }
                 }
-                //if a Leaver was Activated
-                //Open Door Or animate door
+                RoomsDoor.OpenDoor();
                 isNotChecking = true;
                 break;
         }
