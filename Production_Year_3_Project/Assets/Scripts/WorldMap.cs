@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldMap : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class WorldMap : MonoBehaviour
     [SerializeField] private RectTransform minimapPoint_2;
     [SerializeField] private Transform worldPoint_1;
     [SerializeField] private Transform worldPoint_2;
+    [SerializeField] private RectTransform savePointIcon;
 
     [Header("Player")]
     [SerializeField] private RectTransform playerMinimap;
@@ -34,16 +36,22 @@ public class WorldMap : MonoBehaviour
     }
     private void Start()
     {
+        GameManager.Instance.UiManager.CacheWorldMap(this);
         playerWorld = GameManager.Instance.PlayerManager.transform;
         GameManager.Instance.InputManager.OnToggleMap.AddListener(ToggleMap);
         ToggleMap();
-
     }
 
 
     private void Update()
     {
         playerMinimap.anchoredPosition = minimapPoint_1.anchoredPosition + new Vector2((playerWorld.position.x - worldPoint_1.position.x) * minimapRatio, (playerWorld.position.y - worldPoint_1.position.y) * minimapRatio);
+    }
+
+    public void PlaceNewSavePointIcon(Vector3 worldPosition)
+    {
+        RectTransform newIcon = Instantiate(savePointIcon, transform.parent);
+        newIcon.anchoredPosition = playerMinimap.anchoredPosition;
     }
 
 

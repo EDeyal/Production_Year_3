@@ -34,5 +34,9 @@ public class Popup : MonoBehaviour
         }
         gameObject.SetActive(state);
     }
+    public void UnlockPlayer()
+    {
+        GameManager.Instance.PlayerManager.UnLockPlayer();
+    }
 
 }

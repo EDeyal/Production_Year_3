@@ -17,6 +17,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float frequency;
     [SerializeField] private float shakeDuration;
     [SerializeField] private Camera mainCam;
+    [SerializeField, Range(0.1f, 2)] private float movementMod = 1;
 
     Coroutine activeShakeRoutine;
 
@@ -62,7 +63,7 @@ public class CameraMovement : MonoBehaviour
             {
                 MoveCameraYUpwards();
             }
-            else if (holdingRight)
+            if (holdingRight)
             {
                 MoveCameraXForwards();
             }
@@ -96,22 +97,22 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveCameraYDownWards()
     {
-        moveCamComp.m_ScreenY -= Time.deltaTime;
+        moveCamComp.m_ScreenY -= Time.deltaTime * movementMod;
         moveCamComp.m_ScreenY = Mathf.Clamp(moveCamComp.m_ScreenY, minVerticalDistacne, maxVerticalDistance);
     }
     private void MoveCameraYUpwards()
     {
-        moveCamComp.m_ScreenY += Time.deltaTime;
+        moveCamComp.m_ScreenY += Time.deltaTime * movementMod;
         moveCamComp.m_ScreenY = Mathf.Clamp(moveCamComp.m_ScreenY, minVerticalDistacne, maxVerticalDistance);
     }
     private void MoveCameraXBackwards()
     {
-        moveCamComp.m_ScreenX -= Time.deltaTime;
+        moveCamComp.m_ScreenX -= Time.deltaTime * movementMod;
         moveCamComp.m_ScreenX = Mathf.Clamp(moveCamComp.m_ScreenX, minHorizontalDistance, maxHorizontalDistance);
     }
     private void MoveCameraXForwards()
     {
-        moveCamComp.m_ScreenX += Time.deltaTime;
+        moveCamComp.m_ScreenX += Time.deltaTime * movementMod;
         moveCamComp.m_ScreenX = Mathf.Clamp(moveCamComp.m_ScreenX, minHorizontalDistance, maxHorizontalDistance);
     }
     private void ReleaseHoldingCam()

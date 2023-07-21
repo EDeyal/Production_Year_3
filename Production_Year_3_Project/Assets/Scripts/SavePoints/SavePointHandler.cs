@@ -6,6 +6,7 @@ public class SavePointHandler : MonoBehaviour
 {
     [SerializeField] int _currentSavePointID;
     [SerializeField] SavePoint _startingSavePoint;
+
     public int CurrentSavePointID=>_currentSavePointID;
 
     List<IRespawnable> _respawnAssets;
@@ -44,11 +45,19 @@ public class SavePointHandler : MonoBehaviour
         {
             Debug.Log("Save point handler is setting player point");
             Debug.Log("Amount of save points is: " + _savePoints.Count);
+            if (savePoint.ID != _currentSavePointID)
+            {
+                foreach (var savePoints in _savePoints)
+                {
+                    savePoints.DeactivateSavePoint();
+                }
+            }
             _currentSavePointID = savePoint.ID;
             if (withVisuals)
             {
                 savePoint.PlayParticles();
             }
+            savePoint.ActivateSavePoint();
             var damageable = GameManager.Instance.PlayerManager.Damageable;
             damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp });
             Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");

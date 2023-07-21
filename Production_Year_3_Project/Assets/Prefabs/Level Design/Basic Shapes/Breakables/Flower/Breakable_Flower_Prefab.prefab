@@ -162,6 +162,7 @@ MonoBehaviour:
   statSheet: {fileID: 7981675140720294119}
   boosts: []
   middleOfBody: {fileID: 1791282678106064636}
+  spawnHitVFX: 0
 --- !u!114 &7981675140720294119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,7 @@ MonoBehaviour:
   OnResetSpeed:
     m_PersistentCalls:
       m_Calls: []
+  currentSpeed: 0
 --- !u!114 &9092049614913061514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +221,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGainMaxHP:
     m_PersistentCalls:
       m_Calls: []
   OnTakeDmgGFX:
