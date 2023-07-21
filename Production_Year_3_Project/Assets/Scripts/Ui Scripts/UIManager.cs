@@ -9,9 +9,14 @@ public class UIManager : MonoBehaviour
     private PauseMenu _pauseMenu;
     private InstructionPopUp _instructionPopUp;
     private ProgressionPopUp _progressionPopUp;
+    private WorldMap map;
     public void CachPauseMenu(PauseMenu pauseMenu)
     {
         _pauseMenu = pauseMenu;
+    }
+    public void CacheWorldMap(WorldMap worldMap)
+    {
+        map = worldMap;
     }
     public void CachePlayerHud(PlayerHud givenHud)
     {
@@ -69,4 +74,5 @@ public class UIManager : MonoBehaviour
 
     public ProgressionPopUp ProgressionPopUp => _progressionPopUp;
 
+    public WorldMap Map { get => map; }
 }

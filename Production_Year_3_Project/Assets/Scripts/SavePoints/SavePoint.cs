@@ -1,10 +1,8 @@
-using Sirenix.OdinInspector;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
-public class SavePoint : MonoBehaviour,ICheckValidation
+public class SavePoint : MonoBehaviour, ICheckValidation
 {
     private static float _emissionOn = 1;
     private static float _emissionOff = 0;
@@ -24,10 +22,11 @@ public class SavePoint : MonoBehaviour,ICheckValidation
     [SerializeField] AnimationCurve _colorInEase;
     [SerializeField] AnimationCurve _colorOutEase;
     [SerializeField] float _transitionDuration = 3.5f;
+    private bool iconCreated;
 
     private void Awake()
     {
-        _savePointRenderer =  _savePointMatObject.GetComponent<Renderer>();
+        _savePointRenderer = _savePointMatObject.GetComponent<Renderer>();
         if (_savePointRenderer == null)
         {
             Debug.LogError($"Save Point {gameObject.name} could not get renderer");
@@ -54,15 +53,19 @@ public class SavePoint : MonoBehaviour,ICheckValidation
     }
     public void ActivateSavePoint()
     {
-        _savePointAnimator.SetBool("IsActive",true);
-            _savePointRenderer.material.DOColor(_checkPointColor * _emissionOn, "_EmissionColor",_transitionDuration).SetEase(_colorInEase);
+        _savePointAnimator.SetBool("IsActive", true);
+        _savePointRenderer.material.DOColor(_checkPointColor * _emissionOn, "_EmissionColor", _transitionDuration).SetEase(_colorInEase);
+        if (!iconCreated)
+        {
+            GameManager.Instance.UiManager.Map.PlaceNewSavePointIcon(transform.position);
+        }
         //_savePointMaterial.EnableKeyword("_EMISSION");
         //DynamicGI.SetEmissive(_savePointMaterial, _checkPointColor * _emissionOn);
     }
     public void DeactivateSavePoint()
     {
-        _savePointAnimator.SetBool("IsActive",false);
-            _savePointRenderer.material.DOColor(_checkPointColor * _emissionOff, "_EmissionColor", _transitionDuration).SetEase(_colorOutEase);
+        _savePointAnimator.SetBool("IsActive", false);
+        _savePointRenderer.material.DOColor(_checkPointColor * _emissionOff, "_EmissionColor", _transitionDuration).SetEase(_colorOutEase);
         // _savePointMaterial.EnableKeyword("_EMISSION");
     }
     private void OnTriggerEnter(Collider other)
@@ -91,7 +94,7 @@ public class SavePoint : MonoBehaviour,ICheckValidation
         {
             throw new System.Exception($"SavePoint {gameObject.name} has no animator controller");
         }
-        if (_savePointMatObject ==null)
+        if (_savePointMatObject == null)
         {
             throw new System.Exception($"SavePoint {gameObject.name} has no mat reference");
         }
