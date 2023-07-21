@@ -13,7 +13,7 @@ public class Door : MonoBehaviour, ICheckValidation
 
     private void OnTriggerStay(Collider other)
     {              
-        if (CanOpen == true && Input.GetKeyDown(KeyCode.Z))
+        if (CanOpen == true && Input.GetKeyDown(KeyCode.C))
         {
             AnimateDoor();
             TurnOffPopUp(HaveKey);
