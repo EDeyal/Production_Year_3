@@ -7,5 +7,8 @@ public class MaxHpPowerUp : PowerUp
     {
         base.OnPickedUp();
         GameManager.Instance.PlayerManager.Damageable.AddMaxHP(maxHpAmount);
+        GameManager.Instance.UiManager.ProgressionPopUp.CollectNewProgression(ProgressionType.Health);
+        GameManager.Instance.PlayerManager.PlayProgressionParticle(_progressionColor);
+
     }
 }

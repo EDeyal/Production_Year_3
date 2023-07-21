@@ -7,6 +7,7 @@ public class RoomsManager : MonoBehaviour
     [ReadOnly] Dictionary<string, RoomHandler> _roomsDictionary;
     [SerializeField] RoomHandler _currentRoom;
     [ReadOnly, SerializeField] Transform _currentCheckpoint;
+    [SerializeField] public List<Key> collectedKeys;
 
     public RoomHandler CurrentRoom
     {
@@ -52,5 +53,9 @@ public class RoomsManager : MonoBehaviour
         {
             Debug.LogWarning($"RoomsManager tried to get Room:{_currentRoom.RoomName}  from room dictionary with no success can not reset room");
         }
+    }
+    public void AddCollectedKey(Key key)
+    {
+        collectedKeys.Add(key);
     }
 }

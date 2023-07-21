@@ -6,6 +6,7 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
     int currentHallway = -1;
     List<HallwayHandler> _hallways;
     [SerializeField] SpawningHandler _spawnHandler;
+    [SerializeField] List<RoomGoal> roomGoals;
     public string RoomName => gameObject.name;
     public List<HallwayHandler> Hallways => _hallways;
 
@@ -13,6 +14,7 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
     {
         _hallways = new List<HallwayHandler>();
         CheckValidation();
+        InitRoomGoal();
     }
     private void Start()
     {
@@ -36,6 +38,18 @@ public class RoomHandler : MonoBehaviour, ICheckValidation
         if (_spawnHandler.Enemies.Count == 0)//not all rooms have enemies
         {
             Debug.LogWarning($"RoomHandler {RoomName} has no enemies");
+        }
+    }
+    void InitRoomGoal()
+    {
+        if (roomGoals == null)
+        {
+            return;
+        }
+        var enemies = _spawnHandler.Enemies;
+        foreach (var goal in roomGoals)
+        {
+            goal.SetRoomEnemies(enemies);  
         }
     }
 }

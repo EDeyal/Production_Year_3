@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2234237226566577408}
   - component: {fileID: 7041791146108369235}
   - component: {fileID: 5910949949346807801}
-  - component: {fileID: 6281548024191600892}
   m_Layer: 16
   m_Name: BreakingCollider
   m_TagString: DamageableTerrain
@@ -77,6 +76,7 @@ MonoBehaviour:
   OnResetSpeed:
     m_PersistentCalls:
       m_Calls: []
+  currentSpeed: 0
 --- !u!114 &7041791146108369235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,34 +136,6 @@ MonoBehaviour:
   statSheet: {fileID: 2234237226566577408}
   boosts: []
   middleOfBody: {fileID: 6655488496492012592}
---- !u!114 &6281548024191600892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2490406801558651129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e13ee59c1dfce984f88e7d6f3f7f4868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaxHp: 5
-  invulnerabilityDuration: 0
-  decayingHealth:
-    onDecayingHealthReduce:
-      m_PersistentCalls:
-        m_Calls: []
-    onDecayingHealthGain:
-      m_PersistentCalls:
-        m_Calls: []
-  baseSpeed: 0
-  OnOverrideSpeed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnResetSpeed:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3128232792650733607
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +266,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3787309093304623794}
     m_Modifications:
+    - target: {fileID: 1184326315589812378, guid: 4ace9f3c895542443aed3670abaedf44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4858409018375976594, guid: 4ace9f3c895542443aed3670abaedf44,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779700906682752357, guid: 4ace9f3c895542443aed3670abaedf44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6122293791829424992, guid: 4ace9f3c895542443aed3670abaedf44,
         type: 3}
       propertyPath: m_Name
@@ -308,6 +295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898689345430102490, guid: 4ace9f3c895542443aed3670abaedf44,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6898689345430102490, guid: 4ace9f3c895542443aed3670abaedf44,
         type: 3}
@@ -332,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 6898689345430102490, guid: 4ace9f3c895542443aed3670abaedf44,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6898689345430102490, guid: 4ace9f3c895542443aed3670abaedf44,
         type: 3}
@@ -368,6 +360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206089310868477930, guid: 4ace9f3c895542443aed3670abaedf44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ace9f3c895542443aed3670abaedf44, type: 3}

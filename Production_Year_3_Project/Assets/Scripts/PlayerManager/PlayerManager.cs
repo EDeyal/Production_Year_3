@@ -19,6 +19,7 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private ParticleSystem dashParticle;
     [SerializeField] private EnemyPorximityPointer enemyProximityPointer;
     [SerializeField] private ParticleSystem jumpParticle;
+    [SerializeField] private ParticleSystem progressionParticle;
     [SerializeField] private Material outlineMat;
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
@@ -121,6 +122,12 @@ public class PlayerManager : BaseCharacter
         jumpParticle.gameObject.SetActive(true);
         jumpParticle.Clear();
         jumpParticle.Play();
+    }
+    public void PlayProgressionParticle(Color particleColor)
+    {
+        progressionParticle.Clear();
+        progressionParticle.startColor = particleColor;
+        progressionParticle.Play();
     }
     private void EnableDeathPopup()
     {

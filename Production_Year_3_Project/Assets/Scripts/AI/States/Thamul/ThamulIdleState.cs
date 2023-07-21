@@ -17,6 +17,10 @@ public class ThamulIdleState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
+        if (!_thamul)
+        {
+            GetThamulRef();
+        }
         _thamul.AnimatorHandler.Animator.SetFloat(
 AnimatorHelper.GetParameter(AnimatorParameterType.Speed), ZERO);
     }

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     private AbilityVideoPlayer abilityVideoPlayer;
     private PauseMenu _pauseMenu;
     private InstructionPopUp _instructionPopUp;
+    private ProgressionPopUp _progressionPopUp;
     public void CachPauseMenu(PauseMenu pauseMenu)
     {
         _pauseMenu = pauseMenu;
@@ -32,6 +33,10 @@ public class UIManager : MonoBehaviour
     public void CacheInstructionPopUP(InstructionPopUp givenInstructionPopUp)
     {
         _instructionPopUp = givenInstructionPopUp;
+    }
+    public void CacheProgressionPopUp(ProgressionPopUp givenProgressionPopUp)
+    {
+        _progressionPopUp = givenProgressionPopUp;
     }
     public void EscapePressed(bool isPressed)
     {
@@ -59,5 +64,9 @@ public class UIManager : MonoBehaviour
     public DashPopup DashPopup { get => dashPopup; }
     public InstructionPopUp InstructionPopUp => _instructionPopUp;
 
+
     public AbilityVideoPlayer AbilityVideoPlayer { get => abilityVideoPlayer; }
+
+    public ProgressionPopUp ProgressionPopUp => _progressionPopUp;
+
 }
