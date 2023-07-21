@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, ICheckValidation
 {
+    [SerializeField] public PopUpTrigger DoesntHaveKey;
+    [SerializeField] public PopUpTrigger HaveKey;
     [SerializeField] public bool CanOpen = false;
     [SerializeField] Animator doorAnimator;
     [SerializeField] public direction directionEnum;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (CanOpen == true && other.gameObject.CompareTag("Player"))
+    private void OnTriggerStay(Collider other)
+    {              
+        if (CanOpen == true && Input.GetKeyDown(KeyCode.Z))
         {
             AnimateDoor();
+            TurnOffPopUp(HaveKey);
         }
     }
     public void AnimateDoor()
@@ -29,6 +32,14 @@ public class Door : MonoBehaviour, ICheckValidation
             default:
                 break;
         }
+    }
+    public void TurnOffPopUp(PopUpTrigger popUpTrigger)
+    {
+        popUpTrigger.gameObject.SetActive(false);
+    }
+    public void TurnOnPopUp(PopUpTrigger popUpTrigger)
+    {
+        popUpTrigger.gameObject.SetActive(true);
     }
     public void OpenDoor()
     {

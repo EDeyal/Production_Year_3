@@ -26,6 +26,8 @@ public class BaseCharacter : MonoBehaviour
     public List<Boost> Boosts { get => boosts; }
     public Transform MiddleOfBody => middleOfBody;
 
+    [SerializeField] private bool spawnHitVFX = true;
+
     public Boost GetBoostFromBoostType(BoostType givenType)
     {
         foreach (var item in boosts)
@@ -48,7 +50,10 @@ public class BaseCharacter : MonoBehaviour
         Effectable?.CacheOwner(this);
         Damageable.CacheOwner(this);
         StatSheet.DecayingHealth.CacheMax(StatSheet.MaxHp);
-        damageable.OnTotalDamageCalcRecieve.AddListener(PlaceHitParticle);
+        if (spawnHitVFX)
+        {
+            damageable.OnTotalDamageCalcRecieve.AddListener(PlaceHitParticle);
+        }
         damageable.OnHealGFX.AddListener(PlaceHealParticle);
     }
 
