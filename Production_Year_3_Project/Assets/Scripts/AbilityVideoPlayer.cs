@@ -7,12 +7,14 @@ using UnityEngine.Video;
 
 public class AbilityVideoPlayer : Popup
 {
-
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private VideoClip thamulClip;
     [SerializeField] private VideoClip qovaxClip;
     [SerializeField] private VideoClip cemuClip;
+    [SerializeField] string thamulAbilityText = "Thamul Ability";
+    [SerializeField] string qovaxAbilityText = "Qovax Ability";
+    [SerializeField] string cemuAbilityText = "Cemu Ability";
 
     protected override void SubscribeToUiManager()
     {
@@ -39,14 +41,17 @@ public class AbilityVideoPlayer : Popup
     {
         if (givenEnemy is ThamulEnemy)
         {
+            text.text = thamulAbilityText;
             return thamulClip;
         }
         else if(givenEnemy is QovaxEnemy)
         {
+            text.text = qovaxAbilityText;
             return qovaxClip;
         }
         else if (givenEnemy is CemuEnemy)
         {
+            text.text = cemuAbilityText;
             return cemuClip;
         }
         return null;
