@@ -26,9 +26,11 @@ public class Leaver : DamageableObject
         {
             case direction.left:
                 leaverAnimator.SetTrigger("MoveLeft");
+                _isActivated = true;
                 break;
             case direction.right:
                 leaverAnimator.SetTrigger("MoveRight");
+                _isActivated = true;
                 break;
         }
     }
