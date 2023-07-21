@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerHud playerHud;
     private DashPopup dashPopup;
     private DeathPopup deathPopup;
+    private AbilityVideoPlayer abilityVideoPlayer;
     private PauseMenu _pauseMenu;
     private InstructionPopUp _instructionPopUp;
     private ProgressionPopUp _progressionPopUp;
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
     public void CacheDeathPopup(DeathPopup givenDeathPopup)
     {
         deathPopup = givenDeathPopup;
+    }
+    public void CacheAbilityVideoPlayer(AbilityVideoPlayer givenAbilityVideoPlayer)
+    {
+        abilityVideoPlayer = givenAbilityVideoPlayer;
     }
     public void CacheInstructionPopUP(InstructionPopUp givenInstructionPopUp)
     {
@@ -58,5 +63,10 @@ public class UIManager : MonoBehaviour
     public DeathPopup DeathPopup { get => deathPopup; }
     public DashPopup DashPopup { get => dashPopup; }
     public InstructionPopUp InstructionPopUp => _instructionPopUp;
+
+
+    public AbilityVideoPlayer AbilityVideoPlayer { get => abilityVideoPlayer; }
+
     public ProgressionPopUp ProgressionPopUp => _progressionPopUp;
+
 }
