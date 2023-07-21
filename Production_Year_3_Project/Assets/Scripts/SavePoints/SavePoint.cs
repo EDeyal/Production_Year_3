@@ -24,6 +24,7 @@ public class SavePoint : MonoBehaviour,ICheckValidation
     [SerializeField] AnimationCurve _colorInEase;
     [SerializeField] AnimationCurve _colorOutEase;
     [SerializeField] float _transitionDuration = 3.5f;
+
     private void Awake()
     {
         _savePointRenderer =  _savePointMatObject.GetComponent<Renderer>();
