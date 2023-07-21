@@ -6,7 +6,8 @@ public class CemuPatrolState : BaseCemuState
         if (_cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.max))
 || _cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.min)))
         {
-            return _cemuStateHandler.IdleState;
+            _cemu.Patrol();
+            return this;
         }
             Debug.Log("Cemu Patrol State");
             if (_cemu.NoticePlayerDistance.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemuStateHandler.PlayerManager.MiddleOfBody.position)))

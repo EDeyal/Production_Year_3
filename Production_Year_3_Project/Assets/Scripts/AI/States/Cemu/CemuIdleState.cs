@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 public class CemuIdleState : BaseCemuState
 {
@@ -10,7 +11,7 @@ public class CemuIdleState : BaseCemuState
             if (_cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.max))
 || _cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.min)))
             {
-                return this;
+                return _cemuStateHandler.PatrolState;
             }
             //check if player is in sight
             if (_cemu.HasDirectLineToPlayer(_cemu.NoticePlayerDistance.Distance))
@@ -23,14 +24,6 @@ public class CemuIdleState : BaseCemuState
     {
         base.EnterState();
         _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
-            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
-            _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
-    }
-    public override void ExitState()
-    {
-        base.ExitState();
-        _cemuStateHandler.RefEnemy.AnimatorHandler.Animator.SetFloat(
-            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),
-            _cemuStateHandler.RefEnemy.EnemyStatSheet.Speed);
+            AnimatorHelper.GetParameter(AnimatorParameterType.Speed),0);
     }
 }
