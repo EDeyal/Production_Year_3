@@ -12,11 +12,11 @@ public class Door : MonoBehaviour, ICheckValidation
     [SerializeField] public direction directionEnum;
 
     private void OnTriggerStay(Collider other)
-    {              
+    {
         if (CanOpen == true && Input.GetKeyDown(KeyCode.C))
         {
-            AnimateDoor();
             TurnOffPopUp(HaveKey);
+            AnimateDoor();
         }
     }
     public void AnimateDoor()
