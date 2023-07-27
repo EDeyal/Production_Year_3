@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Leaver : DamageableObject
 {
@@ -9,15 +10,24 @@ public class Leaver : DamageableObject
     [SerializeField] Animator leaverAnimator;
     [SerializeField] public direction directionEnum;
 
+    [SerializeField] private UnityEvent onLeverActivated;
     public override void Awake()
     {
         base.Awake();
         Damageable.OnDeath.AddListener(ActivateLeaver);
+        Damageable.OnDeath.AddListener(ActivateEvent);
     }
     private void OnDestroy()
     {
         Damageable.OnDeath.RemoveListener(ActivateLeaver);
+        Damageable.OnDeath.RemoveListener(ActivateEvent);
     }
+
+    public void ActivateEvent()
+    {
+        onLeverActivated?.Invoke();
+    }
+
     public void ActivateLeaver()
     {
 
