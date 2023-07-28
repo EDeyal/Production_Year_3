@@ -19,6 +19,8 @@ public class InstructionPopUp : MonoBehaviour,ICheckValidation
     }
     public void CloseInstructionText()
     {
+        if (_instructionGameObject == null)
+            return;
         _instructionGameObject.SetActive(false);
         _instructionText.text = "";
     }

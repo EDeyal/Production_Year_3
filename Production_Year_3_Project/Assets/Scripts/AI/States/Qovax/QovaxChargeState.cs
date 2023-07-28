@@ -18,6 +18,7 @@ public class QovaxChargeState : BaseQovaxState
     {
         base.EnterState();
         _qovax.AnimatorHandler.Animator.SetBool(AnimatorHelper.GetParameter(AnimatorParameterType.IsCharging), true);
+        GameManager.Instance.SoundManager.PlaySound("BeforeQovaxChargeTest");
     }
     public override void ExitState()
     {

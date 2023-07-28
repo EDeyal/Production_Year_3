@@ -14,5 +14,6 @@ public class CemuDeathState : BaseCemuState
         base.EnterState();
         _cemu.AnimatorHandler.Animator.SetTrigger(
     AnimatorHelper.GetParameter(AnimatorParameterType.IsDead));
+        GameManager.Instance.SoundManager.PlaySound("CemuDeathSoundTest");
     }
 }

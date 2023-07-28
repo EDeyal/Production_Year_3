@@ -72,6 +72,7 @@ public class CemuEnemy : GroundEnemy
             {
                 _isBoostActive = true;
                 _cemuAbility.Cast(this);
+                GameManager.Instance.SoundManager.PlaySound("CemuBoostSoundTest");
             }
             return true;
         }
