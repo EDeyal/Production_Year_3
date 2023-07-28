@@ -23,6 +23,7 @@ public class SavePoint : MonoBehaviour, ICheckValidation
     [SerializeField] AnimationCurve _colorOutEase;
     [SerializeField] float _transitionDuration = 3.5f;
     private bool iconCreated;
+    bool _isActivated = false;
 
     private void Awake()
     {
@@ -60,11 +61,17 @@ public class SavePoint : MonoBehaviour, ICheckValidation
             GameManager.Instance.UiManager.Map.PlaceNewSavePointIcon(transform.position);
             iconCreated = true;
         }
+        if (!_isActivated)
+        {
+            _isActivated = true;
+            GameManager.Instance.SoundManager.PlaySound("ActivateSavePointSoundTest");
+        }
         //_savePointMaterial.EnableKeyword("_EMISSION");
         //DynamicGI.SetEmissive(_savePointMaterial, _checkPointColor * _emissionOn);
     }
     public void DeactivateSavePoint()
     {
+        _isActivated = false;
         _savePointAnimator.SetBool("IsActive", false);
         _savePointRenderer.material.DOColor(_checkPointColor * _emissionOff, "_EmissionColor", _transitionDuration).SetEase(_colorOutEase);
         // _savePointMaterial.EnableKeyword("_EMISSION");

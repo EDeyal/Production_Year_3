@@ -87,6 +87,7 @@ MonoBehaviour:
     type: 3}
   _damageableColliderGameObject: {fileID: 6829448929985756790}
   _isRespawnable: 1
+  _soundSO: {fileID: 11400000, guid: ee54170e03770f74eb2cafb803b7f8e6, type: 2}
   _brokenAssetlifetime: 0.3
   _exploadeRight: 0
   _explosionLocation: {fileID: 1791282678106064636}
@@ -104,10 +105,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 861966692431392727}
-  - component: {fileID: 5372818372185583525}
   - component: {fileID: 4354583596850660638}
   - component: {fileID: 7981675140720294119}
   - component: {fileID: 9092049614913061514}
+  - component: {fileID: 4572144695440665799}
   m_Layer: 16
   m_Name: DamegableCollider
   m_TagString: Untagged
@@ -130,19 +131,6 @@ Transform:
   m_Father: {fileID: 5249625741881330730}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5372818372185583525
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6829448929985756790}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.41, z: 0}
 --- !u!114 &4354583596850660638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +220,19 @@ MonoBehaviour:
   OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &4572144695440665799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6829448929985756790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 10}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &2483490089319112416
 PrefabInstance:
   m_ObjectHideFlags: 0

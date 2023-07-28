@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUpTrigger : MonoBehaviour,ICheckValidation
+public class PopUpTrigger : MonoBehaviour, ICheckValidation
 {
     [SerializeField] string _instructionText;
     [SerializeField] CheckDistanceAction _noticePlayerDistance;
     [SerializeField] CheckDistanceAction _closePlayerDistance;
     [SerializeField] bool _isOneTime;
-    [SerializeField,ReadOnly] bool _hasBeenActivated;
-    [SerializeField,ReadOnly] bool _isActive;
+    [SerializeField, ReadOnly] bool _hasBeenActivated;
+    [SerializeField, ReadOnly] bool _isActive;
     public void CheckValidation()
     {
         if (_noticePlayerDistance == null)
@@ -33,12 +33,12 @@ public class PopUpTrigger : MonoBehaviour,ICheckValidation
                 GameManager.Instance.UiManager.InstructionPopUp.UpdateInstructionText(_instructionText);
                 _isActive = true;
             }
-            
+
         }
         else if (!_closePlayerDistance.InitAction(new DistanceData(transform.position, GameManager.Instance.PlayerManager.MiddleOfBody.position)))
         {
             //close popup
-            if (_isOneTime&& _isActive)
+            if (_isOneTime && _isActive)
             {
                 _hasBeenActivated = true;
             }
@@ -60,7 +60,10 @@ public class PopUpTrigger : MonoBehaviour,ICheckValidation
     }
     private void OnDisable()
     {
-        GameManager.Instance.UiManager.InstructionPopUp.CloseInstructionText();
-        _isActive = false;
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.UiManager.InstructionPopUp.CloseInstructionText();
+            _isActive = false;
+        }
     }
 }

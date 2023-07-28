@@ -13,5 +13,6 @@ public class QovaxDeathState : BaseQovaxState
         _qovax.RB.drag = 0;
         _qovax.AnimatorHandler.Animator.SetTrigger(
         AnimatorHelper.GetParameter(AnimatorParameterType.IsDead));
+        GameManager.Instance.SoundManager.PlaySound("QovaxDeathSoundTest");
     }
 }
