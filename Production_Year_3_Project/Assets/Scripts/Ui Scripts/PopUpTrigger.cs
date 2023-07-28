@@ -58,4 +58,9 @@ public class PopUpTrigger : MonoBehaviour,ICheckValidation
         _noticePlayerDistance.DrawGizmos(transform.position);
         _closePlayerDistance.DrawGizmos(transform.position);
     }
+    private void OnDisable()
+    {
+        GameManager.Instance.UiManager.InstructionPopUp.CloseInstructionText();
+        _isActive = false;
+    }
 }
