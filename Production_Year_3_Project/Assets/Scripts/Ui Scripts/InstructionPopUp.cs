@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InstructionPopUp : MonoBehaviour
+public class InstructionPopUp : MonoBehaviour,ICheckValidation
 {
     [SerializeField] GameObject _instructionGameObject;
     [SerializeField] TextMeshProUGUI _instructionText;
@@ -23,4 +23,9 @@ public class InstructionPopUp : MonoBehaviour
         _instructionText.text = "";
     }
 
+    public void CheckValidation()
+    {
+        if (_instructionGameObject == null)
+            throw new System.Exception("Instruction pop up has no instructionGameObject");
+    }
 }
