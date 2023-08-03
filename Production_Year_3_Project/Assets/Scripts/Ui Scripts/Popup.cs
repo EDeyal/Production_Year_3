@@ -7,7 +7,14 @@ public class Popup : MonoBehaviour
     private void Start()
     {
         SubscribeToUiManager();
+        GameManager.Instance.InputManager.OnPopUpClosed.AddListener(PopupOff);
         gameObject.SetActive(false);
+    }
+    
+    private void PopupOff()
+    {
+        gameObject.SetActive(false);
+        UnlockPlayer();
     }
 
     protected virtual void SubscribeToUiManager()
