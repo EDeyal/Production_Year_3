@@ -98,6 +98,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClosePopup"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb26db5b-2e6d-4156-a6ba-558b82897b04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,28 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleMap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09f669cd-c7b6-424c-bf89-3ba4df1cd2ef"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClosePopup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b988ccba-3a63-4f91-92bf-d88e02a40716"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClosePopup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -534,6 +565,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_Escape = m_BasicActions.FindAction("Escape", throwIfNotFound: true);
         m_BasicActions_SavePoint = m_BasicActions.FindAction("SavePoint", throwIfNotFound: true);
         m_BasicActions_ToggleMap = m_BasicActions.FindAction("ToggleMap", throwIfNotFound: true);
+        m_BasicActions_ClosePopup = m_BasicActions.FindAction("ClosePopup", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
@@ -607,6 +639,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_Escape;
     private readonly InputAction m_BasicActions_SavePoint;
     private readonly InputAction m_BasicActions_ToggleMap;
+    private readonly InputAction m_BasicActions_ClosePopup;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -619,6 +652,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Escape => m_Wrapper.m_BasicActions_Escape;
         public InputAction @SavePoint => m_Wrapper.m_BasicActions_SavePoint;
         public InputAction @ToggleMap => m_Wrapper.m_BasicActions_ToggleMap;
+        public InputAction @ClosePopup => m_Wrapper.m_BasicActions_ClosePopup;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -652,6 +686,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ToggleMap.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
                 @ToggleMap.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
                 @ToggleMap.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnToggleMap;
+                @ClosePopup.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
+                @ClosePopup.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
+                @ClosePopup.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -680,6 +717,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ToggleMap.started += instance.OnToggleMap;
                 @ToggleMap.performed += instance.OnToggleMap;
                 @ToggleMap.canceled += instance.OnToggleMap;
+                @ClosePopup.started += instance.OnClosePopup;
+                @ClosePopup.performed += instance.OnClosePopup;
+                @ClosePopup.canceled += instance.OnClosePopup;
             }
         }
     }
@@ -751,6 +791,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnSavePoint(InputAction.CallbackContext context);
         void OnToggleMap(InputAction.CallbackContext context);
+        void OnClosePopup(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

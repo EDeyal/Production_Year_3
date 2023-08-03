@@ -31,6 +31,7 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnLookRightUp;
     public UnityEvent OnSavePoint;
     public UnityEvent OnToggleMap;
+    public UnityEvent OnPopUpClosed;
 
 
     //public bool LockInputs;
@@ -57,6 +58,12 @@ public class InputManager : MonoBehaviour
         input.Camera.MoveLeft.canceled += InvokeOnLookLeftUp;
         input.BasicActions.SavePoint.started += InvokeSavePoint;
         input.BasicActions.ToggleMap.started += InvokeToggleMap;
+        input.BasicActions.ClosePopup.started += InvokeClosePopup;
+    }
+
+    public void InvokeClosePopup(InputAction.CallbackContext obj)
+    {
+        OnPopUpClosed?.Invoke();
     }
 
     public void InvokeToggleMap(InputAction.CallbackContext obj)
