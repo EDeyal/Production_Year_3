@@ -38,7 +38,7 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation, IRespawnable
     public void ActivateCinematicCamera()
     {
         _playableDirector.Play();
-        GameManager.Instance.PlayerManager.LockPlayer();
+        GameManager.Instance.InputManager.input.Disable();
         GameManager.Instance.UiManager.PlayerHud.gameObject.SetActive(false);
         _isPlaying = true;
     }
@@ -57,7 +57,7 @@ public class CinematicTrigger : MonoBehaviour, ICheckValidation, IRespawnable
     public void ResetCinematic()
     {
         _isPlaying = false;
-        GameManager.Instance.PlayerManager.UnLockPlayer();
+        GameManager.Instance.InputManager.input.Enable();
         GameManager.Instance.UiManager.PlayerHud.gameObject.SetActive(true);
     }
 

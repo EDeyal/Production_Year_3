@@ -36,7 +36,6 @@ public class PlayerDash : MonoBehaviour
         OnDash.AddListener(TurnOnWallChecks);
         OnDash.AddListener(DashAnimOn);
         OnDash.AddListener(controller.ReleaseJumpHeld);
-        OnDashEnd.AddListener(controller.EndDashReset);
         OnDashEnd.AddListener(TurnOffWallChecks);
         OnDashEnd.AddListener(DashAnimOff);
         canDash = true;
@@ -47,6 +46,7 @@ public class PlayerDash : MonoBehaviour
         if (dashUnlocked && Time.time - lastDashed >= dashCoolDown && canDash && controller.CanMove)
         {
             StartCoroutine(Dash());
+            Debug.Log("dash started");
         }
     }
 
@@ -68,7 +68,6 @@ public class PlayerDash : MonoBehaviour
         yield return new WaitUntil(() => dashDurationUp || rightCheck.IsGrounded() || leftCheck.IsGrounded());
         lastDashed = Time.time;
         controller.ResetGravity();
-        GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
         yield return StartCoroutine(OnDashEndApex());
         OnDashEnd?.Invoke();
     }
