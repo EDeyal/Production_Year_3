@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Popup : MonoBehaviour
 {
-    private void Start()
+    protected virtual void Start()
     {
         SubscribeToUiManager();
         GameManager.Instance.InputManager.OnPopUpClosed.AddListener(PopupOff);
         gameObject.SetActive(false);
     }
     
-    private void PopupOff()
+    protected void PopupOff()
     {
         gameObject.SetActive(false);
         UnlockPlayer();

@@ -8,7 +8,7 @@ public class BlackScreenFadeSensor : MonoBehaviour
     {
         if (other.gameObject.GetHashCode() == GameManager.Instance.PlayerManager.gameObject.GetHashCode())
         {
-            StartCoroutine(GameManager.Instance.UiManager.PlayerHud.FadeInEndScree());
+            StartCoroutine(GameManager.Instance.UiManager.EndGamePopup.FadeInEndScreen());
         }
     }
 

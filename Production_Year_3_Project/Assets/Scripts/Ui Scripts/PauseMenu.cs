@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.Instance.UiManager.CachPauseMenu(this);
     }
+
+    [ContextMenu("MainMenu")]
     public void MoveToMainMenu()
     {
         GameManager.Instance.SceneManager.LoadSceneIndex(0);

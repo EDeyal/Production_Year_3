@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     private InstructionPopUp _instructionPopUp;
     private ProgressionPopUp _progressionPopUp;
     private WorldMap map;
+    private EndGamePopup endGamePopup;
     public void CachPauseMenu(PauseMenu pauseMenu)
     {
         _pauseMenu = pauseMenu;
@@ -31,6 +32,10 @@ public class UIManager : MonoBehaviour
     {
         deathPopup = givenDeathPopup;
     }
+    public void CacheEndGamePopup(EndGamePopup endGamePopup)
+    {
+        this.endGamePopup = endGamePopup;
+    }
     public void CacheAbilityVideoPlayer(AbilityVideoPlayer givenAbilityVideoPlayer)
     {
         abilityVideoPlayer = givenAbilityVideoPlayer;
@@ -46,7 +51,7 @@ public class UIManager : MonoBehaviour
     public void EscapePressed(bool isPressed)
     {
         Debug.Log("Attempting to pause");
-        if (!_pauseMenu)
+        if (!PauseMenu)
         {
             Debug.LogWarning("No Pause Menu Found");
             return;
@@ -54,14 +59,14 @@ public class UIManager : MonoBehaviour
         if (isPressed)
         {
             //open window
-            _pauseMenu.PausePanel.SetActive(isPressed);
+            PauseMenu.PausePanel.SetActive(isPressed);
             GameManager.Instance.InputManager.SetCurserVisability(true);
             GameManager.Instance.PauseGameTimeScale(true);
         }
         else
         {
             GameManager.Instance.PauseGameTimeScale(false);
-            _pauseMenu.PausePanel.SetActive(isPressed);
+            PauseMenu.PausePanel.SetActive(isPressed);
         }
     }
     public PlayerHud PlayerHud { get => playerHud; }
@@ -75,4 +80,6 @@ public class UIManager : MonoBehaviour
     public ProgressionPopUp ProgressionPopUp => _progressionPopUp;
 
     public WorldMap Map { get => map; }
+    public EndGamePopup EndGamePopup { get => endGamePopup; }
+    public PauseMenu PauseMenu { get => _pauseMenu; }
 }
