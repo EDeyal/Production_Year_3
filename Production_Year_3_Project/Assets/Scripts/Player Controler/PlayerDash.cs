@@ -46,6 +46,7 @@ public class PlayerDash : MonoBehaviour
         if (dashUnlocked && Time.time - lastDashed >= dashCoolDown && canDash && controller.CanMove)
         {
             StartCoroutine(Dash());
+            Debug.Log("dash started");
         }
     }
 

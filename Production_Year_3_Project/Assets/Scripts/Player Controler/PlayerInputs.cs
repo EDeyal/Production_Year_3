@@ -311,7 +311,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2a5bd5f7-a24e-450f-8a85-022d79948226"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -376,8 +376,30 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6fe8ba4c-0933-4cc8-bf2e-459a9710b16f"",
+                    ""path"": ""<XInputController>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SavePoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d58b3ec7-6e06-42ea-b596-54d8967cdeb8"",
                     ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fdd524b-63b8-4fb2-83d2-1c673b306601"",
+                    ""path"": ""<XInputController>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -399,7 +421,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b988ccba-3a63-4f91-92bf-d88e02a40716"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
