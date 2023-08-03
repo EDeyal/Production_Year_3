@@ -70,6 +70,7 @@ public class DashTowardsEnemy : Ability
         ResetPlayer(true);
         player.PlayerController.ZeroGravity();
         yield return new WaitForSecondsRealtime(dashApex);
+        player.PlayerController.ResetFallingFor();
         player.PlayerController.ResetGravity();
     }
 

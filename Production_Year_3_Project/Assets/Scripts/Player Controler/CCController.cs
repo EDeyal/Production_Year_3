@@ -60,6 +60,7 @@ public class CCController : MonoBehaviour
 
     [SerializeField] private float longFallThreshold;
     [SerializeField] private float LongFallStunDuration;
+    [SerializeField] private GameObject longFallParticle;
     private float fallingFor;
     private bool subbedLongFall;
 
@@ -95,7 +96,7 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetJumpHeldTimer);
         groundCheck.OnGrounded.AddListener(LandAnim);
         groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
-        //groundCheck.OnGrounded.AddListener(LongFallStunStart);
+        groundCheck.OnGrounded.AddListener(LongFallStunStart);
         groundCheck.OnGrounded.AddListener(ResetFallingFor);
 
 
@@ -227,18 +228,17 @@ public class CCController : MonoBehaviour
     {
         if (fallingFor >= longFallThreshold)
         {
-            StartCoroutine(LongFallStun());
+            LongFallStun();
         }
     }
 
-    private IEnumerator LongFallStun()
+    private void LongFallStun()
     {
-        Debug.Log("stunning player");
         GameManager.Instance.PlayerManager.LockPlayer();
-        yield return new WaitForSeconds(LongFallStunDuration);
-        GameManager.Instance.PlayerManager.UnLockPlayer();
+        animBlender.SetTrigger("HardLand");
+        longFallParticle.SetActive(true);
     }
-    private void ResetFallingFor()
+    public void ResetFallingFor()
     {
         fallingFor = 0f;
     }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WorldMap : MonoBehaviour
 {
@@ -21,14 +20,14 @@ public class WorldMap : MonoBehaviour
     private float minimapRatio;
 
 
-   /* private void OnEnable()
-    {
-        Time.timeScale = 0f;
-    }
-    private void OnDisable()
-    {
-        Time.timeScale = 1f;
-    }*/
+    /* private void OnEnable()
+     {
+         Time.timeScale = 0f;
+     }
+     private void OnDisable()
+     {
+         Time.timeScale = 1f;
+     }*/
 
     private void Awake()
     {
@@ -51,8 +50,9 @@ public class WorldMap : MonoBehaviour
     public void PlaceNewSavePointIcon(Vector3 worldPosition)
     {
         RectTransform newIcon = Instantiate(savePointIcon, transform.parent);
-        newIcon.anchoredPosition = playerMinimap.anchoredPosition;
+        newIcon.anchoredPosition = minimapPoint_1.anchoredPosition + new Vector2((worldPosition.x - worldPoint_1.position.x) * minimapRatio, (worldPosition.y - worldPoint_1.position.y) * minimapRatio);
     }
+
 
 
     public void ToggleMap()
