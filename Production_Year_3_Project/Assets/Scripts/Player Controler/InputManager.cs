@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
     ///public static InputManager Instance;
 
 
-    private PlayerInputs input;
+    public PlayerInputs input;
     public UnityEvent OnEscape;
 
     public UnityEvent OnJumpDown;

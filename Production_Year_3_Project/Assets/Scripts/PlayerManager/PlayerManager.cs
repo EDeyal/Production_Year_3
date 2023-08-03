@@ -78,6 +78,8 @@ public class PlayerManager : BaseCharacter
         playerAbilityHandler.OnEquipAbility.AddListener(OnEquipSpecificAbility);
         DamageDealer.OnKill.AddListener(EnemyFirstKill);
         PlayerDash.OnDashEnd.AddListener(PlayerController.ResetFallingFor);
+        PlayerDash.OnDashEnd.AddListener(UnLockPlayer);
+
         /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
          StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
