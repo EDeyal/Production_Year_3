@@ -11,7 +11,14 @@ public class ThamulDeathState : BaseThamulState
     public override void EnterState()
     {
         base.EnterState();
-        GameManager.Instance.SoundManager.PlaySound("ThamulDeathSoundTest");
+        if (GameManager.Instance.SoundManager.isFunnySounds)
+        {
+            GameManager.Instance.SoundManager.PlaySound("ThamulDeathSoundTest");
+        }
+        else
+        {
+            GameManager.Instance.SoundManager.PlaySound("ThamulDeath");
+        }
         _thamul.AnimatorHandler.Animator.SetTrigger(
             AnimatorHelper.GetParameter(AnimatorParameterType.IsDead));
     }

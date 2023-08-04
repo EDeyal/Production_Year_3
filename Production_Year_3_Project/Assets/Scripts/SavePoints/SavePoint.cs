@@ -64,7 +64,14 @@ public class SavePoint : MonoBehaviour, ICheckValidation
         if (!_isActivated)
         {
             _isActivated = true;
-            GameManager.Instance.SoundManager.PlaySound("ActivateSavePointSoundTest");
+            if (GameManager.Instance.SoundManager.isFunnySounds)
+            {
+                GameManager.Instance.SoundManager.PlaySound("ActivateSavePointSoundTest");
+            }
+            else
+            {
+                GameManager.Instance.SoundManager.PlaySound("SavePointSound");
+            }
         }
         //_savePointMaterial.EnableKeyword("_EMISSION");
         //DynamicGI.SetEmissive(_savePointMaterial, _checkPointColor * _emissionOn);

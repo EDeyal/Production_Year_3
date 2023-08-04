@@ -82,7 +82,14 @@ public class CemuEnemy : GroundEnemy
                     _cemuBoostParticles.Clear();
                     _cemuBoostParticles.Play();
                 }
-                GameManager.Instance.SoundManager.PlaySound("CemuBoostSoundTest");
+                if (GameManager.Instance.SoundManager.isFunnySounds)
+                {
+                    GameManager.Instance.SoundManager.PlaySound("CemuBoostSoundTest");
+                }
+                else
+                {
+                    GameManager.Instance.SoundManager.PlaySound("CemuAbility");
+                }
             }
             return true;
         }

@@ -114,7 +114,14 @@ public class ThamulEnemy : GroundEnemy
         ThamulRotate(out int direction);
         if (WaitAction(_meleeCooldownAction, ref _meleeCooldown))
         {
-            GameManager.Instance.SoundManager.PlaySound("ThamulBiteSoundTest");
+            if (GameManager.Instance.SoundManager.isFunnySounds)
+            {
+                GameManager.Instance.SoundManager.PlaySound("ThamulBiteSoundTest");
+            }
+            else
+            {
+                GameManager.Instance.SoundManager.PlaySound("ThamulMeleeAttack");
+            }
             Debug.Log("Attacking with melee");
             if (direction == 1)
             {
@@ -161,7 +168,14 @@ public class ThamulEnemy : GroundEnemy
         if (WaitAction(_projectileCooldownAction, ref _projectileCooldown))
         {
             Debug.Log("Shooting at player");
-            GameManager.Instance.SoundManager.PlaySound("ThamulProjectileTest");
+            if (GameManager.Instance.SoundManager.isFunnySounds)
+            {
+                GameManager.Instance.SoundManager.PlaySound("ThamulProjectileTest");
+            }
+            else
+            {
+                GameManager.Instance.SoundManager.PlaySound("ThamulRangedAttack");
+            }
             ShootProjectile(_thamulProjectileAttack, direction);
             return true; //when completed return true
         }
