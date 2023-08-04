@@ -52,7 +52,7 @@ public class SavePoint : MonoBehaviour, ICheckValidation
         //_saveParticles.Clear();
         _saveParticles.Play();
     }
-    public void ActivateSavePoint()
+    public void ActivateSavePoint(bool withSound)
     {
         _savePointAnimator.SetBool("IsActive", true);
         _savePointRenderer.material.DOColor(_checkPointColor * _emissionOn, "_EmissionColor", _transitionDuration).SetEase(_colorInEase);
@@ -64,13 +64,16 @@ public class SavePoint : MonoBehaviour, ICheckValidation
         if (!_isActivated)
         {
             _isActivated = true;
-            if (GameManager.Instance.SoundManager.isFunnySounds)
+            if (withSound)
             {
-                GameManager.Instance.SoundManager.PlaySound("ActivateSavePointSoundTest");
-            }
-            else
-            {
-                GameManager.Instance.SoundManager.PlaySound("UISaveGame");
+                if (GameManager.Instance.SoundManager.isFunnySounds)
+                {
+                    GameManager.Instance.SoundManager.PlaySound("ActivateSavePointSoundTest");
+                }
+                else
+                {
+                    GameManager.Instance.SoundManager.PlaySound("UISaveGame");
+                }
             }
         }
         //_savePointMaterial.EnableKeyword("_EMISSION");
