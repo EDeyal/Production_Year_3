@@ -3,6 +3,10 @@ public class CemuPatrolState : BaseCemuState
 {
     public override BaseState RunCurrentState()
     {
+        if (!_cemu.IsBoostActive)
+        {
+            _cemu.RemoveBoostParticles();
+        }
         if (_cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.max))
 || _cemu.BoundsXDistanceAction.InitAction(new DistanceData(_cemu.MiddleOfBody.position, _cemu.BoundHandler.Bound.min)))
         {
