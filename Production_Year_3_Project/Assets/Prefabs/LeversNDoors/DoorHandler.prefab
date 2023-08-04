@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2734576433813770760}
   - component: {fileID: 2734576433813770763}
+  - component: {fileID: 5087922218887275494}
   - component: {fileID: 1131703707}
   m_Layer: 13
   m_Name: DoorHandler
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077e5e9e1980471458bb8552d0d30aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _emisionHandler: {fileID: 5087922218887275494}
   PhyiscalCollider: {fileID: 830330289894790688}
   DoesntHaveKey: {fileID: 995614950258795669}
   HaveKey: {fileID: 7616156810056706743}
@@ -56,6 +58,73 @@ MonoBehaviour:
   doorAnimator: {fileID: 5247754170946130162}
   directionEnum: 1
   keyLock: {fileID: 9192999784108279776}
+--- !u!114 &5087922218887275494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2734576433813770762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfae8b93550e4742af05ae2610ac748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emissionOn: 10
+  _emissionOff: 0
+  _matObjects:
+  - {fileID: 3752136940184699011}
+  - {fileID: 1303953962642163783}
+  _color: {r: 0, g: 0.4509804, b: 0.3882353, a: 0}
+  _colorInEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _colorOutEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _transitionDuration: 1.5
 --- !u!65 &1131703707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -198,17 +267,17 @@ PrefabInstance:
     - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
       propertyPath: _LockColor.b
-      value: 0.4666667
+      value: 0.3882353
       objectReference: {fileID: 0}
     - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
       propertyPath: _LockColor.g
-      value: 0.5254902
+      value: 0.4509804
       objectReference: {fileID: 0}
     - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
       propertyPath: _LockColor.r
-      value: 0.15686275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
@@ -217,8 +286,73 @@ PrefabInstance:
       objectReference: {fileID: 8310673246735923894}
     - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
+      propertyPath: _emisionHandler
+      value: 
+      objectReference: {fileID: 6489028933412365830}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
       propertyPath: _transitionDuration
-      value: 2
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorInEase.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575698361327648207, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+        type: 3}
+      propertyPath: _colorOutEase.m_Curve.Array.data[1].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 6686486091906685475, guid: ee6f2db0d2e2d8549a1d757210c154bc,
         type: 3}
@@ -277,6 +411,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6f2db0d2e2d8549a1d757210c154bc, type: 3}
+--- !u!114 &6489028933412365830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9140094091614198825, guid: ee6f2db0d2e2d8549a1d757210c154bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2654179602230491695}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310673246735923894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfae8b93550e4742af05ae2610ac748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8310673246735923894 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6305315456089604249, guid: ee6f2db0d2e2d8549a1d757210c154bc,
@@ -494,6 +640,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b66dbdb3b8dbdbf47937f2ff6e1ed7aa, type: 3}
+--- !u!1 &1303953962642163783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7797053126259723390, guid: b66dbdb3b8dbdbf47937f2ff6e1ed7aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 9091678828743394361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3752136940184699011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5349824540906357946, guid: b66dbdb3b8dbdbf47937f2ff6e1ed7aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 9091678828743394361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8281354903251433832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b66dbdb3b8dbdbf47937f2ff6e1ed7aa,

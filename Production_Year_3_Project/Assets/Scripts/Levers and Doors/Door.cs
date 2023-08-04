@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, ICheckValidation
 {
+    [SerializeField] EmisionHandler _emisionHandler;
     [SerializeField] public BoxCollider PhyiscalCollider;
     [SerializeField] public PopUpTrigger DoesntHaveKey;
     [SerializeField] public PopUpTrigger HaveKey;
@@ -12,13 +13,17 @@ public class Door : MonoBehaviour, ICheckValidation
     [SerializeField] Animator doorAnimator;
     [SerializeField] public direction directionEnum;
     [SerializeField] public Lock keyLock;
-
+    private void Awake()
+    {
+        _emisionHandler.Deactivate();
+    }
     private void OnTriggerStay(Collider other)
     {
         if (CanOpen == true && Input.GetKeyDown(KeyCode.C))
         {
             TurnOffPopUp(HaveKey);
             keyLock.ActivateLock();
+            _emisionHandler.Activate();
             AnimateDoor();
         }
     }
