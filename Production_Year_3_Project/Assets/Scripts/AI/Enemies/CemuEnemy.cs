@@ -86,10 +86,7 @@ public class CemuEnemy : GroundEnemy
             }
             return true;
         }
-        if (_cemuBoostParticles)
-        {
-            _cemuBoostParticles.Stop();
-        }
+        RemoveBoostParticles();
         _isBoostActive = false;
         return false;
     }
@@ -101,6 +98,17 @@ public class CemuEnemy : GroundEnemy
     public override void OnDeath()
     {
         base.OnDeath();
+        RemoveBoostParticles();
+    }
+    public void RemoveBoostParticles()
+    {
+        if (_cemuBoostParticles)
+        {
+            if (_cemuBoostParticles.isPlaying)
+            {
+                _cemuBoostParticles.Stop();
+            }
+        }
     }
 #if UNITY_EDITOR
     public override void OnDrawGizmosSelected()
