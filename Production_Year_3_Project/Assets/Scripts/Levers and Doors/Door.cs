@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, ICheckValidation
 {
+    [SerializeField] public BoxCollider PhyiscalCollider;
     [SerializeField] public PopUpTrigger DoesntHaveKey;
     [SerializeField] public PopUpTrigger HaveKey;
     [SerializeField] public bool CanOpen = false;
     [SerializeField] Animator doorAnimator;
     [SerializeField] public direction directionEnum;
+    [SerializeField] public Lock keyLock;
 
     private void OnTriggerStay(Collider other)
     {
         if (CanOpen == true && Input.GetKeyDown(KeyCode.C))
         {
             TurnOffPopUp(HaveKey);
+            keyLock.ActivateLock();
             AnimateDoor();
         }
     }
@@ -24,9 +27,11 @@ public class Door : MonoBehaviour, ICheckValidation
         switch (directionEnum)
         {
             case direction.up:
+                PhyiscalCollider.enabled = false;
                 doorAnimator.SetTrigger("OpenUp");
                 break;
             case direction.down:
+                PhyiscalCollider.enabled = false;
                 doorAnimator.SetTrigger("OpenDown");
                 break;
             default:

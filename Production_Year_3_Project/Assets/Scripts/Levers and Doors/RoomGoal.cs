@@ -90,6 +90,8 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                     throw new System.Exception($"RoomGoal  {gameObject.name} Has no Keys");
                 if (RoomsDoor == null)
                     throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
+                if(RoomsDoor.keyLock == null)
+                    throw new System.Exception($"RoomGoal{gameObject.name} has no keyLock");
                 break;
             case Conditions.Leaver:
                 if (_LeaversToActive.Count == 0)
