@@ -27,12 +27,10 @@ public class Door : MonoBehaviour, ICheckValidation
         switch (directionEnum)
         {
             case direction.up:
-                PhyiscalCollider.enabled = false;
-                doorAnimator.SetTrigger("OpenUp");
+                doorAnimator.SetTrigger("OpenUp");             
                 break;
             case direction.down:
-                PhyiscalCollider.enabled = false;
-                doorAnimator.SetTrigger("OpenDown");
+                doorAnimator.SetTrigger("OpenDown");              
                 break;
             default:
                 break;
