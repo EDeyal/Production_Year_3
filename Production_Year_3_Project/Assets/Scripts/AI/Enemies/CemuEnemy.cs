@@ -13,7 +13,8 @@ public class CemuEnemy : GroundEnemy
     [SerializeField] CombatHandler _combatHandler;
     [TabGroup("Abilities")]
     [SerializeField] Ability _cemuAbility;
-
+    [TabGroup("Visuals")]
+    [SerializeField] ParticleSystem _cemuBoostParticles;
     public bool IsBoostActive => _isBoostActive;
     public CemuStateHandler CemuStateHandler => StateHandler as CemuStateHandler;
 
@@ -41,6 +42,10 @@ public class CemuEnemy : GroundEnemy
     public override void CheckValidation()
     {
         base.CheckValidation();
+        if (_cemuBoostParticles == null)
+        {
+            Debug.LogError("CemuEnemy has no boost particles");
+        }
     }
     private void Update()
     {
@@ -72,11 +77,19 @@ public class CemuEnemy : GroundEnemy
             {
                 _isBoostActive = true;
                 _cemuAbility.Cast(this);
+                if (_cemuBoostParticles)
+                {
+                    _cemuBoostParticles.Clear();
+                    _cemuBoostParticles.Play();
+                }
                 GameManager.Instance.SoundManager.PlaySound("CemuBoostSoundTest");
             }
             return true;
         }
-
+        if (_cemuBoostParticles)
+        {
+            _cemuBoostParticles.Stop();
+        }
         _isBoostActive = false;
         return false;
     }
