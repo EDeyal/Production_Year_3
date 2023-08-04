@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomGoal : MonoBehaviour, ICheckValidation
 {
+    [SerializeField] Lock roomLock;
     [SerializeField] Door RoomsDoor;
     [SerializeField] public Conditions activeConditions;
     List<BaseEnemy> _enemiesToKill;
@@ -45,8 +46,8 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
 
                 }            
                 RoomsDoor.CanOpen = true;
-                RoomsDoor.TurnOffPopUp(RoomsDoor.DoesntHaveKey);
-                RoomsDoor.TurnOnPopUp(RoomsDoor.HaveKey);
+                roomLock.TurnOffPopUp(roomLock.DoesntHaveKey);
+                roomLock.TurnOnPopUp(roomLock.HaveKey);
                 isNotChecking = true;
 
                 break;
@@ -90,8 +91,8 @@ public class RoomGoal : MonoBehaviour, ICheckValidation
                     throw new System.Exception($"RoomGoal  {gameObject.name} Has no Keys");
                 if (RoomsDoor == null)
                     throw new System.Exception($"RoomGoal {gameObject.name} Has no Door");
-                if(RoomsDoor.keyLock == null)
-                    throw new System.Exception($"RoomGoal{gameObject.name} has no keyLock");
+                if(roomLock == null)
+                    throw new System.Exception($"RoomGoal{gameObject.name} has no Lock");
                 break;
             case Conditions.Leaver:
                 if (_LeaversToActive.Count == 0)

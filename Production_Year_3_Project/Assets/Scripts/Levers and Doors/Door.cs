@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,26 +8,15 @@ public class Door : MonoBehaviour, ICheckValidation
 {
     [SerializeField] EmisionHandler _emisionHandler;
     [SerializeField] public BoxCollider PhyiscalCollider;
-    [SerializeField] public PopUpTrigger DoesntHaveKey;
-    [SerializeField] public PopUpTrigger HaveKey;
     [SerializeField] public bool CanOpen = false;
     [SerializeField] Animator doorAnimator;
     [SerializeField] public direction directionEnum;
-    [SerializeField] public Lock keyLock;
+    
     private void Awake()
     {
         _emisionHandler.Deactivate();
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (CanOpen == true && Input.GetKeyDown(KeyCode.C))
-        {
-            TurnOffPopUp(HaveKey);
-            keyLock.ActivateLock();
-            _emisionHandler.Activate();
-            AnimateDoor();
-        }
-    }
+   
     public void AnimateDoor()
     {
         switch (directionEnum)
@@ -41,19 +31,14 @@ public class Door : MonoBehaviour, ICheckValidation
                 break;
         }
     }
-    public void TurnOffPopUp(PopUpTrigger popUpTrigger)
-    {
-        popUpTrigger.gameObject.SetActive(false);
-    }
-    public void TurnOnPopUp(PopUpTrigger popUpTrigger)
-    {
-        popUpTrigger.gameObject.SetActive(true);
-    }
+    
     public void OpenDoor()
     {
+        _emisionHandler.Activate();
         AnimateDoor();
 
     }
+   
     public void CheckValidation()
     {
         if (doorAnimator == null)
@@ -65,4 +50,5 @@ public class Door : MonoBehaviour, ICheckValidation
         up,
         down
     }
+    
 }
