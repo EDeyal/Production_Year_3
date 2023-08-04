@@ -70,7 +70,7 @@ public class SavePoint : MonoBehaviour, ICheckValidation
             }
             else
             {
-                GameManager.Instance.SoundManager.PlaySound("SavePointSound");
+                GameManager.Instance.SoundManager.PlaySound("UISaveGame");
             }
         }
         //_savePointMaterial.EnableKeyword("_EMISSION");
