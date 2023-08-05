@@ -4,7 +4,7 @@ public class ThamulDeathState : BaseThamulState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("ThamulDeathState");
+        //Debug.Log("ThamulDeathState");
         _thamul.OnDeath();
         return this;
     }

@@ -5,7 +5,7 @@ public class ThamulCombatState : BaseThamulState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("ThamulCombatState");
+        //Debug.Log("ThamulCombatState");
         //check if is in combat Range
         Vector3 thamulMiddleOfBodyPos = _thamul.MiddleOfBody.position;
         Vector3 playerMiddleOfBodyPos = _thamulStateHandler.PlayerManager.MiddleOfBody.position;
