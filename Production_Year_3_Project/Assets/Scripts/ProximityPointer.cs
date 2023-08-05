@@ -7,6 +7,7 @@ public class ProximityPointer<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] private GameObject arrow;
     [SerializeField] private ProximitySensor<T> sensor;
     public UnityEvent<T> OnClosestTargetChanged;
+    public bool disabled;
     protected T target;
     private void Start()
     {
@@ -19,7 +20,7 @@ public class ProximityPointer<T> : MonoBehaviour where T : MonoBehaviour
     protected virtual void PointToClosestLegalTarget()
     {
         T closestTarget = sensor.GetClosestLegalTarget();
-        if (ReferenceEquals(closestTarget, null))
+        if (ReferenceEquals(closestTarget, null) || disabled)
         {
             pointer.gameObject.SetActive(false);
             return;

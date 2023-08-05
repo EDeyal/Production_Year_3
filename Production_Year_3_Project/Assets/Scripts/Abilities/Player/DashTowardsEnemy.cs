@@ -44,6 +44,8 @@ public class DashTowardsEnemy : Ability
             player.PlayerFlipper.FlipLeft();
         }
 
+        player.EnemyProximityPointer.disabled = true;
+
         Vector3 playerRot = player.Gfx.transform.eulerAngles;
         player.Gfx.LookAt(dest);
         player.Gfx.eulerAngles = new Vector3(player.Gfx.eulerAngles.x, playerRot.y, playerRot.z);
@@ -72,6 +74,7 @@ public class DashTowardsEnemy : Ability
         yield return new WaitForSecondsRealtime(dashApex);
         player.PlayerController.ResetFallingFor();
         player.PlayerController.ResetGravity();
+        player.EnemyProximityPointer.disabled = false;
     }
 
     private void ResetPlayer(bool state)

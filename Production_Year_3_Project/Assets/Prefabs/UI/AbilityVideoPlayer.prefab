@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85.1, y: 0}
-  m_SizeDelta: {x: 227.3271, y: 77.5438}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8798262571661714337
 CanvasRenderer:
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: to continue
+  m_text: <sprite=11>or<sprite=5>to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ad8235df08149d4f817d8aa019cfa9a, type: 2}
   m_sharedMaterial: {fileID: -678551291588613778, guid: 7ad8235df08149d4f817d8aa019cfa9a,
@@ -162,7 +162,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 6993806403da4bc47bf066988d83fc36, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -283,12 +283,15 @@ MonoBehaviour:
   qovaxClip: {fileID: 32900000, guid: f6297574b89770946aacc60b06049873, type: 3}
   cemuClip: {fileID: 32900000, guid: f6297574b89770946aacc60b06049873, type: 3}
   thamulAbilityText: Youv'e <color=#ffea5c>slain a Thamul</color>, and gained its
-    <color=#ffea5c>"Wind-Assault" </color>ability.        to make your melee attacks
-    <color=#ffea5c>shoot projectiles </color>for a limited time.
-  qovaxAbilityText: Youv'e slain Qovax, and gained its "Charge" ability. <br> Right
-    Click to Charge at the nearest enemy.
-  cemuAbilityText: Youv'e slain Cemu, and gained its "Chem-Boost" ability. <br> Right
-    Click to gain a boost to movement speed for a short period of time.
+    <color=#ffea5c>"Wind-Assault" </color>ability.<br><sprite=2>or<sprite=4>to make
+    your melee attacks <color=#ffea5c>shoot projectiles </color>for a short period
+    of time.
+  qovaxAbilityText: Youv'e <color=#ffea5c>slain a Qovax</color>, and <color=#ffea5c>gained
+    its "Charge" </color>ability. <br><sprite=2>or<sprite=4><color=#ffea5c>to Charge
+    </color>at the nearest enemy.
+  cemuAbilityText: Youv'e <color=#ffea5c>slain a Cemu</color>, and gained its <color=#ffea5c>"Chem-Boost"
+    </color>ability.<br><sprite=2>or<sprite=4>to gain a boost to <color=#ffea5c>movement
+    speed </color>for a short period of time.
 --- !u!1 &2982104489536256278
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,9 +854,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Youv'e <color=#ffea5c>slain a Qovax</color>, and <color=#ffea5c>gained
-    its \"Charge\" </color>ability. \n        <color=#ffea5c>to Charge </color>at
-    the nearest enemy."
+  m_text: Youv'e <color=#ffea5c>slain a Cemu</color>, and gained its <color=#ffea5c>"Chem-Boost"
+    </color>ability.<br><sprite=2>or<sprite=4>to gain a boost to <color=#ffea5c>movement
+    speed </color>for a short period of time.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ad8235df08149d4f817d8aa019cfa9a, type: 2}
   m_sharedMaterial: {fileID: -678551291588613778, guid: 7ad8235df08149d4f817d8aa019cfa9a,
@@ -873,7 +876,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 6993806403da4bc47bf066988d83fc36, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -1285,6 +1288,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5f687491558bd6348ae5c8225a6e88e7,
         type: 3}
+    - target: {fileID: 6062469940880131079, guid: cfc1a598d9f104f4ba8c72a033044cbc,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6062469940880131079, guid: cfc1a598d9f104f4ba8c72a033044cbc,
         type: 3}
       propertyPath: m_Color.b

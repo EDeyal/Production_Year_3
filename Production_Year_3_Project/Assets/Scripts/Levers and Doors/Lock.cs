@@ -12,7 +12,6 @@ public class Lock : MonoBehaviour, ICheckValidation
     [SerializeField] public PopUpTrigger HaveKey;
     [SerializeField] float _timer;
 
-
     private void Awake()
     {
         CheckValidation();
@@ -28,15 +27,33 @@ public class Lock : MonoBehaviour, ICheckValidation
         yield return new WaitForSeconds(_timer);
         myDoor.OpenDoor();
     }
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (myDoor.CanOpen == true && Input.GetKeyDown(KeyCode.C))
+        if (other.gameObject.GetHashCode() == GameManager.Instance.PlayerManager.gameObject.GetHashCode())
+        {
+            GameManager.Instance.InputManager.OnOpenDoor.AddListener(StartOpeningDoor);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetHashCode() == GameManager.Instance.PlayerManager.gameObject.GetHashCode())
+        {
+            GameManager.Instance.InputManager.OnOpenDoor.RemoveListener(StartOpeningDoor);
+        }
+    }
+    private void StartOpeningDoor()
+    {
+        if (myDoor.CanOpen)
         {
             TurnOffPopUp(HaveKey);
             ActivateLock();
             StartCoroutine(Timer());
         }
-    }
+    }    
+
+
     public void TurnOffPopUp(PopUpTrigger popUpTrigger)
     {
         popUpTrigger.gameObject.SetActive(false);
