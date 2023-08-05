@@ -43,7 +43,7 @@ public class ProximitySensor<T> : MonoBehaviour where T : MonoBehaviour
         {
             RaycastHit hit;
             Vector2 dir = (item.transform.position - transform.position);
-            if (CheckIfTargetIsInMeleeZone(item) && Condition(item))
+            if (CheckIfTargetIsInMeleeZone(item))
             {
                 legalTargets.Add(item);
                 continue;
