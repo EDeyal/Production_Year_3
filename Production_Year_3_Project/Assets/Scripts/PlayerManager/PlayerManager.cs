@@ -24,6 +24,9 @@ public class PlayerManager : BaseCharacter
     [SerializeField] private SavePointProximity savePointProximityDetector;
     [SerializeField] private PlayerSavePointHandler playerSaveHandler;
     [SerializeField] private PlayerSoundPlayer soundPlayer;
+    [SerializeField] private GameObject katarSlash;
+    [SerializeField] private GameObject windEffect;
+    [SerializeField] private GameObject speedEffect;
 
     private List<BaseEnemy> killedEnemies = new List<BaseEnemy>();
     private bool attackState;
@@ -41,6 +44,7 @@ public class PlayerManager : BaseCharacter
     public SavePointProximity SavePointProximityDetector { get => savePointProximityDetector; }
     public DamageAbleTerrainProximitySensor DamageableTerrainProximitySensor { get => damageableTerrainProximitySensor; }
     public PlayerSoundPlayer SoundPlayer { get => soundPlayer; }
+    public GameObject KatarSlash { get => katarSlash; }
 
     private void OnEnable()
     {
@@ -79,10 +83,14 @@ public class PlayerManager : BaseCharacter
         DamageDealer.OnKill.AddListener(EnemyFirstKill);
         PlayerDash.OnDashEnd.AddListener(PlayerController.ResetFallingFor);
         PlayerDash.OnDashEnd.AddListener(UnLockPlayer);
-        PlayerDash.OnDash.AddListener(()=> GameManager.Instance.SoundManager.PlaySound("PlayerDash"));
-        Damageable.OnDeath.AddListener(()=> GameManager.Instance.SoundManager.PlaySound("PlayerDeathNew"));
-
+        PlayerDash.OnDash.AddListener(() => GameManager.Instance.SoundManager.PlaySound("PlayerDash"));
+        Damageable.OnDeath.AddListener(() => GameManager.Instance.SoundManager.PlaySound("PlayerDeathNew"));
+        Effectable.OnRecieveStatusEffect.AddListener(SubscribeSpeedEffect);
+        Effectable.OnStatusEffectRemoved.AddListener(UnSubscribeSpeedEffect);
+        Effectable.OnRecieveStatusEffect.AddListener(StartWindEffect);
+        Effectable.OnStatusEffectRemoved.AddListener(EndWindEffect);
     }
+    
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(5);
@@ -90,6 +98,56 @@ public class PlayerManager : BaseCharacter
         {
             playerSaveHandler.SetStartingSavePoint();
         }
+    }
+
+    private void StartWindEffect(StatusEffect givenEffect)
+    {
+        if (givenEffect is ProjectileOnMelee)
+        {
+            windEffect.SetActive(true);
+        }
+    }
+    private void EndWindEffect(StatusEffect givenEffect)
+    {
+        if (givenEffect is ProjectileOnMelee)
+        {
+            windEffect.SetActive(false);
+        }
+    }
+
+    private void SubscribeSpeedEffect(StatusEffect givenEffect)
+    {
+        if (givenEffect is MovementSpeedBoost)
+        {
+            PlayerController.OnStartRunning.AddListener(SpeedEffectOn);
+            PlayerController.OnStopRunning.AddListener(SpeedEffectOff);
+            PlayerController.GroundCheck.OnNotGrounded.AddListener(SpeedEffectOff);
+            if (playerController.IsMoving)
+            {
+                SpeedEffectOn();
+            }
+        }
+    }
+
+    private void UnSubscribeSpeedEffect(StatusEffect givenEffect)
+    {
+        if (givenEffect is MovementSpeedBoost)
+        {
+            PlayerController.OnStartRunning.RemoveListener(SpeedEffectOn);
+            PlayerController.OnStopRunning.RemoveListener(SpeedEffectOff);
+            PlayerController.GroundCheck.OnNotGrounded.RemoveListener(SpeedEffectOff);
+            speedEffect.SetActive(false);
+        }
+    }
+
+
+    private void SpeedEffectOn()
+    {
+        speedEffect.SetActive(true);
+    }
+    private void SpeedEffectOff()
+    {
+        speedEffect.SetActive(false);
     }
 
     private void DisableRunParticle()

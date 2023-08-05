@@ -107,6 +107,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenDoor"",
+                    ""type"": ""Button"",
+                    ""id"": ""62eccec8-3c5d-4586-bbb2-4d25bd376095"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -355,7 +364,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f1ca5384-084a-44b6-9bd0-e09af3aa3c82"",
-                    ""path"": ""<XInputController>/start"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -426,6 +435,28 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ClosePopup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36c818c4-66db-4071-af70-a3305d95a9bf"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenDoor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3026221d-5ecf-4a5a-a048-fd4e3f0b29d0"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenDoor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -588,6 +619,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_BasicActions_SavePoint = m_BasicActions.FindAction("SavePoint", throwIfNotFound: true);
         m_BasicActions_ToggleMap = m_BasicActions.FindAction("ToggleMap", throwIfNotFound: true);
         m_BasicActions_ClosePopup = m_BasicActions.FindAction("ClosePopup", throwIfNotFound: true);
+        m_BasicActions_OpenDoor = m_BasicActions.FindAction("OpenDoor", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MoveDown = m_Camera.FindAction("MoveDown", throwIfNotFound: true);
@@ -662,6 +694,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicActions_SavePoint;
     private readonly InputAction m_BasicActions_ToggleMap;
     private readonly InputAction m_BasicActions_ClosePopup;
+    private readonly InputAction m_BasicActions_OpenDoor;
     public struct BasicActionsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -675,6 +708,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @SavePoint => m_Wrapper.m_BasicActions_SavePoint;
         public InputAction @ToggleMap => m_Wrapper.m_BasicActions_ToggleMap;
         public InputAction @ClosePopup => m_Wrapper.m_BasicActions_ClosePopup;
+        public InputAction @OpenDoor => m_Wrapper.m_BasicActions_OpenDoor;
         public InputActionMap Get() { return m_Wrapper.m_BasicActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -711,6 +745,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ClosePopup.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
                 @ClosePopup.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
                 @ClosePopup.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnClosePopup;
+                @OpenDoor.started -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnOpenDoor;
+                @OpenDoor.performed -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnOpenDoor;
+                @OpenDoor.canceled -= m_Wrapper.m_BasicActionsActionsCallbackInterface.OnOpenDoor;
             }
             m_Wrapper.m_BasicActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -742,6 +779,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @ClosePopup.started += instance.OnClosePopup;
                 @ClosePopup.performed += instance.OnClosePopup;
                 @ClosePopup.canceled += instance.OnClosePopup;
+                @OpenDoor.started += instance.OnOpenDoor;
+                @OpenDoor.performed += instance.OnOpenDoor;
+                @OpenDoor.canceled += instance.OnOpenDoor;
             }
         }
     }
@@ -814,6 +854,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnSavePoint(InputAction.CallbackContext context);
         void OnToggleMap(InputAction.CallbackContext context);
         void OnClosePopup(InputAction.CallbackContext context);
+        void OnOpenDoor(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

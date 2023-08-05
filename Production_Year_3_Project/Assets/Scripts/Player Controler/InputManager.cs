@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnSavePoint;
     public UnityEvent OnToggleMap;
     public UnityEvent OnPopUpClosed;
+    public UnityEvent OnOpenDoor;
 
 
     //public bool LockInputs;
@@ -59,8 +60,12 @@ public class InputManager : MonoBehaviour
         input.BasicActions.SavePoint.started += InvokeSavePoint;
         input.BasicActions.ToggleMap.started += InvokeToggleMap;
         input.BasicActions.ClosePopup.started += InvokeClosePopup;
+        input.BasicActions.OpenDoor.started += InvokeOpenDoor;
     }
-
+    public void InvokeOpenDoor(InputAction.CallbackContext obj)
+    {
+        OnOpenDoor?.Invoke();
+    }
     public void InvokeClosePopup(InputAction.CallbackContext obj)
     {
         OnPopUpClosed?.Invoke();
@@ -80,7 +85,6 @@ public class InputManager : MonoBehaviour
     }
     public void InvokeEscape(InputAction.CallbackContext obj)
     {
-        Debug.Log("EscapedIsPressed");
         OnEscape?.Invoke();
     }
     public void InvokeOnLookLeftDown(InputAction.CallbackContext obj)

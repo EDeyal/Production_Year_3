@@ -39,6 +39,7 @@ public class StatusEffectable : MonoBehaviour
             }
         }
         statusEffects.Add(effect);
+        OnRecieveStatusEffect?.Invoke(effect);
         effect.CacheHost(Owner);
         effect.StartEffect();
     }
@@ -57,6 +58,8 @@ public class StatusEffectable : MonoBehaviour
         }
 
         statusEffects.Add(effect);
+        OnRecieveStatusEffect?.Invoke(effect);
+        effector.OnApplyStatusEffect?.Invoke(effect);
         effect.CacheHost(Owner);
         effect.StartEffect();
     }
