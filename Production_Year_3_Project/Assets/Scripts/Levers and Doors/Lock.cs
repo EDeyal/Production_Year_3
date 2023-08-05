@@ -20,7 +20,8 @@ public class Lock : MonoBehaviour, ICheckValidation
     public void ActivateLock()
     {
         _emisionHandler.Activate();
-        //trigger animator
+        lockAnimator.SetTrigger("Unlock");
+        StartCoroutine(Timer());
     }
     public IEnumerator Timer()
     {
