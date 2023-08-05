@@ -4,7 +4,7 @@ public class ThamulChaseState : BaseThamulState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("Thamul Chase State");
+        //Debug.Log("Thamul Chase State");
         //if the enemy is within melee range
         if (_thamul.ThamulMeleeDistance.InitAction(
             new DistanceData(_thamul.MiddleOfBody.position, _thamulStateHandler.PlayerManager.MiddleOfBody.position)))

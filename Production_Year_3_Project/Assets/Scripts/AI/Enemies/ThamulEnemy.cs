@@ -167,7 +167,7 @@ public class ThamulEnemy : GroundEnemy
 
         if (WaitAction(_projectileCooldownAction, ref _projectileCooldown))
         {
-            Debug.Log("Shooting at player");
+            //Debug.Log("Shooting at player");
             if (GameManager.Instance.SoundManager.isFunnySounds)
             {
                 GameManager.Instance.SoundManager.PlaySound("ThamulProjectileTest");
