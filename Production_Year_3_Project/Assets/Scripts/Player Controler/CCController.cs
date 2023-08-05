@@ -98,11 +98,13 @@ public class CCController : MonoBehaviour
         groundCheck.OnGrounded.AddListener(ResetMidAirAttackUsed);
         groundCheck.OnGrounded.AddListener(LongFallStunStart);
         groundCheck.OnGrounded.AddListener(ResetFallingFor);
+        groundCheck.OnGrounded.AddListener(() => GameManager.Instance.SoundManager.PlaySound("PlayerLandNew"));
 
 
         OnJump.AddListener(ResetCanHoldJump);
         OnJump.AddListener(JumpAnim);
-
+        OnJump.AddListener(() => GameManager.Instance.SoundManager.PlaySound("PlayerJump"));
+        
         OnStartRunning.AddListener(StartRunAnim);
 
         OnStopRunning.AddListener(StopRunAnim);

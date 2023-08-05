@@ -79,9 +79,9 @@ public class PlayerManager : BaseCharacter
         DamageDealer.OnKill.AddListener(EnemyFirstKill);
         PlayerDash.OnDashEnd.AddListener(PlayerController.ResetFallingFor);
         PlayerDash.OnDashEnd.AddListener(UnLockPlayer);
+        PlayerDash.OnDash.AddListener(()=> GameManager.Instance.SoundManager.PlaySound("PlayerDash"));
+        Damageable.OnDeath.AddListener(()=> GameManager.Instance.SoundManager.PlaySound("PlayerDeathNew"));
 
-        /* StatSheet.DecayingHealth.onDecayingHealthReduce.AddListener(CheckDecayingHealthAmount);
-         StatSheet.DecayingHealth.onDecayingHealthGain.AddListener(CheckDecayingHealthAmount);*/
     }
     private IEnumerator Start()
     {
