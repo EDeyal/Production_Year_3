@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.UiManager.CachPauseMenu(this);
+        GameManager.Instance.InputManager.OnPopUpClosed.AddListener(Continue);
     }
 
     [ContextMenu("MainMenu")]

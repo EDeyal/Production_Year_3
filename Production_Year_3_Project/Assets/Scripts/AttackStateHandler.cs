@@ -9,6 +9,7 @@ public class AttackStateHandler : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = false;
+        GameManager.Instance.PlayerManager.KatarSlash.SetActive(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,6 +22,7 @@ public class AttackStateHandler : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.CanAttack = true;
+        GameManager.Instance.PlayerManager.KatarSlash.SetActive(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
