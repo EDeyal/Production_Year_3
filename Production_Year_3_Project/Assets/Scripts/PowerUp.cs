@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            GameManager.Instance.SoundManager.PlaySound("Kamoovan");
             OnPickedUp();
         }
     }
