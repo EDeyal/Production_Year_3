@@ -9,7 +9,7 @@ public class AttackPowerUp : PowerUp
     {
         base.OnPickedUp();
         GameManager.Instance.PlayerManager.PlayerMeleeAttack.IncreaseAttackBoost(attackPowerIncrease);
-        GameManager.Instance.PlayerManager.PlayProgressionParticle(_progressionColor);
+        //GameManager.Instance.PlayerManager.PlayProgressionParticle(_progressionColor);
         GameManager.Instance.UiManager.ProgressionPopUp.CollectNewProgression(ProgressionType.Damage);
     }
 }

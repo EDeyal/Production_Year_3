@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4450751576809821311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 654, y: 257}
+  m_SizeDelta: {x: 607, y: 209}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4450751576809821309
 CanvasRenderer:
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1998025622, guid: 3846de5cc4432e14b8d700bf38a67c87, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55546ef9492161f4e8c7eed82a859464, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Press <sprite=11> or <sprite=1> to open door'
+  m_text: Hold <color=#ffea5c>A, D</color> or<sprite=9>to move
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ad8235df08149d4f817d8aa019cfa9a, type: 2}
   m_sharedMaterial: {fileID: -678551291588613778, guid: 7ad8235df08149d4f817d8aa019cfa9a,
@@ -232,11 +232,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 49.9
+  m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
