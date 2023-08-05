@@ -228,6 +228,7 @@ MonoBehaviour:
     BoostDuration: 5
     BoostType: 0
   middleOfBody: {fileID: 4405906836718567807}
+  spawnHitVFX: 1
   _boundHandler:
     _bound:
       m_Center: {x: 0, y: 0.44, z: 0}
@@ -306,6 +307,7 @@ MonoBehaviour:
     _damageDealer: {fileID: 684794236260423736}
     _damagable: {fileID: 684794236260423737}
   _cemuAbility: {fileID: 11400000, guid: 15a189a901cca5f498d20bd41227fc27, type: 2}
+  _cemuBoostParticles: {fileID: 2597046071032178755}
 --- !u!114 &684794236260423738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +628,7 @@ Transform:
   - {fileID: 684794236416992103}
   - {fileID: 8429631283860575759}
   - {fileID: 4405906836718567807}
+  - {fileID: 8390011837861638558}
   m_Father: {fileID: 684794236260423882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -727,6 +730,87 @@ Transform:
   m_Father: {fileID: 684794236275958481}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2971338062585021852
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 684794236275958481}
+    m_Modifications:
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.374
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.638
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.993
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435883622794038970, guid: b34430290398a9c45aaa7882fcc1a2d2,
+        type: 3}
+      propertyPath: m_Name
+      value: Cemu_Boost_enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b34430290398a9c45aaa7882fcc1a2d2, type: 3}
+--- !u!198 &2597046071032178755 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 952194240107523551, guid: b34430290398a9c45aaa7882fcc1a2d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2971338062585021852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8390011837861638558 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6724753208300467202, guid: b34430290398a9c45aaa7882fcc1a2d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2971338062585021852}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8320023732739043812
 PrefabInstance:
   m_ObjectHideFlags: 0

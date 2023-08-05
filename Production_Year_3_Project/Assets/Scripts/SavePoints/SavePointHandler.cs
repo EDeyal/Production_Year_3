@@ -35,7 +35,7 @@ public class SavePointHandler : MonoBehaviour
             Debug.LogWarning("Save Point Handler Respawn Assets are Null");
         }
     }
-    public int SetPlayerSavePoint(SavePoint savePoint,bool withVisuals)
+    public int SetPlayerSavePoint(SavePoint savePoint,bool withFeedback)
     {
         if (_savePoints.Count == 0)
         {
@@ -53,17 +53,21 @@ public class SavePointHandler : MonoBehaviour
                 }
             }
             _currentSavePointID = savePoint.ID;
-            if (withVisuals)
+            if (withFeedback)
             {
                 savePoint.PlayParticles();
+                savePoint.ActivateSavePoint(true);
             }
-            savePoint.ActivateSavePoint();
+            else
+            { 
+                savePoint.ActivateSavePoint(false);
+            }
+
             var damageable = GameManager.Instance.PlayerManager.Damageable;
             damageable.Heal(new DamageHandler() { BaseAmount = damageable.MaxHp });
             Debug.Log($"Setting Player to savepoint num:{_currentSavePointID}");
             return CurrentSavePointID;
         }
-        return 0;
     }
     public void RegisterToSavePointHandler(SavePoint savePoint)
     {

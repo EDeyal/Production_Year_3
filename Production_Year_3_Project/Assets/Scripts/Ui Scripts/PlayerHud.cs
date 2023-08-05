@@ -40,6 +40,7 @@ public class PlayerHud : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
     public HealthBarHandler HealthBar { get => healthBar; }
     public AbilityUIHandler AbilityIcon { get => abilityIcon; }
 }

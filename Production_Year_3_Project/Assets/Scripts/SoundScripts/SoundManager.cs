@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSourcePooler audioSourcePooler;
     [SerializeField] SoundHandler soundHandler;
+    [SerializeField] public bool isFunnySounds;
 #if UNITY_EDITOR
     [SerializeField] string _testSoundName;
     [Button("TestPlaySound")]
