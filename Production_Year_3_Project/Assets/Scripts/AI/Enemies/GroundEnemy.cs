@@ -174,7 +174,7 @@ public abstract class GroundEnemy : BaseEnemy
         {
             return true;
         }
-        Debug.Log("Knocking back enemy");
+        //Debug.Log("Knocking back enemy");
         var direction = GeneralFunctions.GetXDirectionToTarget(MiddleOfBody.position, GameManager.Instance.PlayerManager.MiddleOfBody.position);
         direction *= -1;//Knock back away from player
         _moveData.UpdateData(new Vector3(direction, ZERO, ZERO), EnemyStatSheet.KnockbackSpeed);
