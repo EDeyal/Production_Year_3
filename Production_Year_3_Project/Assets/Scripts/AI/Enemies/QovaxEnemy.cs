@@ -91,7 +91,14 @@ public class QovaxEnemy : FlyingEnemy
             {
                 //Start Movement after cooldown
                 _isCharging = true;
-                GameManager.Instance.SoundManager.PlaySound("QovaxChargeTest");
+                if (GameManager.Instance.SoundManager.isFunnySounds)
+                {
+                    GameManager.Instance.SoundManager.PlaySound("QovaxChargeTest");
+                }
+                else
+                {
+                    GameManager.Instance.SoundManager.PlaySound("QovaxAbility");
+                }
                 //Debug.Log("Charging");
                 AnimatorHandler.Animator.SetFloat(AnimatorHelper.GetParameter(AnimatorParameterType.Speed), QovaxStatSheet.ChargeSpeed);
             }
@@ -170,7 +177,6 @@ public class QovaxEnemy : FlyingEnemy
     public override void OnDeath()
     {
         base.OnDeath();
-        
         if (_groundSensorInfo.IsNearWall)
         {
             //GameManager.Instance.SoundManager.PlaySound("QovaxDeathHitFloorSoundTest");

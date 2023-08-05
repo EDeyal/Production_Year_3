@@ -64,6 +64,7 @@ public class EndGamePopup : Popup
         // Wait 2 seconds
         yield return new WaitForSeconds(2);
 
+        GameManager.Instance.SoundManager.PlaySound("UISaveGame");
         // Exit to main menu
         GameManager.Instance.UiManager.PauseMenu.MoveToMainMenu();
     }

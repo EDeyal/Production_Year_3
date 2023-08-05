@@ -18,6 +18,7 @@ public class DeathPopup : Popup
         GameManager.Instance.PlayerManager.PlayerRespawn();
         GameManager.Instance.PlayerManager.PlayerController.EnableCC();
         //GameManager.Instance.PlayerManager.gameObject.SetActive(true);
+        GameManager.Instance.SoundManager.PlaySound("PlayerRespawn");
         gameObject.SetActive(false);
     }
 }

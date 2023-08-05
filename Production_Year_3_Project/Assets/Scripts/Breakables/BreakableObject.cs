@@ -12,6 +12,7 @@ public class BreakableObject : DamageableObject,IRespawnable
     [SerializeField] GameObject _damageableColliderGameObject;
     [SerializeField] bool _isRespawnable;
     [SerializeField] SoundSO _soundSO;
+    [SerializeField] SoundSO _funnySoundSO;
     GameObject _instantiatedObject;
     BrokenAsset _brokenAsset;
     //[TabGroup("General")]
@@ -67,7 +68,15 @@ public class BreakableObject : DamageableObject,IRespawnable
         _brokenAsset = _instantiatedObject.GetComponent<BrokenAsset>();
         ExplodeParts();
         PlayParticles();
-        GameManager.Instance.SoundManager.PlaySound(_soundSO.name);
+        if (GameManager.Instance.SoundManager.isFunnySounds)
+        {
+            if(_funnySoundSO)
+                GameManager.Instance.SoundManager.PlaySound(_funnySoundSO.name);
+        }
+        else
+        {
+            GameManager.Instance.SoundManager.PlaySound(_soundSO.name);
+        }
         Destroy(_instantiatedObject, _brokenAssetlifetime);
     }
     public override void Awake()
