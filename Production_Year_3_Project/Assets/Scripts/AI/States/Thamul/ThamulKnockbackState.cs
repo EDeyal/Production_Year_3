@@ -4,7 +4,7 @@ public class ThamulKnockbackState : BaseThamulState
 {
     public override BaseState RunCurrentState()
     {
-        Debug.Log("ThamulKnockBack");
+        //Debug.Log("ThamulKnockBack");
         if (_thamul.CheckKnockbackEnemy())
         {
             return _thamulStateHandler.CombatState;

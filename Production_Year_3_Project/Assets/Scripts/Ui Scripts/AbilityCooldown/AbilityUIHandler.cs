@@ -81,11 +81,11 @@ public class AbilityUIHandler : MonoBehaviour
         {
             StopCoroutine(activeRoutine);
         }
-        _cooldownImage.fillAmount = 1;
+        _cooldownImage.fillAmount = 0;
     }
     void SetValueForCooldown(float value)
     {
-        _cooldownImage.fillAmount = 1;
+        _cooldownImage.fillAmount = 0;
         _maxAbilityCooldown = value;
     }
     public void ResetAbilityImage()
