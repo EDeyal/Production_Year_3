@@ -9,7 +9,7 @@ public class EmisionHandler : MonoBehaviour, ICheckValidation
     [SerializeField] float _emissionOn = 5;
     [SerializeField] float _emissionOff = 0;
     [SerializeField] List<GameObject> _matObjects;
-    private List<Renderer> _renderers;
+    private List<Renderer> _renderers = new List<Renderer>();
     [SerializeField] Color _color;
     [SerializeField] AnimationCurve _colorInEase;
     [SerializeField] AnimationCurve _colorOutEase;
@@ -19,7 +19,7 @@ public class EmisionHandler : MonoBehaviour, ICheckValidation
         CheckValidation();
         if (_matObjects != null)
         {
-            _renderers = new List<Renderer>();
+            //_renderers = new List<Renderer>();
             for (int i = 0; i < _matObjects.Count; i++)
             {
                 Renderer renderer = _matObjects[i].GetComponent<Renderer>();
