@@ -237,6 +237,7 @@ public class CCController : MonoBehaviour
     private void LongFallStun()
     {
         GameManager.Instance.PlayerManager.LockPlayer();
+        GameManager.Instance.Cam.CamShake();
         animBlender.SetTrigger("HardLand");
         longFallParticle.SetActive(true);
     }
