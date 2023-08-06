@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, ICheckValidation
 {
+
     [SerializeField] EmisionHandler _emisionHandler;
     [SerializeField] public BoxCollider PhyiscalCollider;
     [SerializeField] public bool CanOpen = false;
