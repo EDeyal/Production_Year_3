@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeathPopup : Popup
 {
+    bool canRespawn;
+
     protected override void SubscribeToUiManager()
     {
         base.SubscribeToUiManager();
@@ -17,8 +19,24 @@ public class DeathPopup : Popup
         gameObject.SetActive(false);
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        canRespawn = true;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        canRespawn = false;
+    }
+
     public void RespawnPlayer()
     {
+        if (!canRespawn)
+        {
+            return;
+        }
         GameManager.Instance.PlayerManager.PlayerController.DisableCC();
         GameManager.Instance.PlayerManager.PlayerController.ZeroGravity();
         GameManager.Instance.PlayerManager.transform.position = GameManager.Instance.SaveManager.SavePointHandler.RespawnToSpawnPoint().position;
