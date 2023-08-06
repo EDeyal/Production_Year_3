@@ -11,6 +11,7 @@ public class Lock : MonoBehaviour, ICheckValidation
     [SerializeField] public PopUpTrigger DoesntHaveKey;
     [SerializeField] public PopUpTrigger HaveKey;
     [SerializeField] float _timer;
+    [SerializeField] private GameObject key;
 
     private void Awake()
     {
@@ -71,5 +72,10 @@ public class Lock : MonoBehaviour, ICheckValidation
             throw new System.Exception($"Lock {gameObject.name} has no animator");
         if (myDoor == null)
             throw new System.Exception($"Lock {gameObject.name} has no Door");
+    }
+
+    public void KeyOn()
+    {
+        key.SetActive(true);
     }
 }
