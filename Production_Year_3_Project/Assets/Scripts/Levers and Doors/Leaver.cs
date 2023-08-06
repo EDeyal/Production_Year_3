@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Leaver : DamageableObject
 {
+    [SerializeField] EmisionHandler _emisionHandler;
     [SerializeField] bool _isActivated = false;
     public bool IsActivated => _isActivated;
     [SerializeField] Animator leaverAnimator;
@@ -13,6 +14,7 @@ public class Leaver : DamageableObject
     [SerializeField] private UnityEvent onLeverActivated;
     public override void Awake()
     {
+        _emisionHandler.Deactivate();
         base.Awake();
         Damageable.OnDeath.AddListener(ActivateLeaver);
         Damageable.OnDeath.AddListener(ActivateEvent);
@@ -35,10 +37,12 @@ public class Leaver : DamageableObject
         switch (directionEnum)
         {
             case direction.left:
+                _emisionHandler.Activate();
                 leaverAnimator.SetTrigger("MoveLeft");
                 _isActivated = true;
                 break;
             case direction.right:
+                _emisionHandler.Activate();
                 leaverAnimator.SetTrigger("MoveRight");
                 _isActivated = true;
                 break;
