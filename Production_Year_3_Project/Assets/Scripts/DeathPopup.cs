@@ -10,6 +10,13 @@ public class DeathPopup : Popup
         GameManager.Instance.UiManager.CacheDeathPopup(this);
     }
 
+    protected override void Start()
+    {
+        SubscribeToUiManager();
+        GameManager.Instance.InputManager.OnPopUpClosed.AddListener(RespawnPlayer);
+        gameObject.SetActive(false);
+    }
+
     public void RespawnPlayer()
     {
         GameManager.Instance.PlayerManager.PlayerController.DisableCC();
