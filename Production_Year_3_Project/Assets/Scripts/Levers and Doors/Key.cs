@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+    [SerializeField] Animator animator;
     [SerializeField] bool _isCollected;
     public bool IsCollected => _isCollected;
     private void OnTriggerEnter(Collider other)
