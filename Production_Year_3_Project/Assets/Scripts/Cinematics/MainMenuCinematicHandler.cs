@@ -29,7 +29,10 @@ public class MainMenuCinematicHandler : MonoBehaviour, ICheckValidation
     private void Start()
     {
         if (_wasActivate)
+        {
+            GameManager.Instance.InputManager.SetCurserVisability(true);
             return;
+        }
         //Debug.Log("Main menu cinematic handler playing on start");
         PlayCimenatic();
     }

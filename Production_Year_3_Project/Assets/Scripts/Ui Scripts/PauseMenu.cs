@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
     {
         GameManager.Instance.SceneManager.LoadSceneIndex(0);
         GameManager.Instance.PauseGameTimeScale(false);
+        GameManager.Instance.InputManager.SetCurserVisability(true);
     }
     public void Continue()
     {

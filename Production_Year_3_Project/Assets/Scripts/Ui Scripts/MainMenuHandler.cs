@@ -24,13 +24,16 @@ public class MainMenuHandler : MonoBehaviour, ICheckValidation
         Cursor.lockState = CursorLockMode.Confined;
         //SetCurserVisable(true);
     }
-    public void SetCurserVisable(bool isVisable)
+    private void Update()
     {
-        Cursor.visible = (isVisable);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            GameManager.Instance.InputManager.SetCurserVisability(true);
+        }
     }
     public void StartGame()
     {
-        SetCurserVisable(false);
+        GameManager.Instance.InputManager.SetCurserVisability(false);
         GameManager.Instance.SceneManager.LoadSceneIndex(_gameSceneIndex);
     }
 }
